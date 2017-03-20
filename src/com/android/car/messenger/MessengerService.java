@@ -111,14 +111,15 @@ public class MessengerService extends Service {
         }
         switch (intent.getAction()) {
             case ACTION_AUTO_REPLY:
-                boolean failed = true;
+                boolean success;
                 if (mMapClient != null) {
-                    failed = mMessageMonitor.sendAutoReply(
+                    success = mMessageMonitor.sendAutoReply(
                             intent.getParcelableExtra(EXTRA_SENDER_KEY), mMapClient);
                 } else {
                     Log.e(TAG, "Unable to send reply; MAP profile disconnected!");
+                    success = false;
                 }
-                if (failed) {
+                if (!success) {
                     Toast.makeText(this, R.string.auto_reply_failed_message, Toast.LENGTH_SHORT)
                             .show();
                 }

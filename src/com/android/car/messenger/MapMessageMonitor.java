@@ -28,6 +28,7 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -87,12 +88,12 @@ class MapMessageMonitor {
         }
     }
 
-    // TODO(sriniv): Handle unknown senders. b/33280056
     private void updateNotificationInfo(MapMessage message, MessageKey messageKey) {
         SenderKey senderKey = new SenderKey(message);
         NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
         if (notificationInfo == null) {
-            notificationInfo = new NotificationInfo(message.getSenderName());
+            notificationInfo =
+                    new NotificationInfo(message.getSenderName(), message.getSenderContactUri());
             mNotificationInfos.put(senderKey, notificationInfo);
         }
         notificationInfo.mMessageKeys.add(messageKey);
@@ -192,7 +193,16 @@ class MapMessageMonitor {
         }
         BluetoothDevice device =
                 BluetoothAdapter.getDefaultAdapter().getRemoteDevice(senderKey.mDeviceAddress);
-        Uri recipientUris[] = { Uri.parse(senderKey.mSubKey) };
+        NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
+        if (notificationInfo == null) {
+            Log.w(TAG, "No notificationInfo found for senderKey: " + senderKey);
+            return false;
+        }
+        if (notificationInfo.mSenderContactUri == null) {
+            Log.w(TAG, "Do not have contact URI for sender!");
+            return false;
+        }
+        Uri recipientUris[] = { Uri.parse(notificationInfo.mSenderContactUri) };
 
         final int requestCode = senderKey.hashCode();
         PendingIntent sentIntent =
@@ -264,7 +274,9 @@ class MapMessageMonitor {
         }
     }
 
-    // Key used in HashMap that is composed from a BT device-address and device-specific "sub key"
+    /**
+     * Key used in HashMap that is composed from a BT device-address and device-specific "sub key"
+     */
     private abstract static class CompositeKey {
         final String mDeviceAddress;
         final String mSubKey;
@@ -304,22 +316,32 @@ class MapMessageMonitor {
         }
     }
 
-    // CompositeKey used to identify specific messages; it uses message-handle as the secondary key.
+    /**
+     * {@link CompositeKey} subclass used to identify specific messages; it uses message-handle as
+     * the secondary key.
+     */
     private static class MessageKey extends CompositeKey {
         MessageKey(MapMessage message) {
             super(message.getDevice().getAddress(), message.getHandle());
         }
     }
 
-    // CompositeKey used to identify Notification info for a sender. It uses senderContactUri as
-    // the secondary key.
+    /**
+     * CompositeKey used to identify Notification info for a sender; it uses a combination of
+     * senderContactUri and senderContactName as the secondary key.
+     */
     static class SenderKey extends CompositeKey implements Parcelable {
         private SenderKey(String deviceAddress, String key) {
             super(deviceAddress, key);
         }
 
         SenderKey(MapMessage message) {
-            this(message.getDevice().getAddress(), message.getSenderContactUri());
+            // Use a combination of senderName and senderContactUri for key. Ideally we would use
+            // only senderContactUri (which is encoded phone no.). However since some phones don't
+            // provide these, we fall back to senderName. Since senderName may not be unique, we
+            // include senderContactUri also to provide uniqueness in cases it is available.
+            this(message.getDevice().getAddress(),
+                    message.getSenderName() + "/" + message.getSenderContactUri());
         }
 
         @Override
@@ -347,16 +369,21 @@ class MapMessageMonitor {
         };
     }
 
-    // Information about a single notification displayed.
+    /**
+     * Information about a single notification that is displayed.
+     */
     private static class NotificationInfo {
         private static int NEXT_NOTIFICATION_ID = 0;
 
         final int mNotificationId = NEXT_NOTIFICATION_ID++;
         final String mSenderName;
+        @Nullable
+        final String mSenderContactUri;
         final List<MessageKey> mMessageKeys = new LinkedList<>();
 
-        NotificationInfo(String senderName) {
+        NotificationInfo(String senderName, @Nullable String senderContactUri) {
             mSenderName = senderName;
+            mSenderContactUri = senderContactUri;
         }
     }
 }

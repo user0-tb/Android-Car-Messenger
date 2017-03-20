@@ -28,11 +28,10 @@ class MapMessage {
     private BluetoothDevice mDevice;
     private String mHandle;
     private long mReceivedTimeMs;
-    private String mText;
+    private String mSenderName;
     @Nullable
     private String mSenderContactUri;
-    @Nullable
-    private String mSenderName;
+    private String mText;
 
     /**
      * Constructs Message from {@code intent} that was received from MAP service via
@@ -50,18 +49,19 @@ class MapMessage {
         String senderContactName = intent.getStringExtra(
                 BluetoothMapClient.EXTRA_SENDER_CONTACT_NAME);
         String text = intent.getStringExtra(android.content.Intent.EXTRA_TEXT);
-        return new MapMessage(device, handle, System.currentTimeMillis(), text,
-                senderContactUri, senderContactName);
+        return new MapMessage(device, handle, System.currentTimeMillis(), senderContactName,
+                senderContactUri, text);
     }
 
     private MapMessage(BluetoothDevice device,
             String handle,
             long receivedTimeMs,
-            String text,
+            String senderName,
             @Nullable String senderContactUri,
-            @Nullable String senderName) {
+            String text) {
         boolean missingDevice = (device == null);
         boolean missingHandle = (handle == null);
+        boolean missingSenderName = (senderName == null);
         boolean missingText = (text == null);
         if (missingDevice || missingHandle || missingText) {
             StringBuilder builder = new StringBuilder("Missing required fields:");
@@ -70,6 +70,9 @@ class MapMessage {
             }
             if (missingHandle) {
                 builder.append(" handle");
+            }
+            if (missingSenderName) {
+                builder.append(" senderName");
             }
             if (missingText) {
                 builder.append(" text");
@@ -88,26 +91,43 @@ class MapMessage {
         return mDevice;
     }
 
+    /**
+     * @return Unique handle for this message. NOTE: The handle is only required to be unique for
+     *      the lifetime of a single MAP session.
+     */
     public String getHandle() {
         return mHandle;
     }
 
+    /**
+     * @return Milliseconds since epoch at which this message notification was received on the head-
+     *      unit.
+     */
     public long getReceivedTimeMs() {
         return mReceivedTimeMs;
     }
 
-    public String getText() {
-        return mText;
+    /**
+     * @return Contact name as obtained from the device. If contact is in the device's address-book,
+     *       this is typically the contact name. Otherwise it will be the phone number.
+     */
+    public String getSenderName() {
+        return mSenderName;
     }
 
+    /**
+     * @return Sender phone number available as a URI string. iPhone's don't provide these.
+     */
     @Nullable
     public String getSenderContactUri() {
         return mSenderContactUri;
     }
 
-    @Nullable
-    public String getSenderName() {
-        return mSenderName;
+    /**
+     * @return Actual content of the message.
+     */
+    public String getText() {
+        return mText;
     }
 
     @Override
