@@ -33,6 +33,8 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.car.messenger.tts.TTSHelper;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -40,9 +42,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
- * Component that monitors for incoming messages and posts/updates notifications.
+ * Monitors for incoming messages and posts/updates notifications.
  * <p>
  * It also handles notifications requests e.g. sending auto-replies and message play-out.
  * <p>
@@ -152,18 +155,13 @@ class MapMessageMonitor {
             Log.e(TAG, "Unknown senderKey! " + senderKey);
             return;
         }
-
-        StringBuilder ttsMessage = new StringBuilder();
-        ttsMessage.append(notificationInfo.mSenderName)
-                .append(" ").append(mContext.getString(R.string.tts_says_verb));
-        for (MessageKey messageKey : notificationInfo.mMessageKeys) {
-            MapMessage message = mMessages.get(messageKey);
-            if (message != null) {
-                ttsMessage.append(". ").append(message.getText());
-            }
-        }
-
-        mTTSHelper.requestPlay(ttsMessage.toString(),
+        List<CharSequence> ttsMessages =
+                notificationInfo.mMessageKeys.stream().map((key) -> mMessages.get(key).getText())
+                        .collect(Collectors.toCollection(LinkedList::new));
+        // Insert something like "foo says" before their message content.
+        ttsMessages.add(0,
+                mContext.getString(R.string.tts_sender_says, notificationInfo.mSenderName));
+        mTTSHelper.requestPlay(ttsMessages,
                 new TTSHelper.Listener() {
             @Override
             public void onTTSStarted() {
@@ -171,14 +169,11 @@ class MapMessageMonitor {
             }
 
             @Override
-            public void onTTSStopped() {
+            public void onTTSStopped(boolean error) {
+                if (error) {
+                    Toast.makeText(mContext, R.string.tts_failed_toast, Toast.LENGTH_SHORT).show();
+                }
                 updateNotificationFor(senderKey, notificationInfo, false);
-            }
-
-            @Override
-            public void onTTSError() {
-                Toast.makeText(mContext, R.string.tts_failed_toast, Toast.LENGTH_SHORT).show();
-                onTTSStopped();
             }
         });
     }
