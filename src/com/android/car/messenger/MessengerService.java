@@ -94,7 +94,7 @@ public class MessengerService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (DBG) {
-            Log.d(TAG, "Handling intent: " + intent.getAction());
+            Log.d(TAG, "Handling intent: " + intent);
         }
 
         // Service will be restarted even if its killed/dies. It will never stop itself.
