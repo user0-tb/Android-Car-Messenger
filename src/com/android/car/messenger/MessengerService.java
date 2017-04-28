@@ -49,6 +49,9 @@ public class MessengerService extends Service {
     static final String ACTION_AUTO_REPLY = "com.android.car.messenger.ACTION_AUTO_REPLY";
     // Used to play-out messages from a sender (invoked from Notification).
     static final String ACTION_PLAY_MESSAGES = "com.android.car.messenger.ACTION_PLAY_MESSAGES";
+    // Used to stop further audio notifications from the conversation.
+    static final String ACTION_MUTE_CONVERSATION =
+            "com.android.car.messenger.ACTION_MUTE_CONVERSATION";
     // Used to clear notification state when user dismisses notification.
     static final String ACTION_CLEAR_NOTIFICATION_STATE =
             "com.android.car.messenger.ACTION_CLEAR_NOTIFICATION_STATE";
@@ -127,6 +130,9 @@ public class MessengerService extends Service {
             case ACTION_PLAY_MESSAGES:
                 mMessageMonitor.playMessages(intent.getParcelableExtra(EXTRA_SENDER_KEY));
                 break;
+            case ACTION_MUTE_CONVERSATION:
+                mMessageMonitor.muteConversation(intent.getParcelableExtra(EXTRA_SENDER_KEY));
+                break;
             case ACTION_STOP_PLAYOUT:
                 mMessageMonitor.stopPlayout();
                 break;
@@ -143,6 +149,7 @@ public class MessengerService extends Service {
         switch (intent.getAction()) {
             case ACTION_AUTO_REPLY:
             case ACTION_PLAY_MESSAGES:
+            case ACTION_MUTE_CONVERSATION:
             case ACTION_CLEAR_NOTIFICATION_STATE:
                 if (!intent.hasExtra(EXTRA_SENDER_KEY)) {
                     Log.w(TAG, "Intent is missing sender-key extra: " + intent.getAction());

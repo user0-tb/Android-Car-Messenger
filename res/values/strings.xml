@@ -15,10 +15,17 @@
 -->
 
 <resources>
+    <string name="app_name">Messenger</string>
+
     <plurals name="notification_new_message">
         <item quantity="one">New message</item>
         <item quantity="other">%d new messages</item>
     </plurals>
+
+    <string name="action_mute">Mute</string>
+    <string name="action_play">Play</string>
+    <string name="action_stop">Stop</string>
+    <string name="action_auto_reply">Reply: I\'m driving</string>
 
     <string name="auto_reply_message">I\'m driving right now</string>
     <string name="auto_reply_failed_message">Unable to send reply. Please try again.</string>
