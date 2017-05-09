@@ -159,6 +159,10 @@ public class TTSHelper {
         currentBatchId = null;
     }
 
+    public boolean isSpeaking() {
+        return mTTSEngine.isSpeaking();
+    }
+
     private void playInternal(List<CharSequence> textToSpeak, Listener listener) {
         if (mInitStatus == TextToSpeech.ERROR) {
             Log.e(TAG, "TTS setup failed!");

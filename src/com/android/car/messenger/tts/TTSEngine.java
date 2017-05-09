@@ -38,6 +38,11 @@ public interface TTSEngine {
     void stop();
 
     /**
+     * @return Whether TTS is playing out currently.
+     */
+    boolean isSpeaking();
+
+    /**
      * Un-initialize engine and release resources.
      * {@link #initialize(Context, TextToSpeech.OnInitListener)} will need to be called again before
      * using this engine.

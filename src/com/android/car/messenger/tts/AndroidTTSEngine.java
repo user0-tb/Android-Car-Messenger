@@ -43,6 +43,11 @@ class AndroidTTSEngine implements TTSEngine {
     }
 
     @Override
+    public boolean isSpeaking() {
+        return mTextToSpeech != null ? mTextToSpeech.isSpeaking() : false;
+    }
+
+    @Override
     public void shutdown() {
         mTextToSpeech.shutdown();
         mTextToSpeech = null;

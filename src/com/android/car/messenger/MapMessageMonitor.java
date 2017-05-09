@@ -16,6 +16,8 @@
 
 package com.android.car.messenger;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
@@ -25,16 +27,19 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.Icon;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.car.messenger.tts.TTSHelper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -62,6 +67,7 @@ class MapMessageMonitor {
     private final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
     private final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
     private final TTSHelper mTTSHelper;
+    private final Ringtone mNotificationTone;
 
     MapMessageMonitor(Context context) {
         mContext = context;
@@ -69,6 +75,10 @@ class MapMessageMonitor {
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mTTSHelper = new TTSHelper(mContext);
+
+        // Fetch default notification ringtone.
+        Uri notificationUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        mNotificationTone = RingtoneManager.getRingtone(mContext, notificationUri);
     }
 
     private void handleNewMessage(Intent intent) {
@@ -100,46 +110,87 @@ class MapMessageMonitor {
             mNotificationInfos.put(senderKey, notificationInfo);
         }
         notificationInfo.mMessageKeys.add(messageKey);
-        updateNotificationFor(senderKey, notificationInfo, false /* ttsPlaying */);
+        // Play notification when handling new message, if not muted.
+        if (!notificationInfo.muted) {
+            mNotificationTone.play();
+        }
+        updateNotificationFor(senderKey, notificationInfo);
     }
 
-    private void updateNotificationFor(SenderKey senderKey,
-            NotificationInfo notificationInfo, boolean ttsPlaying) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
-        // TODO(sriniv): Use right icon when switching to correct layout. b/33280056.
-        builder.setSmallIcon(android.R.drawable.btn_plus);
-        builder.setContentTitle(notificationInfo.mSenderName);
-        builder.setContentText(mContext.getResources().getQuantityString(
+    private void updateNotificationFor(SenderKey senderKey, NotificationInfo notificationInfo) {
+        String contentText = mContext.getResources().getQuantityString(
                 R.plurals.notification_new_message, notificationInfo.mMessageKeys.size(),
-                notificationInfo.mMessageKeys.size()));
-
-        Intent deleteIntent = new Intent(mContext, MessengerService.class)
-                .setAction(MessengerService.ACTION_CLEAR_NOTIFICATION_STATE)
-                .putExtra(MessengerService.EXTRA_SENDER_KEY, senderKey);
-        builder.setDeleteIntent(
-                PendingIntent.getService(mContext, notificationInfo.mNotificationId, deleteIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT));
-
-        String messageActions[] = {
-                MessengerService.ACTION_AUTO_REPLY,
-                MessengerService.ACTION_PLAY_MESSAGES
-        };
-        // TODO(sriniv): Actual spec does not have any of these strings. Remove later. b/33280056.
-        // is implemented for notifications.
-        String actionTexts[] = { "Reply", "Play" };
-        if (ttsPlaying) {
-            messageActions[1] = MessengerService.ACTION_STOP_PLAYOUT;
-            actionTexts[1] = "Stop";
-        }
-        for (int i = 0; i < messageActions.length; i++) {
-            Intent intent = new Intent(mContext, MessengerService.class)
-                    .setAction(messageActions[i])
-                    .putExtra(MessengerService.EXTRA_SENDER_KEY, senderKey);
-            PendingIntent pendingIntent = PendingIntent.getService(mContext,
-                    notificationInfo.mNotificationId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            builder.addAction(android.R.drawable.ic_media_play, actionTexts[i], pendingIntent);
-        }
+                notificationInfo.mMessageKeys.size());
+        long lastReceivedTimeMs =
+                mMessages.get(notificationInfo.mMessageKeys.getLast()).getReceivedTimeMs();
+        // TODO(sriniv): Use right icon when switching to correct layout. b/33280056.
+        Notification.Builder builder =
+                new Notification.Builder(mContext, NotificationChannel.DEFAULT_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_message)
+                    .setContentTitle(notificationInfo.mSenderName)
+                    .setContentText(contentText)
+                    .setWhen(lastReceivedTimeMs)
+                    .setShowWhen(true)
+                    .setActions(getActionsFor(senderKey, notificationInfo))
+                    .setDeleteIntent(
+                            buildIntentFor(
+                                    MessengerService.ACTION_CLEAR_NOTIFICATION_STATE,
+                                    senderKey, notificationInfo));
         mNotificationManager.notify(notificationInfo.mNotificationId, builder.build());
+    }
+
+    private Notification.Action[] getActionsFor(SenderKey senderKey,
+            NotificationInfo notificationInfo) {
+        // Icon doesn't appear to be used; using fixed icon for all actions.
+        final Icon icon = Icon.createWithResource(mContext, android.R.drawable.ic_media_play);
+
+        // We can have upto 3 actions.
+        List<Notification.Action.Builder> builders = new ArrayList<>(3);
+
+        // Add play/mute.
+        String playMuteAction;
+        int playMuteResId;
+        if (mTTSHelper.isSpeaking()) {
+            playMuteAction = MessengerService.ACTION_STOP_PLAYOUT;
+            playMuteResId = R.string.action_stop;
+        } else {
+            playMuteAction = MessengerService.ACTION_PLAY_MESSAGES;
+            playMuteResId = R.string.action_play;
+        }
+        PendingIntent playMuteIntent = buildIntentFor(playMuteAction,
+                senderKey, notificationInfo);
+        builders.add(new Notification.Action.Builder(icon,
+                mContext.getString(playMuteResId), playMuteIntent));
+
+        // Add auto-reply.
+        PendingIntent autoReplyIntent = buildIntentFor(MessengerService.ACTION_AUTO_REPLY,
+                senderKey, notificationInfo);
+        builders.add(new Notification.Action.Builder(icon,
+                mContext.getString(R.string.action_auto_reply), autoReplyIntent));
+
+        // Optionally add mute.
+        if (!notificationInfo.muted) {
+            PendingIntent muteIntent = buildIntentFor(MessengerService.ACTION_MUTE_CONVERSATION,
+                    senderKey, notificationInfo);
+            builders.add(new Notification.Action.Builder(icon,
+                    mContext.getString(R.string.action_mute), muteIntent));
+        }
+
+
+        Notification.Action actions[] = new Notification.Action[builders.size()];
+        for (int i = 0; i < builders.size(); i++) {
+            actions[i] = builders.get(i).build();
+        }
+        return actions;
+    }
+
+    private PendingIntent buildIntentFor(String action, SenderKey senderKey,
+            NotificationInfo notificationInfo) {
+        Intent intent = new Intent(mContext, MessengerService.class)
+                .setAction(action)
+                .putExtra(MessengerService.EXTRA_SENDER_KEY, senderKey);
+        return PendingIntent.getService(mContext,
+                notificationInfo.mNotificationId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     void clearNotificationState(SenderKey senderKey) {
@@ -165,7 +216,7 @@ class MapMessageMonitor {
                 new TTSHelper.Listener() {
             @Override
             public void onTTSStarted() {
-                updateNotificationFor(senderKey, notificationInfo, true);
+                updateNotificationFor(senderKey, notificationInfo);
             }
 
             @Override
@@ -173,13 +224,23 @@ class MapMessageMonitor {
                 if (error) {
                     Toast.makeText(mContext, R.string.tts_failed_toast, Toast.LENGTH_SHORT).show();
                 }
-                updateNotificationFor(senderKey, notificationInfo, false);
+                updateNotificationFor(senderKey, notificationInfo);
             }
         });
     }
 
     void stopPlayout() {
         mTTSHelper.requestStop();
+    }
+
+    void muteConversation(SenderKey senderKey) {
+        NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
+        if (notificationInfo == null) {
+            Log.e(TAG, "Unknown senderKey! " + senderKey);
+            return;
+        }
+        notificationInfo.muted = true;
+        updateNotificationFor(senderKey, notificationInfo);
     }
 
     boolean sendAutoReply(SenderKey senderKey, BluetoothMapClient mapClient) {
@@ -374,7 +435,8 @@ class MapMessageMonitor {
         final String mSenderName;
         @Nullable
         final String mSenderContactUri;
-        final List<MessageKey> mMessageKeys = new LinkedList<>();
+        final LinkedList<MessageKey> mMessageKeys = new LinkedList<>();
+        boolean muted = false;
 
         NotificationInfo(String senderName, @Nullable String senderContactUri) {
             mSenderName = senderName;
