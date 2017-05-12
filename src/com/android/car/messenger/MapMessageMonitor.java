@@ -24,20 +24,33 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.telecom.PhoneAccount;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.car.apps.common.LetterTileDrawable;
 import com.android.car.messenger.tts.TTSHelper;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,6 +71,10 @@ import java.util.stream.Collectors;
  * {@link MessengerService}.
  */
 class MapMessageMonitor {
+    public static final String ACTION_MESSAGE_PLAY_START =
+            "car.messenger.action_message_play_start";
+    public static final String ACTION_MESSAGE_PLAY_STOP = "car.messenger.action_message_play_stop";
+
     private static final String TAG = "Messenger.MsgMonitor";
     private static final boolean DBG = MessengerService.DBG;
 
@@ -79,6 +96,10 @@ class MapMessageMonitor {
         // Fetch default notification ringtone.
         Uri notificationUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         mNotificationTone = RingtoneManager.getRingtone(mContext, notificationUri);
+    }
+
+    public boolean isPlaying() {
+        return mTTSHelper.isSpeaking();
     }
 
     private void handleNewMessage(Intent intent) {
@@ -103,6 +124,7 @@ class MapMessageMonitor {
 
     private void updateNotificationInfo(MapMessage message, MessageKey messageKey) {
         SenderKey senderKey = new SenderKey(message);
+
         NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
         if (notificationInfo == null) {
             notificationInfo =
@@ -117,26 +139,106 @@ class MapMessageMonitor {
         updateNotificationFor(senderKey, notificationInfo);
     }
 
+    private static final String[] CONTACT_ID = new String[] {
+            ContactsContract.PhoneLookup._ID
+    };
+
+    private static int getContactIdFromNumber(ContentResolver cr, String number) {
+        if (number == null || number.isEmpty()) {
+            return 0;
+        }
+
+        Uri uri = Uri.withAppendedPath(
+                ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                Uri.encode(number));
+        Cursor cursor = cr.query(uri, CONTACT_ID, null, null, null);
+
+        try {
+            if (cursor != null && cursor.moveToFirst()) {
+                int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.PhoneLookup._ID));
+                return id;
+            }
+        }
+        finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return 0;
+    }
+
     private void updateNotificationFor(SenderKey senderKey, NotificationInfo notificationInfo) {
+        if (DBG) {
+            Log.d(TAG, "updateNotificationFor" + notificationInfo);
+        }
         String contentText = mContext.getResources().getQuantityString(
                 R.plurals.notification_new_message, notificationInfo.mMessageKeys.size(),
                 notificationInfo.mMessageKeys.size());
         long lastReceivedTimeMs =
                 mMessages.get(notificationInfo.mMessageKeys.getLast()).getReceivedTimeMs();
-        // TODO(sriniv): Use right icon when switching to correct layout. b/33280056.
-        Notification.Builder builder =
-                new Notification.Builder(mContext, NotificationChannel.DEFAULT_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_message)
-                    .setContentTitle(notificationInfo.mSenderName)
-                    .setContentText(contentText)
-                    .setWhen(lastReceivedTimeMs)
-                    .setShowWhen(true)
-                    .setActions(getActionsFor(senderKey, notificationInfo))
-                    .setDeleteIntent(
-                            buildIntentFor(
-                                    MessengerService.ACTION_CLEAR_NOTIFICATION_STATE,
-                                    senderKey, notificationInfo));
-        mNotificationManager.notify(notificationInfo.mNotificationId, builder.build());
+
+        String phoneNumber = notificationInfo.mSenderContactUri.substring(
+                (PhoneAccount.SCHEME_TEL + ":").length());
+        Uri photoUri = ContentUris.withAppendedId(
+                ContactsContract.Contacts.CONTENT_URI, getContactIdFromNumber(
+                        mContext.getContentResolver(), phoneNumber));
+        if (DBG) {
+            Log.d(TAG, "start Glide loading... " + photoUri);
+        }
+        Glide.with(mContext)
+                .asBitmap()
+                .load(photoUri)
+                .apply(RequestOptions.circleCropTransform())
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap,
+                            Transition<? super Bitmap> transition) {
+                        sendNotification(bitmap);
+                    }
+
+                    @Override
+                    public void onLoadFailed(@Nullable Drawable fallback) {
+                        sendNotification(null);
+                    }
+
+                    private void sendNotification(Bitmap bitmap) {
+                        if (DBG) {
+                            Log.d(TAG, "Glide loaded. " + bitmap);
+                        }
+                        if (bitmap == null) {
+                            LetterTileDrawable letterTileDrawable =
+                                    new LetterTileDrawable(mContext.getResources());
+                            letterTileDrawable.setContactDetails(
+                                    notificationInfo.mSenderName, phoneNumber);
+                            letterTileDrawable.setIsCircular(true);
+                            bitmap = letterTileDrawable.toBitmap(
+                                    mContext.getResources().getDimensionPixelSize(
+                                            R.dimen.notification_contact_photo_size));
+                        }
+                        Intent intent = new Intent(mContext, PlayMessageActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra(PlayMessageActivity.MESSAGE_KEY, senderKey);
+                        PendingIntent LaunchMessageActivityIntent = PendingIntent.getActivity(
+                                mContext, 0, intent, 0);
+
+                        Notification.Builder builder =
+                                new Notification.Builder(
+                                        mContext, NotificationChannel.DEFAULT_CHANNEL_ID)
+                                        .setContentIntent(LaunchMessageActivityIntent)
+                                        .setLargeIcon(bitmap)
+                                        .setSmallIcon(R.drawable.ic_message)
+                                        .setContentTitle(notificationInfo.mSenderName)
+                                        .setContentText(contentText)
+                                        .setWhen(lastReceivedTimeMs)
+                                        .setShowWhen(true)
+                                        .setActions(getActionsFor(senderKey, notificationInfo))
+                                        .setDeleteIntent(buildIntentFor(
+                                                MessengerService.ACTION_CLEAR_NOTIFICATION_STATE,
+                                                senderKey, notificationInfo));
+                        mNotificationManager.notify(
+                                notificationInfo.mNotificationId, builder.build());
+                    }
+                });
     }
 
     private Notification.Action[] getActionsFor(SenderKey senderKey,
@@ -150,19 +252,23 @@ class MapMessageMonitor {
         // Add play/mute.
         String playMuteAction;
         int playMuteResId;
+        Intent intent = new Intent();
         if (mTTSHelper.isSpeaking()) {
+            intent.setAction(MessengerService.ACTION_PLAY_MESSAGES_STARTED);
             playMuteAction = MessengerService.ACTION_STOP_PLAYOUT;
             playMuteResId = R.string.action_stop;
         } else {
+            intent.setAction(MessengerService.ACTION_PLAY_MESSAGES_STOPPED);
             playMuteAction = MessengerService.ACTION_PLAY_MESSAGES;
             playMuteResId = R.string.action_play;
         }
+        mContext.sendBroadcast(intent);
         PendingIntent playMuteIntent = buildIntentFor(playMuteAction,
                 senderKey, notificationInfo);
         builders.add(new Notification.Action.Builder(icon,
                 mContext.getString(playMuteResId), playMuteIntent));
 
-        // Add auto-reply.
+        // Add auto-reply
         PendingIntent autoReplyIntent = buildIntentFor(MessengerService.ACTION_AUTO_REPLY,
                 senderKey, notificationInfo);
         builders.add(new Notification.Action.Builder(icon,
@@ -216,11 +322,15 @@ class MapMessageMonitor {
                 new TTSHelper.Listener() {
             @Override
             public void onTTSStarted() {
+                Intent intent = new Intent(ACTION_MESSAGE_PLAY_START);
+                mContext.sendBroadcast(intent);
                 updateNotificationFor(senderKey, notificationInfo);
             }
 
             @Override
             public void onTTSStopped(boolean error) {
+                Intent intent = new Intent(ACTION_MESSAGE_PLAY_STOP);
+                mContext.sendBroadcast(intent);
                 if (error) {
                     Toast.makeText(mContext, R.string.tts_failed_toast, Toast.LENGTH_SHORT).show();
                 }
@@ -323,6 +433,9 @@ class MapMessageMonitor {
                     Log.d(TAG, "SMS was sent successfully!");
                 }
             } else if (BluetoothMapClient.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
+                if (DBG) {
+                    Log.d(TAG, "SMS message received");
+                }
                 handleNewMessage(intent);
             } else {
                 Log.w(TAG, "Ignoring unknown broadcast " + intent.getAction());
