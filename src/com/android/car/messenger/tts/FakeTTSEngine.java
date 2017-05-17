@@ -42,6 +42,12 @@ class FakeTTSEngine implements TTSEngine {
     }
 
     @Override
+    public boolean isSpeaking() {
+        // NOTE: currently not used in tests.
+        return false;
+    }
+
+    @Override
     public void shutdown() {
         stop();
         mOnInitListener = null;
