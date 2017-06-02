@@ -23,6 +23,8 @@ import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
+import android.bluetooth.BluetoothUuid;
+import android.bluetooth.SdpMasRecord;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -74,21 +76,26 @@ class MapMessageMonitor {
     public static final String ACTION_MESSAGE_PLAY_START =
             "car.messenger.action_message_play_start";
     public static final String ACTION_MESSAGE_PLAY_STOP = "car.messenger.action_message_play_stop";
+    // reply or "upload" feature is indicated by the 3rd bit
+    private static final int REPLY_FEATURE_POS = 3;
 
     private static final String TAG = "Messenger.MsgMonitor";
     private static final boolean DBG = MessengerService.DBG;
 
     private final Context mContext;
     private final BluetoothMapReceiver mBluetoothMapReceiver;
+    private final BluetoothSdpReceiver mBluetoothSdpReceiver;
     private final NotificationManager mNotificationManager;
     private final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
     private final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
     private final TTSHelper mTTSHelper;
     private final Ringtone mNotificationTone;
+    private final HashMap<String, Boolean> mReplyFeatureMap = new HashMap<>();
 
     MapMessageMonitor(Context context) {
         mContext = context;
         mBluetoothMapReceiver = new BluetoothMapReceiver();
+        mBluetoothSdpReceiver = new BluetoothSdpReceiver();
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mTTSHelper = new TTSHelper(mContext);
@@ -124,6 +131,9 @@ class MapMessageMonitor {
 
     private void updateNotificationInfo(MapMessage message, MessageKey messageKey) {
         SenderKey senderKey = new SenderKey(message);
+        // check the version/feature of the
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        adapter.getRemoteDevice(senderKey.mDeviceAddress).sdpSearch(BluetoothUuid.MAS);
 
         NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
         if (notificationInfo == null) {
@@ -269,10 +279,13 @@ class MapMessageMonitor {
                 mContext.getString(playMuteResId), playMuteIntent));
 
         // Add auto-reply
-        PendingIntent autoReplyIntent = buildIntentFor(MessengerService.ACTION_AUTO_REPLY,
-                senderKey, notificationInfo);
-        builders.add(new Notification.Action.Builder(icon,
-                mContext.getString(R.string.action_auto_reply), autoReplyIntent));
+        if (mReplyFeatureMap.containsKey(senderKey.mDeviceAddress)
+                && mReplyFeatureMap.get(senderKey.mDeviceAddress)) {
+            PendingIntent autoReplyIntent = buildIntentFor(MessengerService.ACTION_AUTO_REPLY,
+                    senderKey, notificationInfo);
+            builders.add(new Notification.Action.Builder(icon,
+                    mContext.getString(R.string.action_auto_reply), autoReplyIntent));
+        }
 
         // Optionally add mute.
         if (!notificationInfo.muted) {
@@ -320,23 +333,23 @@ class MapMessageMonitor {
                 mContext.getString(R.string.tts_sender_says, notificationInfo.mSenderName));
         mTTSHelper.requestPlay(ttsMessages,
                 new TTSHelper.Listener() {
-            @Override
-            public void onTTSStarted() {
-                Intent intent = new Intent(ACTION_MESSAGE_PLAY_START);
-                mContext.sendBroadcast(intent);
-                updateNotificationFor(senderKey, notificationInfo);
-            }
+                    @Override
+                    public void onTTSStarted() {
+                        Intent intent = new Intent(ACTION_MESSAGE_PLAY_START);
+                        mContext.sendBroadcast(intent);
+                        updateNotificationFor(senderKey, notificationInfo);
+                    }
 
-            @Override
-            public void onTTSStopped(boolean error) {
-                Intent intent = new Intent(ACTION_MESSAGE_PLAY_STOP);
-                mContext.sendBroadcast(intent);
-                if (error) {
-                    Toast.makeText(mContext, R.string.tts_failed_toast, Toast.LENGTH_SHORT).show();
-                }
-                updateNotificationFor(senderKey, notificationInfo);
-            }
-        });
+                    @Override
+                    public void onTTSStopped(boolean error) {
+                        Intent intent = new Intent(ACTION_MESSAGE_PLAY_STOP);
+                        mContext.sendBroadcast(intent);
+                        if (error) {
+                            Toast.makeText(mContext, R.string.tts_failed_toast, Toast.LENGTH_SHORT).show();
+                        }
+                        updateNotificationFor(senderKey, notificationInfo);
+                    }
+                });
     }
 
     void stopPlayout() {
@@ -373,7 +386,7 @@ class MapMessageMonitor {
         final int requestCode = senderKey.hashCode();
         PendingIntent sentIntent =
                 PendingIntent.getBroadcast(mContext, requestCode, new Intent(
-                        BluetoothMapClient.ACTION_MESSAGE_SENT_SUCCESSFULLY),
+                                BluetoothMapClient.ACTION_MESSAGE_SENT_SUCCESSFULLY),
                         PendingIntent.FLAG_ONE_SHOT);
         String message = mContext.getString(R.string.auto_reply_message);
         return mapClient.sendMessage(device, recipientUris, message, sentIntent, null);
@@ -407,14 +420,58 @@ class MapMessageMonitor {
 
     void cleanup() {
         mBluetoothMapReceiver.cleanup();
+        mBluetoothSdpReceiver.cleanup();
         mTTSHelper.cleanup();
+    }
+
+    private class BluetoothSdpReceiver extends BroadcastReceiver {
+        BluetoothSdpReceiver() {
+            if (DBG) {
+                Log.d(TAG, "Registering receiver for sdp");
+            }
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(BluetoothDevice.ACTION_SDP_RECORD);
+            mContext.registerReceiver(this, intentFilter);
+        }
+
+        void cleanup() {
+            mContext.unregisterReceiver(this);
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (BluetoothDevice.ACTION_SDP_RECORD.equals(intent.getAction())) {
+                if (DBG) {
+                    Log.d(TAG, "get SDP record: " + intent.getExtras());
+                }
+                SdpMasRecord masRecord =
+                        intent.getParcelableExtra(BluetoothDevice.EXTRA_SDP_RECORD);
+                int features = masRecord.getSupportedFeatures();
+                int version = masRecord.getProfileVersion();
+                boolean supportsReply = false;
+                // we only consider the device supports reply feature of the version
+                // is higher than 1.02 and the feature flag is turned on.
+                if (version >= 0x102 && isOn(features, REPLY_FEATURE_POS)) {
+                    supportsReply = true;
+                }
+                BluetoothDevice bluetoothDevice =
+                        intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                mReplyFeatureMap.put(bluetoothDevice.getAddress(), supportsReply);
+            } else {
+                Log.w(TAG, "Ignoring unknown broadcast " + intent.getAction());
+            }
+        }
+
+        private boolean isOn(int input, int postion) {
+            return ((input >> postion) & 1) == 1;
+        }
     }
 
     // Used to monitor for new incoming messages and sent-message broadcast.
     private class BluetoothMapReceiver extends BroadcastReceiver {
         BluetoothMapReceiver() {
             if (DBG) {
-                Log.d(TAG, "Registering receiver for new messages");
+                Log.d(TAG, "Registering receiver for bluetooth MAP");
             }
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(BluetoothMapClient.ACTION_MESSAGE_SENT_SUCCESSFULLY);
@@ -526,16 +583,16 @@ class MapMessageMonitor {
 
         public static final Parcelable.Creator<SenderKey> CREATOR =
                 new Parcelable.Creator<SenderKey>() {
-            @Override
-            public SenderKey createFromParcel(Parcel source) {
-                return new SenderKey(source.readString(), source.readString());
-            }
+                    @Override
+                    public SenderKey createFromParcel(Parcel source) {
+                        return new SenderKey(source.readString(), source.readString());
+                    }
 
-            @Override
-            public SenderKey[] newArray(int size) {
-                return new SenderKey[size];
-            }
-        };
+                    @Override
+                    public SenderKey[] newArray(int size) {
+                        return new SenderKey[size];
+                    }
+                };
     }
 
     /**
