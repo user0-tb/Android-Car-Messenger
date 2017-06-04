@@ -25,6 +25,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -61,9 +62,24 @@ public class MessengerService extends Service {
     // Common extra for ACTION_AUTO_REPLY and ACTION_PLAY_MESSAGES.
     static final String EXTRA_SENDER_KEY = "com.android.car.messenger.EXTRA_SENDER_KEY";
 
+    // Used to notify that this service started to play out the messages.
+    static final String ACTION_PLAY_MESSAGES_STARTED =
+            "com.android.car.messenger.ACTION_PLAY_MESSAGES_STARTED";
+
+    // Used to notify that this service finished playing out the messages.
+    static final String ACTION_PLAY_MESSAGES_STOPPED =
+            "com.android.car.messenger.ACTION_PLAY_MESSAGES_STOPPED";
+
     private MapMessageMonitor mMessageMonitor;
     private MapDeviceMonitor mDeviceMonitor;
     private BluetoothMapClient mMapClient;
+    private final IBinder mBinder = new LocalBinder();
+
+    public class LocalBinder extends Binder {
+        MessengerService getService() {
+            return MessengerService.this;
+        }
+    }
 
     @Override
     public void onCreate() {
@@ -145,6 +161,13 @@ public class MessengerService extends Service {
         return result;
     }
 
+    /**
+     * @return {code true} if the service is playing the TTS of the message.
+     */
+    public boolean isPlaying() {
+        return mMessageMonitor.isPlaying();
+    }
+
     private boolean hasRequiredArgs(Intent intent) {
         switch (intent.getAction()) {
             case ACTION_AUTO_REPLY:
@@ -179,7 +202,7 @@ public class MessengerService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return mBinder;
     }
 
     // NOTE: These callbacks are invoked on the main thread.
