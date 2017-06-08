@@ -24,8 +24,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 /**
@@ -45,13 +52,25 @@ public class PlayMessageActivity extends Activity {
         mPlayPauseBtn = (TextView) findViewById(R.id.play_pause_btn);
         TextView exitBtn = (TextView) findViewById(R.id.exit_btn);
         exitBtn.setOnClickListener(v -> finish());
-        mPlayPauseBtn.setText(getString(R.string.action_play));
+        mPlayPauseBtn.setText(getString(R.string.action_stop));
         mPlayPauseBtn.setOnClickListener(v -> playMessage());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        // To proper layout the floating window, we need to calculate the parameters
+        // here instead of the layout file.
+        Window window = getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        wlp.gravity = Gravity.BOTTOM;
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x - 100;
+        wlp.width = width;
+        window.setAttributes(wlp);
+
         // Bind to LocalService
         Intent intent = new Intent(this, MessengerService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);

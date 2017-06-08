@@ -19,11 +19,11 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="100dp" >
     <TextView
         android:id="@+id/play_pause_btn"
         style="@style/CarBody1"
-        android:layout_centerInParent="true"
+        android:layout_marginStart="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>
@@ -32,9 +32,8 @@
         android:id="@+id/exit_btn"
         style="@style/CarBody1"
         android:text="Exit"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
+        android:layout_toEndOf="@id/play_pause_btn"
+        android:layout_marginStart="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>
