@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+ifneq ($(TARGET_BUILD_PDK), true)
+
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -78,4 +80,6 @@ include $(BUILD_PREBUILT)
 # Use the following include to make our test apk.
 ifeq (,$(ONE_SHOT_MAKEFILE))
 include $(call all-makefiles-under,$(LOCAL_PATH))
+endif
+
 endif

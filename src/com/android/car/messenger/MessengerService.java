@@ -42,7 +42,6 @@ import android.widget.Toast;
 public class MessengerService extends Service {
     static final String TAG = "MessengerService";
     static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
-    static final boolean VDBG = Log.isLoggable(TAG, Log.VERBOSE);
 
     // Used to start this service at boot-complete. Takes no arguments.
     static final String ACTION_START = "com.android.car.messenger.ACTION_START";

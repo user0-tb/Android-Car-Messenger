@@ -41,6 +41,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccount;
 import android.util.Log;
@@ -115,7 +116,7 @@ class MapMessageMonitor {
         }
         try {
             MapMessage message = MapMessage.parseFrom(intent);
-            if (MessengerService.VDBG) {
+            if (MessengerService.DBG) {
                 Log.v(TAG, "Parsed message: " + message);
             }
             MessageKey messageKey = new MessageKey(message);
@@ -231,9 +232,10 @@ class MapMessageMonitor {
                         PendingIntent LaunchMessageActivityIntent = PendingIntent.getActivity(
                                 mContext, 0, intent, 0);
 
-                        Notification.Builder builder =
-                                new Notification.Builder(
-                                        mContext, NotificationChannel.DEFAULT_CHANNEL_ID)
+                        Notification.Builder builder = new Notification.Builder(
+                                mContext, NotificationChannel.DEFAULT_CHANNEL_ID)
+                                        .setPriority(Notification.PRIORITY_HIGH)
+                                        .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                                         .setContentIntent(LaunchMessageActivityIntent)
                                         .setLargeIcon(bitmap)
                                         .setSmallIcon(R.drawable.ic_message)
@@ -337,7 +339,6 @@ class MapMessageMonitor {
                     public void onTTSStarted() {
                         Intent intent = new Intent(ACTION_MESSAGE_PLAY_START);
                         mContext.sendBroadcast(intent);
-                        updateNotificationFor(senderKey, notificationInfo);
                     }
 
                     @Override
@@ -347,7 +348,6 @@ class MapMessageMonitor {
                         if (error) {
                             Toast.makeText(mContext, R.string.tts_failed_toast, Toast.LENGTH_SHORT).show();
                         }
-                        updateNotificationFor(senderKey, notificationInfo);
                     }
                 });
     }
