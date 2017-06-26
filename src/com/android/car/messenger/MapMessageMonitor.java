@@ -444,8 +444,14 @@ class MapMessageMonitor {
                 if (DBG) {
                     Log.d(TAG, "get SDP record: " + intent.getExtras());
                 }
-                SdpMasRecord masRecord =
-                        intent.getParcelableExtra(BluetoothDevice.EXTRA_SDP_RECORD);
+                Parcelable parcelable = intent.getParcelableExtra(BluetoothDevice.EXTRA_SDP_RECORD);
+                if (!(parcelable instanceof SdpMasRecord)) {
+                    if (DBG) {
+                        Log.d(TAG, "not SdpMasRecord: " + parcelable);
+                    }
+                    return;
+                }
+                SdpMasRecord masRecord = (SdpMasRecord) parcelable;
                 int features = masRecord.getSupportedFeatures();
                 int version = masRecord.getProfileVersion();
                 boolean supportsReply = false;
