@@ -15,26 +15,128 @@
   ~ limitations under the License
   -->
 
-<!-- Eng mock, waiting for UX spec -->
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:orientation="vertical"
+    android:layout_gravity="bottom"
+    android:background="@drawable/round_corner"
+    android:layout_marginStart="@dimen/side_margin"
+    android:layout_marginEnd="@dimen/side_margin"
     android:layout_width="match_parent"
-    android:layout_height="100dp" >
-    <TextView
-        android:id="@+id/play_pause_btn"
-        style="@style/CarBody1"
-        android:layout_marginStart="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/message_container"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/stream_content_keyline_1"
+        android:layout_marginEnd="@dimen/stream_content_keyline_1"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <TextView
+            android:id="@+id/message1"
+            style="@style/CarBody1"
+            android:gravity="center"
+            android:text="@string/caned_message_driving_right_now"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_item_height">
+        </TextView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/car_divider_height"
+            android:background="@color/car_list_divider"/>
+        <TextView
+            android:id="@+id/message2"
+            style="@style/CarBody1"
+            android:gravity="center"
+            android:text="@string/caned_message_driving_right_now"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_item_height">
+        </TextView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/car_divider_height"
+            android:background="@color/car_list_divider"/>
+        <TextView
+            android:id="@+id/message3"
+            style="@style/CarBody1"
+            android:gravity="center"
+            android:text="@string/caned_message_driving_right_now"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_item_height">
+        </TextView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/car_divider_height"
+            android:background="@color/car_list_divider"/>
+        <TextView
+            android:id="@+id/message4"
+            style="@style/CarBody1"
+            android:gravity="center"
+            android:text="@string/caned_message_driving_right_now"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_item_height">
+        </TextView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/car_divider_height"
+            android:background="@color/car_list_divider"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/exit_btn"
-        style="@style/CarBody1"
-        android:text="Exit"
-        android:layout_toEndOf="@id/play_pause_btn"
-        android:layout_marginStart="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/text_container"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_item_height">
+        <TextView
+            android:id="@+id/reply_notice"
+            style="@style/CarBody1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/voice_plate"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_item_height">
+        <TextView
+            android:id="@+id/left_btn"
+            style="@style/CarBody1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textAllCaps="true"
+            android:maxLines="1"
+            android:layout_marginStart="@dimen/stream_content_keyline_1"
+            android:layout_marginEnd="@dimen/voice_plate_button_margin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <ImageView
+            android:id="@+id/voice_icon"
+            android:layout_width="@dimen/stream_button_icon_size"
+            android:layout_height="@dimen/stream_button_icon_size"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/right_btn"
+            style="@style/CarBody1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textAllCaps="true"
+            android:maxLines="1"
+            android:layout_marginStart="@dimen/voice_plate_button_margin"
+            android:layout_marginEnd="@dimen/stream_content_keyline_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+        </TextView>
+    </LinearLayout>
+</LinearLayout>

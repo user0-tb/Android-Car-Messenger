@@ -61,6 +61,8 @@ public class MessengerService extends Service {
     // Common extra for ACTION_AUTO_REPLY and ACTION_PLAY_MESSAGES.
     static final String EXTRA_SENDER_KEY = "com.android.car.messenger.EXTRA_SENDER_KEY";
 
+    static final String EXTRA_REPLY_MESSAGE = "com.android.car.messenger.EXTRA_REPLY_MESSAGE";
+
     // Used to notify that this service started to play out the messages.
     static final String ACTION_PLAY_MESSAGES_STARTED =
             "com.android.car.messenger.ACTION_PLAY_MESSAGES_STARTED";
@@ -132,7 +134,9 @@ public class MessengerService extends Service {
                 boolean success;
                 if (mMapClient != null) {
                     success = mMessageMonitor.sendAutoReply(
-                            intent.getParcelableExtra(EXTRA_SENDER_KEY), mMapClient);
+                            intent.getParcelableExtra(EXTRA_SENDER_KEY),
+                            mMapClient,
+                            intent.getStringExtra(EXTRA_REPLY_MESSAGE));
                 } else {
                     Log.e(TAG, "Unable to send reply; MAP profile disconnected!");
                     success = false;

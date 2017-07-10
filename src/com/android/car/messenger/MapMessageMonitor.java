@@ -80,6 +80,9 @@ class MapMessageMonitor {
     // reply or "upload" feature is indicated by the 3rd bit
     private static final int REPLY_FEATURE_POS = 3;
 
+    private static final int REQUEST_CODE_VOICE_PLATE = 1;
+    private static final int REQUEST_CODE_AUTO_REPLY = 2;
+    private static final int ACTION_COUNT = 2;
     private static final String TAG = "Messenger.MsgMonitor";
     private static final boolean DBG = MessengerService.DBG;
 
@@ -226,17 +229,17 @@ class MapMessageMonitor {
                                     mContext.getResources().getDimensionPixelSize(
                                             R.dimen.notification_contact_photo_size));
                         }
-                        Intent intent = new Intent(mContext, PlayMessageActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(PlayMessageActivity.MESSAGE_KEY, senderKey);
-                        PendingIntent LaunchMessageActivityIntent = PendingIntent.getActivity(
-                                mContext, 0, intent, 0);
+                        PendingIntent LaunchPlayMessageActivityIntent = PendingIntent.getActivity(
+                                mContext,
+                                REQUEST_CODE_VOICE_PLATE,
+                                getPlayMessageIntent(senderKey, notificationInfo),
+                                0);
 
                         Notification.Builder builder = new Notification.Builder(
                                 mContext, NotificationChannel.DEFAULT_CHANNEL_ID)
                                         .setPriority(Notification.PRIORITY_HIGH)
                                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                                        .setContentIntent(LaunchMessageActivityIntent)
+                                        .setContentIntent(LaunchPlayMessageActivityIntent)
                                         .setLargeIcon(bitmap)
                                         .setSmallIcon(R.drawable.ic_message)
                                         .setContentTitle(notificationInfo.mSenderName)
@@ -253,40 +256,33 @@ class MapMessageMonitor {
                 });
     }
 
-    private Notification.Action[] getActionsFor(SenderKey senderKey,
+    private Intent getPlayMessageIntent(SenderKey senderKey, NotificationInfo notificationInfo) {
+        Intent intent = new Intent(mContext, PlayMessageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(PlayMessageActivity.EXTRA_MESSAGE_KEY, senderKey);
+        intent.putExtra(
+                PlayMessageActivity.EXTRA_SENDER_NAME,
+                notificationInfo.mSenderName);
+        return intent;
+    }
+
+    private Notification.Action[] getActionsFor(
+            SenderKey senderKey,
             NotificationInfo notificationInfo) {
         // Icon doesn't appear to be used; using fixed icon for all actions.
         final Icon icon = Icon.createWithResource(mContext, android.R.drawable.ic_media_play);
 
-        // We can have upto 3 actions.
-        List<Notification.Action.Builder> builders = new ArrayList<>(3);
+        List<Notification.Action.Builder> builders = new ArrayList<>(ACTION_COUNT);
 
-        // Add play/mute.
-        String playMuteAction;
-        int playMuteResId;
-        Intent intent = new Intent();
-        if (mTTSHelper.isSpeaking()) {
-            intent.setAction(MessengerService.ACTION_PLAY_MESSAGES_STARTED);
-            playMuteAction = MessengerService.ACTION_STOP_PLAYOUT;
-            playMuteResId = R.string.action_stop;
-        } else {
-            intent.setAction(MessengerService.ACTION_PLAY_MESSAGES_STOPPED);
-            playMuteAction = MessengerService.ACTION_PLAY_MESSAGES;
-            playMuteResId = R.string.action_play;
-        }
-        mContext.sendBroadcast(intent);
-        PendingIntent playMuteIntent = buildIntentFor(playMuteAction,
-                senderKey, notificationInfo);
-        builders.add(new Notification.Action.Builder(icon,
-                mContext.getString(playMuteResId), playMuteIntent));
-
-        // Add auto-reply
+        // show auto reply options of device supports it
         if (mReplyFeatureMap.containsKey(senderKey.mDeviceAddress)
                 && mReplyFeatureMap.get(senderKey.mDeviceAddress)) {
-            PendingIntent autoReplyIntent = buildIntentFor(MessengerService.ACTION_AUTO_REPLY,
-                    senderKey, notificationInfo);
+            Intent replyIntent = getPlayMessageIntent(senderKey, notificationInfo);
+            replyIntent.putExtra(PlayMessageActivity.EXTRA_SHOW_REPLY_LIST_FLAG, true);
+            PendingIntent autoReplyIntent = PendingIntent.getActivity(
+                    mContext, REQUEST_CODE_AUTO_REPLY, replyIntent, 0);
             builders.add(new Notification.Action.Builder(icon,
-                    mContext.getString(R.string.action_auto_reply), autoReplyIntent));
+                    mContext.getString(R.string.action_reply), autoReplyIntent));
         }
 
         // Optionally add mute.
@@ -327,12 +323,14 @@ class MapMessageMonitor {
             Log.e(TAG, "Unknown senderKey! " + senderKey);
             return;
         }
-        List<CharSequence> ttsMessages =
+        List<CharSequence> ttsMessages = new ArrayList<>();
+        // TODO: play unread messages instead of the last.
+        String ttsMessage =
                 notificationInfo.mMessageKeys.stream().map((key) -> mMessages.get(key).getText())
-                        .collect(Collectors.toCollection(LinkedList::new));
+                        .collect(Collectors.toCollection(LinkedList::new)).getLast();
         // Insert something like "foo says" before their message content.
-        ttsMessages.add(0,
-                mContext.getString(R.string.tts_sender_says, notificationInfo.mSenderName));
+        ttsMessages.add(mContext.getString(R.string.tts_sender_says, notificationInfo.mSenderName));
+        ttsMessages.add(ttsMessage);
         mTTSHelper.requestPlay(ttsMessages,
                 new TTSHelper.Listener() {
                     @Override
@@ -366,7 +364,7 @@ class MapMessageMonitor {
         updateNotificationFor(senderKey, notificationInfo);
     }
 
-    boolean sendAutoReply(SenderKey senderKey, BluetoothMapClient mapClient) {
+    boolean sendAutoReply(SenderKey senderKey, BluetoothMapClient mapClient, String message) {
         if (DBG) {
             Log.d(TAG, "Sending auto-reply to: " + senderKey);
         }
@@ -388,7 +386,6 @@ class MapMessageMonitor {
                 PendingIntent.getBroadcast(mContext, requestCode, new Intent(
                                 BluetoothMapClient.ACTION_MESSAGE_SENT_SUCCESSFULLY),
                         PendingIntent.FLAG_ONE_SHOT);
-        String message = mContext.getString(R.string.auto_reply_message);
         return mapClient.sendMessage(device, recipientUris, message, sentIntent, null);
     }
 
