@@ -195,7 +195,7 @@ public class PlayMessageActivity extends Activity {
     private void updateViewFoeMessageStopped() {
         mRightButton.setText(getString(R.string.action_repeat));
         mRightButton.setOnClickListener(v -> playMessage());
-        mVoiceIcon.setImageResource(R.drawable.ic_vocie_stopped);
+        mVoiceIcon.setImageResource(R.drawable.ic_voice_stopped);
     }
 
     private class MessengerServiceBroadcastReceiver extends BroadcastReceiver {
