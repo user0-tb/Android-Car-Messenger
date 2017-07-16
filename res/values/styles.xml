@@ -16,11 +16,12 @@
 
 <resources>
     <!-- Pop up window that does not block interaction to other activity behind it. -->
-    <style name="FloatingWindow">
+    <style name="FloatingWindow" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@drawable/gradient_transparent</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
-        <item name="android:windowElevation">4dp</item>
-        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsFloating">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 </resources>
