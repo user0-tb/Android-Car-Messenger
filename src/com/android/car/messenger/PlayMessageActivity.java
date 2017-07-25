@@ -124,7 +124,7 @@ public class PlayMessageActivity extends Activity {
         mContainer.invalidate();
         mMessageContainer.setVisibility(View.VISIBLE);
         mLeftButton.setText(getString(R.string.action_close_messages));
-        mLeftButton.setOnClickListener(v -> hideAutoReply());
+        mLeftButton.setOnClickListener(v -> finish());
     }
 
     private void hideAutoReply() {
