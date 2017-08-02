@@ -47,10 +47,12 @@ public class PlayMessageActivity extends Activity {
     public static final String EXTRA_SENDER_NAME = "car.messenger.EXTRA_SENDER_NAME";
     public static final String EXTRA_SHOW_REPLY_LIST_FLAG =
             "car.messenger.EXTRA_SHOW_REPLY_LIST_FLAG";
+    public static final String EXTRA_REPLY_DIABLED_FLAG =
+            "car.messenger.EXTRA_REPLY_DIABLED_FLAG";
     private View mContainer;
     private View mMessageContainer;
-    private View mTextContainer;
     private View mVoicePlate;
+    private TextView mReplyNotice;
     private TextView mLeftButton;
     private TextView mRightButton;
     private ImageView mVoiceIcon;
@@ -66,58 +68,93 @@ public class PlayMessageActivity extends Activity {
         setContentView(R.layout.play_message_layout);
         mContainer = findViewById(R.id.container);
         mMessageContainer = findViewById(R.id.message_container);
-        mTextContainer = findViewById(R.id.text_container);
+        mReplyNotice = (TextView) findViewById(R.id.reply_notice);
         mVoicePlate = findViewById(R.id.voice_plate);
         mLeftButton = (TextView) findViewById(R.id.left_btn);
         mRightButton = (TextView) findViewById(R.id.right_btn);
         mVoiceIcon = (ImageView) findViewById(R.id.voice_icon);
 
         mTTSHelper = new TTSHelper(this);
+        setupEmojis();
         hideAutoReply();
         setupAutoReply();
         updateViewForMessagePlaying();
     }
 
+    private void setupEmojis() {
+        TextView emoji1 = (TextView) findViewById(R.id.emoji1);
+        emoji1.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_thumb_up)));
+        TextView emoji2 = (TextView) findViewById(R.id.emoji2);
+        emoji2.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_thumb_down)));
+        TextView emoji3 = (TextView) findViewById(R.id.emoji3);
+        emoji3.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_ok_hand_sign)));
+        TextView emoji4 = (TextView) findViewById(R.id.emoji4);
+        emoji4.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_heart)));
+        TextView emoji5 = (TextView) findViewById(R.id.emoji5);
+        emoji5.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_smiling_face)));
+    }
+
+    private String getEmojiByUnicode(int unicode){
+        return new String(Character.toChars(unicode));
+    }
+
     private void setupAutoReply() {
-        findViewById(R.id.message1).setOnClickListener(v -> {
-            // send auto reply
-            Intent intent = new Intent(getBaseContext(), MessengerService.class)
-                    .setAction(MessengerService.ACTION_AUTO_REPLY)
-                    .putExtra(MessengerService.EXTRA_SENDER_KEY, mSenderKey)
-                    .putExtra(
-                            MessengerService.EXTRA_REPLY_MESSAGE,
-                            getString(R.string.caned_message_driving_right_now));
-            startService(intent);
+        TextView cannedMessage = (TextView) findViewById(R.id.canned_message);
+        cannedMessage.setText(getString(R.string.reply_message_display_template,
+                getString(R.string.caned_message_driving_right_now)));
+        cannedMessage.setOnClickListener(
+                v -> sendReply(getString(R.string.caned_message_driving_right_now)));
+        findViewById(R.id.emoji1).setOnClickListener(this::sendReply);
+        findViewById(R.id.emoji2).setOnClickListener(this::sendReply);
+        findViewById(R.id.emoji3).setOnClickListener(this::sendReply);
+        findViewById(R.id.emoji4).setOnClickListener(this::sendReply);
+        findViewById(R.id.emoji5).setOnClickListener(this::sendReply);
+    }
 
-            String messageSent = getString(
-                    R.string.message_sent_notice,
-                    getIntent().getStringExtra(EXTRA_SENDER_NAME));
-            // hide all view and show reply sent notice text
-            mContainer.invalidate();
-            mMessageContainer.setVisibility(View.GONE);
-            mVoicePlate.setVisibility(View.GONE);
-            mTextContainer.setVisibility(View.VISIBLE);
-            TextView replyNotice = (TextView) findViewById(R.id.reply_notice);
-            replyNotice.setText(messageSent);
+    /**
+     * View needs to be TextView. Leave it as View, so can take advantage of lambda syntax
+     */
+    private void sendReply(View view) {
+        sendReply(((TextView) view).getText());
+    }
 
-            // read out the reply sent notice. Finish activity after TTS is done.
-            List<CharSequence> ttsMessages = new ArrayList<>();
-            ttsMessages.add(messageSent);
-            mTTSHelper.requestPlay(ttsMessages,
-                    new TTSHelper.Listener() {
-                        @Override
-                        public void onTTSStarted() {
+    private void sendReply(CharSequence message) {
+        // send auto reply
+        Intent intent = new Intent(getBaseContext(), MessengerService.class)
+                .setAction(MessengerService.ACTION_AUTO_REPLY)
+                .putExtra(MessengerService.EXTRA_SENDER_KEY, mSenderKey)
+                .putExtra(
+                        MessengerService.EXTRA_REPLY_MESSAGE,
+                        message);
+        startService(intent);
+
+        String messageSent = getString(
+                R.string.message_sent_notice,
+                getIntent().getStringExtra(EXTRA_SENDER_NAME));
+        // hide all view and show reply sent notice text
+        mContainer.invalidate();
+        mMessageContainer.setVisibility(View.GONE);
+        mVoicePlate.setVisibility(View.GONE);
+        mReplyNotice.setText(messageSent);
+        mReplyNotice.setVisibility(View.VISIBLE);
+
+        // read out the reply sent notice. Finish activity after TTS is done.
+        List<CharSequence> ttsMessages = new ArrayList<>();
+        ttsMessages.add(messageSent);
+        mTTSHelper.requestPlay(ttsMessages,
+                new TTSHelper.Listener() {
+                    @Override
+                    public void onTTSStarted() {
+                    }
+
+                    @Override
+                    public void onTTSStopped(boolean error) {
+                        if (error) {
+                            Log.w(TAG, "TTS error.");
                         }
-
-                        @Override
-                        public void onTTSStopped(boolean error) {
-                            if (error) {
-                                Log.w(TAG, "TTS error.");
-                            }
-                            finish();
-                        }
-                    });
-        });
+                        finish();
+                    }
+                });
     }
 
     private void showAutoReply() {
@@ -162,6 +199,9 @@ public class PlayMessageActivity extends Activity {
         playMessage();
         if (getIntent().getBooleanExtra(EXTRA_SHOW_REPLY_LIST_FLAG, false)) {
             showAutoReply();
+        }
+        if (getIntent().getBooleanExtra(EXTRA_REPLY_DIABLED_FLAG, false)) {
+            mLeftButton.setVisibility(View.GONE);
         }
     }
 
