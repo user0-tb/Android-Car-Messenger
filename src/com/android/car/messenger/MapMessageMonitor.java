@@ -44,6 +44,7 @@ import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccount;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -157,23 +158,29 @@ class MapMessageMonitor {
             ContactsContract.PhoneLookup._ID
     };
 
-    private static int getContactIdFromNumber(ContentResolver cr, String number) {
-        if (number == null || number.isEmpty()) {
+    private static int getContactIdFromName(ContentResolver cr, String name) {
+        if (DBG) {
+            Log.d(TAG, "getting contactId for: " + name);
+        }
+        if (TextUtils.isEmpty(name)) {
             return 0;
         }
 
-        Uri uri = Uri.withAppendedPath(
-                ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
-                Uri.encode(number));
-        Cursor cursor = cr.query(uri, CONTACT_ID, null, null, null);
+        String[] mSelectionArgs = { name };
 
+        Cursor cursor =
+                cr.query(
+                        ContactsContract.Contacts.CONTENT_URI,
+                        CONTACT_ID,
+                        ContactsContract.Contacts.DISPLAY_NAME_PRIMARY + " LIKE ?",
+                        mSelectionArgs,
+                        null);
         try {
             if (cursor != null && cursor.moveToFirst()) {
                 int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.PhoneLookup._ID));
                 return id;
             }
-        }
-        finally {
+        } finally {
             if (cursor != null) {
                 cursor.close();
             }
@@ -191,11 +198,9 @@ class MapMessageMonitor {
         long lastReceivedTimeMs =
                 mMessages.get(notificationInfo.mMessageKeys.getLast()).getReceivedTimeMs();
 
-        String phoneNumber = notificationInfo.mSenderContactUri.substring(
-                (PhoneAccount.SCHEME_TEL + ":").length());
         Uri photoUri = ContentUris.withAppendedId(
-                ContactsContract.Contacts.CONTENT_URI, getContactIdFromNumber(
-                        mContext.getContentResolver(), phoneNumber));
+                ContactsContract.Contacts.CONTENT_URI, getContactIdFromName(
+                        mContext.getContentResolver(), notificationInfo.mSenderName));
         if (DBG) {
             Log.d(TAG, "start Glide loading... " + photoUri);
         }
@@ -223,7 +228,7 @@ class MapMessageMonitor {
                             LetterTileDrawable letterTileDrawable =
                                     new LetterTileDrawable(mContext.getResources());
                             letterTileDrawable.setContactDetails(
-                                    notificationInfo.mSenderName, phoneNumber);
+                                    notificationInfo.mSenderName, notificationInfo.mSenderName);
                             letterTileDrawable.setIsCircular(true);
                             bitmap = letterTileDrawable.toBitmap(
                                     mContext.getResources().getDimensionPixelSize(
@@ -263,7 +268,17 @@ class MapMessageMonitor {
         intent.putExtra(
                 PlayMessageActivity.EXTRA_SENDER_NAME,
                 notificationInfo.mSenderName);
+        if (!supportsReply(senderKey.mDeviceAddress)) {
+            intent.putExtra(
+                    PlayMessageActivity.EXTRA_REPLY_DIABLED_FLAG,
+                    true);
+        }
         return intent;
+    }
+
+    private boolean supportsReply(String deviceAddress) {
+        return mReplyFeatureMap.containsKey(deviceAddress)
+                && mReplyFeatureMap.get(deviceAddress);
     }
 
     private Notification.Action[] getActionsFor(
@@ -275,8 +290,7 @@ class MapMessageMonitor {
         List<Notification.Action.Builder> builders = new ArrayList<>(ACTION_COUNT);
 
         // show auto reply options of device supports it
-        if (mReplyFeatureMap.containsKey(senderKey.mDeviceAddress)
-                && mReplyFeatureMap.get(senderKey.mDeviceAddress)) {
+        if (supportsReply(senderKey.mDeviceAddress)) {
             Intent replyIntent = getPlayMessageIntent(senderKey, notificationInfo);
             replyIntent.putExtra(PlayMessageActivity.EXTRA_SHOW_REPLY_LIST_FLAG, true);
             PendingIntent autoReplyIntent = PendingIntent.getActivity(
