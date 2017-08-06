@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2017 The Android Open Source Project
   ~
@@ -14,16 +15,10 @@
   ~ limitations under the License
   -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-       android:shape="rectangle">
-
-    <solid android:color="@color/car_grey_200" />
-    <padding
-        android:bottom="5dp"
-        android:left="5dp"
-        android:right="5dp"
-        android:top="5dp" />
-    <corners android:topLeftRadius="20dp"
-             android:topRightRadius="20dp"/>
-
-</shape>
+<resources>
+    <integer name="emoji_thumb_up">0x1F44D</integer>
+    <integer name="emoji_thumb_down">0x1F44E</integer>
+    <integer name="emoji_ok_hand_sign">0x1F44C</integer>
+    <integer name="emoji_heart">0x2764</integer>
+    <integer name="emoji_smiling_face">0x1F642</integer>
+</resources>

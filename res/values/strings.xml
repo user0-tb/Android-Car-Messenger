@@ -33,6 +33,7 @@
     <string name="tts_sender_says">%s says</string>
 
     <string name="tts_failed_toast">Text playout failed!</string>
-    <string name="caned_message_driving_right_now">\"I\'m driving right now.\"</string>
+    <string name="reply_message_display_template">\"%s\"</string>
+    <string name="caned_message_driving_right_now">Auto-reply: I’m driving. Get back to you soon.</string>
     <string name="message_sent_notice">Reply sent to %s</string>
 </resources>
