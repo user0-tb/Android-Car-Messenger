@@ -35,6 +35,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
+import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -43,7 +44,6 @@ import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -96,6 +96,8 @@ class MapMessageMonitor {
     private final TTSHelper mTTSHelper;
     private final Ringtone mNotificationTone;
     private final HashMap<String, Boolean> mReplyFeatureMap = new HashMap<>();
+    private final AudioManager mAudioManager;
+    private final AudioManager.OnAudioFocusChangeListener mNoOpAFChangeListener = (f) -> {};
 
     MapMessageMonitor(Context context) {
         mContext = context;
@@ -108,6 +110,7 @@ class MapMessageMonitor {
         // Fetch default notification ringtone.
         Uri notificationUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         mNotificationTone = RingtoneManager.getRingtone(mContext, notificationUri);
+        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
     public boolean isPlaying() {
@@ -345,23 +348,35 @@ class MapMessageMonitor {
         // Insert something like "foo says" before their message content.
         ttsMessages.add(mContext.getString(R.string.tts_sender_says, notificationInfo.mSenderName));
         ttsMessages.add(ttsMessage);
-        mTTSHelper.requestPlay(ttsMessages,
-                new TTSHelper.Listener() {
-                    @Override
-                    public void onTTSStarted() {
-                        Intent intent = new Intent(ACTION_MESSAGE_PLAY_START);
-                        mContext.sendBroadcast(intent);
-                    }
 
-                    @Override
-                    public void onTTSStopped(boolean error) {
-                        Intent intent = new Intent(ACTION_MESSAGE_PLAY_STOP);
-                        mContext.sendBroadcast(intent);
-                        if (error) {
-                            Toast.makeText(mContext, R.string.tts_failed_toast, Toast.LENGTH_SHORT).show();
+        int result = mAudioManager.requestAudioFocus(mNoOpAFChangeListener,
+                // Use the music stream.
+                AudioManager.STREAM_MUSIC,
+                // Request permanent focus.
+                AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+            mTTSHelper.requestPlay(ttsMessages,
+                    new TTSHelper.Listener() {
+                        @Override
+                        public void onTTSStarted() {
+                            Intent intent = new Intent(ACTION_MESSAGE_PLAY_START);
+                            mContext.sendBroadcast(intent);
                         }
-                    }
-                });
+
+                        @Override
+                        public void onTTSStopped(boolean error) {
+                            mAudioManager.abandonAudioFocus(mNoOpAFChangeListener);
+                            Intent intent = new Intent(ACTION_MESSAGE_PLAY_STOP);
+                            mContext.sendBroadcast(intent);
+                            if (error) {
+                                Toast.makeText(mContext, R.string.tts_failed_toast,
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        } else {
+            Log.w(TAG, "failed to require audio focus.");
+        }
     }
 
     void stopPlayout() {
