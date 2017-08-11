@@ -52,6 +52,9 @@ public class MessengerService extends Service {
     // Used to stop further audio notifications from the conversation.
     static final String ACTION_MUTE_CONVERSATION =
             "com.android.car.messenger.ACTION_MUTE_CONVERSATION";
+    // Used to resume further audio notifications from the conversation.
+    static final String ACTION_UNMUTE_CONVERSATION =
+            "com.android.car.messenger.ACTION_UNMUTE_CONVERSATION";
     // Used to clear notification state when user dismisses notification.
     static final String ACTION_CLEAR_NOTIFICATION_STATE =
             "com.android.car.messenger.ACTION_CLEAR_NOTIFICATION_STATE";
@@ -150,7 +153,12 @@ public class MessengerService extends Service {
                 mMessageMonitor.playMessages(intent.getParcelableExtra(EXTRA_SENDER_KEY));
                 break;
             case ACTION_MUTE_CONVERSATION:
-                mMessageMonitor.muteConversation(intent.getParcelableExtra(EXTRA_SENDER_KEY));
+                mMessageMonitor.toggleMuteConversation(
+                        intent.getParcelableExtra(EXTRA_SENDER_KEY), true);
+                break;
+            case ACTION_UNMUTE_CONVERSATION:
+                mMessageMonitor.toggleMuteConversation(
+                        intent.getParcelableExtra(EXTRA_SENDER_KEY), false);
                 break;
             case ACTION_STOP_PLAYOUT:
                 mMessageMonitor.stopPlayout();
