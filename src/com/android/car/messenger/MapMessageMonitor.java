@@ -35,15 +35,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -94,8 +92,9 @@ class MapMessageMonitor {
     private final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
     private final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
     private final TTSHelper mTTSHelper;
-    private final Ringtone mNotificationTone;
     private final HashMap<String, Boolean> mReplyFeatureMap = new HashMap<>();
+    private final AudioManager mAudioManager;
+    private final AudioManager.OnAudioFocusChangeListener mNoOpAFChangeListener = (f) -> {};
 
     MapMessageMonitor(Context context) {
         mContext = context;
@@ -105,9 +104,7 @@ class MapMessageMonitor {
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mTTSHelper = new TTSHelper(mContext);
 
-        // Fetch default notification ringtone.
-        Uri notificationUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        mNotificationTone = RingtoneManager.getRingtone(mContext, notificationUri);
+        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
     public boolean isPlaying() {
@@ -147,10 +144,6 @@ class MapMessageMonitor {
             mNotificationInfos.put(senderKey, notificationInfo);
         }
         notificationInfo.mMessageKeys.add(messageKey);
-        // Play notification when handling new message, if not muted.
-        if (!notificationInfo.muted) {
-            mNotificationTone.play();
-        }
         updateNotificationFor(senderKey, notificationInfo);
     }
 
@@ -242,8 +235,6 @@ class MapMessageMonitor {
 
                         Notification.Builder builder = new Notification.Builder(
                                 mContext, NotificationChannel.DEFAULT_CHANNEL_ID)
-                                        .setPriority(Notification.PRIORITY_HIGH)
-                                        .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                                         .setContentIntent(LaunchPlayMessageActivityIntent)
                                         .setLargeIcon(bitmap)
                                         .setSmallIcon(R.drawable.ic_message)
@@ -255,6 +246,12 @@ class MapMessageMonitor {
                                         .setDeleteIntent(buildIntentFor(
                                                 MessengerService.ACTION_CLEAR_NOTIFICATION_STATE,
                                                 senderKey, notificationInfo));
+                        if (notificationInfo.muted) {
+                            builder.setPriority(Notification.PRIORITY_MIN);
+                        } else {
+                            builder.setPriority(Notification.PRIORITY_HIGH)
+                                    .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+                        }
                         mNotificationManager.notify(
                                 notificationInfo.mNotificationId, builder.build());
                     }
@@ -299,14 +296,18 @@ class MapMessageMonitor {
                     mContext.getString(R.string.action_reply), autoReplyIntent));
         }
 
-        // Optionally add mute.
-        if (!notificationInfo.muted) {
+        // add mute/unmute.
+        if (notificationInfo.muted) {
+            PendingIntent muteIntent = buildIntentFor(MessengerService.ACTION_UNMUTE_CONVERSATION,
+                    senderKey, notificationInfo);
+            builders.add(new Notification.Action.Builder(icon,
+                    mContext.getString(R.string.action_unmute), muteIntent));
+        } else {
             PendingIntent muteIntent = buildIntentFor(MessengerService.ACTION_MUTE_CONVERSATION,
                     senderKey, notificationInfo);
             builders.add(new Notification.Action.Builder(icon,
                     mContext.getString(R.string.action_mute), muteIntent));
         }
-
 
         Notification.Action actions[] = new Notification.Action[builders.size()];
         for (int i = 0; i < builders.size(); i++) {
@@ -345,36 +346,48 @@ class MapMessageMonitor {
         // Insert something like "foo says" before their message content.
         ttsMessages.add(mContext.getString(R.string.tts_sender_says, notificationInfo.mSenderName));
         ttsMessages.add(ttsMessage);
-        mTTSHelper.requestPlay(ttsMessages,
-                new TTSHelper.Listener() {
-                    @Override
-                    public void onTTSStarted() {
-                        Intent intent = new Intent(ACTION_MESSAGE_PLAY_START);
-                        mContext.sendBroadcast(intent);
-                    }
 
-                    @Override
-                    public void onTTSStopped(boolean error) {
-                        Intent intent = new Intent(ACTION_MESSAGE_PLAY_STOP);
-                        mContext.sendBroadcast(intent);
-                        if (error) {
-                            Toast.makeText(mContext, R.string.tts_failed_toast, Toast.LENGTH_SHORT).show();
+        int result = mAudioManager.requestAudioFocus(mNoOpAFChangeListener,
+                // Use the music stream.
+                AudioManager.STREAM_MUSIC,
+                // Request permanent focus.
+                AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+            mTTSHelper.requestPlay(ttsMessages,
+                    new TTSHelper.Listener() {
+                        @Override
+                        public void onTTSStarted() {
+                            Intent intent = new Intent(ACTION_MESSAGE_PLAY_START);
+                            mContext.sendBroadcast(intent);
                         }
-                    }
-                });
+
+                        @Override
+                        public void onTTSStopped(boolean error) {
+                            mAudioManager.abandonAudioFocus(mNoOpAFChangeListener);
+                            Intent intent = new Intent(ACTION_MESSAGE_PLAY_STOP);
+                            mContext.sendBroadcast(intent);
+                            if (error) {
+                                Toast.makeText(mContext, R.string.tts_failed_toast,
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        } else {
+            Log.w(TAG, "failed to require audio focus.");
+        }
     }
 
     void stopPlayout() {
         mTTSHelper.requestStop();
     }
 
-    void muteConversation(SenderKey senderKey) {
+    void toggleMuteConversation(SenderKey senderKey, boolean mute) {
         NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
         if (notificationInfo == null) {
             Log.e(TAG, "Unknown senderKey! " + senderKey);
             return;
         }
-        notificationInfo.muted = true;
+        notificationInfo.muted = mute;
         updateNotificationFor(senderKey, notificationInfo);
     }
 
