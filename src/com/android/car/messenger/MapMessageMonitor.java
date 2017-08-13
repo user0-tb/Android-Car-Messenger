@@ -36,8 +36,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.media.AudioManager;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -94,7 +92,6 @@ class MapMessageMonitor {
     private final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
     private final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
     private final TTSHelper mTTSHelper;
-    private final Ringtone mNotificationTone;
     private final HashMap<String, Boolean> mReplyFeatureMap = new HashMap<>();
     private final AudioManager mAudioManager;
     private final AudioManager.OnAudioFocusChangeListener mNoOpAFChangeListener = (f) -> {};
@@ -107,9 +104,6 @@ class MapMessageMonitor {
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mTTSHelper = new TTSHelper(mContext);
 
-        // Fetch default notification ringtone.
-        Uri notificationUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        mNotificationTone = RingtoneManager.getRingtone(mContext, notificationUri);
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
@@ -150,10 +144,6 @@ class MapMessageMonitor {
             mNotificationInfos.put(senderKey, notificationInfo);
         }
         notificationInfo.mMessageKeys.add(messageKey);
-        // Play notification when handling new message, if not muted.
-        if (!notificationInfo.muted) {
-            mNotificationTone.play();
-        }
         updateNotificationFor(senderKey, notificationInfo);
     }
 
@@ -245,8 +235,6 @@ class MapMessageMonitor {
 
                         Notification.Builder builder = new Notification.Builder(
                                 mContext, NotificationChannel.DEFAULT_CHANNEL_ID)
-                                        .setPriority(Notification.PRIORITY_HIGH)
-                                        .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                                         .setContentIntent(LaunchPlayMessageActivityIntent)
                                         .setLargeIcon(bitmap)
                                         .setSmallIcon(R.drawable.ic_message)
@@ -258,6 +246,12 @@ class MapMessageMonitor {
                                         .setDeleteIntent(buildIntentFor(
                                                 MessengerService.ACTION_CLEAR_NOTIFICATION_STATE,
                                                 senderKey, notificationInfo));
+                        if (notificationInfo.muted) {
+                            builder.setPriority(Notification.PRIORITY_MIN);
+                        } else {
+                            builder.setPriority(Notification.PRIORITY_HIGH)
+                                    .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+                        }
                         mNotificationManager.notify(
                                 notificationInfo.mNotificationId, builder.build());
                     }
@@ -302,14 +296,18 @@ class MapMessageMonitor {
                     mContext.getString(R.string.action_reply), autoReplyIntent));
         }
 
-        // Optionally add mute.
-        if (!notificationInfo.muted) {
+        // add mute/unmute.
+        if (notificationInfo.muted) {
+            PendingIntent muteIntent = buildIntentFor(MessengerService.ACTION_UNMUTE_CONVERSATION,
+                    senderKey, notificationInfo);
+            builders.add(new Notification.Action.Builder(icon,
+                    mContext.getString(R.string.action_unmute), muteIntent));
+        } else {
             PendingIntent muteIntent = buildIntentFor(MessengerService.ACTION_MUTE_CONVERSATION,
                     senderKey, notificationInfo);
             builders.add(new Notification.Action.Builder(icon,
                     mContext.getString(R.string.action_mute), muteIntent));
         }
-
 
         Notification.Action actions[] = new Notification.Action[builders.size()];
         for (int i = 0; i < builders.size(); i++) {
@@ -383,13 +381,13 @@ class MapMessageMonitor {
         mTTSHelper.requestStop();
     }
 
-    void muteConversation(SenderKey senderKey) {
+    void toggleMuteConversation(SenderKey senderKey, boolean mute) {
         NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
         if (notificationInfo == null) {
             Log.e(TAG, "Unknown senderKey! " + senderKey);
             return;
         }
-        notificationInfo.muted = true;
+        notificationInfo.muted = mute;
         updateNotificationFor(senderKey, notificationInfo);
     }
 
