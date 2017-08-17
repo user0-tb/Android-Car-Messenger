@@ -16,6 +16,8 @@
 
 package com.android.car.messenger;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -29,6 +31,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -79,15 +82,20 @@ public class PlayMessageActivity extends Activity {
         hideAutoReply();
         setupAutoReply();
         updateViewForMessagePlaying();
+
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(this,
+                R.anim.trans_bottom_in);
+        set.setTarget(mContainer);
+        set.start();
     }
 
     private void setupEmojis() {
         TextView emoji1 = (TextView) findViewById(R.id.emoji1);
-        emoji1.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_thumb_up)));
+        emoji1.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_ok_hand_sign)));
         TextView emoji2 = (TextView) findViewById(R.id.emoji2);
-        emoji2.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_thumb_down)));
+        emoji2.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_thumb_up)));
         TextView emoji3 = (TextView) findViewById(R.id.emoji3);
-        emoji3.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_ok_hand_sign)));
+        emoji3.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_thumb_down)));
         TextView emoji4 = (TextView) findViewById(R.id.emoji4);
         emoji4.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_heart)));
         TextView emoji5 = (TextView) findViewById(R.id.emoji5);
@@ -137,6 +145,9 @@ public class PlayMessageActivity extends Activity {
         mVoicePlate.setVisibility(View.GONE);
         mReplyNotice.setText(messageSent);
         mReplyNotice.setVisibility(View.VISIBLE);
+        ViewGroup.LayoutParams layoutParams = mContainer.getLayoutParams();
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        mContainer.requestLayout();
 
         // read out the reply sent notice. Finish activity after TTS is done.
         List<CharSequence> ttsMessages = new ArrayList<>();
@@ -162,6 +173,9 @@ public class PlayMessageActivity extends Activity {
         mMessageContainer.setVisibility(View.VISIBLE);
         mLeftButton.setText(getString(R.string.action_close_messages));
         mLeftButton.setOnClickListener(v -> finish());
+        ViewGroup.LayoutParams layoutParams = mContainer.getLayoutParams();
+        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        mContainer.requestLayout();
     }
 
     private void hideAutoReply() {
@@ -169,6 +183,9 @@ public class PlayMessageActivity extends Activity {
         mMessageContainer.setVisibility(View.GONE);
         mLeftButton.setText(getString(R.string.action_reply));
         mLeftButton.setOnClickListener(v -> showAutoReply());
+        ViewGroup.LayoutParams layoutParams = mContainer.getLayoutParams();
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        mContainer.requestLayout();
     }
 
     /**
@@ -182,6 +199,7 @@ public class PlayMessageActivity extends Activity {
                     || event.getY() < mContainer.getY()
                     || event.getY() > mContainer.getY() + mContainer.getHeight()) {
                 finish();
+
             }
         }
         return super.onTouchEvent(event);
@@ -195,6 +213,16 @@ public class PlayMessageActivity extends Activity {
         Intent intent = new Intent(this, MessengerService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         mMessengerServiceBroadcastReceiver.start();
+        processIntent();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        processIntent();
+    }
+
+    private void processIntent() {
         mSenderKey = getIntent().getParcelableExtra(EXTRA_MESSAGE_KEY);
         playMessage();
         if (getIntent().getBooleanExtra(EXTRA_SHOW_REPLY_LIST_FLAG, false)) {
@@ -206,10 +234,20 @@ public class PlayMessageActivity extends Activity {
     }
 
     @Override
+    protected void onDestroy() {
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(this,
+                R.anim.trans_bottom_out);
+        set.setTarget(mContainer);
+        set.start();
+        super.onDestroy();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         mTTSHelper.cleanup();
         mMessengerServiceBroadcastReceiver.cleanup();
+        unbindService(mConnection);
     }
 
     private void playMessage() {
@@ -229,13 +267,13 @@ public class PlayMessageActivity extends Activity {
     private void updateViewForMessagePlaying() {
         mRightButton.setText(getString(R.string.action_stop));
         mRightButton.setOnClickListener(v -> stopMessage());
-        mVoiceIcon.setImageResource(R.drawable.ic_voice_out);
+        mVoiceIcon.setVisibility(View.VISIBLE);
     }
 
     private void updateViewFoeMessageStopped() {
         mRightButton.setText(getString(R.string.action_repeat));
         mRightButton.setOnClickListener(v -> playMessage());
-        mVoiceIcon.setImageResource(R.drawable.ic_voice_stopped);
+        mVoiceIcon.setVisibility(View.INVISIBLE);
     }
 
     private class MessengerServiceBroadcastReceiver extends BroadcastReceiver {
