@@ -14,13 +14,19 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-
-<resources>
-    <integer name="emoji_thumb_up">0x1F44D</integer>
-    <integer name="emoji_thumb_down">0x1F44E</integer>
-    <integer name="emoji_ok_hand_sign">0x1F44C</integer>
-    <integer name="emoji_heart">0x1F49B</integer>
-    <integer name="emoji_smiling_face">0x1F642</integer>
-
-    <integer name="anim_time">1000</integer>
-</resources>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <objectAnimator
+        android:interpolator="@android:interpolator/decelerate_quint"
+        android:valueFrom="100dp"
+        android:valueTo="0dp"
+        android:valueType="floatType"
+        android:propertyName="translationY"
+        android:duration="@integer/anim_time" />
+    <objectAnimator
+        android:interpolator="@android:interpolator/decelerate_quint"
+        android:valueFrom="0.0"
+        android:valueTo="1.0"
+        android:valueType="floatType"
+        android:propertyName="alpha"
+        android:duration="@integer/anim_time" />
+</set>
