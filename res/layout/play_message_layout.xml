@@ -20,96 +20,62 @@
     android:id="@+id/container"
     android:orientation="vertical"
     android:layout_gravity="bottom"
+    android:elevation="@dimen/car_card_view_elevation"
     android:background="@drawable/round_corner"
+    android:animateLayoutChanges="true"
+    android:alpha="0"
     android:layout_marginStart="@dimen/side_margin"
     android:layout_marginEnd="@dimen/side_margin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <LinearLayout
+    <GridLayout
         android:id="@+id/message_container"
-        android:orientation="vertical"
         android:visibility="gone"
-        android:layout_marginStart="@dimen/stream_content_keyline_1"
-        android:layout_marginEnd="@dimen/stream_content_keyline_1"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/stream_card_keyline_3"
-            android:layout_marginEnd="@dimen/stream_card_keyline_3">
-            <TextView
-                android:id="@+id/emoji1"
-                style="@style/CarBody1"
-                android:textSize="@dimen/car_list_item_icon_size"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-            <View
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent" />
-            <TextView
-                android:id="@+id/emoji2"
-                style="@style/CarBody1"
-                android:textSize="@dimen/car_list_item_icon_size"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-            <View
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent" />
-            <TextView
-                android:id="@+id/emoji3"
-                style="@style/CarBody1"
-                android:textSize="@dimen/car_list_item_icon_size"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-            <View
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent" />
-            <TextView
-                android:id="@+id/emoji4"
-                style="@style/CarBody1"
-                android:textSize="@dimen/car_list_item_icon_size"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-            <View
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent" />
-            <TextView
-                android:id="@+id/emoji5"
-                style="@style/CarBody1"
-                android:textSize="@dimen/car_list_item_icon_size"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/car_divider_height"
-            android:background="@color/car_list_divider"/>
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/stream_card_keyline_3"
+        android:layout_marginEnd="@dimen/stream_card_keyline_3"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:useDefaultMargins="true"
+        android:alignmentMode="alignBounds"
+        android:columnOrderPreserved="false"
+        android:columnCount="4"
+        >
+        <TextView
+            android:id="@+id/emoji1"
+            style="@style/MessageEmoji">
+        </TextView>
+        <TextView
+            android:id="@+id/emoji2"
+            style="@style/MessageEmoji">
+        </TextView>
+        <TextView
+            android:id="@+id/emoji3"
+            style="@style/MessageEmoji">
+        </TextView>
+        <TextView
+            android:id="@+id/emoji4"
+            style="@style/MessageEmoji">
+        </TextView>
+        <TextView
+            android:id="@+id/emoji5"
+            style="@style/MessageEmoji">
+        </TextView>
         <TextView
             android:id="@+id/canned_message"
-            style="@style/CarBody1"
+            style="@style/CarBody1.Light"
+            android:layout_column="1"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="3"
             android:gravity="center"
+            android:textStyle="italic"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_corner_btn_bg"
             android:text="@string/caned_message_driving_right_now"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_item_height">
+            android:layout_width="614dp"
+            android:layout_height="@dimen/car_touch_target">
         </TextView>
-    </LinearLayout>
+    </GridLayout>
 
     <TextView
         android:id="@+id/reply_notice"
@@ -146,6 +112,7 @@
             android:layout_width="@dimen/stream_button_icon_size"
             android:layout_height="@dimen/stream_button_icon_size"
             android:layout_gravity="center"
+            android:src="@drawable/ic_voice_out"
             android:scaleType="fitCenter">
         </ImageView>
 
