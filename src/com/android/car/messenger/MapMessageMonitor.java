@@ -267,7 +267,7 @@ class MapMessageMonitor {
                 notificationInfo.mSenderName);
         if (!supportsReply(senderKey.mDeviceAddress)) {
             intent.putExtra(
-                    PlayMessageActivity.EXTRA_REPLY_DIABLED_FLAG,
+                    PlayMessageActivity.EXTRA_REPLY_DISABLED_FLAG,
                     true);
         }
         return intent;
