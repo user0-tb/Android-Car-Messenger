@@ -84,7 +84,7 @@
         android:gravity="center"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/line_item_height">
+        android:layout_height="@dimen/single_line_item_height">
     </TextView>
 
     <LinearLayout
@@ -92,7 +92,7 @@
         android:background="@color/car_card"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/line_item_height">
+        android:layout_height="@dimen/single_line_item_height">
         <TextView
             android:id="@+id/left_btn"
             style="@style/CarBody1"
