@@ -50,8 +50,8 @@ public class PlayMessageActivity extends Activity {
     public static final String EXTRA_SENDER_NAME = "car.messenger.EXTRA_SENDER_NAME";
     public static final String EXTRA_SHOW_REPLY_LIST_FLAG =
             "car.messenger.EXTRA_SHOW_REPLY_LIST_FLAG";
-    public static final String EXTRA_REPLY_DIABLED_FLAG =
-            "car.messenger.EXTRA_REPLY_DIABLED_FLAG";
+    public static final String EXTRA_REPLY_DISABLED_FLAG =
+            "car.messenger.EXTRA_REPLY_DISABLED_FLAG";
     private View mContainer;
     private View mMessageContainer;
     private View mVoicePlate;
@@ -228,7 +228,7 @@ public class PlayMessageActivity extends Activity {
         if (getIntent().getBooleanExtra(EXTRA_SHOW_REPLY_LIST_FLAG, false)) {
             showAutoReply();
         }
-        if (getIntent().getBooleanExtra(EXTRA_REPLY_DIABLED_FLAG, false)) {
+        if (getIntent().getBooleanExtra(EXTRA_REPLY_DISABLED_FLAG, false)) {
             mLeftButton.setVisibility(View.GONE);
         }
     }
