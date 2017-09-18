@@ -28,54 +28,69 @@
     android:layout_marginEnd="@dimen/side_margin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <GridLayout
+    <LinearLayout
         android:id="@+id/message_container"
         android:visibility="gone"
-        android:layout_weight="1"
         android:layout_marginStart="@dimen/stream_card_keyline_3"
         android:layout_marginEnd="@dimen/stream_card_keyline_3"
+        android:orientation="vertical"
+        android:layout_weight="1"
         android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:useDefaultMargins="true"
-        android:alignmentMode="alignBounds"
-        android:columnOrderPreserved="false"
-        android:columnCount="4"
-        >
-        <TextView
-            android:id="@+id/emoji1"
-            style="@style/MessageEmoji">
-        </TextView>
-        <TextView
-            android:id="@+id/emoji2"
-            style="@style/MessageEmoji">
-        </TextView>
-        <TextView
-            android:id="@+id/emoji3"
-            style="@style/MessageEmoji">
-        </TextView>
-        <TextView
-            android:id="@+id/emoji4"
-            style="@style/MessageEmoji">
-        </TextView>
-        <TextView
-            android:id="@+id/emoji5"
-            style="@style/MessageEmoji">
-        </TextView>
+        android:layout_width="match_parent" >
+        <!-- expandable spacing -->
+        <View
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/emoji1"
+                style="@style/MessageEmoji">
+            </TextView>
+            <!-- expandable spacing -->
+            <View
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/emoji2"
+                style="@style/MessageEmoji">
+            </TextView>
+            <!-- expandable spacing -->
+            <View
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/emoji3"
+                style="@style/MessageEmoji">
+            </TextView>
+        </LinearLayout>
+        <!-- expandable spacing -->
+        <View
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/canned_message"
             style="@style/CarBody1.Light"
-            android:layout_column="1"
-            android:layout_rowSpan="1"
-            android:layout_columnSpan="3"
             android:gravity="center"
             android:textStyle="italic"
             android:layout_gravity="center"
             android:background="@drawable/rounded_corner_btn_bg"
             android:text="@string/caned_message_driving_right_now"
-            android:layout_width="614dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/car_touch_target">
         </TextView>
-    </GridLayout>
+        <!-- expandable spacing -->
+        <View
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/reply_notice"

@@ -91,15 +91,11 @@ public class PlayMessageActivity extends Activity {
 
     private void setupEmojis() {
         TextView emoji1 = (TextView) findViewById(R.id.emoji1);
-        emoji1.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_ok_hand_sign)));
+        emoji1.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_thumb_up)));
         TextView emoji2 = (TextView) findViewById(R.id.emoji2);
-        emoji2.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_thumb_up)));
+        emoji2.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_thumb_down)));
         TextView emoji3 = (TextView) findViewById(R.id.emoji3);
-        emoji3.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_thumb_down)));
-        TextView emoji4 = (TextView) findViewById(R.id.emoji4);
-        emoji4.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_heart)));
-        TextView emoji5 = (TextView) findViewById(R.id.emoji5);
-        emoji5.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_smiling_face)));
+        emoji3.setText(getEmojiByUnicode(getResources().getInteger(R.integer.emoji_smiling_face)));
     }
 
     private String getEmojiByUnicode(int unicode){
@@ -115,8 +111,6 @@ public class PlayMessageActivity extends Activity {
         findViewById(R.id.emoji1).setOnClickListener(this::sendReply);
         findViewById(R.id.emoji2).setOnClickListener(this::sendReply);
         findViewById(R.id.emoji3).setOnClickListener(this::sendReply);
-        findViewById(R.id.emoji4).setOnClickListener(this::sendReply);
-        findViewById(R.id.emoji5).setOnClickListener(this::sendReply);
     }
 
     /**
