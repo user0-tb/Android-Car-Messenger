@@ -193,7 +193,6 @@ public class PlayMessageActivity extends Activity {
                     || event.getY() < mContainer.getY()
                     || event.getY() > mContainer.getY() + mContainer.getHeight()) {
                 finish();
-
             }
         }
         return super.onTouchEvent(event);
@@ -239,6 +238,7 @@ public class PlayMessageActivity extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
+        stopMessage();
         mTTSHelper.cleanup();
         mMessengerServiceBroadcastReceiver.cleanup();
         unbindService(mConnection);
