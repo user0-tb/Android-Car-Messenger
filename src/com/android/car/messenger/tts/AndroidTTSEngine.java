@@ -39,7 +39,9 @@ class AndroidTTSEngine implements TTSEngine {
 
     @Override
     public void stop() {
-        mTextToSpeech.stop();
+        if (mTextToSpeech != null) {
+            mTextToSpeech.stop();
+        }
     }
 
     @Override
