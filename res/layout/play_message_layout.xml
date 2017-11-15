@@ -24,8 +24,8 @@
     android:background="@drawable/round_corner"
     android:animateLayoutChanges="true"
     android:alpha="0"
-    android:layout_marginStart="@dimen/side_margin"
-    android:layout_marginEnd="@dimen/side_margin"
+    android:layout_marginStart="@dimen/car_margin"
+    android:layout_marginEnd="@dimen/car_margin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
@@ -99,7 +99,7 @@
         android:gravity="center"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/single_line_item_height">
+        android:layout_height="@dimen/car_single_line_list_item_height">
     </TextView>
 
     <LinearLayout
@@ -107,7 +107,7 @@
         android:background="@color/car_card"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/single_line_item_height">
+        android:layout_height="@dimen/car_single_line_list_item_height">
         <TextView
             android:id="@+id/left_btn"
             style="@style/CarBody1"
@@ -124,8 +124,8 @@
 
         <ImageView
             android:id="@+id/voice_icon"
-            android:layout_width="@dimen/stream_button_icon_size"
-            android:layout_height="@dimen/stream_button_icon_size"
+            android:layout_width="@dimen/car_primary_icon_size"
+            android:layout_height="@dimen/car_primary_icon_size"
             android:layout_gravity="center"
             android:src="@drawable/ic_voice_out"
             android:scaleType="fitCenter">
