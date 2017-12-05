@@ -83,7 +83,7 @@
             android:background="@drawable/rounded_corner_btn_bg"
             android:text="@string/caned_message_driving_right_now"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/car_touch_target">
+            android:layout_height="@dimen/car_touch_target_size">
         </TextView>
         <!-- expandable spacing -->
         <View
