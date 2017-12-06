@@ -42,7 +42,6 @@ import android.widget.Toast;
 public class MessengerService extends Service {
     static final String TAG = "MessengerService";
     static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
-    static final boolean VDBG = Log.isLoggable(TAG, Log.VERBOSE);
 
     // Used to start this service at boot-complete. Takes no arguments.
     static final String ACTION_START = "com.android.car.messenger.ACTION_START";
@@ -53,6 +52,9 @@ public class MessengerService extends Service {
     // Used to stop further audio notifications from the conversation.
     static final String ACTION_MUTE_CONVERSATION =
             "com.android.car.messenger.ACTION_MUTE_CONVERSATION";
+    // Used to resume further audio notifications from the conversation.
+    static final String ACTION_UNMUTE_CONVERSATION =
+            "com.android.car.messenger.ACTION_UNMUTE_CONVERSATION";
     // Used to clear notification state when user dismisses notification.
     static final String ACTION_CLEAR_NOTIFICATION_STATE =
             "com.android.car.messenger.ACTION_CLEAR_NOTIFICATION_STATE";
@@ -61,6 +63,8 @@ public class MessengerService extends Service {
 
     // Common extra for ACTION_AUTO_REPLY and ACTION_PLAY_MESSAGES.
     static final String EXTRA_SENDER_KEY = "com.android.car.messenger.EXTRA_SENDER_KEY";
+
+    static final String EXTRA_REPLY_MESSAGE = "com.android.car.messenger.EXTRA_REPLY_MESSAGE";
 
     // Used to notify that this service started to play out the messages.
     static final String ACTION_PLAY_MESSAGES_STARTED =
@@ -133,7 +137,9 @@ public class MessengerService extends Service {
                 boolean success;
                 if (mMapClient != null) {
                     success = mMessageMonitor.sendAutoReply(
-                            intent.getParcelableExtra(EXTRA_SENDER_KEY), mMapClient);
+                            intent.getParcelableExtra(EXTRA_SENDER_KEY),
+                            mMapClient,
+                            intent.getStringExtra(EXTRA_REPLY_MESSAGE));
                 } else {
                     Log.e(TAG, "Unable to send reply; MAP profile disconnected!");
                     success = false;
@@ -147,7 +153,12 @@ public class MessengerService extends Service {
                 mMessageMonitor.playMessages(intent.getParcelableExtra(EXTRA_SENDER_KEY));
                 break;
             case ACTION_MUTE_CONVERSATION:
-                mMessageMonitor.muteConversation(intent.getParcelableExtra(EXTRA_SENDER_KEY));
+                mMessageMonitor.toggleMuteConversation(
+                        intent.getParcelableExtra(EXTRA_SENDER_KEY), true);
+                break;
+            case ACTION_UNMUTE_CONVERSATION:
+                mMessageMonitor.toggleMuteConversation(
+                        intent.getParcelableExtra(EXTRA_SENDER_KEY), false);
                 break;
             case ACTION_STOP_PLAYOUT:
                 mMessageMonitor.stopPlayout();
