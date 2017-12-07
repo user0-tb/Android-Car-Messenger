@@ -31,7 +31,7 @@
         <item name="android:textSize">@dimen/car_emoji_size</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:layout_height">@dimen/car_touch_target</item>
-        <item name="android:layout_width">@dimen/car_touch_target</item>
+        <item name="android:layout_height">@dimen/car_touch_target_size</item>
+        <item name="android:layout_width">@dimen/car_touch_target_size</item>
     </style>
 </resources>
