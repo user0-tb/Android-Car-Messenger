@@ -42,7 +42,9 @@
                 <category android:name="android.intent.category.APP_MESSAGING"/>
             </intent-filter>
         </activity>
-        <activity android:name=".PlayMessageActivity" android:exported="true">
+        <activity android:name=".PlayMessageActivity" android:exported="true"
+                  android:launchMode="singleTop"
+                  android:theme="@style/FloatingWindow">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.APP_MESSAGING"/>
