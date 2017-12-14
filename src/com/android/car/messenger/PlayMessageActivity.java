@@ -264,7 +264,7 @@ public class PlayMessageActivity extends Activity {
         mVoiceIcon.setVisibility(View.VISIBLE);
     }
 
-    private void updateViewFoeMessageStopped() {
+    private void updateViewForMessageStopped() {
         mRightButton.setText(getString(R.string.action_repeat));
         mRightButton.setOnClickListener(v -> playMessage());
         mVoiceIcon.setVisibility(View.INVISIBLE);
@@ -293,7 +293,7 @@ public class PlayMessageActivity extends Activity {
                     updateViewForMessagePlaying();
                     break;
                 case MapMessageMonitor.ACTION_MESSAGE_PLAY_STOP:
-                    updateViewFoeMessageStopped();
+                    updateViewForMessageStopped();
                     break;
                 default:
                     break;
@@ -309,7 +309,7 @@ public class PlayMessageActivity extends Activity {
             if (mMessengerService.isPlaying()) {
                 updateViewForMessagePlaying();
             } else {
-                updateViewFoeMessageStopped();
+                updateViewForMessageStopped();
             }
         }
 
