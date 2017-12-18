@@ -13,7 +13,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 
 LOCAL_JAVA_LIBRARIES := \
     junit \
-    platform-robolectric-3.1.1-prebuilt \
+    platform-robolectric-3.5.1-prebuilt \
     sdk_vcurrent
 
 LOCAL_INSTRUMENTATION_FOR := CarMessengerApp
@@ -37,10 +37,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 
 LOCAL_TEST_PACKAGE := CarMessengerApp
 
-LOCAL_ROBOTEST_FILES := $(filter-out %/BaseRobolectricTest.java,\
-    $(call find-files-in-subdirs,$(LOCAL_PATH)/src,*Test.java,.))
-
 LOCAL_INSTRUMENT_SOURCE_DIRS := $(dir $(LOCAL_PATH))../src
 
-#Require Robolectric 3.4.2 since the min-SDK target is 24
-include prebuilts/misc/common/robolectric/3.4.2/run_robotests.mk
+include prebuilts/misc/common/robolectric/3.5.1/run_robotests.mk
