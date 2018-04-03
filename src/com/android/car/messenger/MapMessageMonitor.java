@@ -41,10 +41,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.android.car.apps.common.LetterTileDrawable;
 import com.android.car.messenger.tts.TTSHelper;
