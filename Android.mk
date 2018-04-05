@@ -45,7 +45,6 @@ LOCAL_STATIC_JAVA_LIBRARIES += car-messenger-disklrucache-target
 
 LOCAL_DEX_PREOPT := false
 
-include packages/apps/Car/libs/car-stream-ui-lib/car-stream-ui-lib.mk
 include packages/apps/Car/libs/car-apps-common/car-apps-common.mk
 
 include $(BUILD_PACKAGE)
