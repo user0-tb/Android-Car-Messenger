@@ -20,9 +20,10 @@ import android.content.Context;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
-import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.util.Pair;
+
+import androidx.annotation.VisibleForTesting;
 
 import java.util.HashMap;
 import java.util.List;
