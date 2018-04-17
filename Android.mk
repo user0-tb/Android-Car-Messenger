@@ -38,14 +38,15 @@ LOCAL_PRIVILEGED_MODULE := true
 
 LOCAL_USE_AAPT2 := true
 
-LOCAL_STATIC_ANDROID_LIBRARIES += androidx.legacy_legacy-support-v4
+LOCAL_STATIC_ANDROID_LIBRARIES += \
+    androidx.legacy_legacy-support-v4 \
+    car-apps-common
+
 LOCAL_STATIC_JAVA_LIBRARIES += car-messenger-glide-target
 LOCAL_STATIC_JAVA_LIBRARIES += car-massenger-gifdecoder-target
 LOCAL_STATIC_JAVA_LIBRARIES += car-messenger-disklrucache-target
 
 LOCAL_DEX_PREOPT := false
-
-include packages/apps/Car/libs/car-apps-common/car-apps-common.mk
 
 include $(BUILD_PACKAGE)
 
