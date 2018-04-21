@@ -56,6 +56,7 @@ LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_MODULE := car-messenger-disklrucache-target
 LOCAL_SDK_VERSION := current
 LOCAL_SRC_FILES := ../../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/disklrucache/SNAPSHOT/disklrucache-SNAPSHOT$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_JETIFIER_ENABLED := true
 LOCAL_UNINSTALLABLE_MODULE := true
 
 include $(BUILD_PREBUILT)
@@ -66,6 +67,7 @@ LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_MODULE := car-massenger-gifdecoder-target
 LOCAL_SDK_VERSION := current
 LOCAL_SRC_FILES := ../../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/gifdecoder/SNAPSHOT/gifdecoder-SNAPSHOT$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_JETIFIER_ENABLED := true
 LOCAL_UNINSTALLABLE_MODULE := true
 
 include $(BUILD_PREBUILT)
@@ -76,6 +78,7 @@ LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_MODULE := car-messenger-glide-target
 LOCAL_SDK_VERSION := current
 LOCAL_SRC_FILES := ../../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/glide/SNAPSHOT/glide-SNAPSHOT$(COMMON_JAVA_PACKAGE_SUFFIX)
+LOCAL_JETIFIER_ENABLED := true
 LOCAL_UNINSTALLABLE_MODULE := true
 
 include $(BUILD_PREBUILT)
