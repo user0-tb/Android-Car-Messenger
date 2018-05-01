@@ -39,12 +39,14 @@ LOCAL_PRIVILEGED_MODULE := true
 LOCAL_USE_AAPT2 := true
 
 LOCAL_STATIC_ANDROID_LIBRARIES += \
-    androidx.legacy_legacy-support-v4 \
+    androidx.car_car \
     car-apps-common
 
-LOCAL_STATIC_JAVA_LIBRARIES += car-messenger-glide-target
-LOCAL_STATIC_JAVA_LIBRARIES += car-massenger-gifdecoder-target
-LOCAL_STATIC_JAVA_LIBRARIES += car-messenger-disklrucache-target
+LOCAL_STATIC_JAVA_LIBRARIES += \
+    androidx.annotation_annotation \
+    car-messenger-glide-target \
+    car-massenger-gifdecoder-target \
+    car-messenger-disklrucache-target
 
 LOCAL_DEX_PREOPT := false
 
