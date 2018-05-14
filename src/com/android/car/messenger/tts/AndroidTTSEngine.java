@@ -54,4 +54,9 @@ class AndroidTTSEngine implements TTSEngine {
         mTextToSpeech.shutdown();
         mTextToSpeech = null;
     }
+
+    @Override
+    public int getStream() {
+        return TextToSpeech.Engine.DEFAULT_STREAM;
+    }
 }
