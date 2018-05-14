@@ -159,6 +159,11 @@ public class PlayMessageActivity extends Activity {
                         }
                         finish();
                     }
+
+                    @Override
+                    public void onAudioFocusFailed() {
+                        Log.w(TAG, "failed to require audio focus.");
+                    }
                 });
     }
 
