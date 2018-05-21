@@ -26,6 +26,7 @@ LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_PACKAGE_NAME := CarMessengerApp
+LOCAL_PRIVATE_PLATFORM_APIS := true
 
 LOCAL_OVERRIDES_PACKAGES := messaging
 
@@ -35,7 +36,9 @@ LOCAL_PROGUARD_ENABLED := disabled
 
 LOCAL_PRIVILEGED_MODULE := true
 
-LOCAL_STATIC_JAVA_LIBRARIES += android-support-v4
+LOCAL_USE_AAPT2 := true
+
+LOCAL_STATIC_ANDROID_LIBRARIES += android-support-v4
 LOCAL_STATIC_JAVA_LIBRARIES += car-messenger-glide-target
 LOCAL_STATIC_JAVA_LIBRARIES += car-massenger-gifdecoder-target
 LOCAL_STATIC_JAVA_LIBRARIES += car-messenger-disklrucache-target
