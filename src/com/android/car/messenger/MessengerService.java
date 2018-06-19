@@ -16,6 +16,7 @@
 
 package com.android.car.messenger;
 
+import android.app.RemoteInput;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -26,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Binder;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -47,6 +49,8 @@ public class MessengerService extends Service {
     static final String ACTION_START = "com.android.car.messenger.ACTION_START";
     // Used to auto-reply to messages from a sender (invoked from Notification).
     static final String ACTION_AUTO_REPLY = "com.android.car.messenger.ACTION_AUTO_REPLY";
+    // Used to reply to message with voice input; triggered by an assistant.
+    static final String ACTION_VOICE_REPLY = "com.android.car.messenger.ACTION_VOICE_REPLY";
     // Used to play-out messages from a sender (invoked from Notification).
     static final String ACTION_PLAY_MESSAGES = "com.android.car.messenger.ACTION_PLAY_MESSAGES";
     // Used to stop further audio notifications from the conversation.
@@ -65,6 +69,8 @@ public class MessengerService extends Service {
     static final String EXTRA_SENDER_KEY = "com.android.car.messenger.EXTRA_SENDER_KEY";
 
     static final String EXTRA_REPLY_MESSAGE = "com.android.car.messenger.EXTRA_REPLY_MESSAGE";
+
+    static final String REMOTE_INPUT_KEY = "com.android.car.messenger.REMOTE_INPUT_KEY";
 
     // Used to notify that this service started to play out the messages.
     static final String ACTION_PLAY_MESSAGES_STARTED =
@@ -134,20 +140,17 @@ public class MessengerService extends Service {
         }
         switch (intent.getAction()) {
             case ACTION_AUTO_REPLY:
-                boolean success;
-                if (mMapClient != null) {
-                    success = mMessageMonitor.sendAutoReply(
-                            intent.getParcelableExtra(EXTRA_SENDER_KEY),
-                            mMapClient,
-                            intent.getStringExtra(EXTRA_REPLY_MESSAGE));
-                } else {
-                    Log.e(TAG, "Unable to send reply; MAP profile disconnected!");
-                    success = false;
+                sendReply(intent.getParcelableExtra(EXTRA_SENDER_KEY),
+                        intent.getStringExtra(EXTRA_REPLY_MESSAGE));
+                break;
+            case ACTION_VOICE_REPLY:
+                Bundle intentResults = RemoteInput.getResultsFromIntent(intent);
+                if (intentResults == null) {
+                    Log.e(TAG, "Received null RemoteInput result");
+                    return result;
                 }
-                if (!success) {
-                    Toast.makeText(this, R.string.auto_reply_failed_message, Toast.LENGTH_SHORT)
-                            .show();
-                }
+                sendReply(intent.getParcelableExtra(EXTRA_SENDER_KEY),
+                        intentResults.getCharSequence(REMOTE_INPUT_KEY).toString());
                 break;
             case ACTION_PLAY_MESSAGES:
                 mMessageMonitor.playMessages(intent.getParcelableExtra(EXTRA_SENDER_KEY));
@@ -170,6 +173,19 @@ public class MessengerService extends Service {
                 Log.e(TAG, "Ignoring unknown intent: " + intent.getAction());
         }
         return result;
+    }
+
+    private void sendReply(MapMessageMonitor.SenderKey senderKey, String replyText) {
+        boolean success;
+        if (mMapClient != null) {
+            success = mMessageMonitor.sendAutoReply(senderKey, mMapClient, replyText);
+        } else {
+            Log.e(TAG, "Unable to send reply; MAP profile disconnected!");
+            success = false;
+        }
+        if (!success) {
+            Toast.makeText(this, R.string.auto_reply_failed_message, Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -219,26 +235,26 @@ public class MessengerService extends Service {
     // NOTE: These callbacks are invoked on the main thread.
     private final BluetoothProfile.ServiceListener mMapServiceListener =
             new BluetoothProfile.ServiceListener() {
-        @Override
-        public void onServiceConnected(int profile, BluetoothProfile proxy) {
-            mMapClient = (BluetoothMapClient) proxy;
-            if (MessengerService.DBG) {
-                Log.d(TAG, "Connected to MAP service!");
-            }
+                @Override
+                public void onServiceConnected(int profile, BluetoothProfile proxy) {
+                    mMapClient = (BluetoothMapClient) proxy;
+                    if (MessengerService.DBG) {
+                        Log.d(TAG, "Connected to MAP service!");
+                    }
 
-            // Since we're connected, we will received broadcasts for any new messages
-            // in the MapMessageMonitor.
-        }
+                    // Since we're connected, we will received broadcasts for any new messages
+                    // in the MapMessageMonitor.
+                }
 
-        @Override
-        public void onServiceDisconnected(int profile) {
-            if (MessengerService.DBG) {
-                Log.d(TAG, "Disconnected from MAP service!");
-            }
-            mMapClient = null;
-            mMessageMonitor.handleMapDisconnect();
-        }
-    };
+                @Override
+                public void onServiceDisconnected(int profile) {
+                    if (MessengerService.DBG) {
+                        Log.d(TAG, "Disconnected from MAP service!");
+                    }
+                    mMapClient = null;
+                    mMessageMonitor.handleMapDisconnect();
+                }
+            };
 
     private class MapDeviceMonitor extends BroadcastReceiver {
         MapDeviceMonitor() {

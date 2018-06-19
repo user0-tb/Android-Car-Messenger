@@ -17,9 +17,12 @@
 package com.android.car.messenger;
 
 import android.app.Notification;
+import android.app.Notification.CarExtender;
+import android.app.Notification.MessagingStyle;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.RemoteInput;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
@@ -36,6 +39,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
@@ -48,6 +52,7 @@ import androidx.annotation.Nullable;
 
 import com.android.car.apps.common.LetterTileDrawable;
 import com.android.car.messenger.tts.TTSHelper;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -81,6 +86,7 @@ class MapMessageMonitor {
     private static final int REQUEST_CODE_VOICE_PLATE = 1;
     private static final int REQUEST_CODE_AUTO_REPLY = 2;
     private static final int ACTION_COUNT = 2;
+    private static String CHANNEL_ID = "MSG_CHANNEL_ID";
     private static final String TAG = "Messenger.MsgMonitor";
     private static final boolean DBG = MessengerService.DBG;
 
@@ -100,6 +106,7 @@ class MapMessageMonitor {
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mTTSHelper = new TTSHelper(mContext);
+        createNotificationChannel();
     }
 
     public boolean isPlaying() {
@@ -180,12 +187,6 @@ class MapMessageMonitor {
         if (DBG) {
             Log.d(TAG, "updateNotificationFor" + notificationInfo);
         }
-        String contentText = mContext.getResources().getQuantityString(
-                R.plurals.notification_new_message, notificationInfo.mMessageKeys.size(),
-                notificationInfo.mMessageKeys.size());
-        long lastReceivedTimeMs =
-                mMessages.get(notificationInfo.mMessageKeys.getLast()).getReceivedTimeMs();
-
         Uri photoUri = ContentUris.withAppendedId(
                 ContactsContract.Contacts.CONTENT_URI, getContactIdFromName(
                         mContext.getContentResolver(), notificationInfo.mSenderName));
@@ -212,45 +213,100 @@ class MapMessageMonitor {
                         if (DBG) {
                             Log.d(TAG, "Glide loaded. " + bitmap);
                         }
-                        if (bitmap == null) {
-                            LetterTileDrawable letterTileDrawable =
-                                    new LetterTileDrawable(mContext.getResources());
-                            letterTileDrawable.setContactDetails(
-                                    notificationInfo.mSenderName, notificationInfo.mSenderName);
-                            letterTileDrawable.setIsCircular(true);
-                            bitmap = letterTileDrawable.toBitmap(
-                                    mContext.getResources().getDimensionPixelSize(
-                                            R.dimen.notification_contact_photo_size));
-                        }
-                        PendingIntent LaunchPlayMessageActivityIntent = PendingIntent.getActivity(
-                                mContext,
-                                REQUEST_CODE_VOICE_PLATE,
-                                getPlayMessageIntent(senderKey, notificationInfo),
-                                0);
-
-                        Notification.Builder builder = new Notification.Builder(
-                                mContext, NotificationChannel.DEFAULT_CHANNEL_ID)
-                                        .setContentIntent(LaunchPlayMessageActivityIntent)
-                                        .setLargeIcon(bitmap)
-                                        .setSmallIcon(R.drawable.ic_message)
-                                        .setContentTitle(notificationInfo.mSenderName)
-                                        .setContentText(contentText)
-                                        .setWhen(lastReceivedTimeMs)
-                                        .setShowWhen(true)
-                                        .setActions(getActionsFor(senderKey, notificationInfo))
-                                        .setDeleteIntent(buildIntentFor(
-                                                MessengerService.ACTION_CLEAR_NOTIFICATION_STATE,
-                                                senderKey, notificationInfo));
-                        if (notificationInfo.muted) {
-                            builder.setPriority(Notification.PRIORITY_MIN);
-                        } else {
-                            builder.setPriority(Notification.PRIORITY_HIGH)
-                                    .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
-                        }
                         mNotificationManager.notify(
-                                notificationInfo.mNotificationId, builder.build());
+                                notificationInfo.mNotificationId,
+                                prepareNotification(senderKey, notificationInfo, bitmap));
                     }
                 });
+    }
+
+    private Notification prepareNotification(
+            SenderKey senderKey, NotificationInfo notificationInfo, Bitmap bitmap) {
+        String contentText = mContext.getResources().getQuantityString(
+                R.plurals.notification_new_message, notificationInfo.mMessageKeys.size(),
+                notificationInfo.mMessageKeys.size());
+        long lastReceivedTimeMs =
+                mMessages.get(notificationInfo.mMessageKeys.getLast()).getReceivedTimeMs();
+
+        if (bitmap == null) {
+            LetterTileDrawable letterTileDrawable = new LetterTileDrawable(mContext.getResources());
+            letterTileDrawable.setContactDetails(
+                    notificationInfo.mSenderName, notificationInfo.mSenderName);
+            letterTileDrawable.setIsCircular(true);
+            bitmap =
+                    letterTileDrawable.toBitmap(
+                            mContext
+                                    .getResources()
+                                    .getDimensionPixelSize(
+                                            R.dimen.notification_contact_photo_size));
+        }
+        PendingIntent launchPlayMessageActivityIntent =
+                PendingIntent.getActivity(
+                        mContext,
+                        REQUEST_CODE_VOICE_PLATE,
+                        getPlayMessageIntent(senderKey, notificationInfo),
+                        0);
+
+        MessagingStyle messagingStyle = new MessagingStyle("");
+        messagingStyle.setConversationTitle(notificationInfo.mSenderName);
+
+        CarExtender.Builder unreadConvoBuilder =
+                new CarExtender.Builder(notificationInfo.mSenderName);
+        unreadConvoBuilder.setLatestTimestamp(lastReceivedTimeMs);
+        RemoteInput remoteInput = new RemoteInput.Builder(
+                MessengerService.REMOTE_INPUT_KEY).build();
+        PendingIntent replyIntent =
+                buildIntentFor(MessengerService.ACTION_VOICE_REPLY, senderKey, notificationInfo);
+        unreadConvoBuilder.setReplyAction(replyIntent, remoteInput);
+
+        for (MessageKey messageKey : notificationInfo.mMessageKeys) {
+            MapMessage message = mMessages.get(messageKey);
+            messagingStyle.addMessage(
+                    message.getText(), message.getReceivedTimeMs(), message.getSenderName());
+            unreadConvoBuilder.addMessage(message.getText());
+        }
+
+        Notification.Builder builder =
+                new Notification.Builder(mContext, CHANNEL_ID)
+                        .setContentIntent(launchPlayMessageActivityIntent)
+                        .setCategory(Notification.CATEGORY_MESSAGE)
+                        .setLargeIcon(bitmap)
+                        .setSmallIcon(R.drawable.ic_message)
+                        .setContentTitle(notificationInfo.mSenderName)
+                        .setContentText(contentText)
+                        .setWhen(lastReceivedTimeMs)
+                        .setShowWhen(true)
+                        .setActions(getActionsFor(senderKey, notificationInfo))
+                        .setDeleteIntent(
+                                buildIntentFor(
+                                        MessengerService.ACTION_CLEAR_NOTIFICATION_STATE, senderKey,
+                                        notificationInfo))
+                        .setStyle(messagingStyle)
+                        .extend(new CarExtender().setUnreadConversation(
+                                unreadConvoBuilder.build()));
+
+        if (notificationInfo.muted) {
+            builder.setPriority(Notification.PRIORITY_MIN);
+        } else {
+            builder.setPriority(Notification.PRIORITY_HIGH)
+                   .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+        }
+
+        mNotificationManager.notify(
+                notificationInfo.mNotificationId, builder.build());
+
+        return builder.build();
+    }
+
+    private void createNotificationChannel() {
+        CharSequence name = "MAP Channel";
+        String description = "MAP message channel";
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+        channel.setDescription(description);
+        // Register the channel with the system; you can't change the importance
+        // or other notification behaviors after this
+        mNotificationManager.createNotificationChannel(channel);
     }
 
     private Intent getPlayMessageIntent(SenderKey senderKey, NotificationInfo notificationInfo) {
