@@ -16,10 +16,11 @@
 
 package com.android.car.messenger;
 
+import static com.android.car.messenger.MessengerService.SMS_CHANNEL_ID;
+
 import android.app.Notification;
 import android.app.Notification.CarExtender;
 import android.app.Notification.MessagingStyle;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.RemoteInput;
@@ -39,7 +40,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
@@ -86,7 +86,6 @@ class MapMessageMonitor {
     private static final int REQUEST_CODE_VOICE_PLATE = 1;
     private static final int REQUEST_CODE_AUTO_REPLY = 2;
     private static final int ACTION_COUNT = 2;
-    private static String CHANNEL_ID = "MSG_CHANNEL_ID";
     private static final String TAG = "Messenger.MsgMonitor";
     private static final boolean DBG = MessengerService.DBG;
 
@@ -106,7 +105,6 @@ class MapMessageMonitor {
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mTTSHelper = new TTSHelper(mContext);
-        createNotificationChannel();
     }
 
     public boolean isPlaying() {
@@ -267,7 +265,7 @@ class MapMessageMonitor {
         }
 
         Notification.Builder builder =
-                new Notification.Builder(mContext, CHANNEL_ID)
+                new Notification.Builder(mContext, SMS_CHANNEL_ID)
                         .setContentIntent(launchPlayMessageActivityIntent)
                         .setCategory(Notification.CATEGORY_MESSAGE)
                         .setLargeIcon(bitmap)
@@ -296,17 +294,6 @@ class MapMessageMonitor {
                 notificationInfo.mNotificationId, builder.build());
 
         return builder.build();
-    }
-
-    private void createNotificationChannel() {
-        CharSequence name = "MAP Channel";
-        String description = "MAP message channel";
-        int importance = NotificationManager.IMPORTANCE_HIGH;
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-        channel.setDescription(description);
-        // Register the channel with the system; you can't change the importance
-        // or other notification behaviors after this
-        mNotificationManager.createNotificationChannel(channel);
     }
 
     private Intent getPlayMessageIntent(SenderKey senderKey, NotificationInfo notificationInfo) {

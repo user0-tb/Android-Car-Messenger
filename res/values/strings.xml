@@ -37,4 +37,11 @@
     <string name="reply_message_display_template">\"%s\"</string>
     <string name="caned_message_driving_right_now">Auto-reply: I’m driving.</string>
     <string name="message_sent_notice">Reply sent to %s</string>
+
+    <string name="sms_channel_name">SMS Channel</string>
+    <string name="sms_channel_description">Phone SMS Receiver Service</string>
+
+    <string name="app_running_msg_channel_name">Uncategorized</string>
+    <string name="app_running_msg_notification_title">Messaging service is active</string>
+    <string name="app_running_msg_notification_content">Receiving SMS through Bluetooth</string>
 </resources>
