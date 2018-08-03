@@ -128,7 +128,7 @@ public class PlayMessageActivity extends Activity {
                 .putExtra(
                         MessengerService.EXTRA_REPLY_MESSAGE,
                         message);
-        startService(intent);
+        startForegroundService(intent);
 
         String messageSent = getString(
                 R.string.message_sent_notice,
@@ -253,14 +253,14 @@ public class PlayMessageActivity extends Activity {
         Intent intent = new Intent(getBaseContext(), MessengerService.class)
                 .setAction(MessengerService.ACTION_PLAY_MESSAGES)
                 .putExtra(MessengerService.EXTRA_SENDER_KEY, mSenderKey);
-        startService(intent);
+        startForegroundService(intent);
     }
 
     private void stopMessage() {
         Intent intent = new Intent(getBaseContext(), MessengerService.class)
                 .setAction(MessengerService.ACTION_STOP_PLAYOUT)
                 .putExtra(MessengerService.EXTRA_SENDER_KEY, mSenderKey);
-        startService(intent);
+        startForegroundService(intent);
     }
 
     private void updateViewForMessagePlaying() {

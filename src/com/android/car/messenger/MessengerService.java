@@ -16,6 +16,8 @@
 
 package com.android.car.messenger;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.RemoteInput;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
@@ -32,16 +34,17 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
+
 /**
- * Background started service that hosts messaging components.
- * <p>
- * The MapConnector manages connecting to the BT MAP service and the MapMessageMonitor listens for
- * new incoming messages and publishes notifications. Actions in the notifications trigger command
- * intents to this service (e.g. auto-reply, play message).
- * <p>
- * This service and its helper components run entirely in the main thread.
+ * Foreground service that hosts messaging components. Receives Bluetooth MAP messages and posts
+ * them as a notification.
  */
+// TODO: Investigate the possible way of removing the need of start a foreground service.
 public class MessengerService extends Service {
+    public static final String SMS_CHANNEL_ID = "SMS_CHANNEL_ID";
+    private static final String APP_RUNNING_CHANNEL_ID = "APP_RUNNING_CHANNEL_ID";
+    private static final int SERVICE_STARTED_NOTIFICATION_ID = 1;
     static final String TAG = "MessengerService";
     static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
 
@@ -100,6 +103,25 @@ public class MessengerService extends Service {
         mMessageMonitor = new MapMessageMonitor(this);
         mDeviceMonitor = new MapDeviceMonitor();
         connectToMap();
+
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+
+        NotificationChannel appRunningNotificationChannel = new NotificationChannel(
+                APP_RUNNING_CHANNEL_ID, getString(R.string.app_running_msg_channel_name),
+                NotificationManager.IMPORTANCE_MIN);
+        notificationManager.createNotificationChannel(appRunningNotificationChannel);
+
+        NotificationChannel smsChannel = new NotificationChannel(SMS_CHANNEL_ID,
+                getString(R.string.sms_channel_name), NotificationManager.IMPORTANCE_HIGH);
+        smsChannel.setDescription(getString(R.string.sms_channel_description));
+        notificationManager.createNotificationChannel(smsChannel);
+
+        NotificationCompat.Builder appRunningNotificationBuilder
+                = new NotificationCompat.Builder(this, APP_RUNNING_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_voice_out)
+                .setContentTitle(getString(R.string.app_running_msg_notification_title))
+                .setContentText(getString(R.string.app_running_msg_notification_content));
+        startForeground(SERVICE_STARTED_NOTIFICATION_ID, appRunningNotificationBuilder.build());
     }
 
     private void connectToMap() {
