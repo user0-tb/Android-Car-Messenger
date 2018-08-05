@@ -29,6 +29,6 @@ public class MessengerReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Intent startIntent =
                 new Intent(MessengerService.ACTION_START).setClass(context, MessengerService.class);
-        context.startService(startIntent);
+        context.startForegroundService(startIntent);
     }
 }
