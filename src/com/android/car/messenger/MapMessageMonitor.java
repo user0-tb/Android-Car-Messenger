@@ -246,7 +246,6 @@ class MapMessageMonitor {
                         0);
 
         MessagingStyle messagingStyle = new MessagingStyle("");
-        messagingStyle.setConversationTitle(notificationInfo.mSenderName);
 
         CarExtender.Builder unreadConvoBuilder =
                 new CarExtender.Builder(notificationInfo.mSenderName);
