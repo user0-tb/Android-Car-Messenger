@@ -2,8 +2,6 @@ package com.android.car.messenger.tts;
 
 import android.speech.tts.TextToSpeech;
 
-import com.android.car.messenger.TestConfig;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,14 +9,12 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.Scheduler;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TTSHelperTest {
     private static final long SHUTDOWN_DELAY_MILLIS = 10;
 
