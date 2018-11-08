@@ -38,6 +38,7 @@
         </receiver>
 
         <activity android:name=".MessengerActivity" android:exported="true">
+            <meta-data android:name="distractionOptimized" android:value="true"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.APP_MESSAGING"/>
@@ -46,6 +47,7 @@
         <activity android:name=".PlayMessageActivity" android:exported="true"
                   android:launchMode="singleTop"
                   android:theme="@style/FloatingWindow">
+            <meta-data android:name="distractionOptimized" android:value="true"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.APP_MESSAGING"/>
