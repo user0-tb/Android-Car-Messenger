@@ -31,10 +31,11 @@ import android.content.IntentFilter;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
+
+import com.android.car.messenger.log.L;
 
 /**
  * Foreground service that hosts messaging components. Receives Bluetooth MAP messages and posts
@@ -46,7 +47,6 @@ public class MessengerService extends Service {
     private static final String APP_RUNNING_CHANNEL_ID = "APP_RUNNING_CHANNEL_ID";
     private static final int SERVICE_STARTED_NOTIFICATION_ID = 1;
     static final String TAG = "MessengerService";
-    static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
 
     // Used to start this service at boot-complete. Takes no arguments.
     static final String ACTION_START = "com.android.car.messenger.ACTION_START";
@@ -96,9 +96,7 @@ public class MessengerService extends Service {
 
     @Override
     public void onCreate() {
-        if (DBG) {
-            Log.d(TAG, "onCreate");
-        }
+        L.d(TAG, "onCreate");
 
         mMessageMonitor = new MapMessageMonitor(this);
         mDeviceMonitor = new MapDeviceMonitor();
@@ -125,28 +123,25 @@ public class MessengerService extends Service {
     }
 
     private void connectToMap() {
-        if (DBG) {
-            Log.d(TAG, "Connecting to MAP service");
-        }
+        L.d(TAG, "Connecting to MAP service");
+
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter == null) {
             // This *should* never happen. Unless there's some severe internal error?
-            Log.wtf(TAG, "BluetoothAdapter is null! Internal error?");
+            L.wtf(TAG, "BluetoothAdapter is null! Internal error?");
             return;
         }
 
         if (!adapter.getProfileProxy(this, mMapServiceListener, BluetoothProfile.MAP_CLIENT)) {
             // This *should* never happen.  Unless arguments passed are incorrect somehow...
-            Log.wtf(TAG, "Unable to get MAP profile! Possible programmer error?");
+            L.wtf(TAG, "Unable to get MAP profile! Possible programmer error?");
             return;
         }
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (DBG) {
-            Log.d(TAG, "Handling intent: " + intent);
-        }
+        L.d(TAG, "Handling intent: %s", intent);
 
         // Service will be restarted even if its killed/dies. It will never stop itself.
         // It may be restarted with null intent or one of the other intents e.g. REPLY, PLAY etc.
@@ -168,7 +163,7 @@ public class MessengerService extends Service {
             case ACTION_VOICE_REPLY:
                 Bundle intentResults = RemoteInput.getResultsFromIntent(intent);
                 if (intentResults == null) {
-                    Log.e(TAG, "Received null RemoteInput result");
+                    L.e(TAG, "Received null RemoteInput result");
                     return result;
                 }
                 sendReply(intent.getParcelableExtra(EXTRA_SENDER_KEY),
@@ -192,7 +187,7 @@ public class MessengerService extends Service {
                 mMessageMonitor.clearNotificationState(intent.getParcelableExtra(EXTRA_SENDER_KEY));
                 break;
             default:
-                Log.e(TAG, "Ignoring unknown intent: " + intent.getAction());
+                L.e(TAG, "Ignoring unknown intent: %s", intent.getAction());
         }
         return result;
     }
@@ -202,7 +197,7 @@ public class MessengerService extends Service {
         if (mMapClient != null) {
             success = mMessageMonitor.sendAutoReply(senderKey, mMapClient, replyText);
         } else {
-            Log.e(TAG, "Unable to send reply; MAP profile disconnected!");
+            L.e(TAG, "Unable to send reply; MAP profile disconnected!");
             success = false;
         }
         if (!success) {
@@ -224,7 +219,7 @@ public class MessengerService extends Service {
             case ACTION_MUTE_CONVERSATION:
             case ACTION_CLEAR_NOTIFICATION_STATE:
                 if (!intent.hasExtra(EXTRA_SENDER_KEY)) {
-                    Log.w(TAG, "Intent is missing sender-key extra: " + intent.getAction());
+                    L.w(TAG, "Intent is missing sender-key extra: %s", intent.getAction());
                     return false;
                 }
                 return true;
@@ -239,9 +234,8 @@ public class MessengerService extends Service {
 
     @Override
     public void onDestroy() {
-        if (DBG) {
-            Log.d(TAG, "onDestroy");
-        }
+        L.d(TAG, "onDestroy");
+
         if (mMapClient != null) {
             mMapClient.close();
         }
@@ -260,9 +254,7 @@ public class MessengerService extends Service {
                 @Override
                 public void onServiceConnected(int profile, BluetoothProfile proxy) {
                     mMapClient = (BluetoothMapClient) proxy;
-                    if (MessengerService.DBG) {
-                        Log.d(TAG, "Connected to MAP service!");
-                    }
+                    L.d(TAG, "Connected to MAP service!");
 
                     // Since we're connected, we will received broadcasts for any new messages
                     // in the MapMessageMonitor.
@@ -270,9 +262,8 @@ public class MessengerService extends Service {
 
                 @Override
                 public void onServiceDisconnected(int profile) {
-                    if (MessengerService.DBG) {
-                        Log.d(TAG, "Disconnected from MAP service!");
-                    }
+                    L.d(TAG, "Disconnected from MAP service!");
+
                     mMapClient = null;
                     mMessageMonitor.handleMapDisconnect();
                 }
@@ -280,9 +271,8 @@ public class MessengerService extends Service {
 
     private class MapDeviceMonitor extends BroadcastReceiver {
         MapDeviceMonitor() {
-            if (DBG) {
-                Log.d(TAG, "Registering Map device monitor");
-            }
+            L.d(TAG, "Registering Map device monitor");
+
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(BluetoothMapClient.ACTION_CONNECTION_STATE_CHANGED);
             registerReceiver(this, intentFilter, android.Manifest.permission.BLUETOOTH, null);
@@ -298,14 +288,13 @@ public class MessengerService extends Service {
             int previousState = intent.getIntExtra(BluetoothProfile.EXTRA_PREVIOUS_STATE, -1);
             BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
             if (state == -1 || previousState == -1 || device == null) {
-                Log.w(TAG, "Skipping broadcast, missing required extra");
+                L.w(TAG, "Skipping broadcast, missing required extra");
                 return;
             }
             if (previousState == BluetoothProfile.STATE_CONNECTED
                     && state != BluetoothProfile.STATE_CONNECTED) {
-                if (DBG) {
-                    Log.d(TAG, "Device losing MAP connection: " + device);
-                }
+                L.d(TAG, "Device losing MAP connection: %s", device);
+
                 mMessageMonitor.handleDeviceDisconnect(device);
             }
         }

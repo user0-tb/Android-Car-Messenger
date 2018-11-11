@@ -28,13 +28,13 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.car.messenger.log.L;
 import com.android.car.messenger.tts.TTSHelper;
 
 import java.util.ArrayList;
@@ -155,14 +155,14 @@ public class PlayMessageActivity extends Activity {
                     @Override
                     public void onTTSStopped(boolean error) {
                         if (error) {
-                            Log.w(TAG, "TTS error.");
+                            L.w(TAG, "TTS error.");
                         }
                         finish();
                     }
 
                     @Override
                     public void onAudioFocusFailed() {
-                        Log.w(TAG, "failed to require audio focus.");
+                        L.w(TAG, "failed to require audio focus.");
                     }
                 });
     }

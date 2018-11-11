@@ -45,12 +45,12 @@ import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.android.car.apps.common.LetterTileDrawable;
+import com.android.car.messenger.log.L;
 import com.android.car.messenger.tts.TTSHelper;
 
 import com.bumptech.glide.Glide;
@@ -87,7 +87,6 @@ class MapMessageMonitor {
     private static final int REQUEST_CODE_AUTO_REPLY = 2;
     private static final int ACTION_COUNT = 2;
     private static final String TAG = "Messenger.MsgMonitor";
-    private static final boolean DBG = MessengerService.DBG;
 
     private final Context mContext;
     private final BluetoothMapReceiver mBluetoothMapReceiver;
@@ -112,14 +111,12 @@ class MapMessageMonitor {
     }
 
     private void handleNewMessage(Intent intent) {
-        if (DBG) {
-            Log.d(TAG, "Handling new message");
-        }
+        L.d(TAG, "Handling new message");
+
         try {
             MapMessage message = MapMessage.parseFrom(intent);
-            if (MessengerService.DBG) {
-                Log.v(TAG, "Parsed message: " + message);
-            }
+            L.v(TAG, "Parsed message: %s", message);
+
             MessageKey messageKey = new MessageKey(message);
             boolean repeatMessage = mMessages.containsKey(messageKey);
             mMessages.put(messageKey, message);
@@ -127,7 +124,7 @@ class MapMessageMonitor {
                 updateNotificationInfo(message, messageKey);
             }
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Dropping invalid MAP message", e);
+            L.e(TAG, e, "Dropping invalid MAP message");
         }
     }
 
@@ -152,9 +149,8 @@ class MapMessageMonitor {
     };
 
     private static int getContactIdFromName(ContentResolver cr, String name) {
-        if (DBG) {
-            Log.d(TAG, "getting contactId for: " + name);
-        }
+        L.d(TAG, "getting contactId for: %s", name);
+
         if (TextUtils.isEmpty(name)) {
             return 0;
         }
@@ -182,15 +178,13 @@ class MapMessageMonitor {
     }
 
     private void updateNotificationFor(SenderKey senderKey, NotificationInfo notificationInfo) {
-        if (DBG) {
-            Log.d(TAG, "updateNotificationFor" + notificationInfo);
-        }
+        L.d(TAG, "updateNotificationFor %s", notificationInfo);
+
         Uri photoUri = ContentUris.withAppendedId(
                 ContactsContract.Contacts.CONTENT_URI, getContactIdFromName(
                         mContext.getContentResolver(), notificationInfo.mSenderName));
-        if (DBG) {
-            Log.d(TAG, "start Glide loading... " + photoUri);
-        }
+        L.d(TAG, "start Glide loading... %s", photoUri);
+
         Glide.with(mContext)
                 .asBitmap()
                 .load(photoUri)
@@ -208,9 +202,8 @@ class MapMessageMonitor {
                     }
 
                     private void sendNotification(Bitmap bitmap) {
-                        if (DBG) {
-                            Log.d(TAG, "Glide loaded. " + bitmap);
-                        }
+                        L.d(TAG, "Glide loaded. %s", bitmap);
+
                         mNotificationManager.notify(
                                 notificationInfo.mNotificationId,
                                 prepareNotification(senderKey, notificationInfo, bitmap));
@@ -363,16 +356,15 @@ class MapMessageMonitor {
     }
 
     void clearNotificationState(SenderKey senderKey) {
-        if (DBG) {
-            Log.d(TAG, "Clearing notification state for: " + senderKey);
-        }
+        L.d(TAG, "Clearing notification state for: %s", senderKey);
+
         mNotificationInfos.remove(senderKey);
     }
 
     void playMessages(SenderKey senderKey) {
         NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
         if (notificationInfo == null) {
-            Log.e(TAG, "Unknown senderKey! " + senderKey);
+            L.e(TAG, "Unknown senderKey! %s", senderKey);
             return;
         }
         List<CharSequence> ttsMessages = new ArrayList<>();
@@ -404,7 +396,7 @@ class MapMessageMonitor {
 
                     @Override
                     public void onAudioFocusFailed() {
-                        Log.w(TAG, "failed to require audio focus.");
+                        L.w(TAG, "failed to require audio focus.");
                     }
                 });
     }
@@ -416,7 +408,7 @@ class MapMessageMonitor {
     void toggleMuteConversation(SenderKey senderKey, boolean mute) {
         NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
         if (notificationInfo == null) {
-            Log.e(TAG, "Unknown senderKey! " + senderKey);
+            L.e(TAG, "Unknown senderKey! %s", senderKey);
             return;
         }
         notificationInfo.muted = mute;
@@ -424,18 +416,17 @@ class MapMessageMonitor {
     }
 
     boolean sendAutoReply(SenderKey senderKey, BluetoothMapClient mapClient, String message) {
-        if (DBG) {
-            Log.d(TAG, "Sending auto-reply to: " + senderKey);
-        }
+        L.d(TAG, "Sending auto-reply to: %s", senderKey);
+
         BluetoothDevice device =
                 BluetoothAdapter.getDefaultAdapter().getRemoteDevice(senderKey.mDeviceAddress);
         NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
         if (notificationInfo == null) {
-            Log.w(TAG, "No notificationInfo found for senderKey: " + senderKey);
+            L.w(TAG, "No notificationInfo found for senderKey: %s", senderKey);
             return false;
         }
         if (notificationInfo.mSenderContactUri == null) {
-            Log.w(TAG, "Do not have contact URI for sender!");
+            L.w(TAG, "Do not have contact URI for sender!");
             return false;
         }
         Uri recipientUris[] = { Uri.parse(notificationInfo.mSenderContactUri) };
@@ -482,9 +473,8 @@ class MapMessageMonitor {
 
     private class BluetoothSdpReceiver extends BroadcastReceiver {
         BluetoothSdpReceiver() {
-            if (DBG) {
-                Log.d(TAG, "Registering receiver for sdp");
-            }
+            L.d(TAG, "Registering receiver for sdp");
+
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(BluetoothDevice.ACTION_SDP_RECORD);
             mContext.registerReceiver(this, intentFilter);
@@ -497,14 +487,11 @@ class MapMessageMonitor {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (BluetoothDevice.ACTION_SDP_RECORD.equals(intent.getAction())) {
-                if (DBG) {
-                    Log.d(TAG, "get SDP record: " + intent.getExtras());
-                }
+                L.d(TAG, "get SDP record: %s", intent.getExtras());
+
                 Parcelable parcelable = intent.getParcelableExtra(BluetoothDevice.EXTRA_SDP_RECORD);
                 if (!(parcelable instanceof SdpMasRecord)) {
-                    if (DBG) {
-                        Log.d(TAG, "not SdpMasRecord: " + parcelable);
-                    }
+                    L.d(TAG, "not SdpMasRecord: %s", parcelable);
                     return;
                 }
                 SdpMasRecord masRecord = (SdpMasRecord) parcelable;
@@ -520,7 +507,7 @@ class MapMessageMonitor {
                         intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 mReplyFeatureMap.put(bluetoothDevice.getAddress(), supportsReply);
             } else {
-                Log.w(TAG, "Ignoring unknown broadcast " + intent.getAction());
+                L.w(TAG, "Ignoring unknown broadcast %s", intent.getAction());
             }
         }
 
@@ -532,9 +519,8 @@ class MapMessageMonitor {
     // Used to monitor for new incoming messages and sent-message broadcast.
     private class BluetoothMapReceiver extends BroadcastReceiver {
         BluetoothMapReceiver() {
-            if (DBG) {
-                Log.d(TAG, "Registering receiver for bluetooth MAP");
-            }
+            L.d(TAG, "Registering receiver for bluetooth MAP");
+
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(BluetoothMapClient.ACTION_MESSAGE_SENT_SUCCESSFULLY);
             intentFilter.addAction(BluetoothMapClient.ACTION_MESSAGE_RECEIVED);
@@ -548,16 +534,12 @@ class MapMessageMonitor {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (BluetoothMapClient.ACTION_MESSAGE_SENT_SUCCESSFULLY.equals(intent.getAction())) {
-                if (DBG) {
-                    Log.d(TAG, "SMS was sent successfully!");
-                }
+                L.d(TAG, "SMS was sent successfully!");
             } else if (BluetoothMapClient.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-                if (DBG) {
-                    Log.d(TAG, "SMS message received");
-                }
+                L.d(TAG, "SMS message received");
                 handleNewMessage(intent);
             } else {
-                Log.w(TAG, "Ignoring unknown broadcast " + intent.getAction());
+                L.w(TAG, "Ignoring unknown broadcast %s", intent.getAction());
             }
         }
     }
