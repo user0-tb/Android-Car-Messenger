@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,6 +53,10 @@ public class PlayMessageActivity extends Activity {
             "car.messenger.EXTRA_SHOW_REPLY_LIST_FLAG";
     public static final String EXTRA_REPLY_DISABLED_FLAG =
             "car.messenger.EXTRA_REPLY_DISABLED_FLAG";
+
+    /** Milliseconds to wait after TTS finishes before automatically closing the activity */
+    private static final int MILLIS_UNTIL_DISMISS = 3000;
+
     private View mContainer;
     private View mMessageContainer;
     private View mVoicePlate;
@@ -64,6 +69,8 @@ public class PlayMessageActivity extends Activity {
             new MessengerServiceBroadcastReceiver();
     private MapMessageMonitor.SenderKey mSenderKey;
     private TTSHelper mTTSHelper;
+    private Handler mHandler;
+    private final Runnable mFinishRunnable = this::finish;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +85,7 @@ public class PlayMessageActivity extends Activity {
         mVoiceIcon = (ImageView) findViewById(R.id.voice_icon);
 
         mTTSHelper = new TTSHelper(this);
+        mHandler = new Handler();
         setupEmojis();
         hideAutoReply();
         setupAutoReply();
@@ -169,6 +177,7 @@ public class PlayMessageActivity extends Activity {
 
     private void showAutoReply() {
         mContainer.invalidate();
+        cancelAutoDismissTimer();
         mMessageContainer.setVisibility(View.VISIBLE);
         mLeftButton.setText(getString(R.string.action_close_messages));
         mLeftButton.setOnClickListener(v -> finish());
@@ -263,13 +272,25 @@ public class PlayMessageActivity extends Activity {
         startForegroundService(intent);
     }
 
+    private void startAutoDismissTimer() {
+        mHandler.postDelayed(mFinishRunnable, MILLIS_UNTIL_DISMISS);
+    }
+
+    private void cancelAutoDismissTimer() {
+        mHandler.removeCallbacks(mFinishRunnable);
+    }
+
     private void updateViewForMessagePlaying() {
+        cancelAutoDismissTimer();
+
         mRightButton.setText(getString(R.string.action_stop));
         mRightButton.setOnClickListener(v -> stopMessage());
         mVoiceIcon.setVisibility(View.VISIBLE);
     }
 
     private void updateViewForMessageStopped() {
+        startAutoDismissTimer();
+
         mRightButton.setText(getString(R.string.action_repeat));
         mRightButton.setOnClickListener(v -> playMessage());
         mVoiceIcon.setVisibility(View.INVISIBLE);
