@@ -29,7 +29,9 @@ public class L {
     /**
      * Logs verbose level logs if loggable.
      *
-     * <p>@see String#format(String, Object...) for formatting log string.
+     * @param tag logging tag
+     * @param msg the message to log, as a format string
+     * @param args arguments referenced by the format string
      */
     public static void v(String tag, @NonNull String msg, Object... args) {
         if (Log.isLoggable(tag, Log.VERBOSE) || Build.IS_DEBUGGABLE) {
@@ -40,7 +42,9 @@ public class L {
     /**
      * Logs debug level logs if loggable.
      *
-     * <p>@see String#format(String, Object...) for formatting log string.
+     * @param tag logging tag
+     * @param msg the message to log, as a format string
+     * @param args arguments referenced by the format string
      */
     public static void d(String tag, @NonNull String msg, Object... args) {
         if (Log.isLoggable(tag, Log.DEBUG) || Build.IS_DEBUGGABLE) {
@@ -51,7 +55,9 @@ public class L {
     /**
      * Logs info level logs if loggable.
      *
-     * <p>@see String#format(String, Object...) for formatting log string.
+     * @param tag logging tag
+     * @param msg the message to log, as a format string
+     * @param args arguments referenced by the format string
      */
     public static void i(String tag, @NonNull String msg, Object... args) {
         if (Log.isLoggable(tag, Log.INFO) || Build.IS_DEBUGGABLE) {
@@ -62,7 +68,9 @@ public class L {
     /**
      * Logs warning level logs if loggable.
      *
-     * <p>@see String#format(String, Object...) for formatting log string.
+     * @param tag logging tag
+     * @param msg the message to log, as a format string
+     * @param args arguments referenced by the format string
      */
     public static void w(String tag, @NonNull String msg, Object... args) {
         if (Log.isLoggable(tag, Log.WARN) || Build.IS_DEBUGGABLE) {
@@ -73,7 +81,9 @@ public class L {
     /**
      * Logs error level logs.
      *
-     * <p>@see String#format(String, Object...) for formatting log string.
+     * @param tag logging tag
+     * @param msg the message to log, as a format string
+     * @param args arguments referenced by the format string
      */
     public static void e(String tag, @NonNull String msg, Object... args) {
         Log.e(tag, String.format(msg, args));
@@ -82,16 +92,34 @@ public class L {
     /**
      * Logs warning level logs.
      *
-     * <p>@see String#format(String, Object...) for formatting log string.
+     * @param tag logging tag
+     * @param e an exception to log
+     * @param msg the message to log, as a format string
+     * @param args arguments referenced by the format string
      */
     public static void e(String tag, Exception e, @NonNull String msg, Object... args) {
         Log.e(tag, String.format(msg, args), e);
     }
 
+    /**
+     * Logs conditions that should never happen.
+     *
+     * @param tag logging tag
+     * @param msg the message to log, as a format string
+     * @param args arguments referenced by the format string
+     */
     public static void wtf(String tag, @NonNull String msg, Object... args) {
         Log.wtf(tag, String.format(msg, args));
     }
 
+    /**
+     * Logs conditions that should never happen.
+     *
+     * @param tag logging tag
+     * @param e an exception to log
+     * @param msg the message to log, as a format string
+     * @param args arguments referenced by the format string
+     */
     public static void wtf(String tag, Exception e, @NonNull String msg, Object... args) {
         Log.wtf(tag, String.format(msg, args), e);
     }
