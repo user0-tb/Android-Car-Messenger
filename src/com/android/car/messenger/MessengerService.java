@@ -45,7 +45,7 @@ import com.android.car.messenger.log.L;
 public class MessengerService extends Service {
     public static final String SMS_CHANNEL_ID = "SMS_CHANNEL_ID";
     private static final String APP_RUNNING_CHANNEL_ID = "APP_RUNNING_CHANNEL_ID";
-    private static final int SERVICE_STARTED_NOTIFICATION_ID = 1;
+    private static final int SERVICE_STARTED_NOTIFICATION_ID = 99999;
     static final String TAG = "MessengerService";
 
     // Used to start this service at boot-complete. Takes no arguments.
