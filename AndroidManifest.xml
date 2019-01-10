@@ -31,22 +31,13 @@
         <service android:name=".MessengerService" android:exported="false">
         </service>
 
-        <receiver android:name=".MessengerReceiver" android:exported="true">
+        <receiver android:name=".BootReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
         <activity android:name=".MessengerActivity" android:exported="true">
-            <meta-data android:name="distractionOptimized" android:value="true"/>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.APP_MESSAGING"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".PlayMessageActivity" android:exported="true"
-                  android:launchMode="singleTop"
-                  android:theme="@style/FloatingWindow">
             <meta-data android:name="distractionOptimized" android:value="true"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

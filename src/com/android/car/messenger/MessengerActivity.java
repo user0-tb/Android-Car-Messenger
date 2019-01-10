@@ -1,11 +1,13 @@
 package com.android.car.messenger;
 
-import android.annotation.Nullable;
+
 import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+
 /**
- * No-op Activity that only exists in-order to have an entry in the manifest with SMS specific
+ * No-op Activity that only exists in order to have an entry in the manifest with SMS specific
  * intent-filter.
  * <p>
  * We need the manifest entry so that PackageManager will grant this pre-installed app SMS related
