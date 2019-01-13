@@ -19,16 +19,15 @@ package com.android.car.messenger;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 /**
  * Minimal receiver that starts up MessengerService on boot-completion.
  */
-public class MessengerReceiver extends BroadcastReceiver {
+public class BootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent startIntent =
-                new Intent(MessengerService.ACTION_START).setClass(context, MessengerService.class);
+        Intent startIntent = new Intent(context, MessengerService.class)
+                .setAction(MessengerService.ACTION_START);
         context.startForegroundService(startIntent);
     }
 }
