@@ -4,6 +4,7 @@ package com.android.car.messenger;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
 import android.content.ContentResolver;
@@ -346,19 +347,21 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         final List<Action> actionList = new ArrayList<>();
 
         // Reply action
-        final String replyString = mContext.getString(R.string.action_reply);
-        PendingIntent replyIntent = createServiceIntent(senderKey, notificationId,
-                MessengerService.ACTION_VOICE_REPLY);
-        actionList.add(
-                new Action.Builder(icon, replyString, replyIntent)
-                        .setSemanticAction(Action.SEMANTIC_ACTION_REPLY)
-                        .setShowsUserInterface(false)
-                        .addRemoteInput(
-                                new RemoteInput.Builder(MessengerService.REMOTE_INPUT_KEY)
-                                        .build()
-                        )
-                        .build()
-        );
+        if (shouldAddReplyAction(senderKey.getDeviceAddress())) {
+            final String replyString = mContext.getString(R.string.action_reply);
+            PendingIntent replyIntent = createServiceIntent(senderKey, notificationId,
+                    MessengerService.ACTION_VOICE_REPLY);
+            actionList.add(
+                    new Action.Builder(icon, replyString, replyIntent)
+                            .setSemanticAction(Action.SEMANTIC_ACTION_REPLY)
+                            .setShowsUserInterface(false)
+                            .addRemoteInput(
+                                    new RemoteInput.Builder(MessengerService.REMOTE_INPUT_KEY)
+                                            .build()
+                            )
+                            .build()
+            );
+        }
 
         // Mark-as-read Action. This will be the callback of Notification Center's "Read" action.
         final String markAsRead = mContext.getString(R.string.action_mark_as_read);
@@ -394,6 +397,16 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         );
 
         return actionList;
+    }
+
+    private boolean shouldAddReplyAction(String deviceAddress) {
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter == null) {
+            return false;
+        }
+        BluetoothDevice device = adapter.getRemoteDevice(deviceAddress);
+
+        return mBluetoothMapClient.isUploadingSupported(device);
     }
 
     /**
