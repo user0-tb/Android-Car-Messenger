@@ -50,6 +50,8 @@ import java.util.function.Predicate;
 /** Delegate class responsible for handling messaging service actions */
 public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListener {
     private static final String TAG = "CM#MessengerDelegate";
+    // Static user name for building a MessagingStyle.
+    private static final String STATIC_USER_NAME = "STATIC_USER_NAME";
 
     private final Context mContext;
     private BluetoothMapClient mBluetoothMapClient;
@@ -245,7 +247,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
         Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
                 Uri.encode(contactUri));
-        String[] projection = new String[] {ContactsContract.PhoneLookup._ID};
+        String[] projection = new String[]{ContactsContract.PhoneLookup._ID};
 
         try (Cursor cursor = cr.query(lookupUri, projection, null, null, null)) {
             if (cursor != null && cursor.moveToFirst() && cursor.isLast()) {
@@ -258,9 +260,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         return 0;
     }
 
-    private Notification createNotification(SenderKey senderKey, NotificationInfo notificationInfo,
-            Bitmap bitmap) {
-
+    private Notification createNotification(
+            SenderKey senderKey, NotificationInfo notificationInfo, Bitmap bitmap) {
         String contentText = mContext.getResources().getQuantityString(
                 R.plurals.notification_new_message, notificationInfo.mMessageKeys.size(),
                 notificationInfo.mMessageKeys.size());
@@ -281,11 +282,14 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
         List<Action> actions = getNotificationActions(senderKey, notificationId, muted);
 
+        Person user = new Person.Builder()
+                .setName(STATIC_USER_NAME)
+                .build();
+        MessagingStyle messagingStyle = new MessagingStyle(user);
         Person sender = new Person.Builder()
                 .setName(senderName)
                 .setUri(notificationInfo.mSenderContactUri)
                 .build();
-        MessagingStyle messagingStyle = new MessagingStyle(sender);
         notificationInfo.mMessageKeys.stream().map(mMessages::get).forEachOrdered(message -> {
             messagingStyle.addMessage(message.getMessageText(), message.getReceiveTime(), sender);
         });
