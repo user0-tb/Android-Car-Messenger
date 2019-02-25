@@ -184,7 +184,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     }
 
     protected void clearNotifications(SenderKey senderKey) {
-        cleanupMessagesAndNotifications(key -> key.matches(senderKey.getDeviceAddress()));
+        cleanupMessagesAndNotifications(key -> key.equals(senderKey));
     }
 
     private void cleanupMessagesAndNotifications(Predicate<CompositeKey> predicate) {
