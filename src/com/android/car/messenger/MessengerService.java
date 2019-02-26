@@ -12,6 +12,7 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import androidx.core.app.NotificationCompat;
@@ -47,6 +48,14 @@ public class MessengerService extends Service {
     /** Used to mark a notification as read **/
     public static final String ACTION_MARK_AS_READ =
             "com.android.car.messenger.ACTION_MARK_AS_READ";
+
+    /** Used to notify when a sms is received. Takes no arguments. */
+    public static final String ACTION_RECEIVED_SMS =
+            "com.android.car.messenger.ACTION_RECEIVED_SMS";
+
+    /** Used to notify when a mms is received. Takes no arguments. */
+    public static final String ACTION_RECEIVED_MMS =
+            "com.android.car.messenger.ACTION_RECEIVED_MMS";
 
     /* EXTRAS */
     /** Key under which the {@link SenderKey} is provided. */
@@ -95,7 +104,6 @@ public class MessengerService extends Service {
     }
 
 
-
     private void sendServiceRunningNotification() {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
 
@@ -138,10 +146,10 @@ public class MessengerService extends Service {
 
         final Notification notification =
                 new NotificationCompat.Builder(this, APP_RUNNING_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_voice_out)
-                .setContentTitle(getString(R.string.app_running_msg_notification_title))
-                .setContentText(getString(R.string.app_running_msg_notification_content))
-                .build();
+                        .setSmallIcon(R.drawable.ic_voice_out)
+                        .setContentTitle(getString(R.string.app_running_msg_notification_title))
+                        .setContentText(getString(R.string.app_running_msg_notification_content))
+                        .build();
 
         startForeground(SERVICE_STARTED_NOTIFICATION_ID, notification);
     }
@@ -185,6 +193,15 @@ public class MessengerService extends Service {
                 break;
             case ACTION_MARK_AS_READ:
                 markAsRead(intent);
+                break;
+            case ACTION_RECEIVED_SMS:
+                // NO-OP
+                break;
+            case ACTION_RECEIVED_MMS:
+                // NO-OP
+                break;
+            case TelephonyManager.ACTION_RESPOND_VIA_MESSAGE:
+                respondViaMessage(intent);
                 break;
             default:
                 L.w(TAG, "Unsupported action: %s", action);
@@ -279,5 +296,20 @@ public class MessengerService extends Service {
         final SenderKey senderKey = intent.getParcelableExtra(EXTRA_SENDER_KEY);
         L.d(TAG, "markAsRead");
         mMessengerDelegate.markAsRead(senderKey);
+    }
+
+    /**
+     * Respond to a call via text message.
+     *
+     * @param intent intent containing a URI describing the recipient and the URI schema
+     */
+    public void respondViaMessage(Intent intent) {
+        Bundle extras = intent.getExtras();
+        if (extras == null) {
+            L.v(TAG, "Called to send SMS but no extras");
+            return;
+        }
+
+        // TODO: get senderKey from the recipient's address, and sendMessage() to it.
     }
 }
