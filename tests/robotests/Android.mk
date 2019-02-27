@@ -40,6 +40,12 @@ LOCAL_JAVA_LIBRARIES := \
     mockito-robolectric-prebuilt \
     truth-prebuilt
 
+LOCAL_JAVA_LIBRARIES := \
+    robolectric_android-all-stub \
+    Robolectric_all-target \
+    mockito-robolectric-prebuilt \
+    truth-prebuilt
+
 LOCAL_TEST_PACKAGE := CarMessengerApp
 
 LOCAL_INSTRUMENT_SOURCE_DIRS := $(dir $(LOCAL_PATH))../src

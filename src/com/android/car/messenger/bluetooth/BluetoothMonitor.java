@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.car.messenger.log.L;
 
@@ -184,6 +185,11 @@ public class BluetoothMonitor {
         mBluetoothMapReceiver.unregisterReceivers();
         mBluetoothSdpReceiver.unregisterReceivers();
         mMapDeviceMonitor.unregisterReceivers();
+    }
+
+    @VisibleForTesting
+    BluetoothProfile.ServiceListener getServiceListener() {
+        return mMapServiceListener;
     }
 
     /** Monitors for new device connections and disconnections */
