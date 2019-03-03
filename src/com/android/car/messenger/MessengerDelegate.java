@@ -22,6 +22,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.Action;
 import androidx.core.app.NotificationCompat.MessagingStyle;
@@ -58,9 +59,10 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     private BluetoothMapClient mBluetoothMapClient;
     private NotificationManager mNotificationManager;
 
-    private final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
-    private final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
-    private final Set<String> mConnectedDevices = new HashSet<>();
+    @VisibleForTesting
+    final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
+    @VisibleForTesting final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
+    @VisibleForTesting final Set<String> mConnectedDevices = new HashSet<>();
 
     public MessengerDelegate(Context context) {
         mContext = context;
@@ -412,7 +414,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     /**
      * Contains information about a single notification that is displayed, with grouped messages.
      */
-    private static class NotificationInfo {
+    @VisibleForTesting static class NotificationInfo {
         private static int NEXT_NOTIFICATION_ID = 0;
 
         final int mNotificationId = NEXT_NOTIFICATION_ID++;
