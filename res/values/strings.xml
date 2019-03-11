@@ -31,13 +31,13 @@
     <string name="action_stop">Stop</string>
     <string name="action_close_messages">Close</string>
     <string name="auto_reply_failed_message">Unable to send reply. Please try again.</string>
-    <string name="auto_reply_device_disconnected">Unable to send reply. Device is not connected.</string>
+    <string name="auto_reply_device_disconnected">Unable to send reply. Device is not connected.
+    </string>
 
     <string name="tts_sender_says">%s says</string>
 
     <string name="tts_failed_toast">Text playout failed!</string>
     <string name="reply_message_display_template">\"%s\"</string>
-    <string name="caned_message_driving_right_now">Auto-reply: I’m driving.</string>
     <string name="message_sent_notice">Reply sent to %s</string>
 
     <string name="sms_unmuted_channel_name">SMS Channel</string>
