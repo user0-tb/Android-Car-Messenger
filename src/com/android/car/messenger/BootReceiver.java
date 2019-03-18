@@ -26,8 +26,17 @@ import android.content.Intent;
 public class BootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent startIntent = new Intent(context, MessengerService.class)
-                .setAction(MessengerService.ACTION_START);
-        context.startForegroundService(startIntent);
+        // Android Automotive has a User 0 always running as a background user, running low level
+        // Android processes. Because of this, they need a foreground user to ensure User 0 is
+        // always in background.
+        // This foreground user is either the last active user, or in the first boot which doesn't
+        // have this, User 10.
+        // Messenger Service should only be started for the active foreground user, not background
+        // system users.
+        if (!context.getUser().isSystem()) {
+            Intent startIntent = new Intent(context, MessengerService.class)
+                    .setAction(MessengerService.ACTION_START);
+            context.startForegroundService(startIntent);
+        }
     }
 }
