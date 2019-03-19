@@ -138,7 +138,7 @@ public class MessengerService extends Service {
         {
             NotificationChannel mutedChannel = new NotificationChannel(SMS_MUTED_CHANNEL_ID,
                     getString(R.string.sms_muted_channel_name),
-                    NotificationManager.IMPORTANCE_HIGH);
+                    NotificationManager.IMPORTANCE_LOW);
             mutedChannel.setDescription(getString(R.string.sms_muted_channel_description));
             mutedChannel.setSound(null, null);
             notificationManager.createNotificationChannel(mutedChannel);
