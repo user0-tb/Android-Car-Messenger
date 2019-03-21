@@ -39,8 +39,7 @@ LOCAL_PRIVILEGED_MODULE := true
 LOCAL_USE_AAPT2 := true
 
 LOCAL_STATIC_ANDROID_LIBRARIES += \
-    androidx.car_car \
-    car-apps-common
+    car-apps-common \
 
 LOCAL_STATIC_JAVA_LIBRARIES += \
     androidx.annotation_annotation \
