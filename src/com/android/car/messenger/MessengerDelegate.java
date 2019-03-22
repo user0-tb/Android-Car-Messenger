@@ -310,7 +310,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 .setSmallIcon(R.drawable.ic_message)
                 .setWhen(lastReceiveTime)
                 .setShowWhen(true)
-                .setOnlyAlertOnce(true)
                 .setDeleteIntent(deleteIntent);
 
         for (final Action action : actions) {
