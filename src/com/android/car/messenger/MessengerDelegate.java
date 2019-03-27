@@ -19,6 +19,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -41,12 +42,10 @@ import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Predicate;
 
 /** Delegate class responsible for handling messaging service actions */
@@ -58,11 +57,14 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     private final Context mContext;
     private BluetoothMapClient mBluetoothMapClient;
     private NotificationManager mNotificationManager;
+    private final SmsDatabaseHandler mSmsDatabaseHandler;
 
     @VisibleForTesting
     final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
-    @VisibleForTesting final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
-    @VisibleForTesting final Set<String> mConnectedDevices = new HashSet<>();
+    @VisibleForTesting
+    final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
+    @VisibleForTesting
+    final Map<String, BluetoothDevice> mAddressToBluetoothDeviceMap = new ArrayMap<>();
 
     public MessengerDelegate(Context context) {
         mContext = context;
@@ -76,6 +78,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mSmsDatabaseHandler = new SmsDatabaseHandler(mContext.getContentResolver());
     }
 
     @Override
@@ -87,6 +91,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             boolean repeatMessage = mMessages.containsKey(messageKey);
             mMessages.put(messageKey, message);
             if (!repeatMessage) {
+                mSmsDatabaseHandler.addOrUpdate(message);
                 updateNotification(messageKey, message);
             }
         } catch (IllegalArgumentException e) {
@@ -102,14 +107,18 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     @Override
     public void onDeviceConnected(BluetoothDevice device) {
         L.d(TAG, "Device connected: \t%s", device.getAddress());
-        mConnectedDevices.add(device.getAddress());
+        mAddressToBluetoothDeviceMap.put(device.getAddress(), device);
+        if (mBluetoothMapClient != null) {
+            mBluetoothMapClient.getUnreadMessages(device);
+        }
     }
 
     @Override
     public void onDeviceDisconnected(BluetoothDevice device) {
         L.d(TAG, "Device disconnected: \t%s", device.getAddress());
         cleanupMessagesAndNotifications(key -> key.matches(device.getAddress()));
-        mConnectedDevices.remove(device.getAddress());
+        mAddressToBluetoothDeviceMap.remove(device.getAddress());
+        mSmsDatabaseHandler.removeMessagesForDevice(device.getAddress());
     }
 
     @Override
@@ -123,6 +132,10 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         }
 
         mBluetoothMapClient = client;
+
+        for (BluetoothDevice device : mAddressToBluetoothDeviceMap.values()) {
+            mBluetoothMapClient.getUnreadMessages(device);
+        }
     }
 
     @Override
@@ -160,7 +173,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             }
         }
 
-        final boolean deviceConnected = mConnectedDevices.contains(senderKey.getDeviceAddress());
+        final boolean deviceConnected = mAddressToBluetoothDeviceMap.containsKey(
+                senderKey.getDeviceAddress());
         if (!success || !deviceConnected) {
             L.e(TAG, "Unable to send reply!");
             final int toastResource = deviceConnected
@@ -243,7 +257,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 });
     }
 
-    private static int getContactId(ContentResolver cr, String contactUri) {
+    // TODO: move out to a shared library.
+    protected static int getContactId(ContentResolver cr, String contactUri) {
         if (TextUtils.isEmpty(contactUri)) {
             return 0;
         }
@@ -261,6 +276,12 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         }
 
         return 0;
+    }
+
+    protected void cleanup() {
+        for (String address : mAddressToBluetoothDeviceMap.keySet()) {
+            mSmsDatabaseHandler.removeMessagesForDevice(address);
+        }
     }
 
     private Notification createNotification(
@@ -413,7 +434,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     /**
      * Contains information about a single notification that is displayed, with grouped messages.
      */
-    @VisibleForTesting static class NotificationInfo {
+    @VisibleForTesting
+    static class NotificationInfo {
         private static int NEXT_NOTIFICATION_ID = 0;
 
         final int mNotificationId = NEXT_NOTIFICATION_ID++;

@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build.VERSION_CODES;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +27,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class, ShadowNotificationManager.class})
+@Config(shadows = {ShadowBluetoothAdapter.class, ShadowNotificationManager.class}, sdk = {
+        VERSION_CODES.O})
 public class MessengerDelegateTest {
 
     private static final String BLUETOOTH_ADDRESS_ONE = "FA:F8:14:CA:32:39";
@@ -67,23 +69,26 @@ public class MessengerDelegateTest {
 
     @Test
     public void testDeviceConnections() {
-        assertThat(mMessengerDelegate.mConnectedDevices).contains(BLUETOOTH_ADDRESS_ONE);
-        assertThat(mMessengerDelegate.mConnectedDevices).hasSize(1);
+        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).containsKey(
+                BLUETOOTH_ADDRESS_ONE);
+        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).hasSize(1);
 
         mMessengerDelegate.onDeviceConnected(mMockBluetoothDeviceTwo);
-        assertThat(mMessengerDelegate.mConnectedDevices).contains(BLUETOOTH_ADDRESS_TWO);
-        assertThat(mMessengerDelegate.mConnectedDevices).hasSize(2);
+        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).containsKey(
+                BLUETOOTH_ADDRESS_TWO);
+        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).hasSize(2);
 
         mMessengerDelegate.onDeviceConnected(mMockBluetoothDeviceOne);
-        assertThat(mMessengerDelegate.mConnectedDevices).hasSize(2);
+        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).hasSize(2);
     }
 
     @Test
     public void testOnDeviceDisconnected_notConnectedDevice() {
         mMessengerDelegate.onDeviceDisconnected(mMockBluetoothDeviceTwo);
 
-        assertThat(mMessengerDelegate.mConnectedDevices.contains(BLUETOOTH_ADDRESS_ONE)).isTrue();
-        assertThat(mMessengerDelegate.mConnectedDevices).hasSize(1);
+        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap.containsKey(
+                BLUETOOTH_ADDRESS_ONE)).isTrue();
+        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).hasSize(1);
     }
 
     @Test
@@ -94,8 +99,9 @@ public class MessengerDelegateTest {
 
         mMessengerDelegate.onDeviceDisconnected(mMockBluetoothDeviceOne);
 
-        assertThat(mMessengerDelegate.mConnectedDevices.contains(BLUETOOTH_ADDRESS_TWO)).isTrue();
-        assertThat(mMessengerDelegate.mConnectedDevices).hasSize(1);
+        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap.containsKey(
+                BLUETOOTH_ADDRESS_TWO)).isTrue();
+        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).hasSize(1);
     }
 
     @Test
