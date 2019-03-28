@@ -19,7 +19,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -42,10 +41,12 @@ import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Predicate;
 
 /** Delegate class responsible for handling messaging service actions */
@@ -64,7 +65,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     @VisibleForTesting
     final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
     @VisibleForTesting
-    final Map<String, BluetoothDevice> mAddressToBluetoothDeviceMap = new ArrayMap<>();
+    final Set<String> mConnectedDevices = new HashSet<>();
 
     public MessengerDelegate(Context context) {
         mContext = context;
@@ -107,17 +108,14 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     @Override
     public void onDeviceConnected(BluetoothDevice device) {
         L.d(TAG, "Device connected: \t%s", device.getAddress());
-        mAddressToBluetoothDeviceMap.put(device.getAddress(), device);
-        if (mBluetoothMapClient != null) {
-            mBluetoothMapClient.getUnreadMessages(device);
-        }
+        mConnectedDevices.add(device.getAddress());
     }
 
     @Override
     public void onDeviceDisconnected(BluetoothDevice device) {
         L.d(TAG, "Device disconnected: \t%s", device.getAddress());
         cleanupMessagesAndNotifications(key -> key.matches(device.getAddress()));
-        mAddressToBluetoothDeviceMap.remove(device.getAddress());
+        mConnectedDevices.remove(device.getAddress());
         mSmsDatabaseHandler.removeMessagesForDevice(device.getAddress());
     }
 
@@ -132,10 +130,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         }
 
         mBluetoothMapClient = client;
-
-        for (BluetoothDevice device : mAddressToBluetoothDeviceMap.values()) {
-            mBluetoothMapClient.getUnreadMessages(device);
-        }
     }
 
     @Override
@@ -173,7 +167,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             }
         }
 
-        final boolean deviceConnected = mAddressToBluetoothDeviceMap.containsKey(
+        final boolean deviceConnected = mConnectedDevices.contains(
                 senderKey.getDeviceAddress());
         if (!success || !deviceConnected) {
             L.e(TAG, "Unable to send reply!");
@@ -279,7 +273,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     }
 
     protected void cleanup() {
-        for (String address : mAddressToBluetoothDeviceMap.keySet()) {
+        for (String address : mConnectedDevices) {
             mSmsDatabaseHandler.removeMessagesForDevice(address);
         }
     }
