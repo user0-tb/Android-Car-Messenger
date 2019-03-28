@@ -158,7 +158,7 @@ public class MessengerService extends Service {
     public void onDestroy() {
         super.onDestroy();
         L.d(TAG, "onDestroy");
-
+        mMessengerDelegate.cleanup();
         mBluetoothMonitor.cleanup();
     }
 
