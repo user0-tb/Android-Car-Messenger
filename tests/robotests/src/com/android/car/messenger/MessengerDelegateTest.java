@@ -69,26 +69,23 @@ public class MessengerDelegateTest {
 
     @Test
     public void testDeviceConnections() {
-        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).containsKey(
-                BLUETOOTH_ADDRESS_ONE);
-        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).hasSize(1);
+        assertThat(mMessengerDelegate.mConnectedDevices).contains(BLUETOOTH_ADDRESS_ONE);
+        assertThat(mMessengerDelegate.mConnectedDevices).hasSize(1);
 
         mMessengerDelegate.onDeviceConnected(mMockBluetoothDeviceTwo);
-        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).containsKey(
-                BLUETOOTH_ADDRESS_TWO);
-        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).hasSize(2);
+        assertThat(mMessengerDelegate.mConnectedDevices).contains(BLUETOOTH_ADDRESS_TWO);
+        assertThat(mMessengerDelegate.mConnectedDevices).hasSize(2);
 
         mMessengerDelegate.onDeviceConnected(mMockBluetoothDeviceOne);
-        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).hasSize(2);
+        assertThat(mMessengerDelegate.mConnectedDevices).hasSize(2);
     }
 
     @Test
     public void testOnDeviceDisconnected_notConnectedDevice() {
         mMessengerDelegate.onDeviceDisconnected(mMockBluetoothDeviceTwo);
 
-        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap.containsKey(
-                BLUETOOTH_ADDRESS_ONE)).isTrue();
-        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).hasSize(1);
+        assertThat(mMessengerDelegate.mConnectedDevices.contains(BLUETOOTH_ADDRESS_ONE)).isTrue();
+        assertThat(mMessengerDelegate.mConnectedDevices).hasSize(1);
     }
 
     @Test
@@ -99,9 +96,8 @@ public class MessengerDelegateTest {
 
         mMessengerDelegate.onDeviceDisconnected(mMockBluetoothDeviceOne);
 
-        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap.containsKey(
-                BLUETOOTH_ADDRESS_TWO)).isTrue();
-        assertThat(mMessengerDelegate.mAddressToBluetoothDeviceMap).hasSize(1);
+        assertThat(mMessengerDelegate.mConnectedDevices.contains(BLUETOOTH_ADDRESS_TWO)).isTrue();
+        assertThat(mMessengerDelegate.mConnectedDevices).hasSize(1);
     }
 
     @Test
