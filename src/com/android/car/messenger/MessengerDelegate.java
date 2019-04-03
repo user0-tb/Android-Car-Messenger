@@ -179,16 +179,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         }
     }
 
-    protected void toggleMute(SenderKey senderKey, boolean muted) {
-        NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
-        if (notificationInfo == null) {
-            L.e(TAG, "Unknown senderKey! %s", senderKey);
-            return;
-        }
-        notificationInfo.muted = muted;
-        updateNotification(senderKey, notificationInfo);
-    }
-
     protected void markAsRead(SenderKey senderKey) {
         /* NO-OP */
     }
@@ -292,13 +282,12 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
         final String senderName = notificationInfo.mSenderName;
         final int notificationId = notificationInfo.mNotificationId;
-        final boolean muted = notificationInfo.muted;
 
         // Create the Content Intent
         PendingIntent deleteIntent = createServiceIntent(senderKey, notificationId,
                 MessengerService.ACTION_CLEAR_NOTIFICATION_STATE);
 
-        List<Action> actions = getNotificationActions(senderKey, notificationId, muted);
+        List<Action> actions = getNotificationActions(senderKey, notificationId);
 
         Person user = new Person.Builder()
                 .setName(STATIC_USER_NAME)
@@ -312,11 +301,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             messagingStyle.addMessage(message.getMessageText(), message.getReceiveTime(), sender);
         });
 
-        final String channelId = muted
-                ? MessengerService.SMS_MUTED_CHANNEL_ID
-                : MessengerService.SMS_UNMUTED_CHANNEL_ID;
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, channelId)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext,
+                MessengerService.SMS_CHANNEL_ID)
                 .setContentTitle(senderName)
                 .setContentText(contentText)
                 .setStyle(messagingStyle)
@@ -355,8 +341,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    private List<Action> getNotificationActions(SenderKey senderKey, int notificationId,
-            boolean muted) {
+    private List<Action> getNotificationActions(SenderKey senderKey, int notificationId) {
 
         final int icon = android.R.drawable.ic_media_play;
 
@@ -390,28 +375,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                         .build()
         );
 
-        // Toggle Mute action
-        final String toggleString;
-        final String toggleAction;
-        final int toggleSemanticAction;
-        if (muted) {
-            toggleString = mContext.getString(R.string.action_unmute);
-            toggleAction = MessengerService.ACTION_UNMUTE_CONVERSATION;
-            toggleSemanticAction = Action.SEMANTIC_ACTION_UNMUTE;
-        } else {
-            toggleString = mContext.getString(R.string.action_mute);
-            toggleAction = MessengerService.ACTION_MUTE_CONVERSATION;
-            toggleSemanticAction = Action.SEMANTIC_ACTION_MUTE;
-        }
-
-        PendingIntent toggleMute = createServiceIntent(senderKey, notificationId, toggleAction);
-        actionList.add(
-                new Action.Builder(icon, toggleString, toggleMute)
-                        .setSemanticAction(toggleSemanticAction)
-                        .setShowsUserInterface(false)
-                        .build()
-        );
-
         return actionList;
     }
 
@@ -437,7 +400,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         @Nullable
         final String mSenderContactUri;
         final LinkedList<MessageKey> mMessageKeys = new LinkedList<>();
-        boolean muted = false;
 
         NotificationInfo(String senderName, @Nullable String senderContactUri) {
             mSenderName = senderName;

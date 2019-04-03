@@ -18,9 +18,9 @@ import android.text.TextUtils;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.RemoteInput;
 
+import com.android.car.messenger.MessengerDelegate.SenderKey;
 import com.android.car.messenger.bluetooth.BluetoothMonitor;
 import com.android.car.messenger.log.L;
-import com.android.car.messenger.MessengerDelegate.SenderKey;
 
 /** Service responsible for handling SMS messaging events from paired Bluetooth devices. */
 public class MessengerService extends Service {
@@ -32,14 +32,6 @@ public class MessengerService extends Service {
 
     /** Used to reply to message with voice input; triggered by an assistant. */
     public static final String ACTION_VOICE_REPLY = "com.android.car.messenger.ACTION_VOICE_REPLY";
-
-    /** Used to stop further audio notifications from the conversation. */
-    public static final String ACTION_MUTE_CONVERSATION =
-            "com.android.car.messenger.ACTION_MUTE_CONVERSATION";
-
-    /** Used to resume further audio notifications from the conversation. */
-    public static final String ACTION_UNMUTE_CONVERSATION =
-            "com.android.car.messenger.ACTION_UNMUTE_CONVERSATION";
 
     /** Used to clear notification state when user dismisses notification. */
     public static final String ACTION_CLEAR_NOTIFICATION_STATE =
@@ -67,8 +59,7 @@ public class MessengerService extends Service {
     public static final String REMOTE_INPUT_KEY = "REMOTE_INPUT_KEY";
 
     /* NOTIFICATIONS */
-    static final String SMS_UNMUTED_CHANNEL_ID = "SMS_UNMUTED_CHANNEL_ID";
-    static final String SMS_MUTED_CHANNEL_ID = "SMS_MUTED_CHANNEL_ID";
+    static final String SMS_CHANNEL_ID = "SMS_CHANNEL_ID";
     private static final String APP_RUNNING_CHANNEL_ID = "APP_RUNNING_CHANNEL_ID";
     private static final int SERVICE_STARTED_NOTIFICATION_ID = Integer.MAX_VALUE;
 
@@ -121,27 +112,16 @@ public class MessengerService extends Service {
             notificationManager.createNotificationChannel(appRunningNotificationChannel);
         }
 
-        // Create a notification channel for unmuted SMS messages
         {
             AudioAttributes attributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_NOTIFICATION)
                     .build();
-            NotificationChannel unmutedChannel = new NotificationChannel(SMS_UNMUTED_CHANNEL_ID,
-                    getString(R.string.sms_unmuted_channel_name),
+            NotificationChannel smsChannel = new NotificationChannel(SMS_CHANNEL_ID,
+                    getString(R.string.sms_channel_name),
                     NotificationManager.IMPORTANCE_HIGH);
-            unmutedChannel.setDescription(getString(R.string.sms_unmuted_channel_description));
-            unmutedChannel.setSound(Settings.System.DEFAULT_NOTIFICATION_URI, attributes);
-            notificationManager.createNotificationChannel(unmutedChannel);
-        }
-
-        // Create a notification channel for muted SMS messages
-        {
-            NotificationChannel mutedChannel = new NotificationChannel(SMS_MUTED_CHANNEL_ID,
-                    getString(R.string.sms_muted_channel_name),
-                    NotificationManager.IMPORTANCE_LOW);
-            mutedChannel.setDescription(getString(R.string.sms_muted_channel_description));
-            mutedChannel.setSound(null, null);
-            notificationManager.createNotificationChannel(mutedChannel);
+            smsChannel.setDescription(getString(R.string.sms_channel_description));
+            smsChannel.setSound(Settings.System.DEFAULT_NOTIFICATION_URI, attributes);
+            notificationManager.createNotificationChannel(smsChannel);
         }
 
         final Notification notification =
@@ -182,12 +162,6 @@ public class MessengerService extends Service {
             case ACTION_VOICE_REPLY:
                 voiceReply(intent);
                 break;
-            case ACTION_MUTE_CONVERSATION:
-                muteConversation(intent);
-                break;
-            case ACTION_UNMUTE_CONVERSATION:
-                unmuteConversation(intent);
-                break;
             case ACTION_CLEAR_NOTIFICATION_STATE:
                 clearNotificationState(intent);
                 break;
@@ -219,8 +193,6 @@ public class MessengerService extends Service {
     private static boolean hasRequiredArgs(Intent intent) {
         switch (intent.getAction()) {
             case ACTION_VOICE_REPLY:
-            case ACTION_MUTE_CONVERSATION:
-            case ACTION_UNMUTE_CONVERSATION:
             case ACTION_CLEAR_NOTIFICATION_STATE:
             case ACTION_MARK_AS_READ:
                 if (!intent.hasExtra(EXTRA_SENDER_KEY)) {
@@ -252,28 +224,6 @@ public class MessengerService extends Service {
         if (!TextUtils.isEmpty(message)) {
             mMessengerDelegate.sendMessage(senderKey, message.toString());
         }
-    }
-
-    /**
-     * Mute the conversation associated with a given sender key.
-     *
-     * @param intent intent containing {@link MessengerService#EXTRA_SENDER_KEY} bundle argument
-     */
-    public void muteConversation(Intent intent) {
-        final SenderKey senderKey = intent.getParcelableExtra(EXTRA_SENDER_KEY);
-        L.d(TAG, "muteConversation");
-        mMessengerDelegate.toggleMute(senderKey, true);
-    }
-
-    /**
-     * Unmute the conversation associated with a given sender key.
-     *
-     * @param intent intent containing {@link MessengerService#EXTRA_SENDER_KEY} bundle argument
-     */
-    public void unmuteConversation(Intent intent) {
-        final SenderKey senderKey = intent.getParcelableExtra(EXTRA_SENDER_KEY);
-        L.d(TAG, "unmuteConversation");
-        mMessengerDelegate.toggleMute(senderKey, false);
     }
 
     /**
