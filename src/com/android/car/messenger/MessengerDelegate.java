@@ -58,11 +58,14 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     private final Context mContext;
     private BluetoothMapClient mBluetoothMapClient;
     private NotificationManager mNotificationManager;
+    private final SmsDatabaseHandler mSmsDatabaseHandler;
 
     @VisibleForTesting
     final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
-    @VisibleForTesting final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
-    @VisibleForTesting final Set<String> mConnectedDevices = new HashSet<>();
+    @VisibleForTesting
+    final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
+    @VisibleForTesting
+    final Set<String> mConnectedDevices = new HashSet<>();
 
     public MessengerDelegate(Context context) {
         mContext = context;
@@ -76,6 +79,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mSmsDatabaseHandler = new SmsDatabaseHandler(mContext.getContentResolver());
     }
 
     @Override
@@ -87,6 +92,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             boolean repeatMessage = mMessages.containsKey(messageKey);
             mMessages.put(messageKey, message);
             if (!repeatMessage) {
+                mSmsDatabaseHandler.addOrUpdate(message);
                 updateNotification(messageKey, message);
             }
         } catch (IllegalArgumentException e) {
@@ -110,6 +116,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         L.d(TAG, "Device disconnected: \t%s", device.getAddress());
         cleanupMessagesAndNotifications(key -> key.matches(device.getAddress()));
         mConnectedDevices.remove(device.getAddress());
+        mSmsDatabaseHandler.removeMessagesForDevice(device.getAddress());
     }
 
     @Override
@@ -160,7 +167,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             }
         }
 
-        final boolean deviceConnected = mConnectedDevices.contains(senderKey.getDeviceAddress());
+        final boolean deviceConnected = mConnectedDevices.contains(
+                senderKey.getDeviceAddress());
         if (!success || !deviceConnected) {
             L.e(TAG, "Unable to send reply!");
             final int toastResource = deviceConnected
@@ -169,16 +177,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
             Toast.makeText(mContext, toastResource, Toast.LENGTH_SHORT).show();
         }
-    }
-
-    protected void toggleMute(SenderKey senderKey, boolean muted) {
-        NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
-        if (notificationInfo == null) {
-            L.e(TAG, "Unknown senderKey! %s", senderKey);
-            return;
-        }
-        notificationInfo.muted = muted;
-        updateNotification(senderKey, notificationInfo);
     }
 
     protected void markAsRead(SenderKey senderKey) {
@@ -243,7 +241,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 });
     }
 
-    private static int getContactId(ContentResolver cr, String contactUri) {
+    // TODO: move out to a shared library.
+    protected static int getContactId(ContentResolver cr, String contactUri) {
         if (TextUtils.isEmpty(contactUri)) {
             return 0;
         }
@@ -263,6 +262,12 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         return 0;
     }
 
+    protected void cleanup() {
+        for (String address : mConnectedDevices) {
+            mSmsDatabaseHandler.removeMessagesForDevice(address);
+        }
+    }
+
     private Notification createNotification(
             SenderKey senderKey, NotificationInfo notificationInfo, Bitmap bitmap) {
         String contentText = mContext.getResources().getQuantityString(
@@ -277,13 +282,12 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
         final String senderName = notificationInfo.mSenderName;
         final int notificationId = notificationInfo.mNotificationId;
-        final boolean muted = notificationInfo.muted;
 
         // Create the Content Intent
         PendingIntent deleteIntent = createServiceIntent(senderKey, notificationId,
                 MessengerService.ACTION_CLEAR_NOTIFICATION_STATE);
 
-        List<Action> actions = getNotificationActions(senderKey, notificationId, muted);
+        List<Action> actions = getNotificationActions(senderKey, notificationId);
 
         Person user = new Person.Builder()
                 .setName(STATIC_USER_NAME)
@@ -297,11 +301,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             messagingStyle.addMessage(message.getMessageText(), message.getReceiveTime(), sender);
         });
 
-        final String channelId = muted
-                ? MessengerService.SMS_MUTED_CHANNEL_ID
-                : MessengerService.SMS_UNMUTED_CHANNEL_ID;
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, channelId)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext,
+                MessengerService.SMS_CHANNEL_ID)
                 .setContentTitle(senderName)
                 .setContentText(contentText)
                 .setStyle(messagingStyle)
@@ -310,7 +311,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 .setSmallIcon(R.drawable.ic_message)
                 .setWhen(lastReceiveTime)
                 .setShowWhen(true)
-                .setOnlyAlertOnce(true)
                 .setDeleteIntent(deleteIntent);
 
         for (final Action action : actions) {
@@ -341,8 +341,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    private List<Action> getNotificationActions(SenderKey senderKey, int notificationId,
-            boolean muted) {
+    private List<Action> getNotificationActions(SenderKey senderKey, int notificationId) {
 
         final int icon = android.R.drawable.ic_media_play;
 
@@ -376,28 +375,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                         .build()
         );
 
-        // Toggle Mute action
-        final String toggleString;
-        final String toggleAction;
-        final int toggleSemanticAction;
-        if (muted) {
-            toggleString = mContext.getString(R.string.action_unmute);
-            toggleAction = MessengerService.ACTION_UNMUTE_CONVERSATION;
-            toggleSemanticAction = Action.SEMANTIC_ACTION_UNMUTE;
-        } else {
-            toggleString = mContext.getString(R.string.action_mute);
-            toggleAction = MessengerService.ACTION_MUTE_CONVERSATION;
-            toggleSemanticAction = Action.SEMANTIC_ACTION_MUTE;
-        }
-
-        PendingIntent toggleMute = createServiceIntent(senderKey, notificationId, toggleAction);
-        actionList.add(
-                new Action.Builder(icon, toggleString, toggleMute)
-                        .setSemanticAction(toggleSemanticAction)
-                        .setShowsUserInterface(false)
-                        .build()
-        );
-
         return actionList;
     }
 
@@ -414,7 +391,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     /**
      * Contains information about a single notification that is displayed, with grouped messages.
      */
-    @VisibleForTesting static class NotificationInfo {
+    @VisibleForTesting
+    static class NotificationInfo {
         private static int NEXT_NOTIFICATION_ID = 0;
 
         final int mNotificationId = NEXT_NOTIFICATION_ID++;
@@ -422,7 +400,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         @Nullable
         final String mSenderContactUri;
         final LinkedList<MessageKey> mMessageKeys = new LinkedList<>();
-        boolean muted = false;
 
         NotificationInfo(String senderName, @Nullable String senderContactUri) {
             mSenderName = senderName;

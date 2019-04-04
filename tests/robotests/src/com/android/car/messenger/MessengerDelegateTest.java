@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build.VERSION_CODES;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +27,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class, ShadowNotificationManager.class})
+@Config(shadows = {ShadowBluetoothAdapter.class, ShadowNotificationManager.class}, sdk = {
+        VERSION_CODES.O})
 public class MessengerDelegateTest {
 
     private static final String BLUETOOTH_ADDRESS_ONE = "FA:F8:14:CA:32:39";
