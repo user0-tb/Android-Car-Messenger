@@ -80,7 +80,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        mSmsDatabaseHandler = new SmsDatabaseHandler(mContext.getContentResolver());
+        mSmsDatabaseHandler = new SmsDatabaseHandler(mContext);
     }
 
     @Override
