@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.net.Uri;
+import android.provider.BaseColumns;
 import android.provider.Telephony;
 
 import androidx.core.content.ContextCompat;
@@ -42,10 +43,9 @@ class SmsDatabaseHandler {
         }
 
         int messageIndex = findMessageIndex(message);
-
         switch(messageIndex) {
             case DUPLICATE_MESSAGES_FOUND:
-                merge(message);
+                removePreviousAndInsert(message);
                 L.d(TAG, "Message has more than one duplicate in Telephony Database: %s",
                         message.toString());
                 return;
@@ -70,9 +70,9 @@ class SmsDatabaseHandler {
     }
 
     /** Removes multiple previous copies, and inserts the new message. **/
-    private void merge(MapMessage message) {
+    private void removePreviousAndInsert(MapMessage message) {
         String smsSelection = Telephony.Sms.ADDRESS + "=? AND "
-                + Telephony.Sms.BODY + "=? AND " + Telephony.Sms.DATE_SENT + "=?";
+                + Telephony.Sms.BODY + "=? AND " + Telephony.Sms.DATE + "=?";
 
         String sqlFriendlyMessageText = DatabaseUtils.sqlEscapeString(message.getMessageText());
         String[] smsSelectionArgs = {message.getDeviceAddress(), sqlFriendlyMessageText,
@@ -84,13 +84,13 @@ class SmsDatabaseHandler {
 
     private int findMessageIndex(MapMessage message) {
         String smsSelection = Telephony.Sms.ADDRESS + "=? AND "
-                + Telephony.Sms.BODY + "=? AND " + Telephony.Sms.DATE_SENT + "=?";
+                + Telephony.Sms.BODY + "=? AND " + Telephony.Sms.DATE + "=?";
 
         String sqlFriendlyMessageText = DatabaseUtils.sqlEscapeString(message.getMessageText());
         String[] smsSelectionArgs = {message.getDeviceAddress(), sqlFriendlyMessageText,
                 Long.toString(message.getReceiveTime())};
 
-        String[] projection = {Telephony.TextBasedSmsChangesColumns.ID};
+        String[] projection = {BaseColumns._ID};
         Cursor cursor = mContentResolver.query(SMS_URI, projection, smsSelection,
                 smsSelectionArgs, null /* sortOrder */);
 
@@ -107,7 +107,7 @@ class SmsDatabaseHandler {
 
     private int getIdOrThrow(Cursor cursor) {
         try {
-            int columnIndex = cursor.getColumnIndexOrThrow(Telephony.TextBasedSmsChangesColumns.ID);
+            int columnIndex = cursor.getColumnIndexOrThrow(BaseColumns._ID);
             return cursor.getInt(columnIndex);
         } catch (IllegalArgumentException e) {
             L.d(TAG, "Could not find _id column: " + e.getMessage());
@@ -116,7 +116,7 @@ class SmsDatabaseHandler {
     }
 
     private void update(int messageIndex, ContentValues value) {
-        final String smsSelection = Telephony.TextBasedSmsChangesColumns.ID + "=?";
+        final String smsSelection = BaseColumns._ID + "=?";
         String[] smsSelectionArgs = {Integer.toString(messageIndex)};
 
         mContentResolver.update(SMS_URI, value, smsSelection, smsSelectionArgs);
@@ -125,13 +125,14 @@ class SmsDatabaseHandler {
     /** Create the ContentValues object using message info, following SMS columns **/
     private ContentValues buildMessageContentValues(MapMessage message) {
         ContentValues newMessage = new ContentValues();
-        newMessage.put(Telephony.Sms.BODY, message.getMessageText());
+        newMessage.put(Telephony.Sms.BODY, DatabaseUtils.sqlEscapeString(message.getMessageText()));
         newMessage.put(Telephony.Sms.DATE, message.getReceiveTime());
         newMessage.put(Telephony.Sms.ADDRESS, message.getDeviceAddress());
         // TODO: if contactId is null, add it.
         newMessage.put(Telephony.Sms.PERSON,
                 getContactId(mContentResolver,
                         message.getSenderContactUri()));
+        newMessage.put(Telephony.Sms.READ, message.isRead());
         return newMessage;
     }
 
