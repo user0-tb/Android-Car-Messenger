@@ -2,8 +2,11 @@ package com.android.car.messenger;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+import android.app.AppOpsManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
@@ -18,6 +21,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowBluetoothAdapter;
@@ -38,6 +42,8 @@ public class MessengerDelegateTest {
     private BluetoothDevice mMockBluetoothDeviceOne;
     @Mock
     private BluetoothDevice mMockBluetoothDeviceTwo;
+    @Mock
+    AppOpsManager mMockAppOpsManager;
 
     private Context mContext = RuntimeEnvironment.application;
     private MessengerDelegate mMessengerDelegate;
@@ -50,6 +56,12 @@ public class MessengerDelegateTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        // Add AppOps permissions required to write to Telephony.SMS database.
+        when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString())).thenReturn(
+                AppOpsManager.MODE_DEFAULT);
+        Shadows.shadowOf(RuntimeEnvironment.application)
+                .setSystemService(Context.APP_OPS_SERVICE, mMockAppOpsManager);
 
         when(mMockBluetoothDeviceOne.getAddress()).thenReturn(BLUETOOTH_ADDRESS_ONE);
         when(mMockBluetoothDeviceTwo.getAddress()).thenReturn(BLUETOOTH_ADDRESS_TWO);
