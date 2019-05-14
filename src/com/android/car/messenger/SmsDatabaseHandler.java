@@ -10,14 +10,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.provider.Telephony;
 
 import androidx.core.content.ContextCompat;
 
 import com.android.car.messenger.log.L;
-
-import java.util.Locale;
 
 /**
  * Reads and writes SMS Messages into the Telephony.SMS Database.
@@ -65,38 +64,35 @@ class SmsDatabaseHandler {
             return;
         }
 
-        String smsSelection =
-                String.format(Locale.US,
-                        "%s=\'%s\'",
-                        Telephony.Sms.ADDRESS,
-                        address);
-        mContentResolver.delete(SMS_URI, smsSelection, null /* selectionsArgs */);
+        String smsSelection = Telephony.Sms.ADDRESS + "=?";
+        String[] smsSelectionArgs = {address};
+        mContentResolver.delete(SMS_URI, smsSelection, smsSelectionArgs);
     }
 
     /** Removes multiple previous copies, and inserts the new message. **/
     private void merge(MapMessage message) {
-        String smsSelection =
-                String.format(Locale.US,
-                        "%s='%s' AND %s LIKE \'%s\'",
-                        Telephony.Sms.ADDRESS,
-                        message.getDeviceAddress(),
-                        Telephony.Sms.BODY,
-                        message.getMessageText());
-        mContentResolver.delete(SMS_URI, smsSelection, null /* selectionArgs */);
+        String smsSelection = Telephony.Sms.ADDRESS + "=? AND "
+                + Telephony.Sms.BODY + "=? AND " + Telephony.Sms.DATE_SENT + "=?";
+
+        String sqlFriendlyMessageText = DatabaseUtils.sqlEscapeString(message.getMessageText());
+        String[] smsSelectionArgs = {message.getDeviceAddress(), sqlFriendlyMessageText,
+                Long.toString(message.getReceiveTime())};
+
+        mContentResolver.delete(SMS_URI, smsSelection, smsSelectionArgs);
         mContentResolver.insert(SMS_URI, buildMessageContentValues(message));
     }
 
     private int findMessageIndex(MapMessage message) {
-        String smsSelection =
-                String.format(Locale.US,
-                        "%s=\'%s\' AND %s LIKE \'%s\'",
-                        Telephony.Sms.ADDRESS,
-                        message.getDeviceAddress(),
-                        Telephony.Sms.BODY,
-                        message.getMessageText());
+        String smsSelection = Telephony.Sms.ADDRESS + "=? AND "
+                + Telephony.Sms.BODY + "=? AND " + Telephony.Sms.DATE_SENT + "=?";
+
+        String sqlFriendlyMessageText = DatabaseUtils.sqlEscapeString(message.getMessageText());
+        String[] smsSelectionArgs = {message.getDeviceAddress(), sqlFriendlyMessageText,
+                Long.toString(message.getReceiveTime())};
+
         String[] projection = {Telephony.TextBasedSmsChangesColumns.ID};
         Cursor cursor = mContentResolver.query(SMS_URI, projection, smsSelection,
-                null /* selectionArgs */, null /* sortOrder */);
+                smsSelectionArgs, null /* sortOrder */);
 
         if (cursor != null && cursor.getCount() != 0) {
             if (cursor.moveToFirst() && cursor.isLast()) {
@@ -120,14 +116,10 @@ class SmsDatabaseHandler {
     }
 
     private void update(int messageIndex, ContentValues value) {
-        final String smsSelection =
-                String.format(
-                        Locale.US,
-                        "%s=%d",
-                        Telephony.TextBasedSmsChangesColumns.ID,
-                        messageIndex);
+        final String smsSelection = Telephony.TextBasedSmsChangesColumns.ID + "=?";
+        String[] smsSelectionArgs = {Integer.toString(messageIndex)};
 
-        mContentResolver.update(SMS_URI, value, smsSelection, null /*selectionArgs*/);
+        mContentResolver.update(SMS_URI, value, smsSelection, smsSelectionArgs);
     }
 
     /** Create the ContentValues object using message info, following SMS columns **/
