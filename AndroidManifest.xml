@@ -15,6 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.android.car.messenger">
 
     <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="26"/>
@@ -88,5 +89,13 @@
                 <data android:scheme="mmsto" />
             </intent-filter>
         </activity>
+
+        <!-- Workaround for b/113294940 -->
+        <provider
+            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+            tools:replace="android:authorities"
+            android:authorities="${applicationId}.lifecycle-tests"
+            android:exported="false"
+            android:multiprocess="true" />
     </application>
 </manifest>
