@@ -33,6 +33,7 @@ class MapMessage {
     private String mSenderContactUri;
     private String mMessageText;
     private long mReceiveTime;
+    private boolean mIsRead;
 
     /**
      * Constructs a {@link MapMessage} from {@code intent} that was received from MAP service via
@@ -49,6 +50,10 @@ class MapMessage {
         String senderUri = intent.getStringExtra(BluetoothMapClient.EXTRA_SENDER_CONTACT_URI);
         String senderName = intent.getStringExtra(BluetoothMapClient.EXTRA_SENDER_CONTACT_NAME);
         String messageText = intent.getStringExtra(android.content.Intent.EXTRA_TEXT);
+        long receiveTime = intent.getLongExtra(BluetoothMapClient.EXTRA_MESSAGE_TIMESTAMP,
+                System.currentTimeMillis());
+        boolean isRead = intent.getBooleanExtra(BluetoothMapClient.EXTRA_MESSAGE_READ_STATUS,
+                false);
 
         return new MapMessage(
                 device.getAddress(),
@@ -56,7 +61,8 @@ class MapMessage {
                 senderName,
                 senderUri,
                 messageText,
-                System.currentTimeMillis()
+                receiveTime,
+                isRead
         );
     }
 
@@ -65,7 +71,8 @@ class MapMessage {
             String senderName,
             @Nullable String senderContactUri,
             String messageText,
-            long receiveTime) {
+            long receiveTime,
+            boolean isRead) {
         boolean missingDevice = (deviceAddress == null);
         boolean missingHandle = (handle == null);
         boolean missingSenderName = (senderName == null);
@@ -92,6 +99,7 @@ class MapMessage {
         mSenderContactUri = senderContactUri;
         mSenderName = senderName;
         mReceiveTime = receiveTime;
+        mIsRead = isRead;
     }
 
     /**
@@ -142,6 +150,13 @@ class MapMessage {
         return mMessageText;
     }
 
+    /**
+     * Returns the read status of the message.
+     */
+    public boolean isRead() {
+        return mIsRead;
+    }
+
     @Override
     public String toString() {
         return "MapMessage{" +
@@ -151,6 +166,7 @@ class MapMessage {
                 ", mSenderContactUri='" + mSenderContactUri + '\'' +
                 ", mSenderName='" + mSenderName + '\'' +
                 ", mReceiveTime=" + mReceiveTime +
+                ", mIsRead= " + mIsRead +
                 "}";
     }
 }
