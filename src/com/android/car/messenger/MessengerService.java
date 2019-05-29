@@ -126,11 +126,10 @@ public class MessengerService extends Service {
 
         final Notification notification =
                 new NotificationCompat.Builder(this, APP_RUNNING_CHANNEL_ID)
-                        .setSmallIcon(R.drawable.ic_voice_out)
+                        .setSmallIcon(R.drawable.ic_message)
                         .setContentTitle(getString(R.string.app_running_msg_notification_title))
                         .setContentText(getString(R.string.app_running_msg_notification_content))
                         .build();
-
         startForeground(SERVICE_STARTED_NOTIFICATION_ID, notification);
     }
 
