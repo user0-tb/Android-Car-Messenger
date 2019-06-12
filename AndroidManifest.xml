@@ -44,12 +44,6 @@
             </intent-filter>
         </service>
 
-        <receiver android:name=".BootReceiver" android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-            </intent-filter>
-        </receiver>
-
         <!-- BroadcastReceiver that listens for incoming SMS messages -->
         <receiver android:name=".SmsReceiver"
                   android:permission="android.permission.BROADCAST_SMS">
