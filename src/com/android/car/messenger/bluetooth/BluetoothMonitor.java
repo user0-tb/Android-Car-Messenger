@@ -24,7 +24,7 @@ import java.util.Set;
  * Provides a callback interface for subscribers to be notified of bluetooth MAP/SDP changes.
  */
 public class BluetoothMonitor {
-    private static final String TAG = "CM#BluetoothMonitor";
+    private static final String TAG = "CM.BluetoothMonitor";
 
     private final Context mContext;
     private final BluetoothMapReceiver mBluetoothMapReceiver;
