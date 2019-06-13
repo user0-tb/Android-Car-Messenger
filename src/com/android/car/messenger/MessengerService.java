@@ -24,7 +24,7 @@ import com.android.car.messenger.log.L;
 
 /** Service responsible for handling SMS messaging events from paired Bluetooth devices. */
 public class MessengerService extends Service {
-    private final static String TAG = "CM#MessengerService";
+    private final static String TAG = "CM.MessengerService";
 
     /* ACTIONS */
     /** Used to start this service at boot-complete. Takes no arguments. */
