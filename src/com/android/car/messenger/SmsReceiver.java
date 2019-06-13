@@ -33,7 +33,7 @@ import java.util.Date;
  * Receiver that listens for Telephony broadcasts when an SMS is received.
  */
 public class SmsReceiver extends BroadcastReceiver {
-    private static final String TAG = "CM#SmsReceiver";
+    private static final String TAG = "CM.SmsReceiver";
     private static final Uri SMS_URI = Telephony.Sms.CONTENT_URI;
     private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(
             "MMM dd,yyyy HH:mm");
