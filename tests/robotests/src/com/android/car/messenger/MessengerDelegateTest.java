@@ -163,6 +163,17 @@ public class MessengerDelegateTest {
         assertThat(info.mMessageKeys).hasSize(1);
     }
 
+    @Test
+    public void testClearNotification_keepsNotificationData() {
+        mMessengerDelegate.onMessageReceived(mMessageOneIntent);
+        mMessengerDelegate.clearNotifications(key -> key.equals(mSenderKey));
+        MessengerDelegate.NotificationInfo info = mMessengerDelegate.mNotificationInfos.get(
+                mSenderKey);
+        assertThat(info.mMessageKeys).hasSize(1);
+
+        assertThat(mMessengerDelegate.mMessages.containsKey(mMessageOneKey)).isTrue();
+    }
+
     private Intent createMessageIntent(BluetoothDevice device, String handle, String senderUri,
             String senderName, String messageText) {
         Intent intent = new Intent();
