@@ -22,7 +22,7 @@ import com.android.car.messenger.log.L;
  * Reads and writes SMS Messages into the Telephony.SMS Database.
  */
 class SmsDatabaseHandler {
-    private static final String TAG = "CM#SmsDatabaseHandler";
+    private static final String TAG = "CM.SmsDatabaseHandler";
     private static final int MESSAGE_NOT_FOUND = -1;
     private static final int DUPLICATE_MESSAGES_FOUND = -2;
     private static final int DATABASE_ERROR = -3;
