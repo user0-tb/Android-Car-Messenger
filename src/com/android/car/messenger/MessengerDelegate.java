@@ -180,7 +180,14 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     }
 
     protected void markAsRead(SenderKey senderKey) {
-        /* NO-OP */
+        NotificationInfo info = mNotificationInfos.get(senderKey);
+        for (MessageKey key : info.mMessageKeys) {
+            MapMessage message = mMessages.get(key);
+            if (!message.isRead()) {
+                message.markMessageAsRead();
+                mSmsDatabaseHandler.addOrUpdate(message);
+            }
+        }
     }
 
     /**
@@ -301,7 +308,12 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 .setUri(notificationInfo.mSenderContactUri)
                 .build();
         notificationInfo.mMessageKeys.stream().map(mMessages::get).forEachOrdered(message -> {
-            messagingStyle.addMessage(message.getMessageText(), message.getReceiveTime(), sender);
+            if (!message.isRead()) {
+                messagingStyle.addMessage(
+                        message.getMessageText(),
+                        message.getReceiveTime(),
+                        sender);
+            }
         });
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext,

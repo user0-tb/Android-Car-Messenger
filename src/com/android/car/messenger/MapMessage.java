@@ -150,6 +150,10 @@ class MapMessage {
         return mMessageText;
     }
 
+    public void markMessageAsRead() {
+        mIsRead = true;
+    }
+
     /**
      * Returns the read status of the message.
      */
