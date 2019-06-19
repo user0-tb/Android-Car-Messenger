@@ -276,6 +276,9 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         for (String address : mConnectedDevices) {
             mSmsDatabaseHandler.removeMessagesForDevice(address);
         }
+        if (mBluetoothMapClient != null) {
+            mBluetoothMapClient.close();
+        }
     }
 
     private Notification createNotification(
