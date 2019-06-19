@@ -25,13 +25,12 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowBluetoothAdapter;
-import org.robolectric.shadows.ShadowNotificationManager;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class, ShadowNotificationManager.class}, sdk = {
+@Config(shadows = {ShadowBluetoothAdapter.class}, sdk = {
         VERSION_CODES.O})
 public class MessengerDelegateTest {
 
@@ -69,13 +68,7 @@ public class MessengerDelegateTest {
         mShadowBluetoothAdapter.setBondedDevices(
                 new HashSet<>(Arrays.asList(mMockBluetoothDeviceOne)));
 
-        mMessageOneIntent = createMessageIntent(mMockBluetoothDeviceOne, "mockHandle",
-                "510-111-2222", "testSender",
-                "Hello");
-        mMessageOne = MapMessage.parseFrom(mMessageOneIntent);
-        mMessageOneKey = new MessengerDelegate.MessageKey(mMessageOne);
-        mSenderKey = new MessengerDelegate.SenderKey(mMessageOne);
-
+        createMockMessages();
         mMessengerDelegate = new MessengerDelegate(mContext);
     }
 
@@ -163,6 +156,29 @@ public class MessengerDelegateTest {
         assertThat(info.mMessageKeys).hasSize(1);
     }
 
+    @Test
+    public void testClearNotification_keepsNotificationData() {
+        mMessengerDelegate.onMessageReceived(mMessageOneIntent);
+        mMessengerDelegate.clearNotifications(key -> key.equals(mSenderKey));
+        MessengerDelegate.NotificationInfo info = mMessengerDelegate.mNotificationInfos.get(
+                mSenderKey);
+        assertThat(info.mMessageKeys).hasSize(1);
+
+        assertThat(mMessengerDelegate.mMessages.containsKey(mMessageOneKey)).isTrue();
+    }
+
+    @Test
+    public void testHandleMarkAsRead() {
+        mMessengerDelegate.onMessageReceived(mMessageOneIntent);
+
+        mMessengerDelegate.markAsRead(mSenderKey);
+
+        MessengerDelegate.NotificationInfo info = mMessengerDelegate.mNotificationInfos.get(
+                mSenderKey);
+        MessengerDelegate.MessageKey key = info.mMessageKeys.get(0);
+        assertThat(mMessengerDelegate.mMessages.get(key).isRead()).isTrue();
+    }
+
     private Intent createMessageIntent(BluetoothDevice device, String handle, String senderUri,
             String senderName, String messageText) {
         Intent intent = new Intent();
@@ -184,5 +200,14 @@ public class MessengerDelegateTest {
                 && expected.getSenderName().equals(observed.getSenderName())
                 && expected.getSenderContactUri().equals(observed.getSenderContactUri())
                 && expected.getMessageText().equals(observed.getMessageText());
+    }
+
+    private void createMockMessages() {
+        mMessageOneIntent= createMessageIntent(mMockBluetoothDeviceOne, "mockHandle",
+                "510-111-2222", "testSender",
+                "Hello");
+        mMessageOne = MapMessage.parseFrom(mMessageOneIntent);
+        mMessageOneKey = new MessengerDelegate.MessageKey(mMessageOne);
+        mSenderKey = new MessengerDelegate.SenderKey(mMessageOne);
     }
 }
