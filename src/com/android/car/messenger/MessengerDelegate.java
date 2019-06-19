@@ -180,23 +180,34 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     }
 
     protected void markAsRead(SenderKey senderKey) {
-        /* NO-OP */
+        NotificationInfo info = mNotificationInfos.get(senderKey);
+        for (MessageKey key : info.mMessageKeys) {
+            MapMessage message = mMessages.get(key);
+            if (!message.isRead()) {
+                message.markMessageAsRead();
+                mSmsDatabaseHandler.addOrUpdate(message);
+            }
+        }
     }
 
-    protected void clearNotifications(SenderKey senderKey) {
-        cleanupMessagesAndNotifications(key -> key.equals(senderKey));
-    }
-
-    private void cleanupMessagesAndNotifications(Predicate<CompositeKey> predicate) {
-        mMessages.entrySet().removeIf(
-                messageKeyMapMessageEntry -> predicate.test(messageKeyMapMessageEntry.getKey()));
-
+    /**
+     * Clears all notifications matching the {@param predicate}. Example method calls are when user
+     * wants to clear (a) message notification(s), or when the Bluetooth device that received the
+     * messages has been disconnected.
+     */
+    protected void clearNotifications(Predicate<CompositeKey> predicate) {
         mNotificationInfos.forEach((senderKey, notificationInfo) -> {
             if (predicate.test(senderKey)) {
                 mNotificationManager.cancel(notificationInfo.mNotificationId);
             }
         });
+    }
 
+    /** Removes all messages related to the inputted predicate, and cancels their notifications. **/
+    private void cleanupMessagesAndNotifications(Predicate<CompositeKey> predicate) {
+        mMessages.entrySet().removeIf(
+                messageKeyMapMessageEntry -> predicate.test(messageKeyMapMessageEntry.getKey()));
+        clearNotifications(predicate);
         mNotificationInfos.entrySet().removeIf(entry -> predicate.test(entry.getKey()));
     }
 
@@ -233,7 +244,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                     }
 
                     private void sendNotification(Bitmap bitmap) {
-
                         mNotificationManager.notify(
                                 notificationInfo.mNotificationId,
                                 createNotification(senderKey, notificationInfo, bitmap));
@@ -298,7 +308,12 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 .setUri(notificationInfo.mSenderContactUri)
                 .build();
         notificationInfo.mMessageKeys.stream().map(mMessages::get).forEachOrdered(message -> {
-            messagingStyle.addMessage(message.getMessageText(), message.getReceiveTime(), sender);
+            if (!message.isRead()) {
+                messagingStyle.addMessage(
+                        message.getMessageText(),
+                        message.getReceiveTime(),
+                        sender);
+            }
         });
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext,
