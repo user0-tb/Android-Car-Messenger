@@ -233,7 +233,7 @@ public class MessengerService extends Service {
     public void clearNotificationState(Intent intent) {
         final SenderKey senderKey = intent.getParcelableExtra(EXTRA_SENDER_KEY);
         L.d(TAG, "clearNotificationState");
-        mMessengerDelegate.clearNotifications(senderKey);
+        mMessengerDelegate.clearNotifications(key -> key.equals(senderKey));
     }
 
     /**
