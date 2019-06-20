@@ -28,6 +28,9 @@ class SmsDatabaseHandler {
     private static final int DUPLICATE_MESSAGES_FOUND = -2;
     private static final int DATABASE_ERROR = -3;
     private static final Uri SMS_URI = Telephony.Sms.CONTENT_URI;
+    private static final String SMS_SELECTION = Telephony.Sms.ADDRESS + "=? AND "
+            + Telephony.Sms.BODY + "=? AND (" + Telephony.Sms.DATE + ">=? OR " + Telephony.Sms.DATE
+            + "<=?)";
 
     private final ContentResolver mContentResolver;
     private final boolean mCanWriteToDatabase;
@@ -35,6 +38,7 @@ class SmsDatabaseHandler {
     protected SmsDatabaseHandler(Context context) {
         mCanWriteToDatabase = canWriteToDatabase(context);
         mContentResolver = context.getContentResolver();
+        SmsReceiver.readDatabase(context);
     }
 
     protected void addOrUpdate(MapMessage message) {
@@ -71,27 +75,17 @@ class SmsDatabaseHandler {
 
     /** Removes multiple previous copies, and inserts the new message. **/
     private void removePreviousAndInsert(MapMessage message) {
-        String smsSelection = Telephony.Sms.ADDRESS + "=? AND "
-                + Telephony.Sms.BODY + "=? AND " + Telephony.Sms.DATE + "=?";
+        String[] smsSelectionArgs = createSmsSelectionArgs(message);
 
-        String sqlFriendlyMessageText = DatabaseUtils.sqlEscapeString(message.getMessageText());
-        String[] smsSelectionArgs = {message.getDeviceAddress(), sqlFriendlyMessageText,
-                Long.toString(message.getReceiveTime())};
-
-        mContentResolver.delete(SMS_URI, smsSelection, smsSelectionArgs);
+        mContentResolver.delete(SMS_URI, SMS_SELECTION, smsSelectionArgs);
         mContentResolver.insert(SMS_URI, buildMessageContentValues(message));
     }
 
     private int findMessageIndex(MapMessage message) {
-        String smsSelection = Telephony.Sms.ADDRESS + "=? AND "
-                + Telephony.Sms.BODY + "=? AND " + Telephony.Sms.DATE + "=?";
-
-        String sqlFriendlyMessageText = DatabaseUtils.sqlEscapeString(message.getMessageText());
-        String[] smsSelectionArgs = {message.getDeviceAddress(), sqlFriendlyMessageText,
-                Long.toString(message.getReceiveTime())};
+        String[] smsSelectionArgs = createSmsSelectionArgs(message);
 
         String[] projection = {BaseColumns._ID};
-        Cursor cursor = mContentResolver.query(SMS_URI, projection, smsSelection,
+        Cursor cursor = mContentResolver.query(SMS_URI, projection, SMS_SELECTION,
                 smsSelectionArgs, null /* sortOrder */);
 
         if (cursor != null && cursor.getCount() != 0) {
@@ -134,6 +128,14 @@ class SmsDatabaseHandler {
                         message.getSenderContactUri()));
         newMessage.put(Telephony.Sms.READ, message.isRead());
         return newMessage;
+    }
+
+    private String[] createSmsSelectionArgs(MapMessage message) {
+        String sqlFriendlyMessageText = DatabaseUtils.sqlEscapeString(message.getMessageText());
+        String[] smsSelectionArgs = {message.getDeviceAddress(), sqlFriendlyMessageText,
+                Long.toString(message.getReceiveTime() - 5000), Long.toString(
+                message.getReceiveTime() + 5000)};
+        return smsSelectionArgs;
     }
 
     /** Checks if the application has the needed AppOps permission to write to the Telephony DB. **/
