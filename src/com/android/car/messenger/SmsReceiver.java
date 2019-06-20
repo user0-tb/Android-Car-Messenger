@@ -97,7 +97,7 @@ public class SmsReceiver extends BroadcastReceiver {
      * in the last five minutes.
      * @param context
      */
-    private void readDatabase(Context context) {
+    public static void readDatabase(Context context) {
         if (!Log.isLoggable(TAG, Log.DEBUG)) {
             return;
         }
@@ -121,8 +121,7 @@ public class SmsReceiver extends BroadcastReceiver {
                         "_id " + cursor.getInt(0) + " person: " + cursor.getInt(3) + " body: "
                                 + body.substring(0, Math.min(body.length(), 17)) + " address: "
                                 + cursor.getString(2) + " date: " + DATE_FORMATTER.format(
-                                date)
-                                + " read: "
+                                date) + " longDate " + cursor.getLong(4) + " read: "
                                 + cursor.getInt(7));
             }
         }
