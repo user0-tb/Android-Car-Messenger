@@ -64,8 +64,10 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
     @VisibleForTesting
     final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
+    // Mapping of when a device was connected via BluetoothMapClient. Used so we don't show
+    // Notifications for messages received before this time.
     @VisibleForTesting
-    final Set<String> mConnectedDevices = new HashSet<>();
+    final Map<String, Long> mBTDeviceAddressToConnectionTimestamp = new HashMap<>();
 
     public MessengerDelegate(Context context) {
         mContext = context;
@@ -108,14 +110,21 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     @Override
     public void onDeviceConnected(BluetoothDevice device) {
         L.d(TAG, "Device connected: \t%s", device.getAddress());
-        mConnectedDevices.add(device.getAddress());
+        mBTDeviceAddressToConnectionTimestamp.put(device.getAddress(), System.currentTimeMillis());
+        if (mBluetoothMapClient != null) {
+            mBluetoothMapClient.getUnreadMessages(device);
+        } else {
+            // onDeviceConnected should be sent by BluetoothMapClient, so log if we run into this
+            // strange case.
+            L.e(TAG, "BluetoothMapClient is null after connecting to device.");
+        }
     }
 
     @Override
     public void onDeviceDisconnected(BluetoothDevice device) {
         L.d(TAG, "Device disconnected: \t%s", device.getAddress());
         cleanupMessagesAndNotifications(key -> key.matches(device.getAddress()));
-        mConnectedDevices.remove(device.getAddress());
+        mBTDeviceAddressToConnectionTimestamp.remove(device.getAddress());
         mSmsDatabaseHandler.removeMessagesForDevice(device.getAddress());
     }
 
@@ -167,7 +176,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             }
         }
 
-        final boolean deviceConnected = mConnectedDevices.contains(
+        final boolean deviceConnected = mBTDeviceAddressToConnectionTimestamp.containsKey(
                 senderKey.getDeviceAddress());
         if (!success || !deviceConnected) {
             L.e(TAG, "Unable to send reply!");
@@ -212,6 +221,13 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     }
 
     private void updateNotification(MessageKey messageKey, MapMessage mapMessage) {
+        // Only show notifications for messages received AFTER phone was connected.
+        if (mapMessage.getReceiveTime()
+                < mBTDeviceAddressToConnectionTimestamp.get(mapMessage.getDeviceAddress())) {
+            return;
+        }
+
+        SmsReceiver.readDatabase(mContext);
         SenderKey senderKey = new SenderKey(mapMessage);
         if (!mNotificationInfos.containsKey(senderKey)) {
             mNotificationInfos.put(senderKey, new NotificationInfo(mapMessage.getSenderName(),
@@ -273,8 +289,11 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     }
 
     protected void cleanup() {
-        for (String address : mConnectedDevices) {
+        for (String address : mBTDeviceAddressToConnectionTimestamp.keySet()) {
             mSmsDatabaseHandler.removeMessagesForDevice(address);
+        }
+        if (mBluetoothMapClient != null) {
+            mBluetoothMapClient.close();
         }
     }
 
