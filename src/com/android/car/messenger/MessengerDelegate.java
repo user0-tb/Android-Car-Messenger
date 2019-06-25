@@ -72,13 +72,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     public MessengerDelegate(Context context) {
         mContext = context;
 
-        // Manually notify self of initially connected devices,
-        // since devices can be paired before the messaging service is initialized.
-        for (BluetoothDevice device : BluetoothHelper.getPairedDevices()) {
-            L.d(TAG, "Existing paired device: %s", device.getAddress());
-            onDeviceConnected(device);
-        }
-
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -139,6 +132,9 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         }
 
         mBluetoothMapClient = client;
+        for (BluetoothDevice device : client.getConnectedDevices()) {
+            onDeviceConnected(device);
+        }
     }
 
     @Override
