@@ -11,6 +11,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources.NotFoundException;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -41,12 +42,10 @@ import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Predicate;
 
 /** Delegate class responsible for handling messaging service actions */
@@ -59,28 +58,32 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     private BluetoothMapClient mBluetoothMapClient;
     private NotificationManager mNotificationManager;
     private final SmsDatabaseHandler mSmsDatabaseHandler;
+    private boolean mShouldLoadExistingMessages;
 
     @VisibleForTesting
     final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
     @VisibleForTesting
     final Map<SenderKey, NotificationInfo> mNotificationInfos = new HashMap<>();
+    // Mapping of when a device was connected via BluetoothMapClient. Used so we don't show
+    // Notifications for messages received before this time.
     @VisibleForTesting
-    final Set<String> mConnectedDevices = new HashSet<>();
+    final Map<String, Long> mBTDeviceAddressToConnectionTimestamp = new HashMap<>();
 
     public MessengerDelegate(Context context) {
         mContext = context;
 
-        // Manually notify self of initially connected devices,
-        // since devices can be paired before the messaging service is initialized.
-        for (BluetoothDevice device : BluetoothHelper.getPairedDevices()) {
-            L.d(TAG, "Existing paired device: %s", device.getAddress());
-            onDeviceConnected(device);
-        }
-
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-
         mSmsDatabaseHandler = new SmsDatabaseHandler(mContext);
+
+        try {
+            mShouldLoadExistingMessages =
+                    mContext.getResources().getBoolean(R.bool.config_loadExistingMessages);
+        } catch(NotFoundException e) {
+            // Should only happen for robolectric unit tests;
+            L.e(TAG, e, "Disabling loading of existing messages");
+            mShouldLoadExistingMessages = false;
+        }
     }
 
     @Override
@@ -108,14 +111,21 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     @Override
     public void onDeviceConnected(BluetoothDevice device) {
         L.d(TAG, "Device connected: \t%s", device.getAddress());
-        mConnectedDevices.add(device.getAddress());
+        mBTDeviceAddressToConnectionTimestamp.put(device.getAddress(), System.currentTimeMillis());
+        if (mBluetoothMapClient != null && mShouldLoadExistingMessages) {
+            mBluetoothMapClient.getUnreadMessages(device);
+        } else {
+            // onDeviceConnected should be sent by BluetoothMapClient, so log if we run into this
+            // strange case.
+            L.e(TAG, "BluetoothMapClient is null after connecting to device.");
+        }
     }
 
     @Override
     public void onDeviceDisconnected(BluetoothDevice device) {
         L.d(TAG, "Device disconnected: \t%s", device.getAddress());
         cleanupMessagesAndNotifications(key -> key.matches(device.getAddress()));
-        mConnectedDevices.remove(device.getAddress());
+        mBTDeviceAddressToConnectionTimestamp.remove(device.getAddress());
         mSmsDatabaseHandler.removeMessagesForDevice(device.getAddress());
     }
 
@@ -130,6 +140,9 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         }
 
         mBluetoothMapClient = client;
+        for (BluetoothDevice device : client.getConnectedDevices()) {
+            onDeviceConnected(device);
+        }
     }
 
     @Override
@@ -167,7 +180,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             }
         }
 
-        final boolean deviceConnected = mConnectedDevices.contains(
+        final boolean deviceConnected = mBTDeviceAddressToConnectionTimestamp.containsKey(
                 senderKey.getDeviceAddress());
         if (!success || !deviceConnected) {
             L.e(TAG, "Unable to send reply!");
@@ -212,6 +225,13 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     }
 
     private void updateNotification(MessageKey messageKey, MapMessage mapMessage) {
+        // Only show notifications for messages received AFTER phone was connected.
+        if (mapMessage.getReceiveTime()
+                < mBTDeviceAddressToConnectionTimestamp.get(mapMessage.getDeviceAddress())) {
+            return;
+        }
+
+        SmsReceiver.readDatabase(mContext);
         SenderKey senderKey = new SenderKey(mapMessage);
         if (!mNotificationInfos.containsKey(senderKey)) {
             mNotificationInfos.put(senderKey, new NotificationInfo(mapMessage.getSenderName(),
@@ -273,7 +293,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     }
 
     protected void cleanup() {
-        for (String address : mConnectedDevices) {
+        for (String address : mBTDeviceAddressToConnectionTimestamp.keySet()) {
             mSmsDatabaseHandler.removeMessagesForDevice(address);
         }
         if (mBluetoothMapClient != null) {
