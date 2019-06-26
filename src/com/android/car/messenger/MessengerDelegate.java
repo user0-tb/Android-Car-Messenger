@@ -11,6 +11,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources.NotFoundException;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -41,12 +42,10 @@ import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Predicate;
 
 /** Delegate class responsible for handling messaging service actions */
@@ -59,6 +58,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     private BluetoothMapClient mBluetoothMapClient;
     private NotificationManager mNotificationManager;
     private final SmsDatabaseHandler mSmsDatabaseHandler;
+    private boolean mShouldLoadExistingMessages;
 
     @VisibleForTesting
     final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
@@ -74,8 +74,16 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-
         mSmsDatabaseHandler = new SmsDatabaseHandler(mContext);
+
+        try {
+            mShouldLoadExistingMessages =
+                    mContext.getResources().getBoolean(R.bool.config_loadExistingMessages);
+        } catch(NotFoundException e) {
+            // Should only happen for robolectric unit tests;
+            L.e(TAG, e, "Disabling loading of existing messages");
+            mShouldLoadExistingMessages = false;
+        }
     }
 
     @Override
@@ -104,7 +112,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     public void onDeviceConnected(BluetoothDevice device) {
         L.d(TAG, "Device connected: \t%s", device.getAddress());
         mBTDeviceAddressToConnectionTimestamp.put(device.getAddress(), System.currentTimeMillis());
-        if (mBluetoothMapClient != null) {
+        if (mBluetoothMapClient != null && mShouldLoadExistingMessages) {
             mBluetoothMapClient.getUnreadMessages(device);
         } else {
             // onDeviceConnected should be sent by BluetoothMapClient, so log if we run into this
