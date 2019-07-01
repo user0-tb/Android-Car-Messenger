@@ -19,8 +19,6 @@ package com.android.car.messenger;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-
 
 /**
  * No-op Receiver that only exists in order to be eligible to be the default SMS app.

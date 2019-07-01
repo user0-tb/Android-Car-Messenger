@@ -231,7 +231,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             return;
         }
 
-        SmsReceiver.readDatabase(mContext);
+        SmsDatabaseHandler.readDatabase(mContext);
         SenderKey senderKey = new SenderKey(mapMessage);
         if (!mNotificationInfos.containsKey(senderKey)) {
             mNotificationInfos.put(senderKey, new NotificationInfo(mapMessage.getSenderName(),
