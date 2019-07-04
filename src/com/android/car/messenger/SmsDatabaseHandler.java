@@ -14,10 +14,14 @@ import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.provider.Telephony;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
 import com.android.car.messenger.log.L;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Reads and writes SMS Messages into the Telephony.SMS Database.
@@ -31,6 +35,8 @@ class SmsDatabaseHandler {
     private static final String SMS_SELECTION = Telephony.Sms.ADDRESS + "=? AND "
             + Telephony.Sms.BODY + "=? AND (" + Telephony.Sms.DATE + ">=? OR " + Telephony.Sms.DATE
             + "<=?)";
+    private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(
+            "MMM dd,yyyy HH:mm");
 
     private final ContentResolver mContentResolver;
     private final boolean mCanWriteToDatabase;
@@ -38,7 +44,7 @@ class SmsDatabaseHandler {
     protected SmsDatabaseHandler(Context context) {
         mCanWriteToDatabase = canWriteToDatabase(context);
         mContentResolver = context.getContentResolver();
-        SmsReceiver.readDatabase(context);
+        readDatabase(context);
     }
 
     protected void addOrUpdate(MapMessage message) {
@@ -71,6 +77,42 @@ class SmsDatabaseHandler {
         String smsSelection = Telephony.Sms.ADDRESS + "=?";
         String[] smsSelectionArgs = {address};
         mContentResolver.delete(SMS_URI, smsSelection, smsSelectionArgs);
+    }
+
+    /**
+     * Reads the Telephony SMS Database, and logs all of the SMS messages that have been received
+     * in the last five minutes.
+     * @param context
+     */
+    protected static void readDatabase(Context context) {
+        if (!Log.isLoggable(TAG, Log.DEBUG)) {
+            return;
+        }
+
+        Long beginningTimeStamp = System.currentTimeMillis() - 300000;
+        String timeStamp = DATE_FORMATTER.format(new Date(beginningTimeStamp));
+        Log.d(TAG,
+                " ------ printing SMSs received after " + timeStamp + "-------- ");
+
+        String smsSelection = Telephony.Sms.DATE + ">=?";
+        String[] smsSelectionArgs = {Long.toString(beginningTimeStamp)};
+        Cursor cursor = context.getContentResolver().query(SMS_URI, null,
+                smsSelection,
+                smsSelectionArgs, null /* sortOrder */);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String body = cursor.getString(12);
+
+                Date date = new Date(cursor.getLong(4));
+                Log.d(TAG,
+                        "_id " + cursor.getInt(0) + " person: " + cursor.getInt(3) + " body: "
+                                + body.substring(0, Math.min(body.length(), 17)) + " address: "
+                                + cursor.getString(2) + " date: " + DATE_FORMATTER.format(
+                                date) + " longDate " + cursor.getLong(4) + " read: "
+                                + cursor.getInt(7));
+            }
+        }
+        Log.d(TAG, " ------ end read table --------");
     }
 
     /** Removes multiple previous copies, and inserts the new message. **/
