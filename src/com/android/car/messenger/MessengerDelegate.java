@@ -218,6 +218,11 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
     /** Removes all messages related to the inputted predicate, and cancels their notifications. **/
     private void cleanupMessagesAndNotifications(Predicate<CompositeKey> predicate) {
+        for (MessageKey key : mMessages.keySet()) {
+            if (predicate.test(key)) {
+                mSmsDatabaseHandler.removeMessagesForDevice(key.getDeviceAddress());
+            }
+        }
         mMessages.entrySet().removeIf(
                 messageKeyMapMessageEntry -> predicate.test(messageKeyMapMessageEntry.getKey()));
         clearNotifications(predicate);
@@ -231,7 +236,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             return;
         }
 
-        SmsReceiver.readDatabase(mContext);
+        SmsDatabaseHandler.readDatabase(mContext);
         SenderKey senderKey = new SenderKey(mapMessage);
         if (!mNotificationInfos.containsKey(senderKey)) {
             mNotificationInfos.put(senderKey, new NotificationInfo(mapMessage.getSenderName(),
@@ -293,9 +298,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     }
 
     protected void cleanup() {
-        for (String address : mBTDeviceAddressToConnectionTimestamp.keySet()) {
-            mSmsDatabaseHandler.removeMessagesForDevice(address);
-        }
+        cleanupMessagesAndNotifications(key -> true);
         if (mBluetoothMapClient != null) {
             mBluetoothMapClient.close();
         }
