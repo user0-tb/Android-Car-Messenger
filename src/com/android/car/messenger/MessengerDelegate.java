@@ -117,8 +117,10 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         L.d(TAG, "Device connected: \t%s", device.getAddress());
         mBTDeviceAddressToConnectionTimestamp.put(device.getAddress(), System.currentTimeMillis());
         synchronized (mMapClientLock) {
-            if (mBluetoothMapClient != null && mShouldLoadExistingMessages) {
-                mBluetoothMapClient.getUnreadMessages(device);
+            if (mBluetoothMapClient != null) {
+                if (mShouldLoadExistingMessages) {
+                    mBluetoothMapClient.getUnreadMessages(device);
+                }
             } else {
                 // onDeviceConnected should be sent by BluetoothMapClient, so log if we run into
                 // this strange case.
