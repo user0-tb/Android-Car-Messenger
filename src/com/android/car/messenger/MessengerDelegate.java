@@ -219,7 +219,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         NotificationInfo info = mNotificationInfos.get(senderKey);
         for (MessageKey key : info.mMessageKeys) {
             MapMessage message = mMessages.get(key);
-            if (!message.isRead()) {
+            if (!message.isReadOnCar()) {
                 message.markMessageAsRead();
                 mSmsDatabaseHandler.addOrUpdate(message);
             }
@@ -359,7 +359,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 .setUri(notificationInfo.mSenderContactUri)
                 .build();
         notificationInfo.mMessageKeys.stream().map(mMessages::get).forEachOrdered(message -> {
-            if (!message.isRead()) {
+            if (!message.isReadOnCar()) {
                 messagingStyle.addMessage(
                         message.getMessageText(),
                         message.getReceiveTime(),
