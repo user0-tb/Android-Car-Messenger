@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
+import android.bluetooth.BluetoothProfile;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -34,6 +35,7 @@ import com.android.car.apps.common.LetterTileDrawable;
 import com.android.car.messenger.bluetooth.BluetoothHelper;
 import com.android.car.messenger.bluetooth.BluetoothMonitor;
 import com.android.car.messenger.log.L;
+import com.android.internal.annotations.GuardedBy;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -53,8 +55,10 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     private static final String TAG = "CM.MessengerDelegate";
     // Static user name for building a MessagingStyle.
     private static final String STATIC_USER_NAME = "STATIC_USER_NAME";
+    private static final Object mMapClientLock = new Object();
 
     private final Context mContext;
+    @GuardedBy("mMapClientLock")
     private BluetoothMapClient mBluetoothMapClient;
     private NotificationManager mNotificationManager;
     private final SmsDatabaseHandler mSmsDatabaseHandler;
@@ -112,12 +116,16 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     public void onDeviceConnected(BluetoothDevice device) {
         L.d(TAG, "Device connected: \t%s", device.getAddress());
         mBTDeviceAddressToConnectionTimestamp.put(device.getAddress(), System.currentTimeMillis());
-        if (mBluetoothMapClient != null && mShouldLoadExistingMessages) {
-            mBluetoothMapClient.getUnreadMessages(device);
-        } else {
-            // onDeviceConnected should be sent by BluetoothMapClient, so log if we run into this
-            // strange case.
-            L.e(TAG, "BluetoothMapClient is null after connecting to device.");
+        synchronized (mMapClientLock) {
+            if (mBluetoothMapClient != null) {
+                if (mShouldLoadExistingMessages) {
+                    mBluetoothMapClient.getUnreadMessages(device);
+                }
+            } else {
+                // onDeviceConnected should be sent by BluetoothMapClient, so log if we run into
+                // this strange case.
+                L.e(TAG, "BluetoothMapClient is null after connecting to device.");
+            }
         }
     }
 
@@ -131,24 +139,36 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
     @Override
     public void onMapConnected(BluetoothMapClient client) {
-        if (mBluetoothMapClient == client) {
-            return;
-        }
+        List<BluetoothDevice> connectedDevices;
+        synchronized (mMapClientLock) {
+            if (mBluetoothMapClient == client) {
+                return;
+            }
 
-        if (mBluetoothMapClient != null) {
-            mBluetoothMapClient.close();
-        }
+            if (mBluetoothMapClient != null) {
+                mBluetoothMapClient.close();
+            }
 
-        mBluetoothMapClient = client;
-        for (BluetoothDevice device : client.getConnectedDevices()) {
-            onDeviceConnected(device);
+            mBluetoothMapClient = client;
+            connectedDevices = mBluetoothMapClient.getConnectedDevices();
+        }
+        if (connectedDevices != null) {
+            for (BluetoothDevice device : connectedDevices) {
+                onDeviceConnected(device);
+            }
         }
     }
 
     @Override
     public void onMapDisconnected(int profile) {
-        mBluetoothMapClient = null;
         cleanupMessagesAndNotifications(key -> true);
+        synchronized (mMapClientLock) {
+            BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+            if (adapter != null) {
+                adapter.closeProfileProxy(BluetoothProfile.MAP_CLIENT, mBluetoothMapClient);
+            }
+            mBluetoothMapClient = null;
+        }
     }
 
     @Override
@@ -159,24 +179,27 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     protected void sendMessage(SenderKey senderKey, String messageText) {
         boolean success = false;
         // Even if the device is not connected, try anyway so that the reply in enqueued.
-        if (mBluetoothMapClient != null) {
-            NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
-            if (notificationInfo == null) {
-                L.w(TAG, "No notificationInfo found for senderKey: %s", senderKey);
-            } else if (notificationInfo.mSenderContactUri == null) {
-                L.w(TAG, "Do not have contact URI for sender!");
-            } else {
-                Uri recipientUris[] = {Uri.parse(notificationInfo.mSenderContactUri)};
+        synchronized (mMapClientLock) {
+            if (mBluetoothMapClient != null) {
+                NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
+                if (notificationInfo == null) {
+                    L.w(TAG, "No notificationInfo found for senderKey: %s", senderKey);
+                } else if (notificationInfo.mSenderContactUri == null) {
+                    L.w(TAG, "Do not have contact URI for sender!");
+                } else {
+                    Uri[] recipientUris = {Uri.parse(notificationInfo.mSenderContactUri)};
 
-                final int requestCode = senderKey.hashCode();
+                    final int requestCode = senderKey.hashCode();
 
-                Intent intent = new Intent(BluetoothMapClient.ACTION_MESSAGE_SENT_SUCCESSFULLY);
-                PendingIntent sentIntent = PendingIntent.getBroadcast(mContext, requestCode, intent,
-                        PendingIntent.FLAG_ONE_SHOT);
+                    Intent intent = new Intent(BluetoothMapClient.ACTION_MESSAGE_SENT_SUCCESSFULLY);
+                    PendingIntent sentIntent = PendingIntent.getBroadcast(mContext, requestCode,
+                            intent,
+                            PendingIntent.FLAG_ONE_SHOT);
 
-                success = BluetoothHelper.sendMessage(mBluetoothMapClient,
-                        senderKey.getDeviceAddress(), recipientUris, messageText,
-                        sentIntent, null);
+                    success = BluetoothHelper.sendMessage(mBluetoothMapClient,
+                            senderKey.getDeviceAddress(), recipientUris, messageText,
+                            sentIntent, null);
+                }
             }
         }
 
@@ -196,7 +219,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         NotificationInfo info = mNotificationInfos.get(senderKey);
         for (MessageKey key : info.mMessageKeys) {
             MapMessage message = mMessages.get(key);
-            if (!message.isRead()) {
+            if (!message.isReadOnCar()) {
                 message.markMessageAsRead();
                 mSmsDatabaseHandler.addOrUpdate(message);
             }
@@ -299,8 +322,10 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
     protected void cleanup() {
         cleanupMessagesAndNotifications(key -> true);
-        if (mBluetoothMapClient != null) {
-            mBluetoothMapClient.close();
+        synchronized (mMapClientLock) {
+            if (mBluetoothMapClient != null) {
+                mBluetoothMapClient.close();
+            }
         }
     }
 
@@ -334,7 +359,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 .setUri(notificationInfo.mSenderContactUri)
                 .build();
         notificationInfo.mMessageKeys.stream().map(mMessages::get).forEachOrdered(message -> {
-            if (!message.isRead()) {
+            if (!message.isReadOnCar()) {
                 messagingStyle.addMessage(
                         message.getMessageText(),
                         message.getReceiveTime(),
@@ -426,7 +451,10 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         }
         BluetoothDevice device = adapter.getRemoteDevice(deviceAddress);
 
-        return mBluetoothMapClient.isUploadingSupported(device);
+        synchronized (mMapClientLock) {
+            return (mBluetoothMapClient != null) && mBluetoothMapClient.isUploadingSupported(
+                    device);
+        }
     }
 
     /**
