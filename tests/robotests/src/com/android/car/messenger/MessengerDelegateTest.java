@@ -50,7 +50,7 @@ public class MessengerDelegateTest {
     private Intent mMessageOneIntent;
     private MapMessage mMessageOne;
     private MessengerDelegate.MessageKey mMessageOneKey;
-    private MessengerDelegate.SenderKey mSenderKey;
+    private SenderKey mSenderKey;
 
     @Before
     public void setUp() {
@@ -261,6 +261,6 @@ public class MessengerDelegateTest {
                 "Hello", /* timestamp= */ null, /* isReadOnPhone */ false);
         mMessageOne = MapMessage.parseFrom(mMessageOneIntent);
         mMessageOneKey = new MessengerDelegate.MessageKey(mMessageOne);
-        mSenderKey = new MessengerDelegate.SenderKey(mMessageOne);
+        mSenderKey = new SenderKey(mMessageOne);
     }
 }

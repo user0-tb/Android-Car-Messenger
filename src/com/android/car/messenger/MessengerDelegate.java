@@ -17,8 +17,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.widget.Toast;
@@ -47,7 +45,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Predicate;
 
 /** Delegate class responsible for handling messaging service actions */
@@ -474,117 +471,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             mSenderName = senderName;
             mSenderContactUri = senderContactUri;
         }
-    }
-
-    /**
-     * A composite key used for {@link Map} lookups, using two strings for
-     * checking equality and hashing.
-     */
-    public abstract static class CompositeKey {
-        private final String mDeviceAddress;
-        private final String mSubKey;
-
-        CompositeKey(String deviceAddress, String subKey) {
-            mDeviceAddress = deviceAddress;
-            mSubKey = subKey;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-
-            if (!(o instanceof CompositeKey)) {
-                return false;
-            }
-
-            CompositeKey that = (CompositeKey) o;
-            return Objects.equals(mDeviceAddress, that.mDeviceAddress)
-                    && Objects.equals(mSubKey, that.mSubKey);
-        }
-
-        /**
-         * Returns true if the device address of this composite key equals {@code deviceAddress}.
-         *
-         * @param deviceAddress the device address which is compared to this key's device address
-         * @return true if the device addresses match
-         */
-        public boolean matches(String deviceAddress) {
-            return mDeviceAddress.equals(deviceAddress);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(mDeviceAddress, mSubKey);
-        }
-
-        @Override
-        public String toString() {
-            return String.format("%s, deviceAddress: %s, subKey: %s",
-                    getClass().getSimpleName(), mDeviceAddress, mSubKey);
-        }
-
-        /** Returns this composite key's device address. */
-        public String getDeviceAddress() {
-            return mDeviceAddress;
-        }
-
-        /** Returns this composite key's sub key. */
-        public String getSubKey() {
-            return mSubKey;
-        }
-    }
-
-    /**
-     * {@link CompositeKey} subclass used to identify Notification info for a sender;
-     * it uses a combination of senderContactUri and senderContactName as the secondary key.
-     */
-    public static class SenderKey extends CompositeKey implements Parcelable {
-
-        private SenderKey(String deviceAddress, String key) {
-            super(deviceAddress, key);
-        }
-
-        SenderKey(MapMessage message) {
-            // Use a combination of senderName and senderContactUri for key. Ideally we would use
-            // only senderContactUri (which is encoded phone no.). However since some phones don't
-            // provide these, we fall back to senderName. Since senderName may not be unique, we
-            // include senderContactUri also to provide uniqueness in cases it is available.
-            this(message.getDeviceAddress(),
-                    message.getSenderName() + "/" + message.getSenderContactUri());
-        }
-
-        @Override
-        public String toString() {
-            return String.format("SenderKey: %s -- %s", getDeviceAddress(), getSubKey());
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(getDeviceAddress());
-            dest.writeString(getSubKey());
-        }
-
-        /** Creates {@link SenderKey} instances from {@link Parcel} sources. */
-        public static final Parcelable.Creator<SenderKey> CREATOR =
-                new Parcelable.Creator<SenderKey>() {
-                    @Override
-                    public SenderKey createFromParcel(Parcel source) {
-                        return new SenderKey(source.readString(), source.readString());
-                    }
-
-                    @Override
-                    public SenderKey[] newArray(int size) {
-                        return new SenderKey[size];
-                    }
-                };
-
     }
 
     /**
