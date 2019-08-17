@@ -18,7 +18,6 @@ import android.text.TextUtils;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.RemoteInput;
 
-import com.android.car.messenger.MessengerDelegate.SenderKey;
 import com.android.car.messenger.bluetooth.BluetoothMonitor;
 import com.android.car.messenger.log.L;
 
