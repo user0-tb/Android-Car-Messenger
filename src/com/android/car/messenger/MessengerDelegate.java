@@ -193,9 +193,13 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                             intent,
                             PendingIntent.FLAG_ONE_SHOT);
 
-                    success = BluetoothHelper.sendMessage(mBluetoothMapClient,
-                            senderKey.getDeviceAddress(), recipientUris, messageText,
-                            sentIntent, null);
+                    try {
+                        success = BluetoothHelper.sendMessage(mBluetoothMapClient,
+                                senderKey.getDeviceAddress(), recipientUris, messageText,
+                                sentIntent, null);
+                    } catch (IllegalArgumentException e) {
+                        L.w(TAG, "Invalid device address: " + senderKey.getDeviceAddress());
+                    }
                 }
             }
         }

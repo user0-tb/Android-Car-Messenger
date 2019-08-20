@@ -18,6 +18,7 @@ LOCAL_JAVA_LIBRARIES := \
     robolectric_android-all-stub \
     Robolectric_all-target \
     mockito-robolectric-prebuilt \
+    testng \
     truth-prebuilt
 
 LOCAL_INSTRUMENTATION_FOR := CarMessengerApp
@@ -38,6 +39,7 @@ LOCAL_JAVA_LIBRARIES := \
     robolectric_android-all-stub \
     Robolectric_all-target \
     mockito-robolectric-prebuilt \
+    testng \
     truth-prebuilt
 
 LOCAL_TEST_PACKAGE := CarMessengerApp
