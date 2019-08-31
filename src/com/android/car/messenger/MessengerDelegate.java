@@ -50,8 +50,6 @@ import java.util.function.Predicate;
 /** Delegate class responsible for handling messaging service actions */
 public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListener {
     private static final String TAG = "CM.MessengerDelegate";
-    // Static user name for building a MessagingStyle.
-    private static final String STATIC_USER_NAME = "STATIC_USER_NAME";
     private static final Object mMapClientLock = new Object();
 
     private final Context mContext;
@@ -352,7 +350,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         List<Action> actions = getNotificationActions(senderKey, notificationId);
 
         Person user = new Person.Builder()
-                .setName(STATIC_USER_NAME)
+                .setName(mContext.getString(R.string.name_not_available))
                 .build();
         MessagingStyle messagingStyle = new MessagingStyle(user);
         Person sender = new Person.Builder()
