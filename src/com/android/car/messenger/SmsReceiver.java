@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,19 @@
 
 package com.android.car.messenger;
 
-public class TestConfig {
-    public static final int SDK_VERSION = 23;
-    public static final String MANIFEST_PATH =
-            "packages/apps/Car/Messenger/AndroidManifest.xml";
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+
+/**
+ *  No-op Receiver that only exists in order to be eligible to be the default SMS app.
+ */
+public class SmsReceiver extends BroadcastReceiver {
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Intent startIntent = new Intent(context, MessengerService.class)
+                .setAction(MessengerService.ACTION_RECEIVED_SMS);
+        context.startForegroundService(startIntent);
+    }
 }
