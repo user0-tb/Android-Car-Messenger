@@ -33,7 +33,8 @@ class MapMessage {
     private String mSenderContactUri;
     private String mMessageText;
     private long mReceiveTime;
-    private boolean mIsRead;
+    private boolean mIsReadOnPhone;
+    private boolean mIsReadOnCar;
 
     /**
      * Constructs a {@link MapMessage} from {@code intent} that was received from MAP service via
@@ -99,7 +100,7 @@ class MapMessage {
         mSenderContactUri = senderContactUri;
         mSenderName = senderName;
         mReceiveTime = receiveTime;
-        mIsRead = isRead;
+        mIsReadOnPhone = isRead;
     }
 
     /**
@@ -151,14 +152,21 @@ class MapMessage {
     }
 
     public void markMessageAsRead() {
-        mIsRead = true;
+        mIsReadOnCar = true;
     }
 
     /**
-     * Returns the read status of the message.
+     * Returns {@code true} if message was read on the phone before it was received on the car.
      */
-    public boolean isRead() {
-        return mIsRead;
+    public boolean isReadOnPhone() {
+        return mIsReadOnPhone;
+    }
+
+    /**
+     * Returns {@code true} if message was read on the car.
+     */
+    public boolean isReadOnCar() {
+        return mIsReadOnCar;
     }
 
     @Override
@@ -169,8 +177,9 @@ class MapMessage {
                 ", mMessageText='" + mMessageText + '\'' +
                 ", mSenderContactUri='" + mSenderContactUri + '\'' +
                 ", mSenderName='" + mSenderName + '\'' +
-                ", mReceiveTime=" + mReceiveTime +
-                ", mIsRead= " + mIsRead +
+                ", mReceiveTime=" + mReceiveTime + '\'' +
+                ", mIsReadOnPhone= " + mIsReadOnPhone + '\'' +
+                ", mIsReadOnCar= " + mIsReadOnCar +
                 "}";
     }
 }
