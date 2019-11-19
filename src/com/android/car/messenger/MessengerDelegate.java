@@ -89,6 +89,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     public void onMessageReceived(Intent intent) {
         try {
             MapMessage message = MapMessage.parseFrom(intent);
+            L.d(TAG, "Received message from " + message.getDeviceAddress());
 
             MessageKey messageKey = new MessageKey(message);
             boolean repeatMessage = mMessages.containsKey(messageKey);
@@ -134,6 +135,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
     @Override
     public void onMapConnected(BluetoothMapClient client) {
+        L.d(TAG, "Connected to BluetoothMapClient");
         List<BluetoothDevice> connectedDevices;
         synchronized (mMapClientLock) {
             if (mBluetoothMapClient == client) {
@@ -156,6 +158,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
     @Override
     public void onMapDisconnected(int profile) {
+        L.d(TAG, "Disconnected from BluetoothMapClient");
         cleanupMessagesAndNotifications(key -> true);
         synchronized (mMapClientLock) {
             BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
@@ -423,6 +426,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                             )
                             .build()
             );
+        } else {
+            L.d(TAG, "Not adding Reply action for " + senderKey.getDeviceAddress());
         }
 
         // Mark-as-read Action. This will be the callback of Notification Center's "Read" action.
