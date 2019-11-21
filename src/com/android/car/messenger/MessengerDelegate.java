@@ -55,7 +55,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     private final Context mContext;
     @GuardedBy("mMapClientLock")
     private BluetoothMapClient mBluetoothMapClient;
-    private NotificationManager mNotificationManager;
+    private final NotificationManager mNotificationManager;
     private final SmsDatabaseHandler mSmsDatabaseHandler;
     private boolean mShouldLoadExistingMessages;
 
@@ -142,10 +142,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 return;
             }
 
-            if (mBluetoothMapClient != null) {
-                mBluetoothMapClient.close();
-            }
-
             mBluetoothMapClient = client;
             connectedDevices = mBluetoothMapClient.getConnectedDevices();
         }
@@ -157,14 +153,10 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     }
 
     @Override
-    public void onMapDisconnected(int profile) {
+    public void onMapDisconnected() {
         L.d(TAG, "Disconnected from BluetoothMapClient");
         cleanupMessagesAndNotifications(key -> true);
         synchronized (mMapClientLock) {
-            BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-            if (adapter != null) {
-                adapter.closeProfileProxy(BluetoothProfile.MAP_CLIENT, mBluetoothMapClient);
-            }
             mBluetoothMapClient = null;
         }
     }
@@ -318,13 +310,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         return 0;
     }
 
-    protected void cleanup() {
+    protected void onDestroy() {
         cleanupMessagesAndNotifications(key -> true);
-        synchronized (mMapClientLock) {
-            if (mBluetoothMapClient != null) {
-                mBluetoothMapClient.close();
-            }
-        }
     }
 
     private Notification createNotification(
