@@ -399,7 +399,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         final List<Action> actionList = new ArrayList<>();
 
         // Reply action
-        if (shouldAddReplyAction(senderKey.getDeviceAddress())) {
+        if (shouldAddReplyAction(senderKey)) {
             final String replyString = mContext.getString(R.string.action_reply);
             PendingIntent replyIntent = createServiceIntent(senderKey, notificationId,
                     MessengerService.ACTION_VOICE_REPLY);
@@ -431,12 +431,16 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         return actionList;
     }
 
-    private boolean shouldAddReplyAction(String deviceAddress) {
+    private boolean shouldAddReplyAction(SenderKey senderKey) {
+        if (mNotificationInfos.get(senderKey).mSenderContactUri == null) {
+            return false;
+        }
+
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter == null) {
             return false;
         }
-        BluetoothDevice device = adapter.getRemoteDevice(deviceAddress);
+        BluetoothDevice device = adapter.getRemoteDevice(senderKey.getDeviceAddress());
 
         synchronized (mMapClientLock) {
             return (mBluetoothMapClient != null) && mBluetoothMapClient.isUploadingSupported(
