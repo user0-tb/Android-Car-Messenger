@@ -9,11 +9,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources.NotFoundException;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
+import com.android.car.messenger.R;
 import com.android.car.messenger.log.L;
 
 import java.util.HashSet;
@@ -153,6 +155,17 @@ public class BluetoothMonitor {
 
     private void onMapDisconnected(int profile) {
         mListeners.forEach(listener -> listener.onMapDisconnected(profile));
+        boolean shouldReconnectToMap = false;
+        try {
+            shouldReconnectToMap = mContext.getResources().getBoolean(
+                    R.bool.config_loadExistingMessages);
+        } catch (NotFoundException e) {
+            // Should only happen for robolectric unit tests
+            L.e(TAG, e, "Could not find loadExistingMessages config");
+        }
+        if (shouldReconnectToMap) {
+            connectToMap();
+        }
     }
 
     private void onSdpRecord(BluetoothDevice device, boolean supportsReply) {

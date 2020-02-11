@@ -12,7 +12,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build.VERSION_CODES;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +29,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class}, sdk = {
-        VERSION_CODES.O})
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class MessengerDelegateTest {
 
     private static final String BLUETOOTH_ADDRESS_ONE = "FA:F8:14:CA:32:39";
@@ -50,7 +48,7 @@ public class MessengerDelegateTest {
     private Intent mMessageOneIntent;
     private MapMessage mMessageOne;
     private MessengerDelegate.MessageKey mMessageOneKey;
-    private MessengerDelegate.SenderKey mSenderKey;
+    private SenderKey mSenderKey;
 
     @Before
     public void setUp() {
@@ -94,7 +92,8 @@ public class MessengerDelegateTest {
         long deviceConnectionTimestamp =
                 mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp.get(BLUETOOTH_ADDRESS_TWO);
 
-        assertThat(deviceConnectionTimestamp).isEqualTo(timestamp);
+        // Sometimes there is slight flakiness in the timestamps.
+        assertThat(deviceConnectionTimestamp-timestamp).isLessThan(5L);
     }
 
     @Test
@@ -195,14 +194,30 @@ public class MessengerDelegateTest {
         MessengerDelegate.NotificationInfo info = mMessengerDelegate.mNotificationInfos.get(
                 mSenderKey);
         MessengerDelegate.MessageKey key = info.mMessageKeys.get(0);
-        assertThat(mMessengerDelegate.mMessages.get(key).isRead()).isTrue();
+        assertThat(mMessengerDelegate.mMessages.get(key).isReadOnCar()).isTrue();
+    }
+
+    @Test
+    public void testMessageReadOnPhone() {
+        Intent readMessageIntent = createMessageIntent(mMockBluetoothDeviceOne, "mockHandle",
+                "510-111-2222", "testSender",
+                "Hello", /* timestamp= */ System.currentTimeMillis() + 10000L,
+                /* isReadOnPhone */ true);
+        mMessengerDelegate.onMessageReceived(readMessageIntent);
+
+        MessengerDelegate.NotificationInfo info = mMessengerDelegate.mNotificationInfos.get(
+                mSenderKey);
+        MessengerDelegate.MessageKey key = info.mMessageKeys.get(0);
+        assertThat(mMessengerDelegate.mMessages.get(key).isReadOnCar()).isFalse();
+        assertThat(mMessengerDelegate.mMessages.get(key).isReadOnPhone()).isTrue();
     }
 
     @Test
     public void testNotificationsNotShownForExistingMessages() {
         Intent existingMessageIntent = createMessageIntent(mMockBluetoothDeviceTwo, "mockHandle",
                 "510-111-2222", "testSender",
-                "Hello", /* timestamp= */ System.currentTimeMillis() - 10000L);
+                "Hello", /* timestamp= */ System.currentTimeMillis() - 10000L,
+                /* isReadOnPhone */ false);
         mMessengerDelegate.onDeviceConnected(mMockBluetoothDeviceTwo);
 
         mMessengerDelegate.onMessageReceived(existingMessageIntent);
@@ -212,13 +227,14 @@ public class MessengerDelegateTest {
     }
 
     private Intent createMessageIntent(BluetoothDevice device, String handle, String senderUri,
-            String senderName, String messageText, Long timestamp) {
+            String senderName, String messageText, Long timestamp, boolean isReadOnPhone) {
         Intent intent = new Intent();
         intent.setAction(BluetoothMapClient.ACTION_MESSAGE_RECEIVED);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
         intent.putExtra(BluetoothMapClient.EXTRA_MESSAGE_HANDLE, handle);
         intent.putExtra(BluetoothMapClient.EXTRA_SENDER_CONTACT_URI, senderUri);
         intent.putExtra(BluetoothMapClient.EXTRA_SENDER_CONTACT_NAME, senderName);
+        intent.putExtra(BluetoothMapClient.EXTRA_MESSAGE_READ_STATUS, isReadOnPhone);
         intent.putExtra(android.content.Intent.EXTRA_TEXT, messageText);
         if (timestamp != null) {
             intent.putExtra(BluetoothMapClient.EXTRA_MESSAGE_TIMESTAMP, timestamp);
@@ -240,9 +256,9 @@ public class MessengerDelegateTest {
     private void createMockMessages() {
         mMessageOneIntent= createMessageIntent(mMockBluetoothDeviceOne, "mockHandle",
                 "510-111-2222", "testSender",
-                "Hello", /* timestamp= */ null);
+                "Hello", /* timestamp= */ null, /* isReadOnPhone */ false);
         mMessageOne = MapMessage.parseFrom(mMessageOneIntent);
         mMessageOneKey = new MessengerDelegate.MessageKey(mMessageOne);
-        mSenderKey = new MessengerDelegate.SenderKey(mMessageOne);
+        mSenderKey = new SenderKey(mMessageOne);
     }
 }
