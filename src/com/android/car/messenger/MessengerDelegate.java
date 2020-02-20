@@ -27,6 +27,7 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import com.android.car.apps.common.LetterTileDrawable;
 import com.android.car.messenger.bluetooth.BluetoothHelper;
 import com.android.car.messenger.bluetooth.BluetoothMonitor;
+import com.android.car.messenger.common.ProjectionStateListener;
 import com.android.car.messenger.log.L;
 import com.android.car.telephony.common.TelecomUtils;
 import com.android.internal.annotations.GuardedBy;
@@ -67,8 +68,14 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     final Map<String, Long> mBTDeviceAddressToConnectionTimestamp = new HashMap<>();
     final Map<SenderKey, Bitmap> mSenderToLargeIconBitmap = new HashMap<>();
 
+    /** Tracks whether a projection application is active in the foreground. **/
+    private ProjectionStateListener mProjectionStateListener;
+
     public MessengerDelegate(Context context) {
         mContext = context;
+
+        mProjectionStateListener = new ProjectionStateListener(context);
+        mProjectionStateListener.start();
 
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -231,6 +238,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         if (mPhoneNumberInfoFuture != null) {
             mPhoneNumberInfoFuture.cancel(true);
         }
+        mProjectionStateListener.stop();
     }
 
     /**
@@ -374,9 +382,15 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             }
         });
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext,
-                MessengerService.SMS_CHANNEL_ID)
-                .setContentTitle(senderName)
+        NotificationCompat.Builder builder;
+        if (mProjectionStateListener.isProjectionInActiveForeground(senderKey.getDeviceAddress())) {
+            builder = new NotificationCompat.Builder(mContext,
+                    MessengerService.SILENT_SMS_CHANNEL_ID);
+        } else {
+            builder = new NotificationCompat.Builder(mContext, MessengerService.SMS_CHANNEL_ID);
+        }
+
+        builder.setContentTitle(senderName)
                 .setContentText(contentText)
                 .setStyle(messagingStyle)
                 .setCategory(Notification.CATEGORY_MESSAGE)
