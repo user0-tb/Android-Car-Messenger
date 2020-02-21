@@ -14,7 +14,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -214,12 +213,17 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         }
     }
 
-    protected void markAsRead(SenderKey senderKey) {
+
+    /**
+     * Excludes messages from a notification so that the messages are not shown to the user once
+     * the notification gets updated with newer messages.
+     */
+    protected void excludeFromNotification(SenderKey senderKey) {
         NotificationInfo info = mNotificationInfos.get(senderKey);
         for (MessageKey key : info.mMessageKeys) {
             MapMessage message = mMessages.get(key);
-            if (!message.isReadOnCar()) {
-                message.markMessageAsRead();
+            if (message.shouldIncludeInNotification()) {
+                message.excludeFromNotification();
                 mSmsDatabaseHandler.addOrUpdate(message);
             }
         }
@@ -243,6 +247,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             if (predicate.test(senderKey)) {
                 mNotificationManager.cancel(notificationInfo.mNotificationId);
             }
+            excludeFromNotification(senderKey);
         });
     }
 
@@ -365,7 +370,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 .setUri(notificationInfo.mSenderContactUri)
                 .build();
         notificationInfo.mMessageKeys.stream().map(mMessages::get).forEachOrdered(message -> {
-            if (!message.isReadOnCar()) {
+            if (message.shouldIncludeInNotification()) {
                 messagingStyle.addMessage(
                         message.getMessageText(),
                         message.getReceiveTime(),

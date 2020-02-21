@@ -34,7 +34,7 @@ class MapMessage {
     private String mMessageText;
     private long mReceiveTime;
     private boolean mIsReadOnPhone;
-    private boolean mIsReadOnCar;
+    private boolean mShouldInclude;
 
     /**
      * Constructs a {@link MapMessage} from {@code intent} that was received from MAP service via
@@ -151,8 +151,13 @@ class MapMessage {
         return mMessageText;
     }
 
-    public void markMessageAsRead() {
-        mIsReadOnCar = true;
+    /**
+     * Sets the message to be excluded from the notification. Messages that have been read aloud on
+     * the car, or that have been dismissed by the user should be excluded from the notification if/
+     * when the notification gets updated. Note: this state will not be propagated to the phone.
+     */
+    public void excludeFromNotification() {
+        mShouldInclude = false;
     }
 
     /**
@@ -163,10 +168,12 @@ class MapMessage {
     }
 
     /**
-     * Returns {@code true} if message was read on the car.
+     * Returns {@code true} if message should be included in the notification. Messages that
+     * have been read aloud on the car, or that have been dismissed by the user should be excluded
+     * from the notification if/when the notification gets updated.
      */
-    public boolean isReadOnCar() {
-        return mIsReadOnCar;
+    public boolean shouldIncludeInNotification() {
+        return mShouldInclude;
     }
 
     @Override
@@ -179,7 +186,7 @@ class MapMessage {
                 ", mSenderName='" + mSenderName + '\'' +
                 ", mReceiveTime=" + mReceiveTime + '\'' +
                 ", mIsReadOnPhone= " + mIsReadOnPhone + '\'' +
-                ", mIsReadOnCar= " + mIsReadOnCar +
+                ", mShouldInclude= " + mShouldInclude +
                 "}";
     }
 }
