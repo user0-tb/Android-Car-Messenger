@@ -243,7 +243,7 @@ public class MessengerService extends Service {
     public void markAsRead(Intent intent) {
         final SenderKey senderKey = intent.getParcelableExtra(EXTRA_SENDER_KEY);
         L.d(TAG, "markAsRead");
-        mMessengerDelegate.markAsRead(senderKey);
+        mMessengerDelegate.excludeFromNotification(senderKey);
     }
 
     /**
