@@ -101,6 +101,7 @@ class MapMessage {
         mSenderName = senderName;
         mReceiveTime = receiveTime;
         mIsReadOnPhone = isRead;
+        mShouldInclude = true;
     }
 
     /**
