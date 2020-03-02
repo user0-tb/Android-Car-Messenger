@@ -372,6 +372,9 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                         message.getMessageText(),
                         message.getReceiveTime(),
                         sender);
+            } else {
+                L.d(TAG, "excluding message received at: " + message.getReceiveTime()
+                        + " from notification.");
             }
         });
 
