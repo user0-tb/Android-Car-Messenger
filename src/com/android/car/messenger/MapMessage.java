@@ -19,6 +19,7 @@ package com.android.car.messenger;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
 import android.content.Intent;
+import com.android.car.messenger.log.L;
 
 import androidx.annotation.Nullable;
 
@@ -26,6 +27,7 @@ import androidx.annotation.Nullable;
  * Represents a message obtained via MAP service from a connected Bluetooth device.
  */
 class MapMessage {
+    private static final String TAG = "CM.MapMessage";
     private String mDeviceAddress;
     private String mHandle;
     private String mSenderName;
@@ -41,11 +43,18 @@ class MapMessage {
      * {@link BluetoothMapClient#ACTION_MESSAGE_RECEIVED} broadcast.
      *
      * @param intent intent received from MAP service
-     * @return message constructed from extras in {@code intent}
+     * @return message constructed from extras in {@code intent}, or null if this is a group
+     *         conversation.
      * @throws NullPointerException if {@code intent} is missing the device extra
      * @throws IllegalArgumentException if {@code intent} is missing any other required extras
      */
+    @Nullable
     public static MapMessage parseFrom(Intent intent) {
+        if (intent.getStringArrayExtra(Intent.EXTRA_CC) != null
+            && intent.getStringArrayExtra(Intent.EXTRA_CC).length > 0) {
+            L.i(TAG, "Skipping group conversation message");
+            return null;
+        }
         BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
         String handle = intent.getStringExtra(BluetoothMapClient.EXTRA_MESSAGE_HANDLE);
         String senderUri = intent.getStringExtra(BluetoothMapClient.EXTRA_SENDER_CONTACT_URI);
