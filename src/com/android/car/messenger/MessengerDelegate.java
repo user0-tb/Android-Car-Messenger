@@ -93,6 +93,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     public void onMessageReceived(Intent intent) {
         try {
             MapMessage message = MapMessage.parseFrom(intent);
+            if (message == null) return;
             L.d(TAG, "Received message from " + message.getDeviceAddress());
 
             MessageKey messageKey = new MessageKey(message);
@@ -371,6 +372,9 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                         message.getMessageText(),
                         message.getReceiveTime(),
                         sender);
+            } else {
+                L.d(TAG, "excluding message received at: " + message.getReceiveTime()
+                        + " from notification.");
             }
         });
 
