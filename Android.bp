@@ -33,6 +33,7 @@ android_app {
 
     static_libs: [
         "car-apps-common",
+        "car-telephony-common",
         "androidx.annotation_annotation",
         "glide-prebuilt",
     ],
