@@ -267,11 +267,11 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 mSmsDatabaseHandler.removeMessagesForDevice(key.getDeviceAddress());
             }
         }
-        mMessages.entrySet().removeIf(
-                messageKeyMapMessageEntry -> predicate.test(messageKeyMapMessageEntry.getKey()));
         clearNotifications(predicate);
         mNotificationInfos.entrySet().removeIf(entry -> predicate.test(entry.getKey()));
         mSenderToLargeIconBitmap.entrySet().removeIf(entry -> predicate.test(entry.getKey()));
+        mMessages.entrySet().removeIf(
+                messageKeyMapMessageEntry -> predicate.test(messageKeyMapMessageEntry.getKey()));
     }
 
     private void updateNotification(MessageKey messageKey, MapMessage mapMessage) {
