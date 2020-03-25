@@ -75,7 +75,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         mContext = context;
 
         mProjectionStateListener = new ProjectionStateListener(context);
-        mProjectionStateListener.start();
 
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -243,7 +242,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         if (mPhoneNumberInfoFuture != null) {
             mPhoneNumberInfoFuture.cancel(true);
         }
-        mProjectionStateListener.stop();
+        mProjectionStateListener.destroy();
     }
 
     /**
