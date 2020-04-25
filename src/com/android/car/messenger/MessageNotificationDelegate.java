@@ -55,11 +55,16 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /** Delegate class responsible for handling messaging service actions */
 public class MessageNotificationDelegate extends BaseNotificationDelegate implements
@@ -69,16 +74,18 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
 
     @GuardedBy("mMapClientLock")
     private BluetoothMapClient mBluetoothMapClient;
-    private static boolean mShouldLoadExistingMessages;
     /** Tracks whether a projection application is active in the foreground. **/
     private ProjectionStateListener mProjectionStateListener;
     private CompletableFuture<Void> mPhoneNumberInfoFuture;
     private static int mBitmapSize;
     private static float mCornerRadiusPercent;
+    private static boolean mShouldLoadExistingMessages;
+    private static int mNotificationConversationTitleLength;
 
     final Map<String, Long> mBtDeviceAddressToConnectionTimestamp = new HashMap<>();
     final Map<SenderKey, Bitmap> mSenderToLargeIconBitmap = new HashMap<>();
     final Map<String, String> mUriToSenderNameMap = new HashMap<>();
+    final Set<ConversationKey> mGeneratedGroupConversationTitles = new HashSet<>();
 
     public MessageNotificationDelegate(Context context) {
         super(context, /* useLetterTile */ true);
@@ -88,6 +95,10 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
 
     /** Loads all necessary values from the config.xml at creation or when values are changed. **/
     protected static void loadConfigValues(Context context) {
+        mBitmapSize = 300;
+        mCornerRadiusPercent = (float) 0.5;
+        mShouldLoadExistingMessages = false;
+        mNotificationConversationTitleLength = 30;
         try {
             mBitmapSize =
                     context.getResources()
@@ -96,19 +107,22 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
                     .getFloat(R.dimen.contact_avatar_corner_radius_percent);
             mShouldLoadExistingMessages =
                     context.getResources().getBoolean(R.bool.config_loadExistingMessages);
+            mNotificationConversationTitleLength = context.getResources().getInteger(
+                    R.integer.notification_conversation_title_length);
         } catch (Resources.NotFoundException e) {
             // Should only happen for robolectric unit tests;
             loge(TAG, "Disabling loading of existing messages: " + e.getMessage());
-            mShouldLoadExistingMessages = false;
         }
     }
 
     @Override
     public void onMessageReceived(Intent intent) {
-        if (!Utils.isGroupConversation(intent)) {
-            addNamesToSenderMap(intent);
-            loadAvatarIconAndProcessMessage(intent);
+        addNamesToSenderMap(intent);
+        if (Utils.isGroupConversation(intent)) {
+            // Group Conversations have URIs of senders whose names we need to load from the DB.
+            loadNamesFromDatabase(intent);
         }
+        loadAvatarIconAndProcessMessage(intent);
     }
 
     @Override
@@ -246,13 +260,14 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
         addMessageToNotificationInfo(message, convoKey);
         ConversationNotificationInfo notificationInfo = mNotificationInfos.get(convoKey);
         // Only show notifications for messages received AFTER phone was connected.
-        if (message.getReceivedTime()
-                < mBtDeviceAddressToConnectionTimestamp.get(convoKey.getDeviceId())) {
-            return;
-        }
         mPhoneNumberInfoFuture.thenRun(() -> {
-            postNotification(convoKey, notificationInfo, getChannelId(convoKey.getDeviceId()),
-                    mSenderToLargeIconBitmap.get(message.getSenderKey()));
+            setGroupConversationTitle(convoKey);
+            // Only show notifications for messages received AFTER phone was connected.
+            if (message.getReceivedTime()
+                    >= mBtDeviceAddressToConnectionTimestamp.get(convoKey.getDeviceId())) {
+                postNotification(convoKey, notificationInfo, getChannelId(convoKey.getDeviceId()),
+                        mSenderToLargeIconBitmap.get(message.getSenderKey()));
+            }
         });
     }
 
@@ -348,6 +363,69 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
         if (senderUri != null) {
             mUriToSenderNameMap.put(senderUri, senderName);
         }
+    }
+
+    /**
+     * Loads the name of a sender based on the sender's contact URI.
+     *
+     * This is needed to load the participants' names of a group conversation since
+     * {@link BluetoothMapClient} only sends the URIs of these participants.
+     */
+    private void loadNamesFromDatabase(Intent intent) {
+        for (String uri : Utils.getInclusiveRecipientsUrisList(intent)) {
+            String phoneNumber = Utils.getPhoneNumberFromMapClient(uri);
+            if (phoneNumber != null && !mUriToSenderNameMap.containsKey(uri)) {
+                loadPhoneNumberInfo(phoneNumber, (phoneNumberInfo) -> {
+                    mUriToSenderNameMap.put(uri, phoneNumberInfo.getDisplayName());
+                });
+            }
+        }
+    }
+
+    /**
+     * Sets the group conversation title using the names of all the participants in the group.
+     * If all the participants' names have been loaded from the database, then we don't need
+     * to generate the title again.
+     *
+     * A group conversation's title should be an alphabetically sorted list of the participant's
+     * names, separated by commas.
+     */
+    private void setGroupConversationTitle(ConversationKey conversationKey) {
+        ConversationNotificationInfo notificationInfo = mNotificationInfos.get(conversationKey);
+        if (!notificationInfo.isGroupConvo()
+                || mGeneratedGroupConversationTitles.contains(conversationKey)) {
+            return;
+        }
+
+        List<String> names = new ArrayList<>();
+
+        boolean allNamesLoaded = true;
+        for (String uri : notificationInfo.getCcRecipientsUris()) {
+            if (mUriToSenderNameMap.containsKey(uri)) {
+                names.add(mUriToSenderNameMap.get(uri));
+            } else {
+                names.add(Utils.getPhoneNumberFromMapClient(uri));
+                // This URI has not been loaded from the database, set allNamesLoaded to false.
+                allNamesLoaded = false;
+            }
+        }
+
+        notificationInfo.setConvoTitle(constructGroupConversationTitle(names));
+        if (allNamesLoaded) mGeneratedGroupConversationTitles.add(conversationKey);
+    }
+
+    /**
+     * Given a name of all the participants in a group conversation (some names might be phone
+     * numbers), this function creates the conversation title putting the names in alphabetical
+     * order first, then adding any phone numbers. This title should not exceed the
+     * mNotificationConversationTitleLength, so not all participants' names are guaranteed to be
+     * in the conversation title.
+     */
+    private String constructGroupConversationTitle(List<String> names) {
+        Collections.sort(names, Utils.ALPHA_THEN_NUMERIC_COMPARATOR);
+
+        return names.stream().map(String::valueOf).collect(
+                Collectors.joining(mContext.getString(R.string.name_separator)));
     }
 
     private void loadPhoneNumberInfo(@Nullable String phoneNumber,
