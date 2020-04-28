@@ -18,7 +18,4 @@
     <!-- Whether existing messages should be loaded. Recommended to turn off if head-unit's and
      BT-paired phone's clocks are not synced.-->
     <bool name="config_loadExistingMessages">false</bool>
-    <!-- Whether app should attempt to reconnect to Bluetooth MAP profile, once MAP is
-    disconnected. -->
-    <bool name="config_reconnectToMap">true</bool>
 </resources>

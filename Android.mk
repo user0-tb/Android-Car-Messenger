@@ -38,12 +38,17 @@ LOCAL_PRIVILEGED_MODULE := true
 
 LOCAL_USE_AAPT2 := true
 
+LOCAL_JAVA_LIBRARIES := android.car
+
 LOCAL_STATIC_ANDROID_LIBRARIES += \
     car-apps-common \
+    car-messenger-common \
+    car-telephony-common \
 
 # Including the resources for the static android libraries allows to pick up their static overlays.
 LOCAL_RESOURCE_DIR += \
-    $(LOCAL_PATH)/../libs/car-apps-common/res
+    $(LOCAL_PATH)/../libs/car-apps-common/res \
+    $(LOCAL_PATH)/../libs/car-telephony-common/res \
 
 LOCAL_STATIC_JAVA_LIBRARIES += \
     androidx.annotation_annotation \

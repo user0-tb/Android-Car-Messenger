@@ -7,20 +7,14 @@ import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
-import android.bluetooth.BluetoothProfile;
-import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.app.NotificationCompat;
@@ -28,23 +22,25 @@ import androidx.core.app.NotificationCompat.Action;
 import androidx.core.app.NotificationCompat.MessagingStyle;
 import androidx.core.app.Person;
 import androidx.core.app.RemoteInput;
-
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import com.android.car.apps.common.LetterTileDrawable;
 import com.android.car.messenger.bluetooth.BluetoothHelper;
 import com.android.car.messenger.bluetooth.BluetoothMonitor;
+import com.android.car.messenger.common.ProjectionStateListener;
 import com.android.car.messenger.log.L;
+import com.android.car.telephony.common.TelecomUtils;
 import com.android.internal.annotations.GuardedBy;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
 /** Delegate class responsible for handling messaging service actions */
@@ -55,9 +51,12 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     private final Context mContext;
     @GuardedBy("mMapClientLock")
     private BluetoothMapClient mBluetoothMapClient;
-    private NotificationManager mNotificationManager;
+    private final NotificationManager mNotificationManager;
     private final SmsDatabaseHandler mSmsDatabaseHandler;
+    private final int mBitmapSize;
+    private final float mCornerRadiusPercent;
     private boolean mShouldLoadExistingMessages;
+    private CompletableFuture<Void> mPhoneNumberInfoFuture;
 
     @VisibleForTesting
     final Map<MessageKey, MapMessage> mMessages = new HashMap<>();
@@ -67,14 +66,26 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     // Notifications for messages received before this time.
     @VisibleForTesting
     final Map<String, Long> mBTDeviceAddressToConnectionTimestamp = new HashMap<>();
+    final Map<SenderKey, Bitmap> mSenderToLargeIconBitmap = new HashMap<>();
+
+    /** Tracks whether a projection application is active in the foreground. **/
+    private ProjectionStateListener mProjectionStateListener;
 
     public MessengerDelegate(Context context) {
         mContext = context;
+
+        mProjectionStateListener = new ProjectionStateListener(context);
+        mProjectionStateListener.start();
 
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mSmsDatabaseHandler = new SmsDatabaseHandler(mContext);
 
+        mBitmapSize =
+            mContext.getResources()
+                .getDimensionPixelSize(R.dimen.notification_contact_photo_size);
+        mCornerRadiusPercent = mContext.getResources()
+            .getFloat(R.dimen.contact_avatar_corner_radius_percent);
         try {
             mShouldLoadExistingMessages =
                     mContext.getResources().getBoolean(R.bool.config_loadExistingMessages);
@@ -89,6 +100,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     public void onMessageReceived(Intent intent) {
         try {
             MapMessage message = MapMessage.parseFrom(intent);
+            if (message == null) return;
+            L.d(TAG, "Received message from " + message.getDeviceAddress());
 
             MessageKey messageKey = new MessageKey(message);
             boolean repeatMessage = mMessages.containsKey(messageKey);
@@ -134,14 +147,11 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
 
     @Override
     public void onMapConnected(BluetoothMapClient client) {
+        L.d(TAG, "Connected to BluetoothMapClient");
         List<BluetoothDevice> connectedDevices;
         synchronized (mMapClientLock) {
             if (mBluetoothMapClient == client) {
                 return;
-            }
-
-            if (mBluetoothMapClient != null) {
-                mBluetoothMapClient.close();
             }
 
             mBluetoothMapClient = client;
@@ -155,13 +165,10 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     }
 
     @Override
-    public void onMapDisconnected(int profile) {
+    public void onMapDisconnected() {
+        L.d(TAG, "Disconnected from BluetoothMapClient");
         cleanupMessagesAndNotifications(key -> true);
         synchronized (mMapClientLock) {
-            BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-            if (adapter != null) {
-                adapter.closeProfileProxy(BluetoothProfile.MAP_CLIENT, mBluetoothMapClient);
-            }
             mBluetoothMapClient = null;
         }
     }
@@ -210,15 +217,29 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         }
     }
 
-    protected void markAsRead(SenderKey senderKey) {
+
+    /**
+     * Excludes messages from a notification so that the messages are not shown to the user once
+     * the notification gets updated with newer messages.
+     */
+    protected void excludeFromNotification(SenderKey senderKey) {
         NotificationInfo info = mNotificationInfos.get(senderKey);
         for (MessageKey key : info.mMessageKeys) {
             MapMessage message = mMessages.get(key);
-            if (!message.isReadOnCar()) {
-                message.markMessageAsRead();
+            if (message.shouldIncludeInNotification()) {
+                message.excludeFromNotification();
                 mSmsDatabaseHandler.addOrUpdate(message);
             }
         }
+    }
+
+    protected void onDestroy() {
+        cleanupMessagesAndNotifications(key -> true);
+
+        if (mPhoneNumberInfoFuture != null) {
+            mPhoneNumberInfoFuture.cancel(true);
+        }
+        mProjectionStateListener.stop();
     }
 
     /**
@@ -231,6 +252,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             if (predicate.test(senderKey)) {
                 mNotificationManager.cancel(notificationInfo.mNotificationId);
             }
+            excludeFromNotification(senderKey);
         });
     }
 
@@ -241,10 +263,11 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 mSmsDatabaseHandler.removeMessagesForDevice(key.getDeviceAddress());
             }
         }
-        mMessages.entrySet().removeIf(
-                messageKeyMapMessageEntry -> predicate.test(messageKeyMapMessageEntry.getKey()));
         clearNotifications(predicate);
         mNotificationInfos.entrySet().removeIf(entry -> predicate.test(entry.getKey()));
+        mSenderToLargeIconBitmap.entrySet().removeIf(entry -> predicate.test(entry.getKey()));
+        mMessages.entrySet().removeIf(
+                messageKeyMapMessageEntry -> predicate.test(messageKeyMapMessageEntry.getKey()));
     }
 
     private void updateNotification(MessageKey messageKey, MapMessage mapMessage) {
@@ -263,77 +286,75 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         NotificationInfo notificationInfo = mNotificationInfos.get(senderKey);
         notificationInfo.mMessageKeys.add(messageKey);
 
-        updateNotification(senderKey, notificationInfo);
+        updateNotificationWithIcon(senderKey, notificationInfo);
     }
 
-    private void updateNotification(SenderKey senderKey, NotificationInfo notificationInfo) {
-        final Uri photoUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI,
-                getContactId(mContext.getContentResolver(), notificationInfo.mSenderContactUri));
+    private void updateNotificationWithIcon(SenderKey senderKey,
+        NotificationInfo notificationInfo) {
+        String phoneNumber = getPhoneNumber(notificationInfo.mSenderContactUri);
+        if (mSenderToLargeIconBitmap.get(senderKey) != null || phoneNumber == null) {
+            postNotification(senderKey, notificationInfo);
+        }
 
-        Glide.with(mContext)
-                .asBitmap()
-                .load(photoUri)
-                .apply(RequestOptions.circleCropTransform())
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap bitmap,
+        if (mPhoneNumberInfoFuture != null) {
+            mPhoneNumberInfoFuture.cancel(/* mayInterruptRunning= */ true);
+        }
+
+        LetterTileDrawable errorDrawable = TelecomUtils.createLetterTile(mContext,
+            notificationInfo.mSenderName, notificationInfo.mSenderName);
+
+        mPhoneNumberInfoFuture = TelecomUtils.getPhoneNumberInfo(mContext, phoneNumber)
+            .thenAcceptAsync(phoneNumberInfo -> {
+                if (phoneNumberInfo == null) {
+                    postNotification(senderKey, notificationInfo);
+                }
+                Glide.with(mContext)
+                    .asBitmap()
+                    .load(phoneNumberInfo.getAvatarUri())
+                    .apply(new RequestOptions().override(mBitmapSize).error(errorDrawable))
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(Bitmap bitmap,
                             Transition<? super Bitmap> transition) {
-                        sendNotification(bitmap);
-                    }
+                            RoundedBitmapDrawable roundedBitmapDrawable =
+                                RoundedBitmapDrawableFactory
+                                    .create(mContext.getResources(), bitmap);
+                            Icon avatarIcon = TelecomUtils
+                                .createFromRoundedBitmapDrawable(roundedBitmapDrawable, mBitmapSize,
+                                    mCornerRadiusPercent);
+                            mSenderToLargeIconBitmap.put(senderKey, avatarIcon.getBitmap());
+                            postNotification(senderKey, notificationInfo);
+                        }
 
-                    @Override
-                    public void onLoadFailed(@Nullable Drawable fallback) {
-                        sendNotification(null);
-                    }
+                        @Override
+                        public void onLoadFailed(@Nullable Drawable fallback) {
+                            postNotification(senderKey, notificationInfo);
+                        }
 
-                    private void sendNotification(Bitmap bitmap) {
-                        mNotificationManager.notify(
-                                notificationInfo.mNotificationId,
-                                createNotification(senderKey, notificationInfo, bitmap));
-                    }
-                });
+                    });
+            }, mContext.getMainExecutor());
     }
 
-    // TODO: move out to a shared library.
-    protected static int getContactId(ContentResolver cr, String contactUri) {
-        if (TextUtils.isEmpty(contactUri)) {
-            return 0;
-        }
-
-        Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
-                Uri.encode(contactUri));
-        String[] projection = new String[]{ContactsContract.PhoneLookup._ID};
-
-        try (Cursor cursor = cr.query(lookupUri, projection, null, null, null)) {
-            if (cursor != null && cursor.moveToFirst() && cursor.isLast()) {
-                return cursor.getInt(cursor.getColumnIndex(ContactsContract.PhoneLookup._ID));
-            } else {
-                L.w(TAG, "Unable to find contact id from phone number.");
-            }
-        }
-
-        return 0;
-    }
-
-    protected void cleanup() {
-        cleanupMessagesAndNotifications(key -> true);
-        synchronized (mMapClientLock) {
-            if (mBluetoothMapClient != null) {
-                mBluetoothMapClient.close();
-            }
-        }
+    private void postNotification(SenderKey senderKey, NotificationInfo notificationInfo) {
+        mNotificationManager.notify(
+            notificationInfo.mNotificationId,
+            createNotification(senderKey, notificationInfo));
     }
 
     private Notification createNotification(
-            SenderKey senderKey, NotificationInfo notificationInfo, Bitmap bitmap) {
+        SenderKey senderKey, NotificationInfo notificationInfo) {
         String contentText = mContext.getResources().getQuantityString(
                 R.plurals.notification_new_message, notificationInfo.mMessageKeys.size(),
                 notificationInfo.mMessageKeys.size());
         long lastReceiveTime = mMessages.get(notificationInfo.mMessageKeys.getLast())
                 .getReceiveTime();
 
-        if (bitmap == null) {
-            bitmap = letterTileBitmap(notificationInfo.mSenderName);
+        Bitmap largeIcon = mSenderToLargeIconBitmap.get(senderKey);
+        if (largeIcon == null) {
+            largeIcon =
+                TelecomUtils.createLetterTile(mContext,
+                    TelecomUtils.getInitials(notificationInfo.mSenderName, ""),
+                    notificationInfo.mSenderName, mBitmapSize, mCornerRadiusPercent).getBitmap();
         }
 
         final String senderName = notificationInfo.mSenderName;
@@ -354,21 +375,30 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 .setUri(notificationInfo.mSenderContactUri)
                 .build();
         notificationInfo.mMessageKeys.stream().map(mMessages::get).forEachOrdered(message -> {
-            if (!message.isReadOnCar()) {
+            if (message.shouldIncludeInNotification()) {
                 messagingStyle.addMessage(
                         message.getMessageText(),
                         message.getReceiveTime(),
                         sender);
+            } else {
+                L.d(TAG, "excluding message received at: " + message.getReceiveTime()
+                        + " from notification.");
             }
         });
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext,
-                MessengerService.SMS_CHANNEL_ID)
-                .setContentTitle(senderName)
+        NotificationCompat.Builder builder;
+        if (mProjectionStateListener.isProjectionInActiveForeground(senderKey.getDeviceAddress())) {
+            builder = new NotificationCompat.Builder(mContext,
+                    MessengerService.SILENT_SMS_CHANNEL_ID);
+        } else {
+            builder = new NotificationCompat.Builder(mContext, MessengerService.SMS_CHANNEL_ID);
+        }
+
+        builder.setContentTitle(senderName)
                 .setContentText(contentText)
                 .setStyle(messagingStyle)
                 .setCategory(Notification.CATEGORY_MESSAGE)
-                .setLargeIcon(bitmap)
+                .setLargeIcon(largeIcon)
                 .setSmallIcon(R.drawable.ic_message)
                 .setWhen(lastReceiveTime)
                 .setShowWhen(true)
@@ -379,17 +409,6 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         }
 
         return builder.build();
-    }
-
-    private Bitmap letterTileBitmap(String senderName) {
-        LetterTileDrawable letterTileDrawable = new LetterTileDrawable(mContext.getResources());
-        letterTileDrawable.setContactDetails(senderName, senderName);
-        letterTileDrawable.setIsCircular(true);
-
-        int bitmapSize = mContext.getResources()
-                .getDimensionPixelSize(R.dimen.notification_contact_photo_size);
-
-        return letterTileDrawable.toBitmap(bitmapSize);
     }
 
     private PendingIntent createServiceIntent(SenderKey senderKey, int notificationId,
@@ -409,7 +428,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         final List<Action> actionList = new ArrayList<>();
 
         // Reply action
-        if (shouldAddReplyAction(senderKey.getDeviceAddress())) {
+        if (shouldAddReplyAction(senderKey)) {
             final String replyString = mContext.getString(R.string.action_reply);
             PendingIntent replyIntent = createServiceIntent(senderKey, notificationId,
                     MessengerService.ACTION_VOICE_REPLY);
@@ -423,6 +442,8 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                             )
                             .build()
             );
+        } else {
+            L.d(TAG, "Not adding Reply action for " + senderKey.getDeviceAddress());
         }
 
         // Mark-as-read Action. This will be the callback of Notification Center's "Read" action.
@@ -439,17 +460,33 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         return actionList;
     }
 
-    private boolean shouldAddReplyAction(String deviceAddress) {
+    private boolean shouldAddReplyAction(SenderKey senderKey) {
+        if (mNotificationInfos.get(senderKey).mSenderContactUri == null) {
+            return false;
+        }
+
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter == null) {
             return false;
         }
-        BluetoothDevice device = adapter.getRemoteDevice(deviceAddress);
+        BluetoothDevice device = adapter.getRemoteDevice(senderKey.getDeviceAddress());
 
         synchronized (mMapClientLock) {
             return (mBluetoothMapClient != null) && mBluetoothMapClient.isUploadingSupported(
                     device);
         }
+    }
+
+    /**
+     * Extracts the phone number from the {@link BluetoothMapClient} formatted URI.
+     **/
+    @Nullable
+    private String getPhoneNumber(String senderContactUri) {
+        if (senderContactUri == null || !senderContactUri.matches("tel:(.+)")) {
+            return null;
+        }
+
+        return senderContactUri.substring(4);
     }
 
     /**

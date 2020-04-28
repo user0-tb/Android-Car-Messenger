@@ -1,8 +1,6 @@
 package com.android.car.messenger;
 
 
-import static com.android.car.messenger.MessengerDelegate.getContactId;
-
 import android.Manifest;
 import android.app.AppOpsManager;
 import android.content.ContentResolver;
@@ -13,7 +11,9 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.provider.ContactsContract;
 import android.provider.Telephony;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.core.content.ContextCompat;
@@ -168,7 +168,8 @@ class SmsDatabaseHandler {
         newMessage.put(Telephony.Sms.PERSON,
                 getContactId(mContentResolver,
                         message.getSenderContactUri()));
-        newMessage.put(Telephony.Sms.READ, (message.isReadOnPhone() || message.isReadOnCar()));
+        newMessage.put(Telephony.Sms.READ, (message.isReadOnPhone()
+                || !message.shouldIncludeInNotification()));
         return newMessage;
     }
 
@@ -193,5 +194,26 @@ class SmsDatabaseHandler {
         }
 
         return granted;
+    }
+
+    // TODO: move out to a shared library.
+    private static int getContactId(ContentResolver cr, String contactUri) {
+        if (TextUtils.isEmpty(contactUri)) {
+            return 0;
+        }
+
+        Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+            Uri.encode(contactUri));
+        String[] projection = new String[]{ContactsContract.PhoneLookup._ID};
+
+        try (Cursor cursor = cr.query(lookupUri, projection, null, null, null)) {
+            if (cursor != null && cursor.moveToFirst() && cursor.isLast()) {
+                return cursor.getInt(cursor.getColumnIndex(ContactsContract.PhoneLookup._ID));
+            } else {
+                L.w(TAG, "Unable to find contact id from phone number.");
+            }
+        }
+
+        return 0;
     }
 }
