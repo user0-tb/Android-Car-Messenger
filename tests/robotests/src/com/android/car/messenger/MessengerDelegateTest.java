@@ -43,12 +43,9 @@ public class MessengerDelegateTest {
     AppOpsManager mMockAppOpsManager;
 
     private Context mContext = RuntimeEnvironment.application;
-    private MessengerDelegate mMessengerDelegate;
+    private MessageNotificationDelegate mMessengerDelegate;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private Intent mMessageOneIntent;
-    private MapMessage mMessageOne;
-    private MessengerDelegate.MessageKey mMessageOneKey;
-    private SenderKey mSenderKey;
 
     @Before
     public void setUp() {
@@ -65,23 +62,23 @@ public class MessengerDelegateTest {
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
 
         createMockMessages();
-        mMessengerDelegate = new MessengerDelegate(mContext);
+        mMessengerDelegate = new MessageNotificationDelegate(mContext);
         mMessengerDelegate.onDeviceConnected(mMockBluetoothDeviceOne);
     }
 
     @Test
     public void testDeviceConnections() {
-        assertThat(mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp).containsKey(
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).containsKey(
                 BLUETOOTH_ADDRESS_ONE);
-        assertThat(mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp).hasSize(1);
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).hasSize(1);
 
         mMessengerDelegate.onDeviceConnected(mMockBluetoothDeviceTwo);
-        assertThat(mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp).containsKey(
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).containsKey(
                 BLUETOOTH_ADDRESS_TWO);
-        assertThat(mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp).hasSize(2);
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).hasSize(2);
 
         mMessengerDelegate.onDeviceConnected(mMockBluetoothDeviceOne);
-        assertThat(mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp).hasSize(2);
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).hasSize(2);
     }
 
     @Test
@@ -90,7 +87,7 @@ public class MessengerDelegateTest {
         mMessengerDelegate.onDeviceConnected(mMockBluetoothDeviceTwo);
 
         long deviceConnectionTimestamp =
-                mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp.get(BLUETOOTH_ADDRESS_TWO);
+                mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp.get(BLUETOOTH_ADDRESS_TWO);
 
         // Sometimes there is slight flakiness in the timestamps.
         assertThat(deviceConnectionTimestamp-timestamp).isLessThan(5L);
@@ -100,9 +97,9 @@ public class MessengerDelegateTest {
     public void testOnDeviceDisconnected_notConnectedDevice() {
         mMessengerDelegate.onDeviceDisconnected(mMockBluetoothDeviceTwo);
 
-        assertThat(mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp).containsKey(
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).containsKey(
                 BLUETOOTH_ADDRESS_ONE);
-        assertThat(mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp).hasSize(1);
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).hasSize(1);
     }
 
     @Test
@@ -111,9 +108,9 @@ public class MessengerDelegateTest {
 
         mMessengerDelegate.onDeviceDisconnected(mMockBluetoothDeviceOne);
 
-        assertThat(mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp).containsKey(
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).containsKey(
                 BLUETOOTH_ADDRESS_TWO);
-        assertThat(mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp).hasSize(1);
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).hasSize(1);
     }
 
     @Test
@@ -122,8 +119,10 @@ public class MessengerDelegateTest {
         mMessengerDelegate.onMessageReceived(mMessageOneIntent);
         mMessengerDelegate.onDeviceDisconnected(mMockBluetoothDeviceOne);
 
-        assertThat(mMessengerDelegate.mMessages).isEmpty();
-        assertThat(mMessengerDelegate.mNotificationInfos).isEmpty();
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).isEmpty();
+        assertThat(mMessengerDelegate.mGeneratedGroupConversationTitles).isEmpty();
+        assertThat(mMessengerDelegate.mSenderToLargeIconBitmap).isEmpty();
+        assertThat(mMessengerDelegate.mUriToSenderNameMap).isEmpty();
     }
 
     @Test
@@ -132,98 +131,17 @@ public class MessengerDelegateTest {
         mMessengerDelegate.onMessageReceived(mMessageOneIntent);
         mMessengerDelegate.onDeviceDisconnected(mMockBluetoothDeviceTwo);
 
-        assertThat(mMessengerDelegate.mMessages).hasSize(1);
-        assertThat(mMessengerDelegate.mNotificationInfos).hasSize(1);
-    }
-
-    @Test
-    public void testOnDeviceDisconnected_connectedDevice_retainsMessagesFromConnectedDevice() {
-        mMessengerDelegate.onDeviceConnected(mMockBluetoothDeviceTwo);
-
-        mMessengerDelegate.onMessageReceived(mMessageOneIntent);
-        mMessengerDelegate.onDeviceDisconnected(mMockBluetoothDeviceTwo);
-
-        assertThat(mMessengerDelegate.mMessages).containsKey(mMessageOneKey);
-        assertThat(mMessengerDelegate.mNotificationInfos).hasSize(1);
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).hasSize(1);
+        assertThat(mMessengerDelegate.mUriToSenderNameMap).hasSize(1);
     }
 
     @Test
     public void testConnectedDevices_areNotAddedFromBTAdapterBondedDevices() {
         mShadowBluetoothAdapter.setBondedDevices(
                 new HashSet<>(Arrays.asList(mMockBluetoothDeviceTwo)));
-        mMessengerDelegate = new MessengerDelegate(mContext);
+        mMessengerDelegate = new MessageNotificationDelegate(mContext);
 
-        assertThat(mMessengerDelegate.mBTDeviceAddressToConnectionTimestamp).isEmpty();
-    }
-
-    @Test
-    public void testOnMessageReceived_newMessage() {
-        mMessengerDelegate.onMessageReceived(mMessageOneIntent);
-
-        assertThat(mapMessageEquals(mMessageOne,
-                mMessengerDelegate.mMessages.get(mMessageOneKey))).isTrue();
-        assertThat(mMessengerDelegate.mNotificationInfos.containsKey(mSenderKey)).isTrue();
-    }
-
-    @Test
-    public void testOnMessageReceived_duplicateMessage() {
-        mMessengerDelegate.onMessageReceived(mMessageOneIntent);
-        mMessengerDelegate.onMessageReceived(mMessageOneIntent);
-        MessengerDelegate.NotificationInfo info = mMessengerDelegate.mNotificationInfos.get(
-                mSenderKey);
-        assertThat(info.mMessageKeys).hasSize(1);
-    }
-
-    @Test
-    public void testClearNotification_keepsNotificationData() {
-        mMessengerDelegate.onMessageReceived(mMessageOneIntent);
-        mMessengerDelegate.clearNotifications(key -> key.equals(mSenderKey));
-        MessengerDelegate.NotificationInfo info = mMessengerDelegate.mNotificationInfos.get(
-                mSenderKey);
-        assertThat(info.mMessageKeys).hasSize(1);
-
-        assertThat(mMessengerDelegate.mMessages.containsKey(mMessageOneKey)).isTrue();
-    }
-
-    @Test
-    public void testHandleMarkAsRead() {
-        mMessengerDelegate.onMessageReceived(mMessageOneIntent);
-
-        mMessengerDelegate.excludeFromNotification(mSenderKey);
-
-        MessengerDelegate.NotificationInfo info = mMessengerDelegate.mNotificationInfos.get(
-                mSenderKey);
-        MessengerDelegate.MessageKey key = info.mMessageKeys.get(0);
-        assertThat(mMessengerDelegate.mMessages.get(key).shouldIncludeInNotification()).isFalse();
-    }
-
-    @Test
-    public void testMessageReadOnPhone() {
-        Intent readMessageIntent = createMessageIntent(mMockBluetoothDeviceOne, "mockHandle",
-                "510-111-2222", "testSender",
-                "Hello", /* timestamp= */ System.currentTimeMillis() + 10000L,
-                /* isReadOnPhone */ true);
-        mMessengerDelegate.onMessageReceived(readMessageIntent);
-
-        MessengerDelegate.NotificationInfo info = mMessengerDelegate.mNotificationInfos.get(
-                mSenderKey);
-        MessengerDelegate.MessageKey key = info.mMessageKeys.get(0);
-        assertThat(mMessengerDelegate.mMessages.get(key).shouldIncludeInNotification()).isTrue();
-        assertThat(mMessengerDelegate.mMessages.get(key).isReadOnPhone()).isTrue();
-    }
-
-    @Test
-    public void testNotificationsNotShownForExistingMessages() {
-        Intent existingMessageIntent = createMessageIntent(mMockBluetoothDeviceTwo, "mockHandle",
-                "510-111-2222", "testSender",
-                "Hello", /* timestamp= */ System.currentTimeMillis() - 10000L,
-                /* isReadOnPhone */ false);
-        mMessengerDelegate.onDeviceConnected(mMockBluetoothDeviceTwo);
-
-        mMessengerDelegate.onMessageReceived(existingMessageIntent);
-
-        assertThat(mMessengerDelegate.mNotificationInfos).isEmpty();
-
+        assertThat(mMessengerDelegate.mBtDeviceAddressToConnectionTimestamp).isEmpty();
     }
 
     private Intent createMessageIntent(BluetoothDevice device, String handle, String senderUri,
@@ -242,23 +160,9 @@ public class MessengerDelegateTest {
         return intent;
     }
 
-    /**
-     * Checks to see if all properties, besides the timestamp, of two {@link MapMessage}s are equal.
-     **/
-    private boolean mapMessageEquals(MapMessage expected, MapMessage observed) {
-        return expected.getDeviceAddress().equals(observed.getDeviceAddress())
-                && expected.getHandle().equals(observed.getHandle())
-                && expected.getSenderName().equals(observed.getSenderName())
-                && expected.getSenderContactUri().equals(observed.getSenderContactUri())
-                && expected.getMessageText().equals(observed.getMessageText());
-    }
-
     private void createMockMessages() {
         mMessageOneIntent= createMessageIntent(mMockBluetoothDeviceOne, "mockHandle",
                 "510-111-2222", "testSender",
                 "Hello", /* timestamp= */ null, /* isReadOnPhone */ false);
-        mMessageOne = MapMessage.parseFrom(mMessageOneIntent);
-        mMessageOneKey = new MessengerDelegate.MessageKey(mMessageOne);
-        mSenderKey = new SenderKey(mMessageOne);
     }
 }
