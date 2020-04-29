@@ -18,6 +18,7 @@ import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
+import com.android.car.messenger.common.Message;
 import com.android.car.messenger.log.L;
 
 import java.text.SimpleDateFormat;
@@ -47,25 +48,25 @@ class SmsDatabaseHandler {
         readDatabase(context);
     }
 
-    protected void addOrUpdate(MapMessage message) {
+    protected void addOrUpdate(String deviceAddress, Message message) {
         if (!mCanWriteToDatabase) {
             return;
         }
 
-        int messageIndex = findMessageIndex(message);
+        int messageIndex = findMessageIndex(deviceAddress, message);
         switch(messageIndex) {
             case DUPLICATE_MESSAGES_FOUND:
-                removePreviousAndInsert(message);
+                removePreviousAndInsert(deviceAddress, message);
                 L.d(TAG, "Message has more than one duplicate in Telephony Database: %s",
                         message.toString());
                 return;
             case MESSAGE_NOT_FOUND:
-                mContentResolver.insert(SMS_URI, buildMessageContentValues(message));
+                mContentResolver.insert(SMS_URI, buildMessageContentValues(deviceAddress, message));
                 return;
             case DATABASE_ERROR:
                 return;
             default:
-                update(messageIndex, buildMessageContentValues(message));
+                update(messageIndex, buildMessageContentValues(deviceAddress, message));
         }
     }
 
@@ -116,15 +117,15 @@ class SmsDatabaseHandler {
     }
 
     /** Removes multiple previous copies, and inserts the new message. **/
-    private void removePreviousAndInsert(MapMessage message) {
-        String[] smsSelectionArgs = createSmsSelectionArgs(message);
+    private void removePreviousAndInsert(String deviceAddress, Message message) {
+        String[] smsSelectionArgs = createSmsSelectionArgs(deviceAddress, message);
 
         mContentResolver.delete(SMS_URI, SMS_SELECTION, smsSelectionArgs);
-        mContentResolver.insert(SMS_URI, buildMessageContentValues(message));
+        mContentResolver.insert(SMS_URI, buildMessageContentValues(deviceAddress, message));
     }
 
-    private int findMessageIndex(MapMessage message) {
-        String[] smsSelectionArgs = createSmsSelectionArgs(message);
+    private int findMessageIndex(String deviceAddress, Message message) {
+        String[] smsSelectionArgs = createSmsSelectionArgs(deviceAddress, message);
 
         String[] projection = {BaseColumns._ID};
         Cursor cursor = mContentResolver.query(SMS_URI, projection, SMS_SELECTION,
@@ -159,25 +160,25 @@ class SmsDatabaseHandler {
     }
 
     /** Create the ContentValues object using message info, following SMS columns **/
-    private ContentValues buildMessageContentValues(MapMessage message) {
+    private ContentValues buildMessageContentValues(String deviceAddress, Message message) {
         ContentValues newMessage = new ContentValues();
         newMessage.put(Telephony.Sms.BODY, DatabaseUtils.sqlEscapeString(message.getMessageText()));
-        newMessage.put(Telephony.Sms.DATE, message.getReceiveTime());
-        newMessage.put(Telephony.Sms.ADDRESS, message.getDeviceAddress());
+        newMessage.put(Telephony.Sms.DATE, message.getReceivedTime());
+        newMessage.put(Telephony.Sms.ADDRESS, deviceAddress);
         // TODO: if contactId is null, add it.
         newMessage.put(Telephony.Sms.PERSON,
                 getContactId(mContentResolver,
                         message.getSenderContactUri()));
         newMessage.put(Telephony.Sms.READ, (message.isReadOnPhone()
-                || !message.shouldIncludeInNotification()));
+                || message.shouldExcludeFromNotification()));
         return newMessage;
     }
 
-    private String[] createSmsSelectionArgs(MapMessage message) {
+    private String[] createSmsSelectionArgs(String deviceAddress, Message message) {
         String sqlFriendlyMessageText = DatabaseUtils.sqlEscapeString(message.getMessageText());
-        String[] smsSelectionArgs = {message.getDeviceAddress(), sqlFriendlyMessageText,
-                Long.toString(message.getReceiveTime() - 5000), Long.toString(
-                message.getReceiveTime() + 5000)};
+        String[] smsSelectionArgs = {deviceAddress, sqlFriendlyMessageText,
+                Long.toString(message.getReceivedTime() - 5000), Long.toString(
+                message.getReceivedTime() + 5000)};
         return smsSelectionArgs;
     }
 
@@ -203,7 +204,7 @@ class SmsDatabaseHandler {
         }
 
         Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
-            Uri.encode(contactUri));
+                Uri.encode(contactUri));
         String[] projection = new String[]{ContactsContract.PhoneLookup._ID};
 
         try (Cursor cursor = cr.query(lookupUri, projection, null, null, null)) {
