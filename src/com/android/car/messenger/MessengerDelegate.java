@@ -14,7 +14,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -28,6 +27,7 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import com.android.car.apps.common.LetterTileDrawable;
 import com.android.car.messenger.bluetooth.BluetoothHelper;
 import com.android.car.messenger.bluetooth.BluetoothMonitor;
+import com.android.car.messenger.common.ProjectionStateListener;
 import com.android.car.messenger.log.L;
 import com.android.car.telephony.common.TelecomUtils;
 import com.android.internal.annotations.GuardedBy;
@@ -68,8 +68,14 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     final Map<String, Long> mBTDeviceAddressToConnectionTimestamp = new HashMap<>();
     final Map<SenderKey, Bitmap> mSenderToLargeIconBitmap = new HashMap<>();
 
+    /** Tracks whether a projection application is active in the foreground. **/
+    private ProjectionStateListener mProjectionStateListener;
+
     public MessengerDelegate(Context context) {
         mContext = context;
+
+        mProjectionStateListener = new ProjectionStateListener(context);
+        mProjectionStateListener.start();
 
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -94,6 +100,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
     public void onMessageReceived(Intent intent) {
         try {
             MapMessage message = MapMessage.parseFrom(intent);
+            if (message == null) return;
             L.d(TAG, "Received message from " + message.getDeviceAddress());
 
             MessageKey messageKey = new MessageKey(message);
@@ -210,12 +217,17 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         }
     }
 
-    protected void markAsRead(SenderKey senderKey) {
+
+    /**
+     * Excludes messages from a notification so that the messages are not shown to the user once
+     * the notification gets updated with newer messages.
+     */
+    protected void excludeFromNotification(SenderKey senderKey) {
         NotificationInfo info = mNotificationInfos.get(senderKey);
         for (MessageKey key : info.mMessageKeys) {
             MapMessage message = mMessages.get(key);
-            if (!message.isReadOnCar()) {
-                message.markMessageAsRead();
+            if (message.shouldIncludeInNotification()) {
+                message.excludeFromNotification();
                 mSmsDatabaseHandler.addOrUpdate(message);
             }
         }
@@ -227,6 +239,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
         if (mPhoneNumberInfoFuture != null) {
             mPhoneNumberInfoFuture.cancel(true);
         }
+        mProjectionStateListener.stop();
     }
 
     /**
@@ -239,6 +252,7 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
             if (predicate.test(senderKey)) {
                 mNotificationManager.cancel(notificationInfo.mNotificationId);
             }
+            excludeFromNotification(senderKey);
         });
     }
 
@@ -249,11 +263,11 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 mSmsDatabaseHandler.removeMessagesForDevice(key.getDeviceAddress());
             }
         }
-        mMessages.entrySet().removeIf(
-                messageKeyMapMessageEntry -> predicate.test(messageKeyMapMessageEntry.getKey()));
         clearNotifications(predicate);
         mNotificationInfos.entrySet().removeIf(entry -> predicate.test(entry.getKey()));
         mSenderToLargeIconBitmap.entrySet().removeIf(entry -> predicate.test(entry.getKey()));
+        mMessages.entrySet().removeIf(
+                messageKeyMapMessageEntry -> predicate.test(messageKeyMapMessageEntry.getKey()));
     }
 
     private void updateNotification(MessageKey messageKey, MapMessage mapMessage) {
@@ -361,17 +375,26 @@ public class MessengerDelegate implements BluetoothMonitor.OnBluetoothEventListe
                 .setUri(notificationInfo.mSenderContactUri)
                 .build();
         notificationInfo.mMessageKeys.stream().map(mMessages::get).forEachOrdered(message -> {
-            if (!message.isReadOnCar()) {
+            if (message.shouldIncludeInNotification()) {
                 messagingStyle.addMessage(
                         message.getMessageText(),
                         message.getReceiveTime(),
                         sender);
+            } else {
+                L.d(TAG, "excluding message received at: " + message.getReceiveTime()
+                        + " from notification.");
             }
         });
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext,
-                MessengerService.SMS_CHANNEL_ID)
-                .setContentTitle(senderName)
+        NotificationCompat.Builder builder;
+        if (mProjectionStateListener.isProjectionInActiveForeground(senderKey.getDeviceAddress())) {
+            builder = new NotificationCompat.Builder(mContext,
+                    MessengerService.SILENT_SMS_CHANNEL_ID);
+        } else {
+            builder = new NotificationCompat.Builder(mContext, MessengerService.SMS_CHANNEL_ID);
+        }
+
+        builder.setContentTitle(senderName)
                 .setContentText(contentText)
                 .setStyle(messagingStyle)
                 .setCategory(Notification.CATEGORY_MESSAGE)
