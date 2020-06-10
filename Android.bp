@@ -31,8 +31,11 @@ android_app {
 
     privileged: true,
 
+    libs: ["android.car"],
+
     static_libs: [
         "car-apps-common",
+        "car-messenger-common",
         "car-telephony-common",
         "androidx.annotation_annotation",
         "glide-prebuilt",

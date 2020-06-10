@@ -168,7 +168,8 @@ class SmsDatabaseHandler {
         newMessage.put(Telephony.Sms.PERSON,
                 getContactId(mContentResolver,
                         message.getSenderContactUri()));
-        newMessage.put(Telephony.Sms.READ, (message.isReadOnPhone() || message.isReadOnCar()));
+        newMessage.put(Telephony.Sms.READ, (message.isReadOnPhone()
+                || !message.shouldIncludeInNotification()));
         return newMessage;
     }
 
