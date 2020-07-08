@@ -19,6 +19,7 @@ package com.android.car.messenger;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothMapClient;
 import android.content.Intent;
+import com.android.car.messenger.log.L;
 
 import androidx.annotation.Nullable;
 
@@ -26,6 +27,7 @@ import androidx.annotation.Nullable;
  * Represents a message obtained via MAP service from a connected Bluetooth device.
  */
 class MapMessage {
+    private static final String TAG = "CM.MapMessage";
     private String mDeviceAddress;
     private String mHandle;
     private String mSenderName;
@@ -34,18 +36,25 @@ class MapMessage {
     private String mMessageText;
     private long mReceiveTime;
     private boolean mIsReadOnPhone;
-    private boolean mIsReadOnCar;
+    private boolean mShouldInclude;
 
     /**
      * Constructs a {@link MapMessage} from {@code intent} that was received from MAP service via
      * {@link BluetoothMapClient#ACTION_MESSAGE_RECEIVED} broadcast.
      *
      * @param intent intent received from MAP service
-     * @return message constructed from extras in {@code intent}
+     * @return message constructed from extras in {@code intent}, or null if this is a group
+     *         conversation.
      * @throws NullPointerException if {@code intent} is missing the device extra
      * @throws IllegalArgumentException if {@code intent} is missing any other required extras
      */
+    @Nullable
     public static MapMessage parseFrom(Intent intent) {
+        if (intent.getStringArrayExtra(Intent.EXTRA_CC) != null
+            && intent.getStringArrayExtra(Intent.EXTRA_CC).length > 0) {
+            L.i(TAG, "Skipping group conversation message");
+            return null;
+        }
         BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
         String handle = intent.getStringExtra(BluetoothMapClient.EXTRA_MESSAGE_HANDLE);
         String senderUri = intent.getStringExtra(BluetoothMapClient.EXTRA_SENDER_CONTACT_URI);
@@ -101,6 +110,7 @@ class MapMessage {
         mSenderName = senderName;
         mReceiveTime = receiveTime;
         mIsReadOnPhone = isRead;
+        mShouldInclude = true;
     }
 
     /**
@@ -151,8 +161,13 @@ class MapMessage {
         return mMessageText;
     }
 
-    public void markMessageAsRead() {
-        mIsReadOnCar = true;
+    /**
+     * Sets the message to be excluded from the notification. Messages that have been read aloud on
+     * the car, or that have been dismissed by the user should be excluded from the notification if/
+     * when the notification gets updated. Note: this state will not be propagated to the phone.
+     */
+    public void excludeFromNotification() {
+        mShouldInclude = false;
     }
 
     /**
@@ -163,10 +178,12 @@ class MapMessage {
     }
 
     /**
-     * Returns {@code true} if message was read on the car.
+     * Returns {@code true} if message should be included in the notification. Messages that
+     * have been read aloud on the car, or that have been dismissed by the user should be excluded
+     * from the notification if/when the notification gets updated.
      */
-    public boolean isReadOnCar() {
-        return mIsReadOnCar;
+    public boolean shouldIncludeInNotification() {
+        return mShouldInclude;
     }
 
     @Override
@@ -179,7 +196,7 @@ class MapMessage {
                 ", mSenderName='" + mSenderName + '\'' +
                 ", mReceiveTime=" + mReceiveTime + '\'' +
                 ", mIsReadOnPhone= " + mIsReadOnPhone + '\'' +
-                ", mIsReadOnCar= " + mIsReadOnCar +
+                ", mShouldInclude= " + mShouldInclude +
                 "}";
     }
 }

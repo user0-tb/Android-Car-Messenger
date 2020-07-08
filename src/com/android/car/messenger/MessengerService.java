@@ -59,6 +59,7 @@ public class MessengerService extends Service {
 
     /* NOTIFICATIONS */
     static final String SMS_CHANNEL_ID = "SMS_CHANNEL_ID";
+    static final String SILENT_SMS_CHANNEL_ID = "SILENT_SMS_CHANNEL_ID";
     private static final String APP_RUNNING_CHANNEL_ID = "APP_RUNNING_CHANNEL_ID";
     private static final int SERVICE_STARTED_NOTIFICATION_ID = Integer.MAX_VALUE;
 
@@ -109,6 +110,16 @@ public class MessengerService extends Service {
                             getString(R.string.app_running_msg_channel_name),
                             NotificationManager.IMPORTANCE_MIN);
             notificationManager.createNotificationChannel(appRunningNotificationChannel);
+        }
+
+        // Create notification channel for notifications that should be posted silently in the
+        // notification center, without a heads up notification.
+        {
+            NotificationChannel silentNotificationChannel =
+                    new NotificationChannel(SILENT_SMS_CHANNEL_ID,
+                            getString(R.string.sms_channel_description),
+                            NotificationManager.IMPORTANCE_LOW);
+            notificationManager.createNotificationChannel(silentNotificationChannel);
         }
 
         {
@@ -243,7 +254,7 @@ public class MessengerService extends Service {
     public void markAsRead(Intent intent) {
         final SenderKey senderKey = intent.getParcelableExtra(EXTRA_SENDER_KEY);
         L.d(TAG, "markAsRead");
-        mMessengerDelegate.markAsRead(senderKey);
+        mMessengerDelegate.excludeFromNotification(senderKey);
     }
 
     /**

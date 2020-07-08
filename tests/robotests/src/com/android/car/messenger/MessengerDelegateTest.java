@@ -189,12 +189,12 @@ public class MessengerDelegateTest {
     public void testHandleMarkAsRead() {
         mMessengerDelegate.onMessageReceived(mMessageOneIntent);
 
-        mMessengerDelegate.markAsRead(mSenderKey);
+        mMessengerDelegate.excludeFromNotification(mSenderKey);
 
         MessengerDelegate.NotificationInfo info = mMessengerDelegate.mNotificationInfos.get(
                 mSenderKey);
         MessengerDelegate.MessageKey key = info.mMessageKeys.get(0);
-        assertThat(mMessengerDelegate.mMessages.get(key).isReadOnCar()).isTrue();
+        assertThat(mMessengerDelegate.mMessages.get(key).shouldIncludeInNotification()).isFalse();
     }
 
     @Test
@@ -208,7 +208,7 @@ public class MessengerDelegateTest {
         MessengerDelegate.NotificationInfo info = mMessengerDelegate.mNotificationInfos.get(
                 mSenderKey);
         MessengerDelegate.MessageKey key = info.mMessageKeys.get(0);
-        assertThat(mMessengerDelegate.mMessages.get(key).isReadOnCar()).isFalse();
+        assertThat(mMessengerDelegate.mMessages.get(key).shouldIncludeInNotification()).isTrue();
         assertThat(mMessengerDelegate.mMessages.get(key).isReadOnPhone()).isTrue();
     }
 
