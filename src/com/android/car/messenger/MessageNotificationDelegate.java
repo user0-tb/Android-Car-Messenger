@@ -56,7 +56,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -64,7 +63,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 /** Delegate class responsible for handling messaging service actions */
 public class MessageNotificationDelegate extends BaseNotificationDelegate implements
@@ -410,22 +408,9 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
             }
         }
 
-        notificationInfo.setConvoTitle(constructGroupConversationTitle(names));
+        notificationInfo.setConvoTitle(Utils.constructGroupConversationTitle(names,
+                mContext.getString(R.string.name_separator), mNotificationConversationTitleLength));
         if (allNamesLoaded) mGeneratedGroupConversationTitles.add(conversationKey);
-    }
-
-    /**
-     * Given a name of all the participants in a group conversation (some names might be phone
-     * numbers), this function creates the conversation title putting the names in alphabetical
-     * order first, then adding any phone numbers. This title should not exceed the
-     * mNotificationConversationTitleLength, so not all participants' names are guaranteed to be
-     * in the conversation title.
-     */
-    private String constructGroupConversationTitle(List<String> names) {
-        Collections.sort(names, Utils.ALPHA_THEN_NUMERIC_COMPARATOR);
-
-        return names.stream().map(String::valueOf).collect(
-                Collectors.joining(mContext.getString(R.string.name_separator)));
     }
 
     private void loadPhoneNumberInfo(@Nullable String phoneNumber,
