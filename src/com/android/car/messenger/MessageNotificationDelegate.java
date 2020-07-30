@@ -147,9 +147,14 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
 
     @Override
     public void onDeviceDisconnected(BluetoothDevice device) {
-        logd(TAG, "Device disconnected: " + device.getAddress());
-        cleanupMessagesAndNotifications(key -> key.matches(device.getAddress()));
-        mBtDeviceAddressToConnectionTimestamp.remove(device.getAddress());
+        String deviceAddress = device.getAddress();
+        logd(TAG, "Device disconnected: " + deviceAddress);
+        cleanupMessagesAndNotifications(key -> key.matches(deviceAddress));
+        mBtDeviceAddressToConnectionTimestamp.remove(deviceAddress);
+        mSenderToLargeIconBitmap.entrySet().removeIf(entry ->
+                entry.getKey().getDeviceId().equals(deviceAddress));
+        mGeneratedGroupConversationTitles.removeIf(
+                convoKey -> convoKey.getDeviceId().equals(deviceAddress));
     }
 
     @Override
@@ -248,6 +253,7 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
         mUriToSenderNameMap.clear();
         mSenderToLargeIconBitmap.clear();
         mBtDeviceAddressToConnectionTimestamp.clear();
+        mGeneratedGroupConversationTitles.clear();
     }
 
     /**
