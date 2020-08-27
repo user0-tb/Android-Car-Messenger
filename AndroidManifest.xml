@@ -15,7 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.car.messenger">
+          package="com.android.car.messenger">
 
     <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="26"/>
 
