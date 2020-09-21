@@ -59,6 +59,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -75,6 +76,7 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
     /** Tracks whether a projection application is active in the foreground. **/
     private ProjectionStateListener mProjectionStateListener;
     private CompletableFuture<Void> mPhoneNumberInfoFuture;
+    private Locale mGeneratedGroupConversationTitlesLocale;
     private static int mBitmapSize;
     private static float mCornerRadiusPercent;
     private static boolean mShouldLoadExistingMessages;
@@ -396,6 +398,13 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
      */
     private void setGroupConversationTitle(ConversationKey conversationKey) {
         ConversationNotificationInfo notificationInfo = mNotificationInfos.get(conversationKey);
+        Locale locale = Locale.getDefault();
+
+        // Do not reuse the old titles if locale has changed. The new locale might need different
+        // formatting or text direction.
+        if (locale != mGeneratedGroupConversationTitlesLocale) {
+            mGeneratedGroupConversationTitles.clear();
+        }
         if (!notificationInfo.isGroupConvo()
                 || mGeneratedGroupConversationTitles.contains(conversationKey)) {
             return;
@@ -416,7 +425,10 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
 
         notificationInfo.setConvoTitle(Utils.constructGroupConversationTitle(names,
                 mContext.getString(R.string.name_separator), mNotificationConversationTitleLength));
-        if (allNamesLoaded) mGeneratedGroupConversationTitles.add(conversationKey);
+        if (allNamesLoaded) {
+            mGeneratedGroupConversationTitlesLocale = locale;
+            mGeneratedGroupConversationTitles.add(conversationKey);
+        }
     }
 
     private void loadPhoneNumberInfo(@Nullable String phoneNumber,
