@@ -56,15 +56,14 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 /** Delegate class responsible for handling messaging service actions */
 public class MessageNotificationDelegate extends BaseNotificationDelegate implements
@@ -77,6 +76,7 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
     /** Tracks whether a projection application is active in the foreground. **/
     private ProjectionStateListener mProjectionStateListener;
     private CompletableFuture<Void> mPhoneNumberInfoFuture;
+    private Locale mGeneratedGroupConversationTitlesLocale;
     private static int mBitmapSize;
     private static float mCornerRadiusPercent;
     private static boolean mShouldLoadExistingMessages;
@@ -149,9 +149,14 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
 
     @Override
     public void onDeviceDisconnected(BluetoothDevice device) {
-        logd(TAG, "Device disconnected: " + device.getAddress());
-        cleanupMessagesAndNotifications(key -> key.matches(device.getAddress()));
-        mBtDeviceAddressToConnectionTimestamp.remove(device.getAddress());
+        String deviceAddress = device.getAddress();
+        logd(TAG, "Device disconnected: " + deviceAddress);
+        cleanupMessagesAndNotifications(key -> key.matches(deviceAddress));
+        mBtDeviceAddressToConnectionTimestamp.remove(deviceAddress);
+        mSenderToLargeIconBitmap.entrySet().removeIf(entry ->
+                entry.getKey().getDeviceId().equals(deviceAddress));
+        mGeneratedGroupConversationTitles.removeIf(
+                convoKey -> convoKey.getDeviceId().equals(deviceAddress));
     }
 
     @Override
@@ -250,6 +255,7 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
         mUriToSenderNameMap.clear();
         mSenderToLargeIconBitmap.clear();
         mBtDeviceAddressToConnectionTimestamp.clear();
+        mGeneratedGroupConversationTitles.clear();
     }
 
     /**
@@ -392,6 +398,13 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
      */
     private void setGroupConversationTitle(ConversationKey conversationKey) {
         ConversationNotificationInfo notificationInfo = mNotificationInfos.get(conversationKey);
+        Locale locale = Locale.getDefault();
+
+        // Do not reuse the old titles if locale has changed. The new locale might need different
+        // formatting or text direction.
+        if (locale != mGeneratedGroupConversationTitlesLocale) {
+            mGeneratedGroupConversationTitles.clear();
+        }
         if (!notificationInfo.isGroupConvo()
                 || mGeneratedGroupConversationTitles.contains(conversationKey)) {
             return;
@@ -410,22 +423,12 @@ public class MessageNotificationDelegate extends BaseNotificationDelegate implem
             }
         }
 
-        notificationInfo.setConvoTitle(constructGroupConversationTitle(names));
-        if (allNamesLoaded) mGeneratedGroupConversationTitles.add(conversationKey);
-    }
-
-    /**
-     * Given a name of all the participants in a group conversation (some names might be phone
-     * numbers), this function creates the conversation title putting the names in alphabetical
-     * order first, then adding any phone numbers. This title should not exceed the
-     * mNotificationConversationTitleLength, so not all participants' names are guaranteed to be
-     * in the conversation title.
-     */
-    private String constructGroupConversationTitle(List<String> names) {
-        Collections.sort(names, Utils.ALPHA_THEN_NUMERIC_COMPARATOR);
-
-        return names.stream().map(String::valueOf).collect(
-                Collectors.joining(mContext.getString(R.string.name_separator)));
+        notificationInfo.setConvoTitle(Utils.constructGroupConversationTitle(names,
+                mContext.getString(R.string.name_separator), mNotificationConversationTitleLength));
+        if (allNamesLoaded) {
+            mGeneratedGroupConversationTitlesLocale = locale;
+            mGeneratedGroupConversationTitles.add(conversationKey);
+        }
     }
 
     private void loadPhoneNumberInfo(@Nullable String phoneNumber,
