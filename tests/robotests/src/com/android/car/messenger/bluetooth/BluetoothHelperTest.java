@@ -35,7 +35,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
@@ -50,7 +53,6 @@ public class BluetoothHelperTest {
     private static final String BLUETOOTH_ADDRESS_ONE = "FA:F8:14:CA:32:39";
     private static final String BLUETOOTH_ADDRESS_TWO = "FA:F8:33:44:32:39";
 
-    @Mock
     private BluetoothMapClient mMockMapClient;
     @Mock
     private BluetoothDevice mMockDeviceOne;
@@ -59,10 +61,15 @@ public class BluetoothHelperTest {
 
     @Before
     public void setUp() {
+        Answer returnTrue = new Answer() {
+            public Object answer(InvocationOnMock invocation) {
+              return true;
+            }
+        };
         MockitoAnnotations.initMocks(this);
         when(mMockDeviceOne.getAddress()).thenReturn(BLUETOOTH_ADDRESS_ONE);
         when(mMockDeviceTwo.getAddress()).thenReturn(BLUETOOTH_ADDRESS_TWO);
-        when(mMockMapClient.sendMessage(any(), any(), any(), any(), any())).thenReturn(true);
+        mMockMapClient = Mockito.mock(BluetoothMapClient.class, returnTrue);
 
         BluetoothAdapter.getDefaultAdapter().enable();
     }
