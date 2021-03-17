@@ -27,6 +27,8 @@ android_app {
 
     platform_apis: true,
 
+    required: ["allowed_privapp_com.android.car.messenger"],
+
     overrides: ["messaging"],
 
     optimize: {
