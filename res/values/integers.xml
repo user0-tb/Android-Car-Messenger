@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2017 The Android Open Source Project
   ~
@@ -14,7 +14,8 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
+
 <resources>
-    <dimen name="notification_contact_photo_size">300dp</dimen>
-    <dimen name="contact_avatar_corner_radius_percent" format="float">0.5</dimen>
+    <integer name="anim_time">1000</integer>
+    <integer name="notification_conversation_title_length">30</integer>
 </resources>
