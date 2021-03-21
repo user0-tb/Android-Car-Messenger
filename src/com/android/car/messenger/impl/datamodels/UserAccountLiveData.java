@@ -95,7 +95,7 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
 
     private void loadValue() {
         List<UserAccount> accounts =
-                mSubscriptionManager.getActiveSubscriptionInfoList().stream()
+                getNullSafeSubscriptionInfoList().stream()
                         .map(
                                 it -> {
                                     int subscriptionId = it.getSubscriptionId();
@@ -184,5 +184,16 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
             value = new UserAccountChangeList();
         }
         return value;
+    }
+
+    /** Returns null safe subscription info list */
+    @NonNull
+    private List<SubscriptionInfo> getNullSafeSubscriptionInfoList() {
+        List<SubscriptionInfo> subscriptionInfos =
+                mSubscriptionManager.getActiveSubscriptionInfoList();
+        if (subscriptionInfos == null) {
+            subscriptionInfos = new ArrayList<>();
+        }
+        return subscriptionInfos;
     }
 }
