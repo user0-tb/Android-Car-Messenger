@@ -106,7 +106,7 @@ public class VoiceUtil {
             args.putBundle(KEY_CONVERSATION, tapToReadConversation.toBundle());
         }
 
-        activity.startLocalVoiceInteraction(args);
+        activity.showAssist(args);
     }
 
     /** Requests Voice request to start a generic compose voice interaction */
@@ -118,7 +118,7 @@ public class VoiceUtil {
         PendingIntent sendIntent =
                 createServiceIntent(ACTION_DIRECT_SEND, /* conversationKey= */ null);
         bundle.putParcelable(KEY_SEND_PENDING_INTENT, sendIntent);
-        activity.startLocalVoiceInteraction(bundle);
+        activity.showAssist(bundle);
     }
 
     /**
