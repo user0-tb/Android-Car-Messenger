@@ -87,14 +87,16 @@ public final class MessageUtils {
                     // lastReply references 2., messages references 3.
                     int messageStatus = message.getMessageStatus();
                     if (message.getMessageType() == MessageType.MESSAGE_TYPE_SENT) {
-                        lastReply.set(message.getTimestamp());
-                        return readMessages.isEmpty();
-                    } else {
-                        if (messageStatus == MessageStatus.MESSAGE_STATUS_READ
-                                || messageStatus == MessageStatus.MESSAGE_STATUS_NONE) {
-                            readMessages.add(message);
-                            return true;
+                        if (lastReply.get() < message.getTimestamp()) {
+                            lastReply.set(message.getTimestamp());
                         }
+                        return readMessages.isEmpty();
+                    }
+
+                    if (messageStatus == MessageStatus.MESSAGE_STATUS_READ
+                            || messageStatus == MessageStatus.MESSAGE_STATUS_NONE) {
+                        readMessages.add(message);
+                        return true;
                     }
                     return false;
                 });

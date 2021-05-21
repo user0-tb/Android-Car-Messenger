@@ -67,6 +67,10 @@ public class VoiceUtil {
     /** Requests Voice request to read a conversation */
     public static void voiceRequestReadConversation(
             @NonNull Activity activity, @NonNull Conversation conversation) {
+        if (conversation.getMessages().isEmpty()) {
+            L.d("No messages to read from Conversation! Returning.");
+            return;
+        }
         voiceRequestHelper(
                 activity,
                 conversation,
