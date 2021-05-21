@@ -65,8 +65,6 @@ public class TelephonyDataModel implements DataModel {
     private final HashMap<Integer, ConversationsPerDeviceLiveData>
             mAccountIdToConversationListLiveData = new HashMap<>();
 
-    @NonNull private final HashMap<String, Conversation> mConversationMap = new HashMap<>();
-
     @NonNull
     private static final Comparator<Conversation> sConversationComparator =
             comparingLong(ConversationUtil::getConversationTimestamp).reversed();
@@ -86,26 +84,30 @@ public class TelephonyDataModel implements DataModel {
     @Override
     public LiveData<Collection<Conversation>> getConversations(@NonNull UserAccount userAccount) {
         MediatorLiveData<Collection<Conversation>> liveData = new MediatorLiveData<>();
+        HashMap<String, Conversation> conversationMap = new HashMap<>();
         subscribeToConversationItemChanges(
                 userAccount,
                 liveData,
                 /* onConversationItemChanged= */ conversationChangeSet -> {
-                    mConversationMap.put(
+                    conversationMap.put(
                             conversationChangeSet.getConversation().getId(),
                             conversationChangeSet.getConversation());
                     liveData.postValue(
-                            mConversationMap.values().stream()
+                            conversationMap.values().stream()
                                     .sorted(sConversationComparator)
                                     .collect(Collectors.toList()));
                 },
                 /* onConversationRemoved= */ conversationId -> {
-                    mConversationMap.remove(conversationId);
+                    conversationMap.remove(conversationId);
                     liveData.postValue(
-                            mConversationMap.values().stream()
+                            conversationMap.values().stream()
                                     .sorted(sConversationComparator)
                                     .collect(Collectors.toList()));
                 },
-                /* onEmpty= */ onEmpty -> liveData.postValue(new ArrayList<>()));
+                /* onEmpty= */ onEmpty -> {
+                    liveData.postValue(new ArrayList<>());
+                    conversationMap.clear();
+                });
 
         return liveData;
     }
