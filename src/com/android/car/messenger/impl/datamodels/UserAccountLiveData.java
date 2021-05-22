@@ -32,6 +32,7 @@ import com.android.car.messenger.impl.datamodels.UserAccountLiveData.UserAccount
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -112,6 +113,12 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
         Set<UserAccount> removedAccounts = getDifference(prevUserAccounts, accounts);
 
         if (addedAccounts.isEmpty() && removedAccounts.isEmpty()) {
+            // Return early if no new accounts were added or removed since last change list.
+            // However, if no account is found, post an empty changelist to allow
+            // the subscriber update the UI with "no account found or all accounts disconnected"
+            if (accounts.isEmpty()) {
+                postValue(new UserAccountChangeList());
+            }
             return;
         }
 
@@ -192,8 +199,12 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
         List<SubscriptionInfo> subscriptionInfos =
                 mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfos == null) {
-            subscriptionInfos = new ArrayList<>();
+            return new ArrayList<>();
         }
+        // The last added subscription is more likely the last device connection made
+        // and more likely relevant to the user.
+        // Reverse the subscription list to prioritize the last connected device.
+        Collections.reverse(subscriptionInfos);
         return subscriptionInfos;
     }
 }
