@@ -97,6 +97,12 @@ class ConversationsPerDeviceLiveData extends ContentProviderLiveData<Conversatio
                 getDifference(prevConversationIds, currentConversationIds);
 
         if (newConversations.isEmpty() && removedConversations.isEmpty()) {
+            // Return early if no new conversations were added or removed since last change list.
+            // However, if no conversations is found, post an empty changelist to allow
+            // the subscriber update the UI with "no new conversations found"
+            if (currentConversationIds.isEmpty()) {
+                postValue(new ConversationIdChangeList());
+            }
             return;
         }
 

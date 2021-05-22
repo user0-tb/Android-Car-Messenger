@@ -50,8 +50,7 @@ public class CarMessengerApp extends Application implements UncaughtExceptionHan
         if (background) {
             L.e("Uncaught exception in background thread " + thread, ex);
             final Handler handler = new Handler(getMainLooper());
-            handler.post(
-                    () -> nullSafeUncaughtException(thread, ex));
+            handler.post(() -> nullSafeUncaughtException(thread, ex));
         } else {
             nullSafeUncaughtException(thread, ex);
         }
