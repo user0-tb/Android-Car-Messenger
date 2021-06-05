@@ -28,6 +28,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
 import androidx.core.app.NotificationCompat;
@@ -38,9 +39,12 @@ import androidx.annotation.Nullable;
 
 import com.android.car.messenger.R;
 import com.android.car.messenger.core.interfaces.AppFactory;
+import com.android.car.messenger.core.interfaces.DataModel;
 import com.android.car.messenger.core.shared.NotificationHandler;
 import com.android.car.messenger.core.util.L;
 import com.android.car.messenger.core.util.VoiceUtil;
+
+import java.time.Duration;
 
 /** Service responsible for handling messaging events. */
 public class MessengerService extends Service {
@@ -57,6 +61,9 @@ public class MessengerService extends Service {
 
     /* Binding boilerplate */
     @NonNull private final IBinder mBinder = new LocalBinder();
+
+    /* Delay fetching to give time for the system to start up on boot */
+    private static final Duration DELAY_FETCH_DURATION = Duration.ofSeconds(3);
 
     /** Local Binder For {@link MessengerService} */
     public class LocalBinder extends Binder {
@@ -77,11 +84,16 @@ public class MessengerService extends Service {
     public void onCreate() {
         super.onCreate();
         L.d("MessengerService - onCreate");
-        AppFactory.get()
-                .getDataModel()
-                .getUnreadMessages()
-                .observeForever(NotificationHandler::postOrRemoveNotification);
+        Handler handler = new Handler();
+        handler.postDelayed(this::subscribeToNotificationUpdates, DELAY_FETCH_DURATION.toMillis());
+
         sendServiceRunningNotification();
+    }
+
+    private void subscribeToNotificationUpdates() {
+        DataModel dataModel = AppFactory.get().getDataModel();
+        dataModel.getUnreadMessages().observeForever(NotificationHandler::postOrRemoveNotification);
+        dataModel.onConversationRemoved().observeForever(NotificationHandler::removeNotification);
     }
 
     private void sendServiceRunningNotification() {

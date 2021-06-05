@@ -117,6 +117,9 @@ public class ConversationListFragment extends MessageListBaseFragment
         if (activity == null || mUserAccount == null || mToolbar == null) {
             return;
         }
+        if (!getResources().getBoolean(R.bool.direct_send_supported)) {
+            return;
+        }
         MenuItem newMessageButton =
                 new MenuItem.Builder(activity)
                         .setIcon(R.drawable.car_ui_icon_edit)
@@ -128,7 +131,6 @@ public class ConversationListFragment extends MessageListBaseFragment
                                         VoiceUtil.voiceRequestGenericCompose(
                                                 activity, mUserAccount))
                         .build();
-
         ArrayList<MenuItem> menuItems = new ArrayList<>();
         menuItems.add(newMessageButton);
         mToolbar.setMenuItems(menuItems);
@@ -136,12 +138,18 @@ public class ConversationListFragment extends MessageListBaseFragment
 
     @Override
     public void onConversationItemClicked(@NonNull Conversation conversation) {
-        VoiceUtil.voiceRequestReadConversation(requireActivity(), conversation);
+        if (mUserAccount == null) {
+            return;
+        }
+        VoiceUtil.voiceRequestReadConversation(requireActivity(), mUserAccount, conversation);
     }
 
     @Override
     public void onReplyIconClicked(@NonNull Conversation conversation) {
-        VoiceUtil.voiceRequestReplyConversation(requireActivity(), conversation);
+        if (mUserAccount == null) {
+            return;
+        }
+        VoiceUtil.voiceRequestReplyConversation(requireActivity(), mUserAccount, conversation);
     }
 
     /**
