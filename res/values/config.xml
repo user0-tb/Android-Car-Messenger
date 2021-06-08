@@ -16,6 +16,7 @@
   -->
 <resources>
     <bool name="group_avatar_fill_background">false</bool>
+    <bool name="direct_send_supported">false</bool>
 
     <!--
     The maximum number of individual avatars used for group avatar.
