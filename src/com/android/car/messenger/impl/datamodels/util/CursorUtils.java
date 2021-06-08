@@ -17,6 +17,7 @@ package com.android.car.messenger.impl.datamodels.util;
 
 import static android.provider.BaseColumns._ID;
 import static android.provider.Telephony.BaseMmsColumns.CONTENT_TYPE;
+import static android.provider.Telephony.BaseMmsColumns.MESSAGE_BOX;
 import static android.provider.Telephony.MmsSms.CONTENT_CONVERSATIONS_URI;
 import static android.provider.Telephony.TextBasedSmsColumns.ADDRESS;
 import static android.provider.Telephony.TextBasedSmsColumns.BODY;
@@ -51,11 +52,12 @@ public class CursorUtils {
 
     @NonNull
     protected static final String[] CONTENT_CONVERSATION_PROJECTION = {
-        _ID, TYPE, DATE, READ, CONTENT_TYPE, BODY, ADDRESS, THREAD_ID, SUBSCRIPTION_ID
+        _ID, TYPE, DATE, READ, CONTENT_TYPE, BODY, ADDRESS, THREAD_ID, SUBSCRIPTION_ID, MESSAGE_BOX
     };
 
+    /** Provides the default sort order for items in database. Default is DESC order by Date. */
     @NonNull
-    private static final String DEFAULT_SORT_ORDER = Telephony.TextBasedSmsColumns.DATE + " DESC";
+    public static final String DEFAULT_SORT_ORDER = Telephony.TextBasedSmsColumns.DATE + " DESC";
 
     /**
      * Get simplified thread cursor with metadata information on the thread, such as recipient ids

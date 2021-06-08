@@ -51,6 +51,15 @@ public interface DataModel {
     LiveData<Collection<Conversation>> getConversations(@NonNull UserAccount userAccount);
 
     /**
+     * Callback is called when a conversation is removed from the telephony database.
+     *
+     * <p>All cached data specific to this conversation should be removed, including notifications,
+     * mute status and more.
+     */
+    @NonNull
+    LiveData<String> onConversationRemoved();
+
+    /**
      * Returns an observable conversation item, holding only unread messages. since the last known
      * {@link UserAccount#getConnectionTime}.
      *
@@ -74,12 +83,14 @@ public interface DataModel {
     void markAsRead(@NonNull String conversationId);
 
     /**
-     * Called by UI to send a message
+     * Called by UI to reply to a conversation
      *
+     * @param accountId The user account/device id to send the message from
      * @param conversationId The phone number to send message
      * @param message The desired message to send to conversation thread
      */
-    void sendMessage(@NonNull String conversationId, @NonNull String message);
+    void replyConversation(
+            @NonNull int accountId, @NonNull String conversationId, @NonNull String message);
 
     /**
      * Called by UI to send a message to a phone number on a device

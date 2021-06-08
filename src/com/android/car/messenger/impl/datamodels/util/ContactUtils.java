@@ -110,9 +110,15 @@ public class ContactUtils {
             @Nullable BiConsumer<String, Bitmap> processParticipant) {
         String name = phoneNo;
         Bitmap bitmap = null;
+        Cursor cursor = null;
+        try {
+            Uri uri = CONTENT_FILTER_URI.buildUpon().appendEncodedPath(Uri.encode(phoneNo)).build();
+            cursor = CursorUtils.simpleQueryWithProjection(context, uri, PROJECTION);
+        } catch (IllegalArgumentException e) {
+            L.w("Unable to retrieve PhoneLookup cursor");
+            L.w(e.toString());
+        }
 
-        Uri uri = CONTENT_FILTER_URI.buildUpon().appendEncodedPath(Uri.encode(phoneNo)).build();
-        Cursor cursor = CursorUtils.simpleQueryWithProjection(context, uri, PROJECTION);
         if (cursor != null && cursor.moveToFirst()) {
             name =
                     cursor.getString(
@@ -170,7 +176,7 @@ public class ContactUtils {
                 cursor.close();
             }
         }
-        L.d("No canonical address found for recipient id");
+        L.w("No canonical address found for recipient id");
         return null;
     }
 }
