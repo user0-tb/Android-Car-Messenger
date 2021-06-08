@@ -44,7 +44,7 @@ public class NotificationHandler {
     /** Posts, removes or updates a notification based on a conversation */
     public static void postOrRemoveNotification(Conversation conversation) {
         if (conversation.isMuted()) {
-            removeNotification(conversation);
+            removeNotification(conversation.getId());
         } else {
             postNotification(conversation);
         }
@@ -130,11 +130,11 @@ public class NotificationHandler {
         return null;
     }
 
-    /* Removes a notification based on a conversation */
-    private static void removeNotification(@NonNull Conversation conversation) {
+    /** Removes a notification based on a conversation */
+    public static void removeNotification(@NonNull String conversationId) {
         Context context = AppFactory.get().getContext();
         NotificationManager notificationManager =
                 context.getSystemService(NotificationManager.class);
-        notificationManager.cancel(conversation.getId().hashCode());
+        notificationManager.cancel(conversationId.hashCode());
     }
 }

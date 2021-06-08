@@ -18,11 +18,11 @@ package com.android.car.messenger.impl.datamodels.util;
 
 import static android.provider.BaseColumns._ID;
 import static android.provider.Telephony.BaseMmsColumns.CONTENT_TYPE;
-import static android.provider.Telephony.TextBasedSmsColumns.TYPE;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.Telephony;
 import android.provider.Telephony.Mms.Addr;
 import android.provider.Telephony.Mms.Part;
 import android.provider.Telephony.Sms;
@@ -38,6 +38,9 @@ class MmsUtils {
     @NonNull public static final String FORMAT_CONTENT_MMS_PART = "content://mms/{0}/part";
     @NonNull public static final String FORMAT_CONTENT_MMS_ADDR = "content://mms/{0}/addr";
     @NonNull public static final String FORMAT_TYPE_AND_MSG_ID = "type={0} AND msg_id={1}";
+
+    /** MMS text messages come with extra characters and new lines that need to be removed */
+    @NonNull private static final String REPLACE_CHARS = "\r\n";
 
     private MmsUtils() {}
 
@@ -61,7 +64,7 @@ class MmsUtils {
         MmsSmsMessage message = new MmsSmsMessage();
         message.mId = cursor.getString(cursor.getColumnIndex(_ID));
         message.mThreadId = cursor.getInt(cursor.getColumnIndex(Sms.THREAD_ID));
-        message.mType = cursor.getInt(cursor.getColumnIndex(TYPE));
+        message.mType = cursor.getInt(cursor.getColumnIndex(Telephony.Mms.MESSAGE_BOX));
         message.mSubscriptionId = cursor.getInt(cursor.getColumnIndex(Sms.SUBSCRIPTION_ID));
         message.mDate = Instant.ofEpochSecond(cursor.getLong(cursor.getColumnIndex(Sms.DATE)));
         message.mRead = cursor.getInt(cursor.getColumnIndex(Sms.READ)) == 1;
@@ -79,7 +82,7 @@ class MmsUtils {
             stringBuilder.append(cursor.getString(cursor.getColumnIndex(Part.TEXT)));
             stringBuilder.append(" ");
         }
-        return stringBuilder.toString();
+        return stringBuilder.toString().replace(REPLACE_CHARS, "");
     }
 
     @NonNull

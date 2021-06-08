@@ -16,7 +16,7 @@
 
 package com.android.car.messenger.impl.datamodels;
 
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.MediatorLiveData;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -30,7 +30,7 @@ import com.android.car.messenger.core.interfaces.AppFactory;
  *
  * @param <T> the class type emitted from the live data to observers
  */
-public abstract class ContentProviderLiveData<T> extends MutableLiveData<T> {
+public abstract class ContentProviderLiveData<T> extends MediatorLiveData<T> {
     @NonNull
     private final ContentObserver mContentObserver =
             new ContentObserver(null) {
@@ -50,6 +50,7 @@ public abstract class ContentProviderLiveData<T> extends MutableLiveData<T> {
 
     @Override
     protected void onActive() {
+        super.onActive();
         if (!mIsRegistered) {
             for (Uri uri : mUris) {
                 getContext()
@@ -63,6 +64,7 @@ public abstract class ContentProviderLiveData<T> extends MutableLiveData<T> {
 
     @Override
     protected void onInactive() {
+        super.onInactive();
         getContext().getContentResolver().unregisterContentObserver(mContentObserver);
         mIsRegistered = false;
     }
