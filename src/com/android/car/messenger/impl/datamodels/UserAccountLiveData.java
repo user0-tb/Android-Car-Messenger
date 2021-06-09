@@ -76,6 +76,7 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
         Context context = AppFactory.get().getContext();
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mSubscriptionManager.addOnSubscriptionsChangedListener(mOnChangeListener);
+        loadValue();
     }
 
     /** Gets the instance of {@link UserAccountLiveData} */
@@ -85,13 +86,6 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
             sInstance = new UserAccountLiveData();
         }
         return sInstance;
-    }
-
-    @Override
-    protected void onActive() {
-        if (getValue() == null) {
-            loadValue();
-        }
     }
 
     private void loadValue() {
