@@ -54,6 +54,7 @@ import com.android.car.messenger.common.Conversation.ConversationAction.ActionTy
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.models.UserAccount;
 import com.android.car.messenger.core.service.MessengerService;
+import com.android.car.messenger.core.shared.MessageConstants;
 import com.android.car.messenger.core.shared.NotificationHandler;
 
 import java.util.ArrayList;
@@ -62,11 +63,16 @@ import java.util.List;
 /** Voice Util classes for requesting voice interactions and responding to voice actions */
 public class VoiceUtil {
 
+    /** Represents a null user account id */
+    private static final int NULL_ACCOUNT_ID = 0;
+
     private VoiceUtil() {}
 
     /** Requests Voice request to read a conversation */
     public static void voiceRequestReadConversation(
-            @NonNull Activity activity, @NonNull Conversation conversation) {
+            @NonNull Activity activity,
+            @NonNull UserAccount userAccount,
+            @NonNull Conversation conversation) {
         if (conversation.getMessages().isEmpty()) {
             L.d("No messages to read from Conversation! Returning.");
             return;
@@ -74,16 +80,20 @@ public class VoiceUtil {
         voiceRequestHelper(
                 activity,
                 conversation,
+                userAccount,
                 VOICE_ACTION_READ_CONVERSATION,
                 VOICE_ACTION_READ_NOTIFICATION);
     }
 
     /** Requests Voice request to reply to a conversation */
     public static void voiceRequestReplyConversation(
-            @NonNull Activity activity, @NonNull Conversation conversation) {
+            @NonNull Activity activity,
+            @NonNull UserAccount userAccount,
+            @NonNull Conversation conversation) {
         voiceRequestHelper(
                 activity,
                 conversation,
+                userAccount,
                 VOICE_ACTION_REPLY_CONVERSATION,
                 VOICE_ACTION_REPLY_NOTIFICATION);
     }
@@ -91,6 +101,7 @@ public class VoiceUtil {
     private static void voiceRequestHelper(
             @NonNull Activity activity,
             @NonNull Conversation conversation,
+            @NonNull UserAccount userAccount,
             @NonNull String conversationAction,
             @NonNull String notificationAction) {
         Bundle args = new Bundle();
@@ -101,12 +112,14 @@ public class VoiceUtil {
                 NotificationHandler.postNotificationForLegacyTapToRead(tapToReadConversation);
         if (sbn != null) {
             args.putString(KEY_ACTION, notificationAction);
+            args.putString(KEY_DEVICE_ADDRESS, userAccount.getIccId());
             args.putParcelable(KEY_NOTIFICATION, sbn);
         } else {
             // New API using generic Conversation class
             // is currently limited in support by partner assistants and is currently being phase
             // in.
             args.putString(KEY_ACTION, conversationAction);
+            args.putString(KEY_DEVICE_ADDRESS, userAccount.getIccId());
             args.putBundle(KEY_CONVERSATION, tapToReadConversation.toBundle());
         }
 
@@ -227,15 +240,19 @@ public class VoiceUtil {
     /** Sends a reply, meant to be used from a caller originating from voice input. */
     public static void voiceReply(Intent intent) {
         final String conversationKey = intent.getStringExtra(EXTRA_CONVERSATION_KEY);
+        final int accountId =
+                intent.getIntExtra(MessageConstants.EXTRA_ACCOUNT_ID, NULL_ACCOUNT_ID);
         final Bundle bundle = RemoteInput.getResultsFromIntent(intent);
-        if (bundle == null) {
-            L.e("Dropping voice reply. Received null bundle!");
+        if (bundle == null || accountId == NULL_ACCOUNT_ID) {
+            L.e("Dropping voice reply. Received null bundle or no user account id in bundle!");
             return;
         }
         final CharSequence message = bundle.getCharSequence(Intent.EXTRA_TEXT);
         L.d("voiceReply: " + message);
         if (!TextUtils.isEmpty(message)) {
-            AppFactory.get().getDataModel().sendMessage(conversationKey, message.toString());
+            AppFactory.get()
+                    .getDataModel()
+                    .replyConversation(accountId, conversationKey, message.toString());
         }
     }
 
