@@ -50,6 +50,9 @@ public final class MessageConstants {
     @NonNull public static final String ACTION_MUTE = "ACTION_MUTE";
 
     /* EXTRAS */
-    /** Key under which the {@link String} is provided. */
+    /** Key under which the a Conversation Key is provided. */
     @NonNull public static final String EXTRA_CONVERSATION_KEY = "EXTRA_CONVERSATION_KEY";
+
+    /** Key under which the user account/device id is provided. */
+    @NonNull public static final String EXTRA_ACCOUNT_ID = "EXTRA_ACCOUNT_ID";
 }
