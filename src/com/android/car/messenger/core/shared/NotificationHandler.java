@@ -16,6 +16,8 @@
 
 package com.android.car.messenger.core.shared;
 
+import static com.android.car.messenger.core.shared.MessageConstants.EXTRA_ACCOUNT_ID;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -29,6 +31,7 @@ import com.android.car.messenger.R;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.service.MessengerService;
+import com.android.car.messenger.core.util.L;
 import com.android.car.messenger.core.util.VoiceUtil;
 
 /** Useful notification handler for posting messages */
@@ -42,7 +45,7 @@ public class NotificationHandler {
     private NotificationHandler() {}
 
     /** Posts, removes or updates a notification based on a conversation */
-    public static void postOrRemoveNotification(Conversation conversation) {
+    public static void postOrRemoveNotification(@NonNull Conversation conversation) {
         if (conversation.isMuted()) {
             removeNotification(conversation.getId());
         } else {
@@ -51,8 +54,15 @@ public class NotificationHandler {
     }
 
     /* Posts or updates a notification based on a conversation */
-    private static void postNotification(@NonNull Conversation conversation) {
-        Conversation tapToReadConversation = VoiceUtil.createTapToReadConversation(conversation);
+    private static void postNotification(Conversation conversation) {
+        int userAccountId = conversation.getExtras().getInt(EXTRA_ACCOUNT_ID, 0);
+        if (userAccountId == 0) {
+            L.w(
+                    "posting Notification with null user account id. "
+                            + "Note, reply would likely fail if user account id is not set.");
+        }
+        Conversation tapToReadConversation =
+                VoiceUtil.createTapToReadConversation(conversation, userAccountId);
         Context context = AppFactory.get().getContext();
         NotificationManager notificationManager =
                 context.getSystemService(NotificationManager.class);
