@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.models.UserAccount;
+import com.android.car.messenger.core.shared.MessageConstants;
 import com.android.car.messenger.core.util.ConversationUtil;
 import com.android.car.messenger.core.util.L;
 import com.android.car.messenger.impl.common.ProjectionStateListener;
@@ -125,6 +126,7 @@ public class NewMessageLiveData extends ContentProviderLiveData<Conversation> {
         Conversation conversation;
         try {
             conversation = fetchConversation(conversationId);
+            conversation.getExtras().putInt(MessageConstants.EXTRA_ACCOUNT_ID, userAccount.getId());
         } catch (CursorIndexOutOfBoundsException e) {
             L.w("Error occurred fetching conversation Id " + conversationId);
             return false;
