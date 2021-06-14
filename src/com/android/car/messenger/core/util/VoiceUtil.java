@@ -31,6 +31,7 @@ import static com.android.car.messenger.core.shared.MessageConstants.ACTION_DIRE
 import static com.android.car.messenger.core.shared.MessageConstants.ACTION_MARK_AS_READ;
 import static com.android.car.messenger.core.shared.MessageConstants.ACTION_MUTE;
 import static com.android.car.messenger.core.shared.MessageConstants.ACTION_REPLY;
+import static com.android.car.messenger.core.shared.MessageConstants.EXTRA_ACCOUNT_ID;
 import static com.android.car.messenger.core.shared.MessageConstants.EXTRA_CONVERSATION_KEY;
 
 import android.app.Activity;
@@ -105,21 +106,20 @@ public class VoiceUtil {
             @NonNull String conversationAction,
             @NonNull String notificationAction) {
         Bundle args = new Bundle();
-        Conversation tapToReadConversation = createTapToReadConversation(conversation);
+        Conversation tapToReadConversation =
+                createTapToReadConversation(conversation, userAccount.getId());
         // use legacy tap to read by default as support for
         // new api using Conversation class is still very limited and very nascent
         StatusBarNotification sbn =
                 NotificationHandler.postNotificationForLegacyTapToRead(tapToReadConversation);
         if (sbn != null) {
             args.putString(KEY_ACTION, notificationAction);
-            args.putString(KEY_DEVICE_ADDRESS, userAccount.getIccId());
             args.putParcelable(KEY_NOTIFICATION, sbn);
         } else {
             // New API using generic Conversation class
             // is currently limited in support by partner assistants and is currently being phase
             // in.
             args.putString(KEY_ACTION, conversationAction);
-            args.putString(KEY_DEVICE_ADDRESS, userAccount.getIccId());
             args.putBundle(KEY_CONVERSATION, tapToReadConversation.toBundle());
         }
 
@@ -133,7 +133,8 @@ public class VoiceUtil {
         bundle.putString(KEY_DEVICE_ADDRESS, userAccount.getIccId());
         bundle.putString(KEY_DEVICE_NAME, userAccount.getName());
         PendingIntent sendIntent =
-                createServiceIntent(ACTION_DIRECT_SEND, /* conversationKey= */ null);
+                createServiceIntent(
+                        ACTION_DIRECT_SEND, /* conversationKey= */ null, userAccount.getId());
         bundle.putParcelable(KEY_SEND_PENDING_INTENT, sendIntent);
         activity.showAssist(bundle);
     }
@@ -150,14 +151,16 @@ public class VoiceUtil {
      *
      * @return new conversation instance with the same data and pending intents for tap to read.
      */
-    public static Conversation createTapToReadConversation(Conversation conversation) {
+    public static Conversation createTapToReadConversation(
+            Conversation conversation, int userAccountId) {
         Context context = AppFactory.get().getContext();
         String conversationKey = conversation.getId();
         Conversation.Builder builder = conversation.toBuilder();
 
         final int replyIcon = R.drawable.car_ui_icon_reply;
         final String replyString = context.getString(R.string.action_reply);
-        PendingIntent replyIntent = createServiceIntent(ACTION_REPLY, conversationKey);
+        PendingIntent replyIntent =
+                createServiceIntent(ACTION_REPLY, conversationKey, userAccountId);
         ConversationAction replyAction =
                 new ConversationAction(
                         ActionType.ACTION_TYPE_REPLY,
@@ -170,7 +173,8 @@ public class VoiceUtil {
 
         final int markAsReadIcon = android.R.drawable.ic_media_play;
         final String markAsReadString = context.getString(R.string.action_mark_as_read);
-        PendingIntent markAsReadIntent = createServiceIntent(ACTION_MARK_AS_READ, conversationKey);
+        PendingIntent markAsReadIntent =
+                createServiceIntent(ACTION_MARK_AS_READ, conversationKey, userAccountId);
         ConversationAction markAsReadAction =
                 new ConversationAction(
                         ActionType.ACTION_TYPE_MARK_AS_READ,
@@ -183,7 +187,7 @@ public class VoiceUtil {
 
         final int muteIcon = R.drawable.car_ui_icon_toggle_mute;
         final String muteString = context.getString(R.string.action_mute);
-        PendingIntent muteIntent = createServiceIntent(ACTION_MUTE, conversationKey);
+        PendingIntent muteIntent = createServiceIntent(ACTION_MUTE, conversationKey, userAccountId);
         ConversationAction muteAction =
                 new ConversationAction(
                         ActionType.ACTION_TYPE_MUTE,
@@ -203,12 +207,13 @@ public class VoiceUtil {
     }
 
     private static PendingIntent createServiceIntent(
-            @NonNull String action, @Nullable String conversationKey) {
+            @NonNull String action, @Nullable String conversationKey, int userAccountId) {
         Context context = AppFactory.get().getContext();
         Bundle bundle = new Bundle();
         if (conversationKey != null) {
             bundle.putString(EXTRA_CONVERSATION_KEY, conversationKey);
         }
+        bundle.putInt(EXTRA_ACCOUNT_ID, userAccountId);
         Intent intent =
                 new Intent(context, MessengerService.class)
                         .setAction(action)
