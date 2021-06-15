@@ -90,6 +90,10 @@ public class TelephonyDataModel implements DataModel {
     @Override
     public void replyConversation(
             int accountId, @NonNull String conversationId, @NonNull String message) {
+        if (accountId <= 0) {
+            L.e("Invalid user account id when replying conversation, dropping message");
+            return;
+        }
         L.d("Sending a message to a conversation");
         String destination =
                 Uri.withAppendedPath(Telephony.Threads.CONTENT_URI, conversationId).toString();
