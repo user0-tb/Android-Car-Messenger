@@ -27,6 +27,7 @@ import com.android.car.messenger.bluetooth.BluetoothMonitor;
 import com.android.car.messenger.common.BaseNotificationDelegate;
 import com.android.car.messenger.common.ConversationKey;
 import com.android.car.messenger.log.L;
+import com.android.car.telephony.common.InMemoryPhoneBook;
 
 /** Service responsible for handling SMS messaging events from paired Bluetooth devices. */
 public class MessengerService extends Service {
@@ -81,6 +82,9 @@ public class MessengerService extends Service {
         mBluetoothMonitor = new BluetoothMonitor(this);
         mBluetoothMonitor.registerListener(mMessengerDelegate);
         sendServiceRunningNotification();
+        if (!InMemoryPhoneBook.isInitialized()) {
+            InMemoryPhoneBook.init(this);
+        }
     }
 
 
