@@ -30,6 +30,7 @@ import androidx.annotation.NonNull;
 import com.android.car.messenger.R;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
+import com.android.car.messenger.core.shared.NotificationHandler;
 import com.android.car.messenger.core.ui.conversationlist.ConversationItemAdapter.OnConversationItemClickListener;
 import com.android.car.messenger.core.ui.shared.CircularOutputlineProvider;
 import com.android.car.messenger.core.ui.shared.ViewUtils;
@@ -150,6 +151,9 @@ public class ConversationItemViewHolder extends RecyclerView.ViewHolder {
                 view -> {
                     boolean mute = !uiData.isMuted();
                     mDataModel.muteConversation(uiData.getConversationId(), mute);
+                    if (mute) {
+                        NotificationHandler.removeNotification(uiData.getConversationId());
+                    }
                 });
     }
 }
