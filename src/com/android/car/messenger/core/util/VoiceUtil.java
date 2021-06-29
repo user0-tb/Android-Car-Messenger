@@ -223,8 +223,8 @@ public class VoiceUtil {
 
         int requestCode =
                 (conversationKey == null) ? action.hashCode() : conversationKey.hashCode();
-        return PendingIntent.getForegroundService(
-                context, requestCode, intent, PendingIntent.FLAG_ONE_SHOT);
+        return PendingIntent.getForegroundService(context, requestCode, intent,
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_ONE_SHOT);
     }
 
     /** Sends a reply, meant to be used from a caller originating from voice input. */
