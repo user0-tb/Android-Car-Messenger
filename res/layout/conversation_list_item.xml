@@ -28,10 +28,10 @@ limitations under the License.
         android:layout_marginEnd="@dimen/unread_icon_marginEnd"
         android:contentDescription="@string/cd_unread"
         android:scaleType="centerCrop"
+        android:src="@color/unread_dot_color"
         app:layout_constraintBottom_toBottomOf="@id/icon"
         app:layout_constraintEnd_toStartOf="@id/icon"
-        app:layout_constraintTop_toTopOf="@id/icon"
-        tools:src="#66B5FF" />
+        app:layout_constraintTop_toTopOf="@id/icon" />
 
     <ImageView
         android:id="@+id/icon"
