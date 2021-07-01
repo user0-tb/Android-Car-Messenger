@@ -108,19 +108,23 @@ public class VoiceUtil {
         Bundle args = new Bundle();
         Conversation tapToReadConversation =
                 createTapToReadConversation(conversation, userAccount.getId());
-        // use legacy tap to read by default as support for
-        // new api using Conversation class is still very limited and very nascent
-        StatusBarNotification sbn =
-                NotificationHandler.postNotificationForLegacyTapToRead(tapToReadConversation);
-        if (sbn != null) {
-            args.putString(KEY_ACTION, notificationAction);
-            args.putParcelable(KEY_NOTIFICATION, sbn);
-        } else {
+        boolean isConversationSupported =
+                activity.getResources().getBoolean(R.bool.ttr_conversation_supported);
+        if (isConversationSupported) {
             // New API using generic Conversation class
-            // is currently limited in support by partner assistants and is currently being phase
-            // in.
+            // is currently limited in support by partner assistants and is being phased in.
             args.putString(KEY_ACTION, conversationAction);
             args.putBundle(KEY_CONVERSATION, tapToReadConversation.toBundle());
+        } else {
+            // Continue using legacy SBN
+            StatusBarNotification sbn =
+                    NotificationHandler.postNotificationForLegacyTapToRead(tapToReadConversation);
+            if (sbn == null) {
+                L.e("Failed to convert Conversation to SBN for Legacy Tap To Read.");
+                return;
+            }
+            args.putString(KEY_ACTION, notificationAction);
+            args.putParcelable(KEY_NOTIFICATION, sbn);
         }
 
         activity.showAssist(args);
