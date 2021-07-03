@@ -79,6 +79,16 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
         loadValue();
     }
 
+    /**
+     * Refresh the user accounts. Updates listeners if a change is found. Useful to call when
+     * something occurs that indicates a change in accounts, such as empty messages. This is useful
+     * as there are occasions when the subscription on change listener is not called after a
+     * subscription is deleted.
+     */
+    public void refresh() {
+        loadValue();
+    }
+
     /** Gets the instance of {@link UserAccountLiveData} */
     @NonNull
     public static UserAccountLiveData getInstance() {
