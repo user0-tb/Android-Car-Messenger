@@ -42,6 +42,12 @@ public interface DataModel {
     LiveData<Collection<UserAccount>> getAccounts();
 
     /**
+     * Call this to reload user account live data. This is useful when resuming an activity, to
+     * ensure no account changes was missed.
+     */
+    void refreshUserAccounts();
+
+    /**
      * Get collection of conversations for the given account.
      *
      * @param userAccount The account to which data is being queried. This could be the subscription

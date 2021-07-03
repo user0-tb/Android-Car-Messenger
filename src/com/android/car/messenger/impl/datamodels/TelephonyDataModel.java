@@ -51,6 +51,11 @@ public class TelephonyDataModel implements DataModel {
                 UserAccountLiveData.getInstance(), UserAccountChangeList::getAccounts);
     }
 
+    @Override
+    public void refreshUserAccounts() {
+        UserAccountLiveData.getInstance().refresh();
+    }
+
     @NonNull
     @Override
     public LiveData<Collection<Conversation>> getConversations(@NonNull UserAccount userAccount) {
