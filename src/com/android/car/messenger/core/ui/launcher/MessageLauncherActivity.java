@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import androidx.annotation.NonNull;
 
+import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.models.UserAccount;
 import com.android.car.messenger.core.ui.conversationlist.ConversationListFragment;
 import com.android.car.messenger.core.util.L;
@@ -69,6 +70,13 @@ public class MessageLauncherActivity extends FragmentActivity implements InsetsC
             getSupportFragmentManager().popBackStackImmediate();
         }
         pushContentFragment(fragment, fragmentTag);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        L.d("On Resume of Message Activity.");
+        AppFactory.get().getDataModel().refreshUserAccounts();
     }
 
     private void pushContentFragment(
