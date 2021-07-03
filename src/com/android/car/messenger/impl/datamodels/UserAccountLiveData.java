@@ -95,7 +95,10 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
                                 it -> {
                                     int subscriptionId = it.getSubscriptionId();
                                     String iccId = it.getIccId();
-                                    String displayName = it.getDisplayName().toString();
+                                    String displayName =
+                                            it.getDisplayName() != null
+                                                    ? it.getDisplayName().toString()
+                                                    : "";
                                     return new UserAccount(
                                             subscriptionId, displayName, iccId, Instant.now());
                                 })
