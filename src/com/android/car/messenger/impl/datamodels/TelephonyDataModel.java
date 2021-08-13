@@ -18,8 +18,6 @@ package com.android.car.messenger.impl.datamodels;
 
 import static com.android.car.messenger.core.shared.MessageConstants.KEY_MUTED_CONVERSATIONS;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Transformations;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -28,6 +26,8 @@ import android.provider.Telephony;
 import android.telephony.SmsManager;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Transformations;
 
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
@@ -109,29 +109,6 @@ public class TelephonyDataModel implements DataModel {
                         message,
                         /* sentIntent= */ null,
                         /* deliveryIntent= */ null);
-    }
-
-    @Override
-    public void sendMessage(int accountId, @NonNull String phoneNumber, @NonNull String message) {
-        L.d("Sending a message to a phone number");
-        SmsManager.getSmsManagerForSubscriptionId(accountId)
-                .sendTextMessage(
-                        phoneNumber,
-                        /* scAddress= */ null,
-                        message,
-                        /* sentIntent= */ null,
-                        /* deliveryIntent= */ null);
-    }
-
-    @Override
-    public void sendMessage(
-            @NonNull String iccId, @NonNull String phoneNumber, @NonNull String message) {
-        UserAccount userAccount = UserAccountLiveData.getUserAccount(iccId);
-        if (userAccount == null) {
-            L.d("Could not find User Account with specified iccId. Unable to send message");
-            return;
-        }
-        sendMessage(userAccount.getId(), phoneNumber, message);
     }
 
     @NonNull
