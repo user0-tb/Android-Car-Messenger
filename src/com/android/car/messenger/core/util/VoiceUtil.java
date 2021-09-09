@@ -20,7 +20,6 @@ import static com.android.car.assist.CarVoiceInteractionSession.KEY_CONVERSATION
 import static com.android.car.assist.CarVoiceInteractionSession.KEY_DEVICE_ADDRESS;
 import static com.android.car.assist.CarVoiceInteractionSession.KEY_DEVICE_NAME;
 import static com.android.car.assist.CarVoiceInteractionSession.KEY_NOTIFICATION;
-import static com.android.car.assist.CarVoiceInteractionSession.KEY_PHONE_NUMBER;
 import static com.android.car.assist.CarVoiceInteractionSession.KEY_SEND_PENDING_INTENT;
 import static com.android.car.assist.CarVoiceInteractionSession.VOICE_ACTION_READ_CONVERSATION;
 import static com.android.car.assist.CarVoiceInteractionSession.VOICE_ACTION_READ_NOTIFICATION;
@@ -232,21 +231,6 @@ public class VoiceUtil {
                 requestCode,
                 intent,
                 PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ONE_SHOT);
-    }
-
-    /** Sends a reply, meant to be used from a caller originating from voice input. */
-    public static void directSend(Intent intent) {
-        final CharSequence phoneNumber = intent.getCharSequenceExtra(KEY_PHONE_NUMBER);
-        final String iccId = intent.getStringExtra(KEY_DEVICE_ADDRESS);
-        final CharSequence message = intent.getCharSequenceExtra(Intent.EXTRA_TEXT);
-        if (iccId == null || phoneNumber == null || TextUtils.isEmpty(message)) {
-            L.e("Dropping voice reply. Received no icc id, phone Number and/or empty message!");
-            return;
-        }
-        L.d("Sending a message to specified phone number");
-        AppFactory.get()
-                .getDataModel()
-                .sendMessage(iccId, phoneNumber.toString(), message.toString());
     }
 
     /** Sends a reply, meant to be used from a caller originating from voice input. */
