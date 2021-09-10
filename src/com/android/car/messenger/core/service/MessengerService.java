@@ -31,14 +31,13 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
+import androidx.core.app.NotificationCompat;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 
 import com.android.car.messenger.R;
-import com.android.car.messenger.common.MessagingUtils;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
 import com.android.car.messenger.core.shared.NotificationHandler;
@@ -180,7 +179,7 @@ public class MessengerService extends Service {
                 VoiceUtil.markAsRead(intent);
                 break;
             case ACTION_DIRECT_SEND:
-                MessagingUtils.directSend(this, intent);
+                VoiceUtil.directSend(intent);
                 break;
             case TelephonyManager.ACTION_RESPOND_VIA_MESSAGE:
                 // Not currently supported. This was added to allow CarMessenger become the default

@@ -68,14 +68,15 @@ public final class MessageUtils {
     }
 
     /**
-     * Gets Read Messages and Reply Timestamp.
+     * Gets Read Messages and Last Reply
      *
      * @param messagesCursor MessageCursor in descending order
      */
     @NonNull
-    public static Pair<List<Message>, Long> getReadMessagesAndReplyTimestamp(
+    public static Pair<List<Message>, Message> getReadMessagesAndReplyTimestamp(
             @Nullable Cursor messagesCursor) {
         List<Message> readMessages = new ArrayList<>();
+        AtomicReference<Message> replyMessage = new AtomicReference<>();
         AtomicReference<Long> lastReply = new AtomicReference<>(0L);
         MessageUtils.forEachDesc(
                 messagesCursor,
@@ -89,6 +90,7 @@ public final class MessageUtils {
                     if (message.getMessageType() == MessageType.MESSAGE_TYPE_SENT) {
                         if (lastReply.get() < message.getTimestamp()) {
                             lastReply.set(message.getTimestamp());
+                            replyMessage.set(message);
                         }
                         return readMessages.isEmpty();
                     }
@@ -101,7 +103,7 @@ public final class MessageUtils {
                     return false;
                 });
         readMessages.sort(comparingLong(Message::getTimestamp));
-        return new Pair<>(readMessages, lastReply.get());
+        return new Pair<>(readMessages, replyMessage.get());
     }
 
     /**

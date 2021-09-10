@@ -18,10 +18,8 @@ package com.android.car.messenger.core.interfaces;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.models.UserAccount;
-
 import java.util.Collection;
 
 /**
@@ -96,4 +94,23 @@ public interface DataModel {
      */
     void replyConversation(
             @NonNull int accountId, @NonNull String conversationId, @NonNull String message);
+
+    /**
+     * Called by UI to send a message to a phone number on a device
+     *
+     * @param accountId The user account/device id to send the message from
+     * @param phoneNumber The desired phone number to send message to
+     * @param message The desired message to send to conversation thread
+     */
+    void sendMessage(int accountId, @NonNull String phoneNumber, @NonNull String message);
+
+    /**
+     * Called by UI to send a message to a phone number on a device
+     *
+     * @param iccId The {@link UserAccount#getIccId()} belonging to the device/user account to send
+     *     the message from
+     * @param phoneNumber The desired phone number to send message to
+     * @param message The desired message to send to conversation thread
+     */
+    void sendMessage(@NonNull String iccId, @NonNull String phoneNumber, @NonNull String message);
 }

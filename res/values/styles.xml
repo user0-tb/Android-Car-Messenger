@@ -17,7 +17,7 @@
     <!-- Message history -->
     <style name="TextAppearance.MessageHistoryTitle" parent="TextAppearance.Body1" />
 
-    <style name="TextAppearance.MessageHistorySubtitle" parent="TextAppearance.Body3">
+    <style name="TextAppearance.MessageHistoryTextPreview" parent="TextAppearance.Body3">
         <item name="android:textColor">@color/secondary_text_color</item>
     </style>
     <!-- Customized text color for unread messages can be added here -->
@@ -26,9 +26,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.MessageHistoryUnreadSubtitle"
-        parent="TextAppearance.MessageHistorySubtitle">
+    <style name="TextAppearance.MessageHistoryUnreadMetadata"
+        parent="TextAppearance.MessageHistoryTextPreview">
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/unread_color</item>
     </style>
 
     <style name="Widget.Button" parent="android:Widget.DeviceDefault.Button">
