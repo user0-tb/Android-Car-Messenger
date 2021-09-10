@@ -20,7 +20,9 @@ import static com.android.car.messenger.core.shared.MessageConstants.EXTRA_ACCOU
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.service.notification.StatusBarNotification;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,7 @@ import com.android.car.messenger.R;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.service.MessengerService;
+import com.android.car.messenger.core.ui.launcher.MessageLauncherActivity;
 import com.android.car.messenger.core.util.L;
 import com.android.car.messenger.core.util.VoiceUtil;
 
@@ -70,8 +73,27 @@ public class NotificationHandler {
         Notification notification =
                 ConversationPayloadHandler.createNotificationFromConversation(
                         context, channelId, tapToReadConversation, R.drawable.ic_message, null);
+        notification.contentIntent = createServiceIntent();
 
         notificationManager.notify(tapToReadConversation.getId().hashCode(), notification);
+    }
+
+    private static PendingIntent createServiceIntent() {
+        Context context = AppFactory.get().getContext();
+
+        Intent intent =
+                new Intent(context, MessageLauncherActivity.class)
+                        .addFlags(
+                                Intent.FLAG_ACTIVITY_NEW_TASK
+                                        | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                        | Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                        .setClass(context, MessengerService.class);
+
+        return PendingIntent.getActivity(
+                context,
+                /* requestCode= */ 0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     /**

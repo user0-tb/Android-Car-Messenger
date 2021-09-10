@@ -17,6 +17,7 @@
 <resources>
     <bool name="group_avatar_fill_background">false</bool>
     <bool name="direct_send_supported">true</bool>
+    <bool name="direct_reply_supported">true</bool>
     <bool name="ttr_conversation_supported">false</bool>
 
     <!--
