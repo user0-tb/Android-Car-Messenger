@@ -18,7 +18,6 @@ package com.android.car.messenger.impl.datamodels;
 
 import static com.android.car.messenger.core.shared.MessageConstants.KEY_MUTED_CONVERSATIONS;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import android.content.ContentValues;
 import android.content.Context;
@@ -26,9 +25,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.provider.Telephony;
 import android.telephony.SmsManager;
-
 import androidx.annotation.NonNull;
-
+import androidx.lifecycle.LiveData;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
@@ -36,7 +34,6 @@ import com.android.car.messenger.core.models.UserAccount;
 import com.android.car.messenger.core.util.L;
 import com.android.car.messenger.impl.datamodels.UserAccountLiveData.UserAccountChangeList;
 import com.android.car.messenger.impl.datamodels.util.CursorUtils;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;

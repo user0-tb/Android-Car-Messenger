@@ -56,19 +56,18 @@ public class ConversationFetchUtil {
         // messages to read: first get unread messages
         List<Conversation.Message> messagesToRead = MessageUtils.getUnreadMessages(messagesCursor);
         int unreadCount = messagesToRead.size();
-        long lastReplyTimestamp = 0L;
+        Conversation.Message lastReply = null;
 
         // if no unread messages, get read messages
         if (messagesToRead.isEmpty()) {
-            Pair<List<Conversation.Message>, Long> readMessagesAndReplyTimestamp =
+            Pair<List<Conversation.Message>, Conversation.Message> readMessagesAndReplyTimestamp =
                     MessageUtils.getReadMessagesAndReplyTimestamp(messagesCursor);
             messagesToRead = readMessagesAndReplyTimestamp.first;
-            lastReplyTimestamp = readMessagesAndReplyTimestamp.second;
+            lastReply = readMessagesAndReplyTimestamp.second;
         }
 
         conversationBuilder.setMessages(messagesToRead).setUnreadCount(unreadCount);
-        ConversationUtil.setReplyTimestampAsAnExtra(
-                conversationBuilder, /* extras= */ null, lastReplyTimestamp);
+        ConversationUtil.setReplyAsAnExtra(conversationBuilder, /* extras= */ null, lastReply);
         return conversationBuilder.build();
     }
 

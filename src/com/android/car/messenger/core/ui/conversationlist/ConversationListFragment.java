@@ -87,7 +87,7 @@ public class ConversationListFragment extends MessageListBaseFragment
                                     || conversationLog.getData().isEmpty()) {
                                 mLoadingFrameLayout.showEmpty(
                                         MessageConstants.INVALID_RES_ID,
-                                        R.string.no_new_messages,
+                                        R.string.no_messages,
                                         MessageConstants.INVALID_RES_ID);
                                 setMenuItems();
                             } else {
@@ -122,10 +122,11 @@ public class ConversationListFragment extends MessageListBaseFragment
         }
         MenuItem newMessageButton =
                 new MenuItem.Builder(activity)
-                        .setIcon(R.drawable.car_ui_icon_edit)
+                        .setIcon(R.drawable.ui_icon_edit)
                         .setTinted(true)
                         .setShowIconAndTitle(true)
                         .setTitle(R.string.new_message)
+                        .setPrimary(true)
                         .setOnClickListener(
                                 item ->
                                         VoiceUtil.voiceRequestGenericCompose(
@@ -150,6 +151,14 @@ public class ConversationListFragment extends MessageListBaseFragment
             return;
         }
         VoiceUtil.voiceRequestReplyConversation(requireActivity(), mUserAccount, conversation);
+    }
+
+    @Override
+    public void onPlayIconClicked(@NonNull Conversation conversation) {
+        if (mUserAccount == null) {
+            return;
+        }
+        VoiceUtil.voiceRequestReadConversation(requireActivity(), mUserAccount, conversation);
     }
 
     /**
