@@ -19,15 +19,17 @@ package com.android.car.messenger.core.ui.conversationlist;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
+import android.car.drivingstate.CarUxRestrictions;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
 import com.android.car.messenger.core.models.UserAccount;
+import com.android.car.messenger.core.util.L;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,15 +77,30 @@ public class ConversationListViewModel extends AndroidViewModel {
         MediatorLiveData<UIConversationLog> mutableLiveData = new MediatorLiveData<>();
         mutableLiveData.postValue(UIConversationLog.getLoadingState());
         mutableLiveData.addSource(
+                AppFactory.get().getCarStateListener().getUxrRestrictions(),
+                uxrRestrictions ->
+                        subscribeToConversations(userAccount, mutableLiveData, uxrRestrictions));
+        return mutableLiveData;
+    }
+
+    private void subscribeToConversations(
+            @NonNull UserAccount userAccount,
+            MediatorLiveData<UIConversationLog> mutableLiveData,
+            CarUxRestrictions uxRestrictions) {
+        L.w("Got new ux restrictions: " + uxRestrictions);
+        mutableLiveData.addSource(
                 mDataModel.getConversations(userAccount),
                 list -> {
                     List<UIConversationItem> data =
                             list.stream()
-                                    .map(UIConversationItemConverter::convertToUIConversationItem)
+                                    .map(
+                                            conversation ->
+                                                    UIConversationItemConverter
+                                                            .convertToUIConversationItem(
+                                                                    conversation, uxRestrictions))
                                     .collect(Collectors.toList());
                     UIConversationLog log = UIConversationLog.getLoadedState(data);
                     mutableLiveData.postValue(log);
                 });
-        return mutableLiveData;
     }
 }

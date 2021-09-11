@@ -16,13 +16,10 @@
 
 package com.android.car.messenger.core.interfaces;
 
-import androidx.lifecycle.LiveData;
-
 import androidx.annotation.NonNull;
-
+import androidx.lifecycle.LiveData;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.models.UserAccount;
-
 import java.util.Collection;
 
 /**

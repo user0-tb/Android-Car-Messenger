@@ -18,16 +18,13 @@ package com.android.car.messenger.core.ui.launcher;
 
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import androidx.lifecycle.LiveData;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
 import com.android.car.messenger.core.models.UserAccount;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
