@@ -16,12 +16,16 @@
 
 package com.android.car.messenger.core.ui.conversationlist;
 
+import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import com.android.car.messenger.R;
@@ -106,15 +110,19 @@ public class ConversationItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setUpTextAppearance(@NonNull UIConversationItem uiData) {
+        Context context = AppFactory.get().getContext();
         if (uiData.shouldUseUnreadTheme()) {
             mTitleView.setTextAppearance(R.style.TextAppearance_MessageHistoryUnreadTitle);
-            mPreviewTextView.setTextAppearance(R.style.TextAppearance_MessageHistoryTextPreview);
+            mPreviewTextView.setTextAppearance(
+                    R.style.TextAppearance_MessageHistoryTextPreviewUnread);
             mTextMetadataView.setTextAppearance(
                     R.style.TextAppearance_MessageHistoryUnreadMetadata);
             mTextMetadataDotView.setTextAppearance(
                     R.style.TextAppearance_MessageHistoryUnreadMetadata);
             mDateTimeView.setTextAppearance(R.style.TextAppearance_MessageHistoryUnreadMetadata);
-            mDotSeparatorView.setTextAppearance(R.style.TextAppearance_MessageHistoryTextPreview);
+            mDotSeparatorView.setTextAppearance(
+                    R.style.TextAppearance_MessageHistoryTextPreviewUnread);
+            updateSubtitleIcon(context.getColor(R.color.unread_color));
             ViewUtils.setVisible(mUnreadIconIndicator, /* visible= */ true);
         } else {
             mTitleView.setTextAppearance(R.style.TextAppearance_MessageHistoryTitle);
@@ -124,14 +132,20 @@ public class ConversationItemViewHolder extends RecyclerView.ViewHolder {
                     R.style.TextAppearance_MessageHistoryTextPreview);
             mDateTimeView.setTextAppearance(R.style.TextAppearance_MessageHistoryTextPreview);
             mDotSeparatorView.setTextAppearance(R.style.TextAppearance_MessageHistoryTextPreview);
+            updateSubtitleIcon(context.getColor(R.color.secondary_text_color));
             ViewUtils.setVisible(mUnreadIconIndicator, /* visible= */ false);
         }
+    }
+
+    private void updateSubtitleIcon(@ColorInt int color) {
+        PorterDuffColorFilter porterDuffColorFilter =
+                new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        mSubtitleIconView.getDrawable().setColorFilter(porterDuffColorFilter);
     }
 
     private void updateMuteButton(boolean isMuted) {
         int drawableRes = isMuted ? R.drawable.ic_unmute : R.drawable.ic_mute;
         Drawable drawable = AppFactory.get().getContext().getDrawable(drawableRes);
-
         mMuteActionButton.setImageDrawable(drawable);
     }
 

@@ -38,19 +38,23 @@
     </plurals>
 
     <!-- Button text for when disconnected from Bluetooth [CHAR LIMIT=40] -->
-    <string name="app_name" translatable="false">Car Messenger</string>
+    <string name="app_name" translatable="false">SMS</string>
 
     <!-- Button text for connecting to Bluetooth [CHAR LIMIT=40] -->
     <string name="bluetooth_disconnected" translatable="false">Bluetooth disconnected</string>
 
     <!-- Status when no new messages[CHAR LIMIT=40] -->
+    <string name="no_messages" translatable="false">No messages</string>
+
     <string name="connect_bluetooth_button_text" translatable="false">Connect to Bluetooth</string>
 
     <!-- Status when replied [CHAR LIMIT=40] -->
-    <string name="no_messages" translatable="false">No messages</string>
+    <string name="replied" translatable="false">Replied</string>
+
+    <!-- Status - Tap To Read Aloud [CHAR LIMIT=40] -->
+    <string name="tap_to_read_aloud">Tap to read aloud</string>
 
     <!-- Dot separator [CHAR LIMIT=1] -->
-    <string name="replied" translatable="false">Replied</string>
     <string name="dot" translatable="false">·</string>
     <string name="action_reply" translatable="false">Reply</string>
     <string name="action_mute" translatable="false">Mute</string>

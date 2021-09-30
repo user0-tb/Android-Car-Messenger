@@ -73,21 +73,18 @@ public class NotificationHandler {
         Notification notification =
                 ConversationPayloadHandler.createNotificationFromConversation(
                         context, channelId, tapToReadConversation, R.drawable.ic_message, null);
-        notification.contentIntent = createServiceIntent();
-
+        notification.contentIntent = createContentIntent();
         notificationManager.notify(tapToReadConversation.getId().hashCode(), notification);
     }
 
-    private static PendingIntent createServiceIntent() {
+    private static PendingIntent createContentIntent() {
         Context context = AppFactory.get().getContext();
-
         Intent intent =
                 new Intent(context, MessageLauncherActivity.class)
                         .addFlags(
                                 Intent.FLAG_ACTIVITY_NEW_TASK
                                         | Intent.FLAG_ACTIVITY_CLEAR_TOP
-                                        | Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                        .setClass(context, MessengerService.class);
+                                        | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
         return PendingIntent.getActivity(
                 context,
