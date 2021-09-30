@@ -125,6 +125,13 @@ public class NewMessageLiveData extends ContentProviderLiveData<Conversation> {
         Conversation conversation;
         try {
             conversation = fetchConversation(conversationId);
+            Instant offset =
+                    Objects.requireNonNull(
+                            mOffsetMap.getOrDefault(
+                                    userAccount.getId(), userAccount.getConnectionTime()));
+            conversation
+                    .getMessages()
+                    .removeIf(message -> message.getTimestamp() < offset.toEpochMilli());
             conversation.getExtras().putInt(MessageConstants.EXTRA_ACCOUNT_ID, userAccount.getId());
         } catch (CursorIndexOutOfBoundsException e) {
             L.w("Error occurred fetching conversation Id " + conversationId);

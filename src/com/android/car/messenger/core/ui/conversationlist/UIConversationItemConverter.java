@@ -42,12 +42,10 @@ public class UIConversationItemConverter {
         long timestamp = ConversationUtil.getConversationTimestamp(conversation);
         boolean isReplied = ConversationUtil.isReplied(conversation);
 
-        Drawable subtitleIcon = null;
-
-        // show reply icon to the side when replied
-        if (isReplied) {
-            subtitleIcon = context.getDrawable(R.drawable.car_ui_icon_reply);
-        }
+        Drawable subtitleIcon =
+                isReplied
+                        ? context.getDrawable(R.drawable.car_ui_icon_reply)
+                        : context.getDrawable(R.drawable.ic_subtitle_play);
 
         boolean showTextPreview =
                 (carUxRestrictions.getActiveRestrictions()
@@ -64,6 +62,8 @@ public class UIConversationItemConverter {
             }
         } else {
             if (isUnread) {
+                // in place of text preview, we show "tap to read aloud" when unread
+                textPreview = context.getString(R.string.tap_to_read_aloud);
                 textMetadata = getNumberOfUnreadMessages(context, conversation.getUnreadCount());
             } else if (isReplied) {
                 textMetadata = context.getString(R.string.replied);
@@ -71,10 +71,6 @@ public class UIConversationItemConverter {
                 textMetadata = getNumberOfMessages(context, conversation.getMessages().size());
             }
         }
-
-        boolean showPlayIcon = isUnread;
-        boolean showReplyIcon =
-                !showPlayIcon && context.getResources().getBoolean(R.bool.direct_reply_supported);
 
         return new UIConversationItem(
                 conversation.getId(),
@@ -84,9 +80,9 @@ public class UIConversationItemConverter {
                 textMetadata,
                 timestamp,
                 getConversationAvatar(context, conversation),
-                /* showMuteIcon= */ true,
-                /* showReplyIcon= */ showReplyIcon,
-                /* showPlayIcon= */ showPlayIcon,
+                /* showMuteIcon= */ false,
+                /* showReplyIcon= */ true,
+                /* showPlayIcon= */ false,
                 isUnread,
                 conversation.isMuted(),
                 conversation);
