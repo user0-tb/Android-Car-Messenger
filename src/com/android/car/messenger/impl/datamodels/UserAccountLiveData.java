@@ -20,12 +20,15 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
 import android.telephony.TelephonyManager;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
+
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.models.UserAccount;
 import com.android.car.messenger.impl.datamodels.UserAccountLiveData.UserAccountChangeList;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;

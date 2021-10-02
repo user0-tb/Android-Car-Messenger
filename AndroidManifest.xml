@@ -28,9 +28,9 @@
 
         <activity
             android:name=".core.ui.launcher.MessageLauncherActivity"
-            android:launchMode="singleTask"
             android:exported="true"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

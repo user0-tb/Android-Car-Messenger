@@ -17,7 +17,11 @@
     <!-- Message history -->
     <style name="TextAppearance.MessageHistoryTitle" parent="TextAppearance.Body1" />
 
-    <style name="TextAppearance.MessageHistoryTextPreview" parent="TextAppearance.Body3">
+    <style name="TextAppearance.MessageHistoryTextPreviewUnread" parent="TextAppearance.CarUi.Body1">
+        <item name="android:textColor">@color/unread_color</item>
+    </style>
+
+    <style name="TextAppearance.MessageHistoryTextPreview" parent="TextAppearance.CarUi.Body1">
         <item name="android:textColor">@color/secondary_text_color</item>
     </style>
     <!-- Customized text color for unread messages can be added here -->
