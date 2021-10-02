@@ -130,30 +130,21 @@ public final class MessageUtils {
                 L.d("Message was not able to be parsed. Skipping.");
                 continue;
             }
+            if (message.getText().trim().isEmpty()) {
+                // There are occasions where a user may send
+                // a text message plus an image or audio and
+                // bluetooth will post two messages to the database (b/182834412),
+                // one with a text and one blank
+                // This leads to boomerang notifications, one with text and one that is empty.
+                // Validating or removing messages when blank is a mitigation on our end.
+                L.d("Message is blank. Skipped. ");
+                continue;
+            }
             if (message.getMessageType() == MessageType.MESSAGE_TYPE_SENT) {
                 hasBeenRepliedTo = true;
             }
             moveToNext = processor.apply(message);
         } while (messageCursor.moveToNext() && moveToNext);
-    }
-
-    /**
-     * Parses each message in the cursor and returns the item for further processing
-     *
-     * @param messageCursor The message cursor to be parsed for SMS and MMS messages and returns
-     *     true for the method to continue parsing the cursor or false to return.
-     */
-    @Nullable
-    public static Message parseCurrentMessage(@NonNull Cursor messageCursor) {
-        Message message = null;
-        Context context = AppFactory.get().getContext();
-        try {
-            message = parseMessageAtPoint(context, messageCursor, false);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            L.d("Message was not able to be parsed. Skipping.");
-        }
-        return message;
     }
 
     /**

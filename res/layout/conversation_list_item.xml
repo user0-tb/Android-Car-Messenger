@@ -52,16 +52,15 @@ limitations under the License.
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="@string/cd_reply_action_button"
         android:scaleType="center"
-        android:src="@drawable/car_ui_icon_reply"
+        android:src="@drawable/ic_reply"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/mute_action_button"
-        app:layout_constraintStart_toEndOf="@id/guideline_end"
+        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/play_action_button"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="@string/cd_play_action_button"
@@ -69,8 +68,7 @@ limitations under the License.
         android:scaleY=".4"
         android:src="@drawable/ic_play"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/mute_action_button"
-        app:layout_constraintStart_toEndOf="@id/guideline_end"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="gone"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,13 +76,14 @@ limitations under the License.
         android:id="@+id/mute_action_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="@string/cd_mute_button"
         android:scaleType="center"
         android:src="@drawable/car_ui_icon_toggle_mute"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guideline_mid"
+        app:layout_constraintStart_toEndOf="@id/guideline_end"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -128,7 +127,7 @@ limitations under the License.
         app:layout_constraintStart_toEndOf="@id/last_action_icon_view"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintEnd_toStartOf="@id/preview_dot"
-        tools:visibility="gone"
+        tools:visibility="visible"
         android:ellipsize="end"
         android:maxLength="20"
         tools:text="Let this be the preview. Lots of preview with
@@ -181,7 +180,6 @@ limitations under the License.
         android:id="@+id/date_time_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/message_history_text_margin_end"
         android:layout_marginStart="6dp"
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@id/text_metadata"
@@ -220,13 +218,6 @@ limitations under the License.
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="200dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_mid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
