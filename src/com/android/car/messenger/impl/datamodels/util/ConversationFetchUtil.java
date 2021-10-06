@@ -16,6 +16,8 @@
 
 package com.android.car.messenger.impl.datamodels.util;
 
+import static java.lang.Math.min;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -27,6 +29,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.core.app.Person;
 
+import com.android.car.messenger.R;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.shared.MessageConstants;
@@ -44,6 +47,7 @@ public class ConversationFetchUtil {
 
     private static final int MESSAGE_LIMIT = 10;
     private static final String COMMA_DELIMITER = ", ";
+    private static final int MAX_TITLE_NAMES = 3;
 
     private ConversationFetchUtil() {}
 
@@ -82,7 +86,7 @@ public class ConversationFetchUtil {
                 fetchParticipants(
                         conversationId,
                         (names, icons) -> {
-                            builder.setConversationTitle(TextUtils.join(COMMA_DELIMITER, names));
+                            builder.setConversationTitle(formatConversationTitle(names));
                             Bitmap bitmap = AvatarUtil.createGroupAvatar(context, icons);
                             if (bitmap != null) {
                                 builder.setConversationIcon(IconCompat.createWithBitmap(bitmap));
@@ -91,6 +95,19 @@ public class ConversationFetchUtil {
         builder.setParticipants(participants);
         builder.setMuted(loadMutedList().contains(conversationId));
         return builder;
+    }
+
+    private static String formatConversationTitle(List<CharSequence> names) {
+        Context context = AppFactory.get().getContext();
+        String title =
+                TextUtils.join(
+                        COMMA_DELIMITER, names.subList(0, min(MAX_TITLE_NAMES, names.size())));
+        if (names.size() > MAX_TITLE_NAMES) {
+            title +=
+                    context.getString(
+                            R.string.participant_overflow_text, names.size() - MAX_TITLE_NAMES);
+        }
+        return title;
     }
 
     /**
