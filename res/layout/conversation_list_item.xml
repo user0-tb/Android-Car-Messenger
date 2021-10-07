@@ -95,6 +95,7 @@ limitations under the License.
         tools:text="Ashley Bae"
         app:layout_constraintVertical_chainStyle="packed"
         android:theme="@style/Theme.Messaging.BidiText"
+        android:ellipsize="end"
         app:layout_constraintBottom_toTopOf="@+id/preview"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_begin"
@@ -129,7 +130,7 @@ limitations under the License.
         app:layout_constraintEnd_toStartOf="@id/preview_dot"
         tools:visibility="visible"
         android:ellipsize="end"
-        android:maxLength="20"
+        android:maxEms="19"
         tools:text="Let this be the preview. Lots of preview with
         a whole lot of various texts, one that is quite long in every way.
         To verify that it still fits in the end" />

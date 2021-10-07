@@ -135,6 +135,7 @@ public class ConversationItemViewHolder extends RecyclerView.ViewHolder {
             updateSubtitleIcon(context.getColor(R.color.secondary_text_color));
             ViewUtils.setVisible(mUnreadIconIndicator, /* visible= */ false);
         }
+        mDotSeparatorView.setTextSize(context.getResources().getDimension(R.dimen.dot_size));
     }
 
     private void updateSubtitleIcon(@ColorInt int color) {

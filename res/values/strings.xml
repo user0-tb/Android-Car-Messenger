@@ -93,6 +93,9 @@
     <!-- A string denoting the current point in time that should be as short as possible. Abbreviations are preferred to full strings as this might be shown repetitively. It is used in the header of notifications. [CHAR LIMIT=8]-->
     <string name="now_string_shortest">now</string>
 
+    <!-- Overflow title text for too many participants in a conversation [CHAR LIMIT=40] -->
+    <string name="participant_overflow_text">, and %d more</string>
+
     <!-- Phrase describing a time duration using minutes that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->
     <plurals name="duration_minutes_shortest">
         <item quantity="one"><xliff:g example="1" id="count" translatable="false">%d</xliff:g>m</item>
