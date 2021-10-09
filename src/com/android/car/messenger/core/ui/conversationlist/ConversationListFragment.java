@@ -135,7 +135,7 @@ public class ConversationListFragment extends MessageListBaseFragment
         MenuItem newMessageButton =
                 new MenuItem.Builder(activity)
                         .setIcon(R.drawable.ui_icon_edit)
-                        .setTinted(true)
+                        .setTinted(false)
                         .setShowIconAndTitle(true)
                         .setTitle(R.string.new_message)
                         .setPrimary(true)
