@@ -79,7 +79,8 @@ public class NotificationHandler {
 
     private static PendingIntent createContentIntent() {
         Context context = AppFactory.get().getContext();
-        Intent intent = new Intent(context, MessageLauncherActivity.class)
+        Intent intent =
+                new Intent(context, MessageLauncherActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         return PendingIntent.getActivity(
