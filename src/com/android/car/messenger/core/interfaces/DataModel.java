@@ -41,10 +41,10 @@ public interface DataModel {
     LiveData<Collection<UserAccount>> getAccounts();
 
     /**
-     * Call this to reload user account live data. This is useful when resuming an activity, to
-     * ensure no account changes was missed.
+     * Call this to reload data. This is useful when resuming an activity, to ensure no account
+     * changes was missed or other changes were missed.
      */
-    void refreshUserAccounts();
+    void refresh();
 
     /**
      * Get collection of conversations for the given account.
