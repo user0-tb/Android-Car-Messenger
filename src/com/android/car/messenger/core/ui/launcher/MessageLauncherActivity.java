@@ -75,7 +75,7 @@ public class MessageLauncherActivity extends FragmentActivity implements InsetsC
     @Override
     protected void onResume() {
         L.d("On Resume of Message Activity.");
-        AppFactory.get().getDataModel().refreshUserAccounts();
+        AppFactory.get().getDataModel().refresh();
         super.onResume();
     }
 
