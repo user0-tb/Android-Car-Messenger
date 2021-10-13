@@ -43,7 +43,6 @@ import java.util.Set;
 
 /** Queries the telephony data model to retrieve the SMS/MMS messages */
 public class TelephonyDataModel implements DataModel {
-
     @NonNull
     @Override
     public LiveData<Collection<UserAccount>> getAccounts() {
@@ -52,8 +51,9 @@ public class TelephonyDataModel implements DataModel {
     }
 
     @Override
-    public void refreshUserAccounts() {
+    public void refresh() {
         UserAccountLiveData.getInstance().refresh();
+        RefreshLiveData.getInstance().refresh();
     }
 
     @NonNull
