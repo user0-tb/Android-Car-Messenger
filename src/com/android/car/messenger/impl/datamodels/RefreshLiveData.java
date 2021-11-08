@@ -40,6 +40,7 @@ public class RefreshLiveData extends LiveData<Boolean> {
         return sInstance;
     }
 
+    /** Posts value to listeners to refresh */
     public void refresh() {
         postValue(true);
     }

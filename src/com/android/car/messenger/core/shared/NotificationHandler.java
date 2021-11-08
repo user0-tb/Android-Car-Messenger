@@ -47,17 +47,8 @@ public class NotificationHandler {
 
     private NotificationHandler() {}
 
-    /** Posts, removes or updates a notification based on a conversation */
-    public static void postOrRemoveNotification(@NonNull Conversation conversation) {
-        if (conversation.isMuted()) {
-            removeNotification(conversation.getId());
-        } else {
-            postNotification(conversation);
-        }
-    }
-
-    /* Posts or updates a notification based on a conversation */
-    private static void postNotification(Conversation conversation) {
+    /** Posts or updates a notification based on a conversation */
+    public static void postNotification(Conversation conversation) {
         int userAccountId = conversation.getExtras().getInt(EXTRA_ACCOUNT_ID, 0);
         if (userAccountId == 0) {
             L.w(
@@ -69,7 +60,11 @@ public class NotificationHandler {
         Context context = AppFactory.get().getContext();
         NotificationManager notificationManager =
                 context.getSystemService(NotificationManager.class);
-        String channelId = MessengerService.MESSAGE_CHANNEL_ID;
+
+        String channelId =
+                conversation.isMuted()
+                        ? MessengerService.SILENT_MESSAGE_CHANNEL_ID
+                        : MessengerService.MESSAGE_CHANNEL_ID;
         Notification notification =
                 ConversationPayloadHandler.createNotificationFromConversation(
                         context, channelId, tapToReadConversation, R.drawable.ic_message, null);
