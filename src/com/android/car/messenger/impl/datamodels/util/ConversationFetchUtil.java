@@ -55,17 +55,25 @@ public class ConversationFetchUtil {
     public static Conversation fetchConversation(@NonNull String conversationId) {
         L.d("Fetching latest data for Conversation " + conversationId);
         Conversation.Builder conversationBuilder = initConversationBuilder(conversationId);
-        Cursor messagesCursor =
-                CursorUtils.getMessagesCursor(conversationId, MESSAGE_LIMIT, /* offset= */ 0);
+        Cursor mmsCursor = getMmsCursor(conversationId);
+        Cursor smsCursor = getSmsCursor(conversationId);
+
+        // message list sorted by date desc
+        List<Conversation.Message> messages =
+                MessageUtils.getMessages(MESSAGE_LIMIT, mmsCursor, smsCursor);
+
         // messages to read: first get unread messages
-        List<Conversation.Message> messagesToRead = MessageUtils.getUnreadMessages(messagesCursor);
+        // List should truncate at the latest reply or read message since reading a recent message
+        // does not mark all previous messages read.
+        List<Conversation.Message> messagesToRead = MessageUtils.getUnreadMessages(messages);
+
         int unreadCount = messagesToRead.size();
         Conversation.Message lastReply = null;
 
         // if no unread messages, get read messages
         if (messagesToRead.isEmpty()) {
             Pair<List<Conversation.Message>, Conversation.Message> readMessagesAndReplyTimestamp =
-                    MessageUtils.getReadMessagesAndReplyTimestamp(messagesCursor);
+                    MessageUtils.getReadMessagesAndReplyTimestamp(messages);
             messagesToRead = readMessagesAndReplyTimestamp.first;
             lastReply = readMessagesAndReplyTimestamp.second;
         }
@@ -151,5 +159,15 @@ public class ConversationFetchUtil {
         SharedPreferences sharedPreferences = AppFactory.get().getSharedPreferences();
         return sharedPreferences.getStringSet(
                 MessageConstants.KEY_MUTED_CONVERSATIONS, new HashSet<>());
+    }
+
+    private static Cursor getMmsCursor(@NonNull String conversationId) {
+        return CursorUtils.getMessagesCursor(
+                conversationId, MESSAGE_LIMIT, /* offset= */ 0, CursorUtils.ContentType.MMS);
+    }
+
+    private static Cursor getSmsCursor(@NonNull String conversationId) {
+        return CursorUtils.getMessagesCursor(
+                conversationId, MESSAGE_LIMIT, /* offset= */ 0, CursorUtils.ContentType.SMS);
     }
 }
