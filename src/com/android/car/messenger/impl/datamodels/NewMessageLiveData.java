@@ -65,7 +65,7 @@ public class NewMessageLiveData extends ContentProviderLiveData<Conversation> {
     private final CarStateListener mCarStateListener = AppFactory.get().getCarStateListener();
 
     NewMessageLiveData() {
-        super(Telephony.Sms.CONTENT_URI, Telephony.Mms.CONTENT_URI, Telephony.MmsSms.CONTENT_URI);
+        super(Telephony.MmsSms.CONTENT_URI);
     }
 
     @Override
