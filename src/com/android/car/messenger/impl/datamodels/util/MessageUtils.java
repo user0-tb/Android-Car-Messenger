@@ -20,6 +20,7 @@ import static com.android.car.messenger.common.Conversation.Message.MessageStatu
 import static com.android.car.messenger.common.Conversation.Message.MessageStatus.MESSAGE_STATUS_READ;
 import static com.android.car.messenger.common.Conversation.Message.MessageStatus.MESSAGE_STATUS_UNREAD;
 
+import static java.lang.Math.min;
 import static java.util.Comparator.comparingLong;
 
 import android.content.Context;
@@ -47,61 +48,80 @@ import java.util.function.Function;
 public final class MessageUtils {
 
     /**
-     * Gets all unread messages in cursor
+     * Returns all messages in the given cursors.
      *
-     * @param messagesCursor The messageCursor in descending order
+     * @param limit The maximum number of messages
+     * @param messageCursors The messageCursors of messages in descending order
      */
     @NonNull
-    public static List<Message> getUnreadMessages(@Nullable Cursor messagesCursor) {
-        List<Message> unreadMessages = new ArrayList<>();
-        MessageUtils.forEachDesc(
-                messagesCursor,
-                message -> {
-                    if (message.getMessageStatus() == MessageStatus.MESSAGE_STATUS_UNREAD) {
-                        unreadMessages.add(message);
+    public static List<Message> getMessages(int limit, @Nullable Cursor... messageCursors) {
+        List<Message> messages = new ArrayList<>();
+        for (Cursor cursor : messageCursors) {
+            MessageUtils.forEachDesc(
+                    cursor,
+                    message -> {
+                        messages.add(message);
                         return true;
-                    }
-                    return false;
-                });
-        unreadMessages.sort(comparingLong(Message::getTimestamp));
+                    });
+        }
+        messages.sort(comparingLong(Message::getTimestamp).reversed());
+        return messages.subList(0, min(limit, messages.size()));
+    }
+
+    /**
+     * Returns unread messages from a conversation, in ascending order.
+     *
+     * @param messages The messages in descending order
+     */
+    @NonNull
+    public static List<Message> getUnreadMessages(@NonNull List<Message> messages) {
+        int i = 0;
+        for (Conversation.Message message : messages) {
+            if (message.getMessageStatus() != MessageStatus.MESSAGE_STATUS_UNREAD) {
+                break;
+            }
+            i++;
+        }
+        List<Message> unreadMessages = messages.subList(0, i);
+        unreadMessages.sort(comparingLong(Conversation.Message::getTimestamp));
         return unreadMessages;
     }
+
 
     /**
      * Gets Read Messages and Last Reply
      *
-     * @param messagesCursor MessageCursor in descending order
+     * @param messages List of messages in descending order
      */
     @NonNull
     public static Pair<List<Message>, Message> getReadMessagesAndReplyTimestamp(
-            @Nullable Cursor messagesCursor) {
+            @Nullable List<Message> messages) {
         List<Message> readMessages = new ArrayList<>();
         AtomicReference<Message> replyMessage = new AtomicReference<>();
         AtomicReference<Long> lastReply = new AtomicReference<>(0L);
-        MessageUtils.forEachDesc(
-                messagesCursor,
-                message -> {
-                    // Desired impact: 4. Reply -> 3. Messages -> 2. Reply -> 1 Messages (stop
-                    // parsing at 2.)
-                    // lastReply references 4., messages references 3.
-                    // Desired impact: 3. Messages -> 2. Reply -> 1. Messages (stop parsing at 2.)
-                    // lastReply references 2., messages references 3.
-                    int messageStatus = message.getMessageStatus();
-                    if (message.getMessageType() == MessageType.MESSAGE_TYPE_SENT) {
-                        if (lastReply.get() < message.getTimestamp()) {
-                            lastReply.set(message.getTimestamp());
-                            replyMessage.set(message);
-                        }
-                        return readMessages.isEmpty();
-                    }
 
-                    if (messageStatus == MessageStatus.MESSAGE_STATUS_READ
-                            || messageStatus == MessageStatus.MESSAGE_STATUS_NONE) {
-                        readMessages.add(message);
-                        return true;
-                    }
-                    return false;
-                });
+        for (Message message : messages) {
+            // Desired impact: 4. Reply -> 3. Messages -> 2. Reply -> 1 Messages (stop
+            // parsing at 2.)
+            // lastReply references 4., messages references 3.
+            // Desired impact: 3. Messages -> 2. Reply -> 1. Messages (stop parsing at 2.)
+            // lastReply references 2., messages references 3.
+            int messageStatus = message.getMessageStatus();
+            if (message.getMessageType() == MessageType.MESSAGE_TYPE_SENT) {
+                if (lastReply.get() < message.getTimestamp()) {
+                    lastReply.set(message.getTimestamp());
+                    replyMessage.set(message);
+                }
+                if (!readMessages.isEmpty()) {
+                    break;
+                }
+            } else if (messageStatus == MessageStatus.MESSAGE_STATUS_READ
+                    || messageStatus == MessageStatus.MESSAGE_STATUS_NONE) {
+                readMessages.add(message);
+            } else {
+                break;
+            }
+        }
         readMessages.sort(comparingLong(Message::getTimestamp));
         return new Pair<>(readMessages, replyMessage.get());
     }
@@ -113,7 +133,7 @@ public final class MessageUtils {
      * @param processor A consumer that takes in the {@link Message} and returns true for the method
      *     to continue parsing the cursor or false to return.
      */
-    public static void forEachDesc(
+    private static void forEachDesc(
             @Nullable Cursor messageCursor, @NonNull Function<Message, Boolean> processor) {
         if (messageCursor == null || !messageCursor.moveToFirst()) {
             return;
