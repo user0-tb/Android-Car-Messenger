@@ -47,10 +47,10 @@ android_app {
         "androidx.legacy_legacy-support-v4",
         "androidx.preference_preference",
         "androidx.recyclerview_recyclerview",
-        "car-assist-lib",
+        "car-assist-lib-prebuilt",
         "car-messenger-common",
-        "car-telephony-common",
-        "car-ui-lib",
+        "car-telephony-common-prebuilt",
+        "car-ui-lib-prebuilt",
         "androidx.annotation_annotation",
     ],
 
