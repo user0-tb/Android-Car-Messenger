@@ -31,19 +31,16 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
-import androidx.core.app.NotificationCompat;
 import android.telephony.TelephonyManager;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import androidx.core.app.NotificationCompat;
 import com.android.car.messenger.R;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
 import com.android.car.messenger.core.shared.NotificationHandler;
 import com.android.car.messenger.core.util.L;
 import com.android.car.messenger.core.util.VoiceUtil;
-
 import java.time.Duration;
 
 /** Service responsible for handling messaging events. */

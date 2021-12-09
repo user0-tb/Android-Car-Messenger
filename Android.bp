@@ -58,6 +58,7 @@ android_app {
         "car-telephony-common-prebuilt",
         "car-ui-lib-prebuilt",
         "androidx.annotation_annotation",
+        "car-messenger-testing",
     ],
 
     dex_preopt: {

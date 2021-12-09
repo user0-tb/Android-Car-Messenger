@@ -22,20 +22,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import androidx.core.graphics.drawable.IconCompat;
 import android.text.TextUtils;
 import android.util.Pair;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.Person;
-
+import androidx.core.graphics.drawable.IconCompat;
 import com.android.car.messenger.R;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.shared.MessageConstants;
 import com.android.car.messenger.core.util.ConversationUtil;
 import com.android.car.messenger.core.util.L;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.android.car.messenger;
+package com.android.car.messenger.testing;
 
-import static com.google.common.truth.Truth.assertThat;
+import android.app.Activity;
+import android.os.Bundle;
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
+/**
+ * Empty activity used for testing.
+ */
+public class TestActivity extends Activity {
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-@RunWith(AndroidJUnit4.class)
-public class BuildTest {
-
-    @Test
-    public void test() {
-        assertThat(true).isEqualTo(true);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.test_activity);
     }
 }

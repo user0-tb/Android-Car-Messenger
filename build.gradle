@@ -21,7 +21,7 @@ android {
     defaultConfig {
         applicationId "com.android.car.messenger"
         minSdkVersion 30
-        targetSdkVersion gradle.ext.aaosLatestSDK
+        targetSdkVersion gradle.ext.aaosTargetSDK
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -89,6 +89,7 @@ dependencies {
     implementation project(":car-telephony-common")
     implementation project(":car-ui-lib")
 
+    androidTestImplementation project(path: ':car-messenger-app:testing')
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test:core:1.4.0'
     androidTestImplementation 'androidx.test:rules:1.4.0'
