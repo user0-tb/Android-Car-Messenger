@@ -31,6 +31,7 @@ public class UIConversationItem {
     @NonNull String mTextPreview;
     @Nullable Drawable mSubtitleIcon;
     @NonNull String mTextMetadata;
+    @NonNull String mUnreadCount;
     long mLastMessageTimestamp;
     @Nullable Drawable mAvatar;
     boolean mIsMuted;
@@ -46,6 +47,7 @@ public class UIConversationItem {
             @NonNull String textPreview,
             @Nullable Drawable subtitleIcon,
             @NonNull String textMetadata,
+            @NonNull String unreadCount,
             long lastMessageTimestamp,
             @Nullable Drawable avatar,
             boolean showMuteIcon,
@@ -59,6 +61,7 @@ public class UIConversationItem {
         this.mTextPreview = textPreview;
         this.mSubtitleIcon = subtitleIcon;
         this.mTextMetadata = textMetadata;
+        this.mUnreadCount = unreadCount;
         this.mLastMessageTimestamp = lastMessageTimestamp;
         this.mAvatar = avatar;
         this.mShowMuteIcon = showMuteIcon;
@@ -100,6 +103,12 @@ public class UIConversationItem {
     @NonNull
     public String getTextMetadata() {
         return mTextMetadata;
+    }
+
+    /** Gets unread count */
+    @NonNull
+    public String getUnreadCountText() {
+        return mUnreadCount;
     }
 
     /** Gets last message timestamp */

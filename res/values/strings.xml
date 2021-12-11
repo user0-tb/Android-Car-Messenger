@@ -37,6 +37,9 @@
             <xliff:g example="2" id="count">%d</xliff:g> more messages</item>
     </plurals>
 
+    <!-- Character suffix for when there are more messages than the max limit [CHAR LIMIT=1] -->
+    <string name="message_overflow" translatable="false">%d+</string>
+
     <!-- Button text for when disconnected from Bluetooth [CHAR LIMIT=40] -->
     <string name="app_name" translatable="false">SMS</string>
 

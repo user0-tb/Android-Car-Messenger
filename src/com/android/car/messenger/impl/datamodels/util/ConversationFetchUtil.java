@@ -31,6 +31,7 @@ import com.android.car.messenger.R;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.shared.MessageConstants;
+import com.android.car.messenger.core.ui.conversationlist.UIConversationItemConverter;
 import com.android.car.messenger.core.util.ConversationUtil;
 import com.android.car.messenger.core.util.L;
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ import java.util.function.BiConsumer;
 /** Utility class for retrieving and setting conversation items. */
 public class ConversationFetchUtil {
 
-    private static final int MESSAGE_LIMIT = 10;
+    private static final int MESSAGE_LIMIT = UIConversationItemConverter.MAX_UNREAD_COUNT + 1;
     private static final String COMMA_DELIMITER = ", ";
     private static final int MAX_TITLE_NAMES = 3;
 

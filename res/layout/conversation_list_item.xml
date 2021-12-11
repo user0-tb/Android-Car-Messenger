@@ -22,18 +22,6 @@ limitations under the License.
     tools:background="@color/background_image_30p_black">
 
     <ImageView
-        android:id="@+id/unread_indicator"
-        android:layout_width="@dimen/unread_icon_size"
-        android:layout_height="@dimen/unread_icon_size"
-        android:layout_marginEnd="@dimen/unread_icon_marginEnd"
-        android:contentDescription="@string/cd_unread"
-        android:scaleType="centerCrop"
-        android:src="@color/unread_color"
-        app:layout_constraintBottom_toBottomOf="@id/icon"
-        app:layout_constraintEnd_toStartOf="@id/icon"
-        app:layout_constraintTop_toTopOf="@id/icon" />
-
-    <ImageView
         android:id="@+id/icon"
         android:layout_width="@dimen/avatar_icon_size"
         android:layout_height="@dimen/avatar_icon_size"
@@ -44,6 +32,111 @@ limitations under the License.
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@color/car_red_500a" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/message_history_text_margin_end"
+        android:singleLine="true"
+        tools:text="Ashley Bae"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:theme="@style/Theme.Messaging.BidiText"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toTopOf="@+id/preview_section"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_begin"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/last_action_icon_view"
+        android:layout_width="@dimen/subtitle_icon_width"
+        android:layout_height="0dp"
+        android:contentDescription="@string/cd_icon_indicating_the_last_action"
+        android:scaleType="centerInside"
+        android:src="@drawable/car_ui_icon_reply"
+        android:visibility="gone"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginEnd="@dimen/message_history_icons_margin"
+        app:layout_constraintBottom_toBottomOf="@id/preview_section"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintEnd_toStartOf="@id/preview_section"/>
+
+    <!-- This nesting is required for the follow behavior:
+         - dot and date_time_view must always be visible
+         - preview must ellipsize if it overflows
+        The LinearLayout's dimensions must be limited to the constraints set on the FrameLayout -->
+    <FrameLayout
+        android:id="@+id/preview_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/last_action_icon_view"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_weight="1"
+                tools:visibility="visible"
+                tools:text="Let this be the preview. Lots of preview with
+                a whole lot of various texts, one that is quite long in every way.
+                To verify that it still fits in the end" />
+
+            <TextView
+                android:id="@+id/preview_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/message_history_icons_margin"
+                android:layout_marginEnd="@dimen/message_history_icons_margin"
+                android:text="@string/dot"
+                tools:visibility="gone" />
+
+            <com.android.car.messenger.core.ui.shared.DateTimeView
+                android:id="@+id/date_time_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:singleLine="true"
+                tools:text="6 min" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <View
+        android:id="@+id/play_action_touch_view"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/unread_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/unread_badge_background"
+        android:gravity="center"
+        android:textColor="@color/unread_text_color"
+        android:textSize="@dimen/unread_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/guideline_end"
+        app:layout_constraintEnd_toStartOf="@id/divider"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
         android:id="@+id/reply_action_button"
@@ -83,123 +176,8 @@ limitations under the License.
         android:src="@drawable/car_ui_icon_toggle_mute"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toEndOf="@id/guideline_divider"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/message_history_text_margin_end"
-        android:singleLine="true"
-        tools:text="Ashley Bae"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:theme="@style/Theme.Messaging.BidiText"
-        android:ellipsize="end"
-        app:layout_constraintBottom_toTopOf="@+id/preview"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintStart_toStartOf="@id/guideline_begin"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <ImageView
-        android:id="@+id/last_action_icon_view"
-        android:layout_width="@dimen/subtitle_icon_width"
-        android:layout_height="0dp"
-        android:contentDescription="@string/cd_icon_indicating_the_last_action"
-        android:scaleType="centerInside"
-        android:src="@drawable/car_ui_icon_reply"
-        android:visibility="gone"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        android:layout_marginEnd="@dimen/message_history_icons_margin"
-        app:layout_constraintBottom_toBottomOf="@id/preview"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintEnd_toStartOf="@id/preview"
-        app:layout_constraintTop_toTopOf="@id/preview" />
-
-    <TextView
-        android:id="@+id/preview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/last_action_icon_view"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintEnd_toStartOf="@id/preview_dot"
-        tools:visibility="visible"
-        android:ellipsize="end"
-        android:maxLength="20"
-        tools:text="Let this be the preview. Lots of preview with
-        a whole lot of various texts, one that is quite long in every way.
-        To verify that it still fits in the end" />
-
-    <TextView
-        android:id="@+id/preview_dot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/message_history_icons_margin"
-        android:layout_marginEnd="@dimen/message_history_icons_margin"
-        app:layout_goneMarginStart="0dp"
-        app:layout_goneMarginEnd="0dp"
-        android:singleLine="true"
-        android:text="@string/dot"
-        app:layout_constraintEnd_toStartOf="@id/text_metadata"
-        app:layout_constraintBottom_toBottomOf="@id/preview"
-        app:layout_constraintStart_toEndOf="@id/preview"
-        app:layout_constraintTop_toTopOf="@id/preview"
-        tools:visibility="gone" />
-
-    <TextView
-        android:id="@+id/text_metadata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:maxLength="20"
-        app:layout_constraintStart_toEndOf="@id/preview_dot"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintEnd_toStartOf="@id/text_metadata_dot"
-        tools:visibility="visible"
-        tools:text="2 more messages" />
-
-    <TextView
-        android:id="@+id/text_metadata_dot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:text="@string/dot"
-        android:visibility="visible"
-        android:layout_marginStart="6dp"
-        tools:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@id/text_metadata"
-        app:layout_constraintStart_toEndOf="@id/text_metadata"
-        app:layout_constraintTop_toTopOf="@id/text_metadata"
-        app:layout_constraintEnd_toStartOf="@id/date_time_view" />
-
-    <com.android.car.messenger.core.ui.shared.DateTimeView
-        android:id="@+id/date_time_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="@id/text_metadata"
-        app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintStart_toEndOf="@id/text_metadata_dot"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        tools:text="6 min" />
-
-    <View
-        android:id="@+id/play_action_touch_view"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="?android:attr/selectableItemBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/divider"
@@ -208,7 +186,7 @@ limitations under the License.
         android:layout_marginBottom="@dimen/vertical_divider_inset"
         android:layout_marginTop="@dimen/vertical_divider_inset"
         android:background="@color/divider_color"
-        app:layout_constraintStart_toStartOf="@id/guideline_end" />
+        app:layout_constraintStart_toStartOf="@id/guideline_divider" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_begin"
@@ -219,6 +197,13 @@ limitations under the License.
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="200dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_divider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

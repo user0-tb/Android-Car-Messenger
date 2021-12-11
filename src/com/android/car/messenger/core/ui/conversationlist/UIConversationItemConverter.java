@@ -32,14 +32,15 @@ import java.util.Objects;
 /** Util class that converts Conversation Item to UIConversationItem */
 public class UIConversationItemConverter {
 
+    // See ConversationFetchUtil#MESSAGE_LIMIT
+    public static final int MAX_UNREAD_COUNT = 10;
+
     private UIConversationItemConverter() {}
 
     /** Converts Conversation Item to UIConversationItem */
     public static UIConversationItem convertToUIConversationItem(
             Conversation conversation, CarUxRestrictions carUxRestrictions) {
         Context context = AppFactory.get().getContext();
-        boolean isUnread = conversation.getUnreadCount() > 0;
-        long timestamp = ConversationUtil.getConversationTimestamp(conversation);
         boolean isReplied = ConversationUtil.isReplied(conversation);
 
         Drawable subtitleIcon =
@@ -53,31 +54,38 @@ public class UIConversationItemConverter {
                         == 0;
         String textPreview = "";
         String textMetadata = "";
+        int unreadCount = conversation.getUnreadCount();
+        boolean isUnread = unreadCount > 0;
 
         // show a preview when parked
         if (showTextPreview) {
             textPreview = ConversationUtil.getLastMessagePreview(conversation);
             if (isUnread) {
-                textMetadata = getNumberOfMoreMessages(context, conversation.getUnreadCount());
+                textMetadata = getNumberOfMoreMessages(context, unreadCount);
             }
+        } else if (isUnread) {
+            // in place of text preview, we show "tap to read aloud" when unread
+            textPreview = context.getString(R.string.tap_to_read_aloud);
+            textMetadata = getNumberOfUnreadMessages(context, unreadCount);
+        } else if (isReplied) {
+            textMetadata = context.getString(R.string.replied);
         } else {
-            if (isUnread) {
-                // in place of text preview, we show "tap to read aloud" when unread
-                textPreview = context.getString(R.string.tap_to_read_aloud);
-                textMetadata = getNumberOfUnreadMessages(context, conversation.getUnreadCount());
-            } else if (isReplied) {
-                textMetadata = context.getString(R.string.replied);
-            } else {
-                textMetadata = getNumberOfMessages(context, conversation.getMessages().size());
-            }
+            textMetadata = getNumberOfMessages(context, conversation.getMessages().size());
         }
 
+        String unreadCountText = Integer.toString(unreadCount);
+        if (unreadCount > MAX_UNREAD_COUNT) {
+            unreadCountText = context.getString(R.string.message_overflow, MAX_UNREAD_COUNT);
+        }
+
+        long timestamp = ConversationUtil.getConversationTimestamp(conversation);
         return new UIConversationItem(
                 conversation.getId(),
                 Objects.requireNonNull(conversation.getConversationTitle()),
                 textPreview,
                 subtitleIcon,
                 textMetadata,
+                unreadCountText,
                 timestamp,
                 getConversationAvatar(context, conversation),
                 /* showMuteIcon= */ false,
