@@ -94,4 +94,19 @@ public class MessageLauncherActivity extends FragmentActivity implements InsetsC
         // This is only necessary because the fragments are not immediately added to the
         // activity when calling .commit()
     }
+
+    @Override
+    public void onBackPressed() {
+        // By default, onBackPressed will pop all the fragments off the backstack and then finish
+        // the activity. We want to finish the activity when there is only one fragment left.
+        if (isBackNavigationAvailable()) {
+            super.onBackPressed();
+        } else {
+            finishAfterTransition();
+        }
+    }
+
+    private boolean isBackNavigationAvailable() {
+        return getSupportFragmentManager().getBackStackEntryCount() > 1;
+    }
 }
