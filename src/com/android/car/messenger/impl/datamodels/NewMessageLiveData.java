@@ -27,6 +27,7 @@ import android.provider.Telephony;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
@@ -51,8 +52,13 @@ public class NewMessageLiveData extends ContentProviderLiveData<Conversation> {
     @NonNull
     private final UserAccountLiveData mUserAccountLiveData = UserAccountLiveData.getInstance();
 
-    @NonNull private Collection<UserAccount> mUserAccounts = new ArrayList<>();
-    @NonNull private final HashMap<Integer, Instant> mOffsetMap = new HashMap<>();
+    @VisibleForTesting
+    @NonNull
+    Collection<UserAccount> mUserAccounts = new ArrayList<>();
+
+    @VisibleForTesting
+    @NonNull
+    final HashMap<Integer, Instant> mOffsetMap = new HashMap<>();
 
     @NonNull
     private static final String MESSAGE_QUERY =
@@ -139,13 +145,15 @@ public class NewMessageLiveData extends ContentProviderLiveData<Conversation> {
 
     /** Get the last message cursor, taking into account the last message posted */
     @Nullable
-    private Cursor getMmsCursor(@NonNull UserAccount userAccount, @NonNull Instant offset) {
+    @VisibleForTesting
+    Cursor getMmsCursor(@NonNull UserAccount userAccount, @NonNull Instant offset) {
         return getCursor(Telephony.Mms.Inbox.CONTENT_URI, userAccount, offset.getEpochSecond());
     }
 
     /** Get the last message cursor, taking into account the last message posted */
     @Nullable
-    private Cursor getSmsCursor(@NonNull UserAccount userAccount, @NonNull Instant offset) {
+    @VisibleForTesting
+    Cursor getSmsCursor(@NonNull UserAccount userAccount, @NonNull Instant offset) {
         return getCursor(Telephony.Sms.Inbox.CONTENT_URI, userAccount, offset.toEpochMilli());
     }
     /** Get the last message cursor, taking into account an offset and subscription id */

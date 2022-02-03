@@ -48,7 +48,7 @@ import java.util.function.Function;
 public final class MessageUtils {
 
     /**
-     * Returns all messages in the given cursors.
+     * Returns all messages in the given cursors in descending order.
      *
      * @param limit The maximum number of messages
      * @param messageCursors The messageCursors of messages in descending order
@@ -89,13 +89,13 @@ public final class MessageUtils {
 
 
     /**
-     * Gets Read Messages and Last Reply
+     * Gets Read Messages in ascending order and Last Reply
      *
      * @param messages List of messages in descending order
      */
     @NonNull
     public static Pair<List<Message>, Message> getReadMessagesAndReplyTimestamp(
-            @Nullable List<Message> messages) {
+            @NonNull List<Message> messages) {
         List<Message> readMessages = new ArrayList<>();
         AtomicReference<Message> replyMessage = new AtomicReference<>();
         AtomicReference<Long> lastReply = new AtomicReference<>(0L);

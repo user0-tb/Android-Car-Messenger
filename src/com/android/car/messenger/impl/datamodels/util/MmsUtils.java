@@ -80,7 +80,9 @@ class MmsUtils {
         StringBuilder stringBuilder = new StringBuilder();
         while (cursor != null && cursor.moveToNext()) {
             stringBuilder.append(cursor.getString(cursor.getColumnIndex(Part.TEXT)));
-            stringBuilder.append(" ");
+            if (!cursor.isLast()) {
+                stringBuilder.append(" ");
+            }
         }
 
         return stringBuilder.toString().replace(REPLACE_CHARS, "");
