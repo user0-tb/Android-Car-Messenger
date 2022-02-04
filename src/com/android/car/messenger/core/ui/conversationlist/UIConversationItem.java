@@ -30,7 +30,6 @@ public class UIConversationItem {
     @NonNull String mTitle;
     @NonNull String mTextPreview;
     @Nullable Drawable mSubtitleIcon;
-    @NonNull String mTextMetadata;
     @NonNull String mUnreadCount;
     long mLastMessageTimestamp;
     @Nullable Drawable mAvatar;
@@ -46,7 +45,6 @@ public class UIConversationItem {
             @NonNull String title,
             @NonNull String textPreview,
             @Nullable Drawable subtitleIcon,
-            @NonNull String textMetadata,
             @NonNull String unreadCount,
             long lastMessageTimestamp,
             @Nullable Drawable avatar,
@@ -60,7 +58,6 @@ public class UIConversationItem {
         this.mTitle = title;
         this.mTextPreview = textPreview;
         this.mSubtitleIcon = subtitleIcon;
-        this.mTextMetadata = textMetadata;
         this.mUnreadCount = unreadCount;
         this.mLastMessageTimestamp = lastMessageTimestamp;
         this.mAvatar = avatar;
@@ -97,12 +94,6 @@ public class UIConversationItem {
     @Nullable
     public Drawable getSubtitleIcon() {
         return mSubtitleIcon;
-    }
-
-    /** Gets text metadata */
-    @NonNull
-    public String getTextMetadata() {
-        return mTextMetadata;
     }
 
     /** Gets unread count */

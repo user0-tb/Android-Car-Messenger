@@ -53,24 +53,17 @@ public class UIConversationItemConverter {
                                 & CarUxRestrictions.UX_RESTRICTIONS_NO_TEXT_MESSAGE)
                         == 0;
         String textPreview = "";
-        String textMetadata = "";
         int unreadCount = conversation.getUnreadCount();
         boolean isUnread = unreadCount > 0;
 
-        // show a preview when parked
+        // show a preview if UXR allows
         if (showTextPreview) {
             textPreview = ConversationUtil.getLastMessagePreview(conversation);
-            if (isUnread) {
-                textMetadata = getNumberOfMoreMessages(context, unreadCount);
-            }
         } else if (isUnread) {
             // in place of text preview, we show "tap to read aloud" when unread
             textPreview = context.getString(R.string.tap_to_read_aloud);
-            textMetadata = getNumberOfUnreadMessages(context, unreadCount);
         } else if (isReplied) {
-            textMetadata = context.getString(R.string.replied);
-        } else {
-            textMetadata = getNumberOfMessages(context, conversation.getMessages().size());
+            textPreview = context.getString(R.string.replied);
         }
 
         String unreadCountText = Integer.toString(unreadCount);
@@ -84,7 +77,6 @@ public class UIConversationItemConverter {
                 Objects.requireNonNull(conversation.getConversationTitle()),
                 textPreview,
                 subtitleIcon,
-                textMetadata,
                 unreadCountText,
                 timestamp,
                 getConversationAvatar(context, conversation),
@@ -94,46 +86,6 @@ public class UIConversationItemConverter {
                 isUnread,
                 conversation.isMuted(),
                 conversation);
-    }
-
-    /**
-     * For the text "More Unread Messages", indicates the number of messages remaining after the
-     * preview.
-     */
-    @NonNull
-    private static String getNumberOfMoreMessages(
-            @NonNull Context context, int noOfUnreadMessages) {
-        int remainingMessagesAfterPreview = noOfUnreadMessages - 1;
-        if (remainingMessagesAfterPreview == 0) {
-            return "";
-        }
-        if (remainingMessagesAfterPreview == 1) {
-            return context.getResources().getQuantityString(R.plurals.more_message, 1);
-        }
-        return context.getResources()
-                .getQuantityString(
-                        R.plurals.more_message,
-                        remainingMessagesAfterPreview,
-                        remainingMessagesAfterPreview);
-    }
-
-    @NonNull
-    private static String getNumberOfUnreadMessages(
-            @NonNull Context context, int noOfUnreadMessages) {
-        if (noOfUnreadMessages == 1) {
-            return context.getResources().getQuantityString(R.plurals.new_message, 1);
-        }
-        return context.getResources()
-                .getQuantityString(R.plurals.new_message, noOfUnreadMessages, noOfUnreadMessages);
-    }
-
-    @NonNull
-    private static String getNumberOfMessages(@NonNull Context context, int noOfMessages) {
-        if (noOfMessages < 2) {
-            return context.getResources().getQuantityString(R.plurals.no_of_message, noOfMessages);
-        }
-        return context.getResources()
-                .getQuantityString(R.plurals.no_of_message, noOfMessages, noOfMessages);
     }
 
     private static Drawable getConversationAvatar(
