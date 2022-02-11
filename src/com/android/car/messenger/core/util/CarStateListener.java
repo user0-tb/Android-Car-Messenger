@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.car.messenger.impl.common;
+package com.android.car.messenger.core.util;
 
 import android.bluetooth.BluetoothDevice;
 import android.car.Car;
 import android.car.CarProjectionManager;
+import android.car.drivingstate.CarUxRestrictions;
+import android.car.drivingstate.CarUxRestrictionsManager;
 import android.car.projection.ProjectionStatus;
 import android.content.Context;
 import android.os.Bundle;
@@ -26,8 +28,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.android.car.messenger.core.util.L;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,12 +39,20 @@ import java.util.List;
  * {@link ProjectionStatus} listener that exposes APIs to detect whether a projection application is
  * active.
  */
-public class ProjectionStateListener {
+public class CarStateListener {
     @NonNull
     static final String PROJECTION_STATUS_EXTRA_DEVICE_STATE =
             "android.car.projection.DEVICE_STATE";
 
     @Nullable private CarProjectionManager mCarProjectionManager = null;
+    @Nullable private CarUxRestrictionsManager mCarUxRestrictionsManager = null;
+
+    @NonNull
+    private final MutableLiveData<CarUxRestrictions> mUxRestrictions = new MutableLiveData<>();
+
+    @NonNull
+    private final CarUxRestrictionsManager.OnUxRestrictionsChangedListener
+            mCarUxRestrictionListener = mUxRestrictions::postValue;
 
     @NonNull
     private final CarProjectionManager.ProjectionStatusListener mListener =
@@ -56,7 +66,7 @@ public class ProjectionStateListener {
     private int mProjectionState = ProjectionStatus.PROJECTION_STATE_INACTIVE;
     @NonNull private List<ProjectionStatus> mProjectionDetails = new ArrayList<>();
 
-    public ProjectionStateListener(@NonNull Context context) {
+    public CarStateListener(@NonNull Context context) {
         Car.createCar(
                 context,
                 /* handler= */ null,
@@ -65,8 +75,16 @@ public class ProjectionStateListener {
                     mCar = car;
                     mCarProjectionManager =
                             (CarProjectionManager) mCar.getCarManager(Car.PROJECTION_SERVICE);
+                    mCarUxRestrictionsManager =
+                            (CarUxRestrictionsManager)
+                                    mCar.getCarManager(Car.CAR_UX_RESTRICTION_SERVICE);
                     if (mCarProjectionManager != null) {
                         mCarProjectionManager.registerProjectionStatusListener(mListener);
+                    }
+                    if (mCarUxRestrictionsManager != null) {
+                        mCarUxRestrictionsManager.registerListener(mCarUxRestrictionListener);
+                        mCarUxRestrictionListener.onUxRestrictionsChanged(
+                                mCarUxRestrictionsManager.getCurrentCarUxRestrictions());
                     }
                 });
     }
@@ -76,12 +94,24 @@ public class ProjectionStateListener {
         if (mCarProjectionManager != null) {
             mCarProjectionManager.unregisterProjectionStatusListener(mListener);
         }
+        if (mCarUxRestrictionsManager != null) {
+            mCarUxRestrictionsManager.unregisterListener();
+        }
         if (mCar != null) {
             mCar.disconnect();
             mCar = null;
         }
         mProjectionState = ProjectionStatus.PROJECTION_STATE_INACTIVE;
         mProjectionDetails = Collections.emptyList();
+    }
+
+    /** Gets the UxrRestrictions */
+    @NonNull
+    public final LiveData<CarUxRestrictions> getUxrRestrictions() {
+        if (mUxRestrictions.getValue() == null && mCarUxRestrictionsManager != null) {
+            mUxRestrictions.postValue(mCarUxRestrictionsManager.getCurrentCarUxRestrictions());
+        }
+        return mUxRestrictions;
     }
 
     /**
