@@ -15,28 +15,6 @@
   ~ limitations under the License.
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Phrase describing that there is a new message [CHAR LIMIT=20] -->
-    <plurals name="new_message">
-        <item quantity="one">New message</item>
-        <item quantity="other">
-            <xliff:g example="2" id="count">%d</xliff:g> messages</item>
-    </plurals>
-
-    <!-- Phrase describing the number of messages [CHAR LIMIT=20] -->
-    <plurals name="no_of_message">
-        <item quantity="zero">No message</item>
-        <item quantity="one">1 message</item>
-        <item quantity="other">
-            <xliff:g example="2" id="count">%d</xliff:g> messages</item>
-    </plurals>
-
-    <!-- Phrase describing a case where there are more messages other than the one shown the user. [CHAR LIMIT=30] -->
-    <plurals name="more_message">
-        <item quantity="one">One more message</item>
-        <item quantity="other">
-            <xliff:g example="2" id="count">%d</xliff:g> more messages</item>
-    </plurals>
-
     <!-- Character suffix for when there are more messages than the max limit [CHAR LIMIT=1] -->
     <string name="message_overflow" translatable="false">%d+</string>
 
