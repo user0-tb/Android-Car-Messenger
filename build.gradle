@@ -63,9 +63,13 @@ android {
 
     signingConfigs {
         debug {
+            storeFile file('../libs/certs/com_android_car_apps_test.jks')
+            storePassword 'carapps'
+            keyAlias 'carapps'
+            keyPassword 'carapps'
             // The following signs the apk with platform key.
-            storeFile file('../../../../vendor/google/certs/devkeys/platform.keystore')
-            storePassword 'android'
+            // storeFile file('../../../../vendor/google/certs/devkeys/platform.keystore')
+            // storePassword 'android'
         }
     }
 }

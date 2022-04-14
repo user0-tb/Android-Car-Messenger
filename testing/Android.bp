@@ -21,7 +21,7 @@ android_library {
     libs: ["android.car-system-stubs"],
 
     static_libs: [
-        "car-ui-lib",
+        "car-ui-lib-prebuilt",
         "androidx.lifecycle_lifecycle-extensions",
         "androidx.test.espresso.core",
         "androidx.test.espresso.contrib",

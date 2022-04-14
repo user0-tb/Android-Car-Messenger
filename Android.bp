@@ -18,6 +18,9 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
+// Switch away from "platform"
+CERTIFICATE = ":com-android-car-apps-test"
+
 android_app {
     name: "CarMessengerApp",
 
@@ -33,7 +36,7 @@ android_app {
 
     required: ["allowed_privapp_com.android.car.messenger"],
 
-    certificate: "platform",
+    certificate: CERTIFICATE,
 
     overrides: ["messaging"],
 
@@ -86,7 +89,7 @@ android_test_helper_app {
 
     required: ["allowed_privapp_com.android.car.messenger"],
 
-    certificate: "platform",
+    certificate: CERTIFICATE,
 
     overrides: ["messaging"],
 
@@ -106,10 +109,10 @@ android_test_helper_app {
         "androidx.legacy_legacy-support-v4",
         "androidx.preference_preference",
         "androidx.recyclerview_recyclerview",
-        "car-assist-lib",
+        "car-assist-lib-prebuilt",
         "car-messenger-common",
-        "car-telephony-common",
-        "car-ui-lib",
+        "car-telephony-common-prebuilt",
+        "car-ui-lib-prebuilt",
         "androidx.annotation_annotation",
         "car-messenger-testing",
     ],
