@@ -109,6 +109,7 @@ android_test_helper_app {
         "androidx.legacy_legacy-support-v4",
         "androidx.preference_preference",
         "androidx.recyclerview_recyclerview",
+        "car-apps-common-prebuilt",
         "car-assist-lib-prebuilt",
         "car-messenger-common",
         "car-telephony-common-prebuilt",
