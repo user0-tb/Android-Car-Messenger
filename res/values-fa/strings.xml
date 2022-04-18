@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">اتصال بلوتوث قطع شد</string>
+  <string name="no_messages">پیامی وجود ندارد</string>
+  <string name="connect_bluetooth_button_text">اتصال به بلوتوث</string>
+  <string name="replied">پاسخ‌داده‌شده</string>
+  <string name="tap_to_read_aloud">برای خواندن با صدای بلند، ضربه بزنید</string>
+  <string name="action_reply">پاسخ دادن</string>
+  <string name="action_mute">بی‌صدا کردن</string>
+  <string name="action_mark_as_read">علامت‌گذاری به‌عنوان خوانده‌شده</string>
+  <string name="app_running_msg_notification_title">سرویس پیام‌رسانی فعال است</string>
+  <string name="app_running_msg_notification_content">دریافت «پیام‌ها» در خودرو</string>
+  <string name="message_channel_name">کانال پیام</string>
+  <string name="message_channel_description">سرویس گیرنده پیام تلفن</string>
+  <string name="new_message">پیام جدید</string>
+  <string name="cd_unread">خوانده‌نشده</string>
+  <string name="cd_conversation_icon">نماد مکالمه</string>
+  <string name="cd_icon_indicating_the_last_action">نماد نوشتار زیرنویس</string>
+  <string name="cd_mute_button">دکمه صامت کردن</string>
+  <string name="cd_loading_info_icon">نماد بار کردن اطلاعات</string>
+  <string name="cd_reply_action_button">دکمه کنش پاسخ</string>
+  <string name="cd_play_action_button">دکمه کنش پخش</string>
+  <string name="now_string_shortest">اکنون</string>
+  <string name="participant_overflow_text">، و %d نفر دیگر</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d دقیقه</item>
+    <item quantity="other">%d دقیقه</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d ساعت</item>
+    <item quantity="other">%d ساعت</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d روز</item>
+    <item quantity="other">%d روز</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d سال</item>
+    <item quantity="other">%d سال</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">تا %d دقیقه دیگر</item>
+    <item quantity="other">تا %d دقیقه دیگر</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">تا %d ساعت دیگر</item>
+    <item quantity="other">تا %d ساعت دیگر</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">تا %d روز دیگر</item>
+    <item quantity="other">تا %d روز دیگر</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">تا %d سال دیگر</item>
+    <item quantity="other">تا %d سال دیگر</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d دقیقه قبل</item>
+    <item quantity="other">%d دقیقه قبل</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d ساعت قبل</item>
+    <item quantity="other">%d ساعت قبل</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d روز قبل</item>
+    <item quantity="other">%d روز قبل</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d سال قبل</item>
+    <item quantity="other">%d سال قبل</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">تا %d دقیقه دیگر</item>
+    <item quantity="other">تا %d دقیقه دیگر</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">تا %d ساعت دیگر</item>
+    <item quantity="other">تا %d ساعت دیگر</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">تا %d روز دیگر</item>
+    <item quantity="other">تا %d روز دیگر</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">تا %d سال دیگر</item>
+    <item quantity="other">تا %d سال دیگر</item>
+  </plurals>
+</resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth-ն անջատված է</string>
+  <string name="no_messages">Հաղորդագրություններ չկան</string>
+  <string name="connect_bluetooth_button_text">Միանալ Bluetooth-ին</string>
+  <string name="replied">Ունի պատասխան</string>
+  <string name="tap_to_read_aloud">Հպեք լսելու համար</string>
+  <string name="action_reply">Պատասխանել</string>
+  <string name="action_mute">Անջատել ձայնը</string>
+  <string name="action_mark_as_read">Նշել որպես կարդացված</string>
+  <string name="app_running_msg_notification_title">Հաղորդագրման ծառայությունը միացված է</string>
+  <string name="app_running_msg_notification_content">Հաղորդագրությունների ստացում մեքենայում</string>
+  <string name="message_channel_name">Հաղորդագրությունների ալիք</string>
+  <string name="message_channel_description">SMS-ների ընդունման ծառայություն</string>
+  <string name="new_message">Նոր հաղորդագրություն</string>
+  <string name="cd_unread">Չկարդացված</string>
+  <string name="cd_conversation_icon">Զրույցի պատկերակ</string>
+  <string name="cd_icon_indicating_the_last_action">Ենթավերնագրի տեքստի պատկերակ</string>
+  <string name="cd_mute_button">Ձայնի անջատման կոճակ</string>
+  <string name="cd_loading_info_icon">Տեղեկությունների բեռնման պատկերակ</string>
+  <string name="cd_reply_action_button">«Պատասխանել» կոճակ</string>
+  <string name="cd_play_action_button">«Նվագարկել» կոճակ</string>
+  <string name="now_string_shortest">հիմա</string>
+  <string name="participant_overflow_text">, ու ևս %d</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d ր</item>
+    <item quantity="other">%d ր</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d ժ</item>
+    <item quantity="other">%d ժ</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d օր</item>
+    <item quantity="other">%d օր</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d տ</item>
+    <item quantity="other">%d տ</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%d րոպեից</item>
+    <item quantity="other">%d րոպեից</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%d ժամից</item>
+    <item quantity="other">%d ժամից</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%d օրից</item>
+    <item quantity="other">%d օրից</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%d տարուց</item>
+    <item quantity="other">%d տարուց</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d րոպե առաջ</item>
+    <item quantity="other">%d րոպե առաջ</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d ժամ առաջ</item>
+    <item quantity="other">%d ժամ առաջ</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d օր առաջ</item>
+    <item quantity="other">%d օր առաջ</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d տարի առաջ</item>
+    <item quantity="other">%d տարի առաջ</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d րոպեից</item>
+    <item quantity="other">%d րոպեից</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d ժամից</item>
+    <item quantity="other">%d ժամից</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d օրից</item>
+    <item quantity="other">%d օրից</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d տարուց</item>
+    <item quantity="other">%d տարուց</item>
+  </plurals>
+</resources>

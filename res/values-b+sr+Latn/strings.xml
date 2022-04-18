@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth je isključen</string>
+  <string name="no_messages">Nema poruka</string>
+  <string name="connect_bluetooth_button_text">Poveži sa Bluetooth-om</string>
+  <string name="replied">Odgovoreno</string>
+  <string name="tap_to_read_aloud">Dodirnite za čitanje naglas</string>
+  <string name="action_reply">Odgovorite</string>
+  <string name="action_mute">Ignoriši</string>
+  <string name="action_mark_as_read">Označi kao pročitano</string>
+  <string name="app_running_msg_notification_title">Usluga razmene poruka je aktivna</string>
+  <string name="app_running_msg_notification_content">Primaju se poruke u automobilu</string>
+  <string name="message_channel_name">Kanal za poruke</string>
+  <string name="message_channel_description">Usluga za prijem poruka na telefonu</string>
+  <string name="new_message">Nova poruka</string>
+  <string name="cd_unread">Nepročitano</string>
+  <string name="cd_conversation_icon">Ikona konverzacije</string>
+  <string name="cd_icon_indicating_the_last_action">Ikona teksta titla</string>
+  <string name="cd_mute_button">Dugme za prekid zvuka</string>
+  <string name="cd_loading_info_icon">Ikona učitavanja informacija</string>
+  <string name="cd_reply_action_button">Dugme za radnju odgovora</string>
+  <string name="cd_play_action_button">Dugme za radnju puštanja</string>
+  <string name="now_string_shortest">sada</string>
+  <string name="participant_overflow_text">i još %d</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d m</item>
+    <item quantity="few">%d m</item>
+    <item quantity="other">%d m</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d s</item>
+    <item quantity="few">%d s</item>
+    <item quantity="other">%d s</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d d</item>
+    <item quantity="few">%d d</item>
+    <item quantity="other">%d d</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d god</item>
+    <item quantity="few">%d god</item>
+    <item quantity="other">%d god</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">za %d min</item>
+    <item quantity="few">za %d min</item>
+    <item quantity="other">za %d min</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">za %d s</item>
+    <item quantity="few">za %d s</item>
+    <item quantity="other">za %d s</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">za %d d</item>
+    <item quantity="few">za %d d</item>
+    <item quantity="other">za %d d</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">za %d god</item>
+    <item quantity="few">za %d god</item>
+    <item quantity="other">za %d god</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">Pre %d minut</item>
+    <item quantity="few">Pre %d minuta</item>
+    <item quantity="other">Pre %d minuta</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">Pre %d sat</item>
+    <item quantity="few">Pre %d sata</item>
+    <item quantity="other">Pre %d sati</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">Pre %d dan</item>
+    <item quantity="few">Pre %d dana</item>
+    <item quantity="other">Pre %d dana</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">Pre %d godine</item>
+    <item quantity="few">Pre %d godine</item>
+    <item quantity="other">Pre %d godina</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">za %d minut</item>
+    <item quantity="few">za %d minuta</item>
+    <item quantity="other">za %d minuta</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">za %d sat</item>
+    <item quantity="few">za %d sata</item>
+    <item quantity="other">za %d sati</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">za %d dan</item>
+    <item quantity="few">za %d dana</item>
+    <item quantity="other">za %d dana</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">za %d godinu</item>
+    <item quantity="few">za %d godine</item>
+    <item quantity="other">za %d godina</item>
+  </plurals>
+</resources>

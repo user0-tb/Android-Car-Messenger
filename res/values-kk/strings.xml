@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth ажыратылған</string>
+  <string name="no_messages">Хабарлар жоқ</string>
+  <string name="connect_bluetooth_button_text">Bluetooth-қа қосылу</string>
+  <string name="replied">Жауап берілді</string>
+  <string name="tap_to_read_aloud">Дауыстап оқу үшін түртіңіз</string>
+  <string name="action_reply">Жауап беру</string>
+  <string name="action_mute">Дыбысын өшіру</string>
+  <string name="action_mark_as_read">Оқылды деп белгілеу</string>
+  <string name="app_running_msg_notification_title">Хабар алмасу қызметі қосулы.</string>
+  <string name="app_running_msg_notification_content">Көлікте хабарлар алу</string>
+  <string name="message_channel_name">Хабар арнасы</string>
+  <string name="message_channel_description">Телефон хабарын алу қызметі</string>
+  <string name="new_message">Жаңа хабар</string>
+  <string name="cd_unread">Оқылмаған</string>
+  <string name="cd_conversation_icon">Әңгіме белгішесі</string>
+  <string name="cd_icon_indicating_the_last_action">Субтитр мәтіні белгішесі</string>
+  <string name="cd_mute_button">Дыбысты өшіру түймесі</string>
+  <string name="cd_loading_info_icon">Ақпаратты жүктеу белгішесі</string>
+  <string name="cd_reply_action_button">Жауап беру түймесі</string>
+  <string name="cd_play_action_button">Ойнату түймесі</string>
+  <string name="now_string_shortest">қазір</string>
+  <string name="participant_overflow_text">және тағы %d</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d мин</item>
+    <item quantity="other">%d мин</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d сағ</item>
+    <item quantity="other">%d сағ</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d күн</item>
+    <item quantity="other">%d күн</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d жыл</item>
+    <item quantity="other">%d жыл</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%d мин кейін</item>
+    <item quantity="other">%d мин кейін</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%d сағ кейін</item>
+    <item quantity="other">%d сағ кейін</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%d күннен кейін</item>
+    <item quantity="other">%d күннен кейін</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%d жылдан кейін</item>
+    <item quantity="other">%d жылдан кейін</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d минут бұрын</item>
+    <item quantity="other">%d минут бұрын</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d сағат бұрын</item>
+    <item quantity="other">%d сағат бұрын</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d күн бұрын</item>
+    <item quantity="other">%d күн бұрын</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d жыл бұрын</item>
+    <item quantity="other">%d жыл бұрын</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d минуттан кейін</item>
+    <item quantity="other">%d минуттан кейін</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d сағаттан кейін</item>
+    <item quantity="other">%d сағаттан кейін</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d күннен кейін</item>
+    <item quantity="other">%d күннен кейін</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d жылдан кейін</item>
+    <item quantity="other">%d жылдан кейін</item>
+  </plurals>
+</resources>

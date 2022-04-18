@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth салсан</string>
+  <string name="no_messages">Мессеж алга</string>
+  <string name="connect_bluetooth_button_text">Bluetooth-тэй холбогдох</string>
+  <string name="replied">Хариу бичсэн</string>
+  <string name="tap_to_read_aloud">Чанга уншихын тулд товшино уу</string>
+  <string name="action_reply">Хариу бичих</string>
+  <string name="action_mute">Дуу хаах</string>
+  <string name="action_mark_as_read">Уншсан гэж тэмдэглэх</string>
+  <string name="app_running_msg_notification_title">Мессеж бичих үйлчилгээ идэвхтэй байна</string>
+  <string name="app_running_msg_notification_content">Машиндаа мессеж хүлээн авах</string>
+  <string name="message_channel_name">Мессеж суваг</string>
+  <string name="message_channel_description">Утасны мессеж хүлээн авагчийн үйлчилгээ</string>
+  <string name="new_message">Шинэ мессеж</string>
+  <string name="cd_unread">Уншаагүй</string>
+  <string name="cd_conversation_icon">Харилцан ярианы дүрс тэмдэг</string>
+  <string name="cd_icon_indicating_the_last_action">Хадмал текстийн дүрс тэмдэг</string>
+  <string name="cd_mute_button">Дууг хаах товчлуур</string>
+  <string name="cd_loading_info_icon">Мэдээллийг ачаалж буй дүрс тэмдэг</string>
+  <string name="cd_reply_action_button">Хариулах үйлдлийн товчлуур</string>
+  <string name="cd_play_action_button">Тоглуулах үйлдлийн товчлуур</string>
+  <string name="now_string_shortest">одоо</string>
+  <string name="participant_overflow_text">, ба %d болон бусад</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%dм</item>
+    <item quantity="other">%dм</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%dц</item>
+    <item quantity="other">%dц</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%dө</item>
+    <item quantity="other">%dө</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%dж</item>
+    <item quantity="other">%dж</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%dминутын дотор</item>
+    <item quantity="other">%dминутын дотор</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%dцагийн дотор</item>
+    <item quantity="other">%dцагийн дотор</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%dөдрийн дотор</item>
+    <item quantity="other">%dөдрийн дотор</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%dжилийн дотор</item>
+    <item quantity="other">%dжилийн дотор</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d минутын өмнө</item>
+    <item quantity="other">%d минутын өмнө</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d цагийн өмнө</item>
+    <item quantity="other">%d цагийн өмнө</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d өдрийн өмнө</item>
+    <item quantity="other">%d өдрийн өмнө</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d жилийн өмнө</item>
+    <item quantity="other">%d жилийн өмнө</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d минутын дотор</item>
+    <item quantity="other">%d минутын дотор</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d цагийн дотор</item>
+    <item quantity="other">%d цагийн дотор</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d өдрийн дотор</item>
+    <item quantity="other">%d өдрийн дотор</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d жиийн дотор</item>
+    <item quantity="other">%d жилийн дотор</item>
+  </plurals>
+</resources>

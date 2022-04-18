@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth је искључен</string>
+  <string name="no_messages">Нема порука</string>
+  <string name="connect_bluetooth_button_text">Повежи са Bluetooth-ом</string>
+  <string name="replied">Одговорено</string>
+  <string name="tap_to_read_aloud">Додирните за читање наглас</string>
+  <string name="action_reply">Одговорите</string>
+  <string name="action_mute">Игнориши</string>
+  <string name="action_mark_as_read">Означи као прочитано</string>
+  <string name="app_running_msg_notification_title">Услуга размене порука је активна</string>
+  <string name="app_running_msg_notification_content">Примају се поруке у аутомобилу</string>
+  <string name="message_channel_name">Канал за поруке</string>
+  <string name="message_channel_description">Услуга за пријем порука на телефону</string>
+  <string name="new_message">Нова порука</string>
+  <string name="cd_unread">Непрочитано</string>
+  <string name="cd_conversation_icon">Икона конверзације</string>
+  <string name="cd_icon_indicating_the_last_action">Икона текста титла</string>
+  <string name="cd_mute_button">Дугме за прекид звука</string>
+  <string name="cd_loading_info_icon">Икона учитавања информација</string>
+  <string name="cd_reply_action_button">Дугме за радњу одговора</string>
+  <string name="cd_play_action_button">Дугме за радњу пуштања</string>
+  <string name="now_string_shortest">сада</string>
+  <string name="participant_overflow_text">и још %d</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d м</item>
+    <item quantity="few">%d м</item>
+    <item quantity="other">%d м</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d с</item>
+    <item quantity="few">%d с</item>
+    <item quantity="other">%d с</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d д</item>
+    <item quantity="few">%d д</item>
+    <item quantity="other">%d д</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d год</item>
+    <item quantity="few">%d год</item>
+    <item quantity="other">%d год</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">за %d мин</item>
+    <item quantity="few">за %d мин</item>
+    <item quantity="other">за %d мин</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">за %d с</item>
+    <item quantity="few">за %d с</item>
+    <item quantity="other">за %d с</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">за %d д</item>
+    <item quantity="few">за %d д</item>
+    <item quantity="other">за %d д</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">за %d год</item>
+    <item quantity="few">за %d год</item>
+    <item quantity="other">за %d год</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">Пре %d минут</item>
+    <item quantity="few">Пре %d минута</item>
+    <item quantity="other">Пре %d минута</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">Пре %d сат</item>
+    <item quantity="few">Пре %d сата</item>
+    <item quantity="other">Пре %d сати</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">Пре %d дан</item>
+    <item quantity="few">Пре %d дана</item>
+    <item quantity="other">Пре %d дана</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">Пре %d године</item>
+    <item quantity="few">Пре %d године</item>
+    <item quantity="other">Пре %d година</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">за %d минут</item>
+    <item quantity="few">за %d минута</item>
+    <item quantity="other">за %d минута</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">за %d сат</item>
+    <item quantity="few">за %d сата</item>
+    <item quantity="other">за %d сати</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">за %d дан</item>
+    <item quantity="few">за %d дана</item>
+    <item quantity="other">за %d дана</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">за %d годину</item>
+    <item quantity="few">за %d године</item>
+    <item quantity="other">за %d година</item>
+  </plurals>
+</resources>

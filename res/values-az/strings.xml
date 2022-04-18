@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth bağlantısı kəsildi</string>
+  <string name="no_messages">Mesaj yoxdur</string>
+  <string name="connect_bluetooth_button_text">Bluetooth\'a qoşulun</string>
+  <string name="replied">Cavablandırılıb</string>
+  <string name="tap_to_read_aloud">Ucadan oxumaq üçün toxunun</string>
+  <string name="action_reply">Cavablayın</string>
+  <string name="action_mute">Səssiz</string>
+  <string name="action_mark_as_read">Oxunmuş kimi qeyd edin</string>
+  <string name="app_running_msg_notification_title">Mesajlaşma xidməti aktivdir</string>
+  <string name="app_running_msg_notification_content">Avtomobildə Mesajların alınması</string>
+  <string name="message_channel_name">Mesaj Kanalı</string>
+  <string name="message_channel_description">Telefonun Mesaj Alma Xidməti</string>
+  <string name="new_message">Yeni Mesaj</string>
+  <string name="cd_unread">Oxunmamış</string>
+  <string name="cd_conversation_icon">Söhbət İkonası</string>
+  <string name="cd_icon_indicating_the_last_action">Altyazı Mətni İkonası</string>
+  <string name="cd_mute_button">\"Səssiz\" Düyməsi</string>
+  <string name="cd_loading_info_icon">Məlumat Yükləmə İkonası</string>
+  <string name="cd_reply_action_button">\"Cavab\" Əməliyyat Düyməsi</string>
+  <string name="cd_play_action_button">\"Oxut\" Əməliyyat Düyməsi</string>
+  <string name="now_string_shortest">indi</string>
+  <string name="participant_overflow_text">və daha %d iştirakçı</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d d</item>
+    <item quantity="other">%d d</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d s</item>
+    <item quantity="other">%d s</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d g</item>
+    <item quantity="other">%d g</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d il</item>
+    <item quantity="other">%d il</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%d d ərzində</item>
+    <item quantity="other">%d d ərzində</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%d s ərzində</item>
+    <item quantity="other">%d s ərzində</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%d g ərzində</item>
+    <item quantity="other">%d g ərzində</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%d il ərzində</item>
+    <item quantity="other">%d il ərzində</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d dəqiqə əvvəl</item>
+    <item quantity="other">%d dəqiqə əvvəl</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d saat əvvəl</item>
+    <item quantity="other">%d saat əvvəl</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d gün əvvəl</item>
+    <item quantity="other">%d gün əvvəl</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d il əvvəl</item>
+    <item quantity="other">%d il əvvəl</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d dəqiqə ərzində</item>
+    <item quantity="other">%d dəqiqə ərzində</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d saat ərzində</item>
+    <item quantity="other">%d saat ərzində</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d gün ərzində</item>
+    <item quantity="other">%d gün ərzində</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d il ərzində</item>
+    <item quantity="other">%d il ərzində</item>
+  </plurals>
+</resources>

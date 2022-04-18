@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Подключение по Bluetooth не установлено</string>
+  <string name="no_messages">Сообщений нет</string>
+  <string name="connect_bluetooth_button_text">Подключиться по Bluetooth</string>
+  <string name="replied">С ответом</string>
+  <string name="tap_to_read_aloud">Нажмите для озвучивания</string>
+  <string name="action_reply">Ответить</string>
+  <string name="action_mute">Отключить звук</string>
+  <string name="action_mark_as_read">Прочитано</string>
+  <string name="app_running_msg_notification_title">Сервис для обмена сообщениями активен</string>
+  <string name="app_running_msg_notification_content">Доступ к сообщениям в автомобиле</string>
+  <string name="message_channel_name">Канал для сообщений</string>
+  <string name="message_channel_description">Служба приема входящих сообщений</string>
+  <string name="new_message">Новое сообщение</string>
+  <string name="cd_unread">Не прочитано</string>
+  <string name="cd_conversation_icon">Значок чата</string>
+  <string name="cd_icon_indicating_the_last_action">Значок субтитров</string>
+  <string name="cd_mute_button">Кнопка отключения звука</string>
+  <string name="cd_loading_info_icon">Иконка загрузки информации</string>
+  <string name="cd_reply_action_button">Кнопка ответа</string>
+  <string name="cd_play_action_button">Кнопка воспроизведения</string>
+  <string name="now_string_shortest">сейчас</string>
+  <string name="participant_overflow_text">и ещё %d</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d мин.</item>
+    <item quantity="few">%d мин.</item>
+    <item quantity="many">%d мин.</item>
+    <item quantity="other">%d мин.</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d ч.</item>
+    <item quantity="few">%d ч.</item>
+    <item quantity="many">%d ч.</item>
+    <item quantity="other">%d ч.</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d дн.</item>
+    <item quantity="few">%d дн.</item>
+    <item quantity="many">%d дн.</item>
+    <item quantity="other">%d дн.</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d г.</item>
+    <item quantity="few">%d г.</item>
+    <item quantity="many">%d лет</item>
+    <item quantity="other">%d г.</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">через %d мин.</item>
+    <item quantity="few">через %d мин.</item>
+    <item quantity="many">через %d мин.</item>
+    <item quantity="other">через %d мин.</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">через %d ч.</item>
+    <item quantity="few">через %d ч.</item>
+    <item quantity="many">через %d ч.</item>
+    <item quantity="other">через %d ч.</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">через %d дн.</item>
+    <item quantity="few">через %d дн.</item>
+    <item quantity="many">через %d дн.</item>
+    <item quantity="other">через %d дн.</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">через %d г.</item>
+    <item quantity="few">через %d г.</item>
+    <item quantity="many">через %d лет</item>
+    <item quantity="other">через %d г.</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d минуту назад</item>
+    <item quantity="few">%d минуты назад</item>
+    <item quantity="many">%d минут назад</item>
+    <item quantity="other">%d минуты назад</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d час назад</item>
+    <item quantity="few">%d часа назад</item>
+    <item quantity="many">%d часов назад</item>
+    <item quantity="other">%d часа назад</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d день назад</item>
+    <item quantity="few">%d дня назад</item>
+    <item quantity="many">%d дней назад</item>
+    <item quantity="other">%d дня назад</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d год назад</item>
+    <item quantity="few">%d года назад</item>
+    <item quantity="many">%d лет назад</item>
+    <item quantity="other">%d года назад</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">через %d минуту</item>
+    <item quantity="few">через %d минуты</item>
+    <item quantity="many">через %d минут</item>
+    <item quantity="other">через %d минуты</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">через %d час</item>
+    <item quantity="few">через %d часа</item>
+    <item quantity="many">через %d часов</item>
+    <item quantity="other">через %d часа</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">через %d день</item>
+    <item quantity="few">через %d дня</item>
+    <item quantity="many">через %d дней</item>
+    <item quantity="other">через %d дня</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">через %d год</item>
+    <item quantity="few">через %d года</item>
+    <item quantity="many">через %d лет</item>
+    <item quantity="other">через %d года</item>
+  </plurals>
+</resources>

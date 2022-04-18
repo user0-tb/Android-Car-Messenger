@@ -22,26 +22,28 @@
     <string name="app_name" translatable="false">SMS</string>
 
     <!-- Button text for connecting to Bluetooth [CHAR LIMIT=40] -->
-    <string name="bluetooth_disconnected" translatable="false">Bluetooth disconnected</string>
+    <string name="bluetooth_disconnected">Bluetooth disconnected</string>
 
     <!-- Status when no new messages[CHAR LIMIT=40] -->
-    <string name="no_messages" translatable="false">No messages</string>
+    <string name="no_messages">No messages</string>
 
-    <string name="connect_bluetooth_button_text" translatable="false">Connect to Bluetooth</string>
+    <string name="connect_bluetooth_button_text">Connect to Bluetooth</string>
 
     <!-- Status when replied [CHAR LIMIT=40] -->
-    <string name="replied" translatable="false">Replied</string>
+    <string name="replied">Replied</string>
 
     <!-- Status - Tap To Read Aloud [CHAR LIMIT=40] -->
     <string name="tap_to_read_aloud">Tap to read aloud</string>
 
     <!-- Dot separator [CHAR LIMIT=1] -->
     <string name="dot" translatable="false">·</string>
-    <string name="action_reply" translatable="false">Reply</string>
-    <string name="action_mute" translatable="false">Mute</string>
+
+    <!-- Notification action button strings -->
+    <string name="action_reply">Reply</string>
+    <string name="action_mute">Mute</string>
 
     <!-- The message service channel name [CHAR LIMIT=40] -->
-    <string name="action_mark_as_read" translatable="false">Mark As Read</string>
+    <string name="action_mark_as_read">Mark As Read</string>
     <!-- The message service channel description [CHAR LIMIT=40] -->
     <string name="app_running_msg_notification_title">Messaging service is active</string>
     <!-- The message channel name [CHAR LIMIT=40] -->
@@ -79,8 +81,8 @@
 
     <!-- Phrase describing a time duration using minutes that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->
     <plurals name="duration_minutes_shortest">
-        <item quantity="one"><xliff:g example="1" id="count" translatable="false">%d</xliff:g>m</item>
-        <item quantity="other"><xliff:g example="2" id="count" translatable="false">%d</xliff:g>m</item>
+        <item quantity="one"><xliff:g example="1" id="count">%d</xliff:g>m</item>
+        <item quantity="other"><xliff:g example="2" id="count">%d</xliff:g>m</item>
     </plurals>
 
     <!-- Phrase describing a time duration using hours that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">బ్లూటూత్ డిస్‌కనెక్ట్ చేయబడింది</string>
+  <string name="no_messages">మెసేజ్‌లు ఏవీ లేవు</string>
+  <string name="connect_bluetooth_button_text">బ్లూటూత్‌కు కనెక్ట్ చేయండి</string>
+  <string name="replied">రిప్లయి ఇవ్వబడింది</string>
+  <string name="tap_to_read_aloud">బిగ్గరగా చదవడానికి ట్యాప్ చేయండి</string>
+  <string name="action_reply">రిప్లయి ఇవ్వండి</string>
+  <string name="action_mute">మ్యూట్ చేయండి</string>
+  <string name="action_mark_as_read">చదివినట్లు గుర్తు పెట్టండి</string>
+  <string name="app_running_msg_notification_title">మెసేజింగ్ సర్వీస్ యాక్టివ్‌గా ఉంది</string>
+  <string name="app_running_msg_notification_content">కార్‌లో మెసేజ్‌లు వస్తున్నాయి</string>
+  <string name="message_channel_name">మెసేజ్ ఛానెల్</string>
+  <string name="message_channel_description">ఫోన్ మెసేజ్ రిసీవర్ సర్వీస్</string>
+  <string name="new_message">కొత్త మెసేజ్</string>
+  <string name="cd_unread">చదవనివి</string>
+  <string name="cd_conversation_icon">సంభాషణ చిహ్నం</string>
+  <string name="cd_icon_indicating_the_last_action">సబ్‌టైటిల్ టెక్స్ట్ చిహ్నం</string>
+  <string name="cd_mute_button">మ్యూట్ బటన్</string>
+  <string name="cd_loading_info_icon">సమాచారం లోడ్ అవుతున్న చిహ్నం</string>
+  <string name="cd_reply_action_button">రిప్లయి యాక్షన్ బటన్</string>
+  <string name="cd_play_action_button">ప్లే యాక్షన్ బటన్</string>
+  <string name="now_string_shortest">ఇప్పుడు</string>
+  <string name="participant_overflow_text">, ఇంకా మరో %d</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%dని</item>
+    <item quantity="other">%dని</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%dగం</item>
+    <item quantity="other">%dగం</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%dరో</item>
+    <item quantity="other">%dరో</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%dసం</item>
+    <item quantity="other">%dసం</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%dనిమిషంలో</item>
+    <item quantity="other">%dనిమిషంలో</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%dగంటలో</item>
+    <item quantity="other">%dగంటలో</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%dరోజులో</item>
+    <item quantity="other">%dరోజులో</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%dసంవత్సరంలో</item>
+    <item quantity="other">%dసంవత్సరంలో</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d నిమిషం క్రితం</item>
+    <item quantity="other">%d నిమిషాల క్రితం</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d గంట క్రితం</item>
+    <item quantity="other">%d గంటల క్రితం</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d రోజు క్రితం</item>
+    <item quantity="other">%d రోజుల క్రితం</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d సంవత్సరం క్రితం</item>
+    <item quantity="other">%d సంవత్సరాల క్రితం</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d నిమిషంలో</item>
+    <item quantity="other">%d నిమిషాల్లో</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d గంటలో</item>
+    <item quantity="other">%d గంటల్లో</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d రోజులో</item>
+    <item quantity="other">%d రోజుల్లో</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d సంవత్సరంలో</item>
+    <item quantity="other">%d సంవత్సరాల్లో</item>
+  </plurals>
+</resources>

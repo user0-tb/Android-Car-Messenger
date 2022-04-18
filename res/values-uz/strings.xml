@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth aloqa uzildi</string>
+  <string name="no_messages">Hech qanday xabar yoʻq</string>
+  <string name="connect_bluetooth_button_text">Bluetoothga ulanish</string>
+  <string name="replied">Javob berildi</string>
+  <string name="tap_to_read_aloud">Tinglash uchun tegining</string>
+  <string name="action_reply">Javob berish</string>
+  <string name="action_mute">Ovozsiz</string>
+  <string name="action_mark_as_read">Ochilgan deb belgilash</string>
+  <string name="app_running_msg_notification_title">Xabarlashuv xizmati faol</string>
+  <string name="app_running_msg_notification_content">Xabarlarni avtomobilda qabul qilish</string>
+  <string name="message_channel_name">Xabarlar kanali</string>
+  <string name="message_channel_description">Telefon xabarini qabul qilish xizmati</string>
+  <string name="new_message">Yangi xabar</string>
+  <string name="cd_unread">Ochilmagan</string>
+  <string name="cd_conversation_icon">Suhbat belgisi</string>
+  <string name="cd_icon_indicating_the_last_action">Taglavha matni belgisi</string>
+  <string name="cd_mute_button">Ovozsiz qilish tugmasi</string>
+  <string name="cd_loading_info_icon">“Axborot yuklanmoqda” belgisi</string>
+  <string name="cd_reply_action_button">Javob berish amali tugmasi</string>
+  <string name="cd_play_action_button">Ijro amali tugmasi</string>
+  <string name="now_string_shortest">hozir</string>
+  <string name="participant_overflow_text">va yana %d kishi</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d d</item>
+    <item quantity="other">%d d</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d st</item>
+    <item quantity="other">%d st</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d k</item>
+    <item quantity="other">%d k</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d y</item>
+    <item quantity="other">%d y</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%d daqiqadan keyin</item>
+    <item quantity="other">%d daqiqadan keyin</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%d soatdan keyin</item>
+    <item quantity="other">%d soatdan keyin</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%d kundan keyin</item>
+    <item quantity="other">%d kundan keyin</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%d yildan keyin</item>
+    <item quantity="other">%d yildan keyin</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d daqiqa oldin</item>
+    <item quantity="other">%d daqiqa oldin</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d soat oldin</item>
+    <item quantity="other">%d soat oldin</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d kun oldin</item>
+    <item quantity="other">%d kun oldin</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d yil oldin</item>
+    <item quantity="other">%d yil oldin</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d daqiqadan keyin</item>
+    <item quantity="other">%d daqiqadan keyin</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d soatdan keyin</item>
+    <item quantity="other">%d soatdan keyin</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d kundan keyin</item>
+    <item quantity="other">%d kundan keyin</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d yildan keyin</item>
+    <item quantity="other">%d yildan keyin</item>
+  </plurals>
+</resources>

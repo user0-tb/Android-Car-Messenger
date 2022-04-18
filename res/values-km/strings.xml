@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">បានផ្ដាច់​ប៊្លូធូស</string>
+  <string name="no_messages">គ្មានសារទេ</string>
+  <string name="connect_bluetooth_button_text">ភ្ជាប់​ប៊្លូធូស</string>
+  <string name="replied">បាន​ឆ្លើយតប</string>
+  <string name="tap_to_read_aloud">ចុច​ដើម្បី​អានឮៗ​</string>
+  <string name="action_reply">ឆ្លើយតប</string>
+  <string name="action_mute">បិទសំឡេង</string>
+  <string name="action_mark_as_read">សម្គាល់​ថា​បានអាន​ហើយ</string>
+  <string name="app_running_msg_notification_title">សេវាកម្ម​ផ្ញើសារកំពុង​ដំណើរការ</string>
+  <string name="app_running_msg_notification_content">កំពុងទទួលសារនៅលើរថយន្ត</string>
+  <string name="message_channel_name">បណ្ដាញសារ</string>
+  <string name="message_channel_description">សេវាកម្ម​កម្មវិធីទទួល​សារទូរសព្ទ</string>
+  <string name="new_message">សារ​ថ្មី</string>
+  <string name="cd_unread">មិនទាន់អាន</string>
+  <string name="cd_conversation_icon">រូប​ការ​សន្ទនា</string>
+  <string name="cd_icon_indicating_the_last_action">រូបអក្សររត់</string>
+  <string name="cd_mute_button">ប៊ូតុង​បិទសំឡេង</string>
+  <string name="cd_loading_info_icon">រូបកំពុងផ្ទុកព័ត៌មាន</string>
+  <string name="cd_reply_action_button">ប៊ូតុងសកម្មភាពឆ្លើយតប</string>
+  <string name="cd_play_action_button">ប៊ូតុងសកម្មភាពចាក់</string>
+  <string name="now_string_shortest">ឥឡូវ​នេះ</string>
+  <string name="participant_overflow_text">និង %d ទៀត</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%dន</item>
+    <item quantity="other">%dន</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%dម៉</item>
+    <item quantity="other">%dម៉</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%dថ</item>
+    <item quantity="other">%dថ</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%dឆ</item>
+    <item quantity="other">%dឆ</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">ក្នុងរយៈពេល %dនាទី</item>
+    <item quantity="other">ក្នុងរយៈពេល %dនាទី</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">ក្នុងរយៈពេល %dម៉ោង</item>
+    <item quantity="other">ក្នុងរយៈពេល %dម៉ោង</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">ក្នុងរយៈពេល %dថ្ងៃ</item>
+    <item quantity="other">ក្នុងរយៈពេល %dថ្ងៃ</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">ក្នុងរយៈពេល %dឆ្នាំ</item>
+    <item quantity="other">ក្នុងរយៈពេល %dឆ្នាំ</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d នាទីមុន</item>
+    <item quantity="other">%d នាទីមុន</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d ម៉ោងមុន</item>
+    <item quantity="other">%d ម៉ោងមុន</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d ថ្ងៃមុន</item>
+    <item quantity="other">%d ថ្ងៃមុន</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d ឆ្នាំមុន</item>
+    <item quantity="other">%d ឆ្នាំមុន</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">ក្នុងរយៈពេល %d នាទី</item>
+    <item quantity="other">ក្នុងរយៈពេល %d នាទី</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">ក្នុងរយៈពេល %d ម៉ោង</item>
+    <item quantity="other">ក្នុងរយៈពេល %d ម៉ោង</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">ក្នុងរយៈពេល %d ថ្ងៃ</item>
+    <item quantity="other">ក្នុងរយៈពេល %d ថ្ងៃ</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">ក្នុង​រយៈ​ពេល %d ឆ្នាំ</item>
+    <item quantity="other">ក្នុង​រយៈ​ពេល %d ឆ្នាំ</item>
+  </plurals>
+</resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">ব্লুটুথ সংযোগ বিচ্ছিন্ন কৰা হ’ল</string>
+  <string name="no_messages">কোনো বাৰ্তা নাই</string>
+  <string name="connect_bluetooth_button_text">ব্লুটুথৰ সৈতে সংযোগ কৰক</string>
+  <string name="replied">প্ৰত্যুত্তৰ দিয়া হৈছে</string>
+  <string name="tap_to_read_aloud">ডাঙৰকৈ পঢ়া শুনিবলৈ টিপক</string>
+  <string name="action_reply">প্ৰত্যুত্তৰ</string>
+  <string name="action_mute">মিউট কৰক</string>
+  <string name="action_mark_as_read">পঢ়া হৈছে বুলি চিহ্নিত কৰক</string>
+  <string name="app_running_msg_notification_title">বাৰ্তা বিনিময় সেৱাটো সক্ৰিয় হৈ আছে</string>
+  <string name="app_running_msg_notification_content">গাড়ীত বাৰ্তা লাভ কৰা</string>
+  <string name="message_channel_name">বাৰ্তাৰ চেনেল</string>
+  <string name="message_channel_description">ফ’নৰ বাৰ্তাৰ প্ৰাপক সেৱা</string>
+  <string name="new_message">নতুন বাৰ্তা</string>
+  <string name="cd_unread">নপঢ়া</string>
+  <string name="cd_conversation_icon">বাৰ্তালাপৰ চিহ্ন</string>
+  <string name="cd_icon_indicating_the_last_action">ছাবটাইটেল পাঠৰ চিহ্ন</string>
+  <string name="cd_mute_button">মিউট কৰাৰ বুটাম</string>
+  <string name="cd_loading_info_icon">তথ্য ল’ড হোৱাৰ চিহ্ন</string>
+  <string name="cd_reply_action_button">প্ৰত্যুত্তৰ দিয়াৰ বুটাম</string>
+  <string name="cd_play_action_button">প্লে’ কৰাৰ বুটাম</string>
+  <string name="now_string_shortest">এতিয়া</string>
+  <string name="participant_overflow_text">, আৰু %d টা</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d মি</item>
+    <item quantity="other">%d মি</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d ঘ</item>
+    <item quantity="other">%d ঘ</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d দি</item>
+    <item quantity="other">%d দি</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d ব</item>
+    <item quantity="other">%d ব</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%d মিনিটত</item>
+    <item quantity="other">%d মিনিটত</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%d ঘণ্টাত</item>
+    <item quantity="other">%d ঘণ্টাত</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%d দিনত</item>
+    <item quantity="other">%d দিনত</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%d বছৰত</item>
+    <item quantity="other">%d বছৰত</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d মিনিট পূৰ্বে</item>
+    <item quantity="other">%d মিনিট পূৰ্বে</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d ঘণ্টা পূৰ্বে</item>
+    <item quantity="other">%d ঘণ্টা পূৰ্বে</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d দিন পূৰ্বে</item>
+    <item quantity="other">%d দিন পূৰ্বে</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d বছৰ পূৰ্বে</item>
+    <item quantity="other">%d বছৰ পূৰ্বে</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d মিনিটত</item>
+    <item quantity="other">%d মিনিটত</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d ঘণ্টাত</item>
+    <item quantity="other">%d ঘণ্টাত</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d দিনত</item>
+    <item quantity="other">%d দিনত</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d বছৰত</item>
+    <item quantity="other">%d বছৰত</item>
+  </plurals>
+</resources>

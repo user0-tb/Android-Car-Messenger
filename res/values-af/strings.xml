@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth is ontkoppel</string>
+  <string name="no_messages">Geen boodskappe nie</string>
+  <string name="connect_bluetooth_button_text">Koppel aan Bluetooth</string>
+  <string name="replied">Het geantwoord</string>
+  <string name="tap_to_read_aloud">Tik om hardop te lees</string>
+  <string name="action_reply">Antwoord</string>
+  <string name="action_mute">Demp</string>
+  <string name="action_mark_as_read">Merk as gelees</string>
+  <string name="app_running_msg_notification_title">Boodskapdiens is aktief</string>
+  <string name="app_running_msg_notification_content">Ontvang boodskappe in motor</string>
+  <string name="message_channel_name">Boodskapkanaal</string>
+  <string name="message_channel_description">Ontvangerdiens vir foonboodskappe</string>
+  <string name="new_message">Nuwe boodskap</string>
+  <string name="cd_unread">Ongelees</string>
+  <string name="cd_conversation_icon">Gesprek-ikoon</string>
+  <string name="cd_icon_indicating_the_last_action">Onderskrifteks-ikoon</string>
+  <string name="cd_mute_button">Dempknoppie</string>
+  <string name="cd_loading_info_icon">Laai tans Inligting-ikoon</string>
+  <string name="cd_reply_action_button">Antwoord-handelingknoppie</string>
+  <string name="cd_play_action_button">Speel-handelingknoppie</string>
+  <string name="now_string_shortest">nou</string>
+  <string name="participant_overflow_text">, en nog %d</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d m.</item>
+    <item quantity="other">%d m.</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d u.</item>
+    <item quantity="other">%d u.</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d d.</item>
+    <item quantity="other">%d d.</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d j.</item>
+    <item quantity="other">%d j.</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">oor %d m.</item>
+    <item quantity="other">oor %d m.</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">oor %d u.</item>
+    <item quantity="other">oor %d u.</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">oor %d d.</item>
+    <item quantity="other">oor %d d.</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">oor %d j.</item>
+    <item quantity="other">oor %d j.</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d minuut gelede</item>
+    <item quantity="other">%d minute gelede</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d uur gelede</item>
+    <item quantity="other">%d uur gelede</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d dag gelede</item>
+    <item quantity="other">%d dae gelede</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d jaar gelede</item>
+    <item quantity="other">%d jaar gelede</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">Oor %d minuut</item>
+    <item quantity="other">Oor %d minute</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">oor %d uur</item>
+    <item quantity="other">oor %d uur</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">oor %d dag</item>
+    <item quantity="other">oor %d dae</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">oor %d jaar</item>
+    <item quantity="other">oor %d jaar</item>
+  </plurals>
+</resources>

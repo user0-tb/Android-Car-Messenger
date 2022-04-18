@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth terputus</string>
+  <string name="no_messages">Tidak ada pesan</string>
+  <string name="connect_bluetooth_button_text">Hubungkan ke Bluetooth</string>
+  <string name="replied">Dibalas</string>
+  <string name="tap_to_read_aloud">Ketuk agar dibacakan</string>
+  <string name="action_reply">Balas</string>
+  <string name="action_mute">Bisukan</string>
+  <string name="action_mark_as_read">Tandai Telah Dibaca</string>
+  <string name="app_running_msg_notification_title">Layanan pesan aktif</string>
+  <string name="app_running_msg_notification_content">Menerima Pesan di mobil</string>
+  <string name="message_channel_name">Saluran Pesan</string>
+  <string name="message_channel_description">Layanan Penerima Pesan Ponsel</string>
+  <string name="new_message">Pesan Baru</string>
+  <string name="cd_unread">Belum Dibaca</string>
+  <string name="cd_conversation_icon">Ikon Percakapan</string>
+  <string name="cd_icon_indicating_the_last_action">Ikon Teks Subtitel</string>
+  <string name="cd_mute_button">Tombol Bisukan</string>
+  <string name="cd_loading_info_icon">Ikon Memuat Info</string>
+  <string name="cd_reply_action_button">Tombol Tindakan Balas</string>
+  <string name="cd_play_action_button">Tombol Tindakan Putar</string>
+  <string name="now_string_shortest">skrg</string>
+  <string name="participant_overflow_text">, dan %d lainnya</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d m</item>
+    <item quantity="other">%d m</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d j</item>
+    <item quantity="other">%d j</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d h</item>
+    <item quantity="other">%d h</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d t</item>
+    <item quantity="other">%d t</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">dalam %d m</item>
+    <item quantity="other">dalam %d m</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">dalam %d j</item>
+    <item quantity="other">dalam %d j</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">dalam %d h</item>
+    <item quantity="other">dalam %d h</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">dalam %d t</item>
+    <item quantity="other">dalam %d t</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d menit lalu</item>
+    <item quantity="other">%d menit lalu</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d jam lalu</item>
+    <item quantity="other">%d jam lalu</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d hari lalu</item>
+    <item quantity="other">%d hari lalu</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d tahun lalu</item>
+    <item quantity="other">%d tahun lalu</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">dalam %d menit</item>
+    <item quantity="other">dalam %d menit</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">dalam %d jam</item>
+    <item quantity="other">dalam %d jam</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">dalam %d hari</item>
+    <item quantity="other">dalam %d hari</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">dalam %d tahun</item>
+    <item quantity="other">dalam %d tahun</item>
+  </plurals>
+</resources>

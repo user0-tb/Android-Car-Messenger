@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">ຖືກຕັດການເຊື່ອມຕໍ່ Bluetooth ແລ້ວ</string>
+  <string name="no_messages">ບໍ່ມີຂໍ້ຄວາມ</string>
+  <string name="connect_bluetooth_button_text">ເຊື່ອມຕໍ່ຫາ Bluetooth</string>
+  <string name="replied">ຕອບກັບແລ້ວ</string>
+  <string name="tap_to_read_aloud">ແຕະເພື່ອອ່ານດັງໆ</string>
+  <string name="action_reply">ຕອບກັບ</string>
+  <string name="action_mute">ປິດສຽງ</string>
+  <string name="action_mark_as_read">ໝາຍວ່າອ່ານແລ້ວ</string>
+  <string name="app_running_msg_notification_title">ບໍລິການຮັບສົ່ງຂໍ້ຄວາມແມ່ນເປີດນຳໃຊ້</string>
+  <string name="app_running_msg_notification_content">ການຮັບຂໍ້ຄວາມຢູ່ເທິງລົດ</string>
+  <string name="message_channel_name">ຊ່ອງຂໍ້ຄວາມ</string>
+  <string name="message_channel_description">ບໍລິການຕົວຮັບຂໍ້ມູນຂໍ້ຄວາມໂທລະສັບ</string>
+  <string name="new_message">ຂໍ້ຄວາມໃໝ່</string>
+  <string name="cd_unread">ຍັງບໍ່ໄດ້ອ່ານ</string>
+  <string name="cd_conversation_icon">ໄອຄອນບົດສົນທະນາ</string>
+  <string name="cd_icon_indicating_the_last_action">ໄອຄອນຂໍ້ຄວາມຄຳແປ</string>
+  <string name="cd_mute_button">ປຸ່ມປິດສຽງ</string>
+  <string name="cd_loading_info_icon">ໄອຄອນກຳລັງໂຫລດຂໍ້ມູນ</string>
+  <string name="cd_reply_action_button">ປຸ່ມຄຳສັ່ງຕອບກັບ</string>
+  <string name="cd_play_action_button">ປຸ່ມຄຳສັ່ງຫຼິ້ນ</string>
+  <string name="now_string_shortest">ຕອນນີ້</string>
+  <string name="participant_overflow_text">, ແລະ %d ອື່ນໆອີກ</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%dນທ</item>
+    <item quantity="other">%dນທ</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%dຊມ</item>
+    <item quantity="other">%dຊມ</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%dມ</item>
+    <item quantity="other">%dມ</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%dປ</item>
+    <item quantity="other">%dປ</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">ໃນ %dນທ</item>
+    <item quantity="other">ໃນ %dນທ</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">ໃນ %dຊມ</item>
+    <item quantity="other">ໃນ %dຊມ</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">ໃນ %dມ</item>
+    <item quantity="other">ໃນ %dມ</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">ໃນ %dປ</item>
+    <item quantity="other">ໃນ %dປ</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d ນາທີກ່ອນ</item>
+    <item quantity="other">%d ນາທີກ່ອນ</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d ຊົ່ວໂມງກ່ອນ</item>
+    <item quantity="other">%d ຊົ່ວໂມງກ່ອນ</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d ມື້ກ່ອນ</item>
+    <item quantity="other">%d ມື້ກ່ອນ</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d ປີຜ່ານມາ</item>
+    <item quantity="other">%d ປີຜ່ານມາ</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">ໃນ %d ນາທີ</item>
+    <item quantity="other">ໃນ %d ນາທີ</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">ໃນ %d ຊົ່ວໂມງ</item>
+    <item quantity="other">ໃນ %d ຊົ່ວໂມງ</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">ໃນ %d ມື້</item>
+    <item quantity="other">ໃນ %d ມື້</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">ໃນ %d ປີ</item>
+    <item quantity="other">ໃນ %d ປີ</item>
+  </plurals>
+</resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Đã ngắt kết nối Bluetooth</string>
+  <string name="no_messages">Không có tin nhắn nào</string>
+  <string name="connect_bluetooth_button_text">Kết nối với Bluetooth</string>
+  <string name="replied">Đã trả lời</string>
+  <string name="tap_to_read_aloud">Nhấn để nghe đọc</string>
+  <string name="action_reply">Trả lời</string>
+  <string name="action_mute">Tắt tiếng</string>
+  <string name="action_mark_as_read">Đánh dấu là đã đọc</string>
+  <string name="app_running_msg_notification_title">Dịch vụ nhắn tin đang hoạt động</string>
+  <string name="app_running_msg_notification_content">Đang nhận tin nhắn trên xe</string>
+  <string name="message_channel_name">Kênh tin nhắn</string>
+  <string name="message_channel_description">Dịch vụ nhận tin nhắn điện thoại</string>
+  <string name="new_message">Tin nhắn mới</string>
+  <string name="cd_unread">Chưa đọc</string>
+  <string name="cd_conversation_icon">Biểu tượng cuộc trò chuyện</string>
+  <string name="cd_icon_indicating_the_last_action">Biểu tượng văn bản phụ đề</string>
+  <string name="cd_mute_button">Nút tắt tiếng</string>
+  <string name="cd_loading_info_icon">Biểu tượng tải thông tin</string>
+  <string name="cd_reply_action_button">Nút hành động trả lời</string>
+  <string name="cd_play_action_button">Nút hành động phát</string>
+  <string name="now_string_shortest">vừa xong</string>
+  <string name="participant_overflow_text">và %d người khác</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d phút</item>
+    <item quantity="other">%d phút</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d giờ</item>
+    <item quantity="other">%d giờ</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d ngày</item>
+    <item quantity="other">%d ngày</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d năm</item>
+    <item quantity="other">%d năm</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%d phút nữa</item>
+    <item quantity="other">%d phút nữa</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%d giờ nữa</item>
+    <item quantity="other">%d giờ nữa</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%d ngày nữa</item>
+    <item quantity="other">%d ngày nữa</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%d năm nữa</item>
+    <item quantity="other">%d năm nữa</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d phút trước</item>
+    <item quantity="other">%d phút trước</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d giờ trước</item>
+    <item quantity="other">%d giờ trước</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d ngày trước</item>
+    <item quantity="other">%d ngày trước</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d năm trước</item>
+    <item quantity="other">%d năm trước</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d phút nữa</item>
+    <item quantity="other">%d phút nữa</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d giờ nữa</item>
+    <item quantity="other">%d giờ nữa</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d ngày nữa</item>
+    <item quantity="other">%d ngày nữa</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d năm nữa</item>
+    <item quantity="other">%d năm nữa</item>
+  </plurals>
+</resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Το Bluetooth αποσυνδέθηκε</string>
+  <string name="no_messages">Δεν υπάρχουν μηνύματα</string>
+  <string name="connect_bluetooth_button_text">Σύνδεση σε Bluetooth</string>
+  <string name="replied">Απάντησε</string>
+  <string name="tap_to_read_aloud">Πατήστε για εκφώνηση</string>
+  <string name="action_reply">Απάντηση</string>
+  <string name="action_mute">Σίγαση</string>
+  <string name="action_mark_as_read">Επισήμανση ως αναγνωσμένο</string>
+  <string name="app_running_msg_notification_title">Η υπηρ. ανταλλαγής μηνυμάτ. είναι ενεργή</string>
+  <string name="app_running_msg_notification_content">Λήψη μηνυμάτων στο αυτοκίνητο</string>
+  <string name="message_channel_name">Κανάλι μηνυμάτων</string>
+  <string name="message_channel_description">Υπηρεσία λήψης μηνυμάτων τηλεφώνου</string>
+  <string name="new_message">Νέο μήνυμα</string>
+  <string name="cd_unread">Μη αναγνωσμένο</string>
+  <string name="cd_conversation_icon">Εικονίδιο συνομιλίας</string>
+  <string name="cd_icon_indicating_the_last_action">Εικονίδιο κειμένου υποτίτλων</string>
+  <string name="cd_mute_button">Κουμπί σίγασης</string>
+  <string name="cd_loading_info_icon">Εικονίδιο φόρτωσης πληροφοριών</string>
+  <string name="cd_reply_action_button">Κουμπί ενεργειών απάντησης</string>
+  <string name="cd_play_action_button">Κουμπί ενεργειών αναπαραγωγής</string>
+  <string name="now_string_shortest">τώρα</string>
+  <string name="participant_overflow_text">και %d ακόμη</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%dλ.</item>
+    <item quantity="other">%dλ.</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%dώ.</item>
+    <item quantity="other">%dώ.</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%dη.</item>
+    <item quantity="other">%dη.</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%dέ.</item>
+    <item quantity="other">%dέ.</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">σε %dλ.</item>
+    <item quantity="other">σε %dλ.</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">σε %dώ.</item>
+    <item quantity="other">σε %dώ.</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">σε %dη.</item>
+    <item quantity="other">σε %dη.</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">σε %dέ.</item>
+    <item quantity="other">σε %dέ.</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">Πριν από %d λεπτό</item>
+    <item quantity="other">Πριν από %d λεπτά</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">Πριν από %d ώρα</item>
+    <item quantity="other">Πριν από %d ώρες</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">Πριν από %d ημέρα</item>
+    <item quantity="other">Πριν από %d ημέρες</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">Πριν από %d έτος</item>
+    <item quantity="other">Πριν από %d έτη</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">σε %d λεπτό</item>
+    <item quantity="other">σε %d λεπτά</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">σε %d ώρα</item>
+    <item quantity="other">σε %d ώρες</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">σε %d ημέρα</item>
+    <item quantity="other">σε %d ημέρες</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">σε %d έτος</item>
+    <item quantity="other">σε %d έτη</item>
+  </plurals>
+</resources>

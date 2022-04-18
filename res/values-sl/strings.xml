@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Povezava Bluetooth je prekinjena</string>
+  <string name="no_messages">Ni sporočil</string>
+  <string name="connect_bluetooth_button_text">Povezovanje z Bluetoothom</string>
+  <string name="replied">Odgovorjeno</string>
+  <string name="tap_to_read_aloud">Dotik za branje na glas</string>
+  <string name="action_reply">Odgovor</string>
+  <string name="action_mute">Izklopi zvok</string>
+  <string name="action_mark_as_read">Označi kot prebrano</string>
+  <string name="app_running_msg_notification_title">Storitev za sporočanje je aktivna.</string>
+  <string name="app_running_msg_notification_content">Prejemanje sporočil v avtomobilu</string>
+  <string name="message_channel_name">Kanal za sporočila</string>
+  <string name="message_channel_description">Storitev sprejem. sporočil prek telefona</string>
+  <string name="new_message">Novo sporočilo</string>
+  <string name="cd_unread">Neprebrano</string>
+  <string name="cd_conversation_icon">Ikona pogovora</string>
+  <string name="cd_icon_indicating_the_last_action">Ikona besedila podnaslova</string>
+  <string name="cd_mute_button">Gumb za izklop zvoka</string>
+  <string name="cd_loading_info_icon">Ikona za nalaganje informacij</string>
+  <string name="cd_reply_action_button">Gumb za dejanje odgovarjanja</string>
+  <string name="cd_play_action_button">Gumb za dejanje predvajanja</string>
+  <string name="now_string_shortest">zdaj</string>
+  <string name="participant_overflow_text">in še %d</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d min</item>
+    <item quantity="two">%d min</item>
+    <item quantity="few">%d min</item>
+    <item quantity="other">%d min</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d h</item>
+    <item quantity="two">%d h</item>
+    <item quantity="few">%d h</item>
+    <item quantity="other">%d h</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d d</item>
+    <item quantity="two">%d d</item>
+    <item quantity="few">%d d</item>
+    <item quantity="other">%d d</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d l</item>
+    <item quantity="two">%d l</item>
+    <item quantity="few">%d l</item>
+    <item quantity="other">%d l</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">čez %d min</item>
+    <item quantity="two">čez %d min</item>
+    <item quantity="few">čez %d min</item>
+    <item quantity="other">čez %d min</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">čez %d h</item>
+    <item quantity="two">čez %d h</item>
+    <item quantity="few">čez %d h</item>
+    <item quantity="other">čez %d h</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">čez %d d</item>
+    <item quantity="two">čez %d d</item>
+    <item quantity="few">čez %d d</item>
+    <item quantity="other">čez %d d</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">čez %d l</item>
+    <item quantity="two">čez %d l</item>
+    <item quantity="few">čez %d l</item>
+    <item quantity="other">čez %d l</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">pred %d minuto</item>
+    <item quantity="two">pred %d minutama</item>
+    <item quantity="few">pred %d minutami</item>
+    <item quantity="other">pred %d minutami</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">pred %d uro</item>
+    <item quantity="two">pred %d urama</item>
+    <item quantity="few">pred %d urami</item>
+    <item quantity="other">pred %d urami</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">pred %d dnevom</item>
+    <item quantity="two">pred %d dnevoma</item>
+    <item quantity="few">pred %d dnevi</item>
+    <item quantity="other">pred %d dnevi</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">pred %d letom</item>
+    <item quantity="two">pred %d letoma</item>
+    <item quantity="few">pred %d leti</item>
+    <item quantity="other">pred %d leti</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">čez %d minuto</item>
+    <item quantity="two">čez %d minuti</item>
+    <item quantity="few">čez %d minute</item>
+    <item quantity="other">čez %d minut</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">čez %d uro</item>
+    <item quantity="two">čez %d uri</item>
+    <item quantity="few">čez %d ure</item>
+    <item quantity="other">čez %d ur</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">čez %d dan</item>
+    <item quantity="two">čez %d dneva</item>
+    <item quantity="few">čez %d dni</item>
+    <item quantity="other">čez %d dni</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">čez %d leto</item>
+    <item quantity="two">čez %d leti</item>
+    <item quantity="few">čez %d leta</item>
+    <item quantity="other">čez %d let</item>
+  </plurals>
+</resources>

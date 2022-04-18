@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth är frånkopplat</string>
+  <string name="no_messages">Inga meddelanden</string>
+  <string name="connect_bluetooth_button_text">Anslut till Bluetooth</string>
+  <string name="replied">Svarat</string>
+  <string name="tap_to_read_aloud">Tryck och få text uppläst</string>
+  <string name="action_reply">Svara</string>
+  <string name="action_mute">Ljud av</string>
+  <string name="action_mark_as_read">Markera som läst</string>
+  <string name="app_running_msg_notification_title">Meddelandetjänsten har aktiverats</string>
+  <string name="app_running_msg_notification_content">Tar emot meddelanden i bilen</string>
+  <string name="message_channel_name">Meddelandekanal</string>
+  <string name="message_channel_description">Mottagartjänst för telefonmeddelanden</string>
+  <string name="new_message">Nytt meddelande</string>
+  <string name="cd_unread">Oläst</string>
+  <string name="cd_conversation_icon">Konversationsikon</string>
+  <string name="cd_icon_indicating_the_last_action">Ikon för undertexter</string>
+  <string name="cd_mute_button">Ljudavstängningsknapp</string>
+  <string name="cd_loading_info_icon">Ikon för inläsning av information</string>
+  <string name="cd_reply_action_button">Åtgärdsknapp för att svara</string>
+  <string name="cd_play_action_button">Åtgärdsknapp för att spela upp</string>
+  <string name="now_string_shortest">nu</string>
+  <string name="participant_overflow_text">och %d till</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%dm</item>
+    <item quantity="other">%dm</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%dt</item>
+    <item quantity="other">%dt</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%dd</item>
+    <item quantity="other">%dd</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d år</item>
+    <item quantity="other">%d år</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">om %d m</item>
+    <item quantity="other">om %d m</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">om %d t</item>
+    <item quantity="other">om %d t</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">om %d d</item>
+    <item quantity="other">om %d d</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">om %d år</item>
+    <item quantity="other">om %d år</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d minut sedan</item>
+    <item quantity="other">%d minuter sedan</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d timme sedan</item>
+    <item quantity="other">%d timmar sedan</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d dag sedan</item>
+    <item quantity="other">%d dagar sedan</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">för %d år sedan</item>
+    <item quantity="other">för %d år sedan</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">om %d minut</item>
+    <item quantity="other">om %d minuter</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">om %d timme</item>
+    <item quantity="other">om %d timmar</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">om %d dag</item>
+    <item quantity="other">om %d dagar</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">om %d år</item>
+    <item quantity="other">om %d år</item>
+  </plurals>
+</resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth-ühendus on katkestatud</string>
+  <string name="no_messages">Sõnumeid pole</string>
+  <string name="connect_bluetooth_button_text">Ühenda Bluetoothiga</string>
+  <string name="replied">Vastatud</string>
+  <string name="tap_to_read_aloud">Puudutage ettelugemiseks</string>
+  <string name="action_reply">Vasta</string>
+  <string name="action_mute">Vaigista</string>
+  <string name="action_mark_as_read">Märgi loetuks</string>
+  <string name="app_running_msg_notification_title">Sõnumsideteenus on aktiivne</string>
+  <string name="app_running_msg_notification_content">Sõnumeid võetakse vastu autos</string>
+  <string name="message_channel_name">Sõnumikanal</string>
+  <string name="message_channel_description">Telefoni sõnumite vastuvõtuteenus</string>
+  <string name="new_message">Uus sõnum</string>
+  <string name="cd_unread">Lugemata</string>
+  <string name="cd_conversation_icon">Vestluse ikoon</string>
+  <string name="cd_icon_indicating_the_last_action">Subtiitrite teksti ikoon</string>
+  <string name="cd_mute_button">Vaigistuse nupp</string>
+  <string name="cd_loading_info_icon">Teabe laadimise ikoon</string>
+  <string name="cd_reply_action_button">Vastamise toimingunupp</string>
+  <string name="cd_play_action_button">Esitamise toimingunupp</string>
+  <string name="now_string_shortest">praegu</string>
+  <string name="participant_overflow_text">ja veel %d</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d min</item>
+    <item quantity="other">%d min</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d h</item>
+    <item quantity="other">%d h</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d p</item>
+    <item quantity="other">%d p</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d a</item>
+    <item quantity="other">%d a</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%d min pärast</item>
+    <item quantity="other">%d min pärast</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%d h pärast</item>
+    <item quantity="other">%d h pärast</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%d p pärast</item>
+    <item quantity="other">%d p pärast</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%d a pärast</item>
+    <item quantity="other">%d a pärast</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d minut tagasi</item>
+    <item quantity="other">%d minutit tagasi</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d tund tagasi</item>
+    <item quantity="other">%d tundi tagasi</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d päev tagasi</item>
+    <item quantity="other">%d päeva tagasi</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d aasta tagasi</item>
+    <item quantity="other">%d aastat tagasi</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d minuti pärast</item>
+    <item quantity="other">%d minuti pärast</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d tunni pärast</item>
+    <item quantity="other">%d tunni pärast</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d päeva pärast</item>
+    <item quantity="other">%d päeva pärast</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d aasta pärast</item>
+    <item quantity="other">%d aasta pärast</item>
+  </plurals>
+</resources>

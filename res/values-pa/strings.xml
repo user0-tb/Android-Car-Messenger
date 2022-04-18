@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">ਬਲੂਟੁੱਥ ਡਿਸਕਨੈਕਟ ਕੀਤਾ ਗਿਆ</string>
+  <string name="no_messages">ਕੋਈ ਸੁਨੇਹਾ ਨਹੀਂ</string>
+  <string name="connect_bluetooth_button_text">ਬਲੂਟੁੱਥ ਨਾਲ ਕਨੈਕਟ ਕਰੋ</string>
+  <string name="replied">ਜਵਾਬ ਦਿੱਤਾ ਗਿਆ</string>
+  <string name="tap_to_read_aloud">ਉੱਚੀ ਅਵਾਜ਼ ਵਿੱਚ ਪੜ੍ਹਨ ਲਈ ਟੈਪ ਕਰੋ</string>
+  <string name="action_reply">ਜਵਾਬ ਦਿਓ</string>
+  <string name="action_mute">ਮਿਊਟ ਕਰੋ</string>
+  <string name="action_mark_as_read">ਪੜ੍ਹੇ ਵਜੋਂ ਨਿਸ਼ਾਨਦੇਹੀ ਕਰੋ</string>
+  <string name="app_running_msg_notification_title">ਸੁਨੇਹੇ ਸੇਵਾ ਕਿਰਿਆਸ਼ੀਲ ਹੈ</string>
+  <string name="app_running_msg_notification_content">ਕਾਰ \'ਤੇ ਸੁਨੇਹੇ ਪ੍ਰਾਪਤ ਕਰਨਾ</string>
+  <string name="message_channel_name">ਸੁਨੇਹਾ ਚੈਨਲ</string>
+  <string name="message_channel_description">ਫ਼ੋਨ ਦੇ ਸੁਨੇਹੇ ਪ੍ਰਾਪਤ ਕਰਨ ਵਾਲੀ ਸੇਵਾ</string>
+  <string name="new_message">ਨਵਾਂ ਸੁਨੇਹਾ</string>
+  <string name="cd_unread">ਨਾ-ਪੜ੍ਹਿਆ</string>
+  <string name="cd_conversation_icon">ਗੱਲਬਾਤ ਸੰਬੰਧੀ ਪ੍ਰਤੀਕ</string>
+  <string name="cd_icon_indicating_the_last_action">ਉਪਸਿਰਲੇਖ ਲਿਖਤ ਸੁਨੇਹੇ ਸੰਬੰਧੀ ਪ੍ਰਤੀਕ</string>
+  <string name="cd_mute_button">ਮਿਊਟ ਬਟਨ</string>
+  <string name="cd_loading_info_icon">ਜਾਣਕਾਰੀ ਲੋਡ ਹੋਣ ਸੰਬੰਧੀ ਪ੍ਰਤੀਕ</string>
+  <string name="cd_reply_action_button">ਜਵਾਬੀ ਕਾਰਵਾਈ ਸੰਬੰਧੀ ਬਟਨ</string>
+  <string name="cd_play_action_button">ਚਲਾਉਣ ਦੀ ਕਾਰਵਾਈ ਸੰਬੰਧੀ ਬਟਨ</string>
+  <string name="now_string_shortest">ਹੁਣ</string>
+  <string name="participant_overflow_text">, ਅਤੇ %d ਹੋਰ</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d ਮਿੰਟ</item>
+    <item quantity="other">%d ਮਿੰਟ</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d ਘੰਟਾ</item>
+    <item quantity="other">%d ਘੰਟੇ</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d ਦਿਨ</item>
+    <item quantity="other">%d ਦਿਨ</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d ਸਾਲ</item>
+    <item quantity="other">%d ਸਾਲ</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%d ਮਿੰਟ ਵਿੱਚ</item>
+    <item quantity="other">%d ਮਿੰਟ ਵਿੱਚ</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%d ਘੰਟੇ ਵਿੱਚ</item>
+    <item quantity="other">%d ਘੰਟਿਆਂ ਵਿੱਚ</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%d ਦਿਨ ਵਿੱਚ</item>
+    <item quantity="other">%d ਦਿਨਾਂ ਵਿੱਚ</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%d ਸਾਲ ਵਿੱਚ</item>
+    <item quantity="other">%d ਸਾਲਾਂ ਵਿੱਚ</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d ਮਿੰਟ ਪਹਿਲਾਂ</item>
+    <item quantity="other">%d ਮਿੰਟ ਪਹਿਲਾਂ</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d ਘੰਟਾ ਪਹਿਲਾਂ</item>
+    <item quantity="other">%d ਘੰਟੇ ਪਹਿਲਾਂ</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d ਦਿਨ ਪਹਿਲਾਂ</item>
+    <item quantity="other">%d ਦਿਨ ਪਹਿਲਾਂ</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d ਸਾਲ ਪਹਿਲਾਂ</item>
+    <item quantity="other">%d ਸਾਲ ਪਹਿਲਾਂ</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d ਮਿੰਟ ਵਿੱਚ</item>
+    <item quantity="other">%d ਮਿੰਟਾਂ ਵਿੱਚ</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d ਘੰਟੇ ਵਿੱਚ</item>
+    <item quantity="other">%d ਘੰਟਿਆਂ ਵਿੱਚ</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d ਦਿਨ ਵਿੱਚ</item>
+    <item quantity="other">%d ਦਿਨਾਂ ਵਿੱਚ</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d ਸਾਲ ਵਿੱਚ</item>
+    <item quantity="other">%d ਸਾਲਾਂ ਵਿੱਚ</item>
+  </plurals>
+</resources>

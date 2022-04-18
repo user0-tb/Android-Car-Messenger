@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth er frakoblet</string>
+  <string name="no_messages">Ingen meldinger</string>
+  <string name="connect_bluetooth_button_text">Koble til Bluetooth</string>
+  <string name="replied">Har svart</string>
+  <string name="tap_to_read_aloud">Trykk for å lese opp</string>
+  <string name="action_reply">Svar</string>
+  <string name="action_mute">Kutt lyden</string>
+  <string name="action_mark_as_read">Merk som lest</string>
+  <string name="app_running_msg_notification_title">Meldingstjenesten er aktiv</string>
+  <string name="app_running_msg_notification_content">Mottar meldinger i bilen</string>
+  <string name="message_channel_name">Meldingskanal</string>
+  <string name="message_channel_description">Mottakertjeneste for telefonmeldinger</string>
+  <string name="new_message">Ny melding</string>
+  <string name="cd_unread">Ulest</string>
+  <string name="cd_conversation_icon">Samtaleikon</string>
+  <string name="cd_icon_indicating_the_last_action">Undertekstikon</string>
+  <string name="cd_mute_button">Dempeknapp</string>
+  <string name="cd_loading_info_icon">Ikon for informasjonsinnlasting</string>
+  <string name="cd_reply_action_button">Svar-handlingsknapp</string>
+  <string name="cd_play_action_button">Spill-handlingsknapp</string>
+  <string name="now_string_shortest">nå</string>
+  <string name="participant_overflow_text">og %d til</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d m</item>
+    <item quantity="other">%d m</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d t</item>
+    <item quantity="other">%d t</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d d</item>
+    <item quantity="other">%d d</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d å</item>
+    <item quantity="other">%d å</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">om %d m</item>
+    <item quantity="other">om %d m</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">om %d t</item>
+    <item quantity="other">om %d t</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">om %d d</item>
+    <item quantity="other">om %d d</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">om %d å</item>
+    <item quantity="other">om %d å</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">for %d minutt siden</item>
+    <item quantity="other">for %d minutter siden</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">for %d time siden</item>
+    <item quantity="other">for %d timer siden</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">for %d dag siden</item>
+    <item quantity="other">for %d dager siden</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">for %d år siden</item>
+    <item quantity="other">for %d år siden</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">om %d minutt</item>
+    <item quantity="other">om %d minutter</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">om %d time</item>
+    <item quantity="other">om %d timer</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">om %d dag</item>
+    <item quantity="other">om %d dager</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">om %d år</item>
+    <item quantity="other">om %d år</item>
+  </plurals>
+</resources>

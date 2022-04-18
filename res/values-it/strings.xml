@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth scollegato</string>
+  <string name="no_messages">Nessun messaggio</string>
+  <string name="connect_bluetooth_button_text">Connettiti al Bluetooth</string>
+  <string name="replied">Con risposta</string>
+  <string name="tap_to_read_aloud">Tocca per la lettura ad alta voce</string>
+  <string name="action_reply">Rispondi</string>
+  <string name="action_mute">Disattiva audio</string>
+  <string name="action_mark_as_read">Segna come letto</string>
+  <string name="app_running_msg_notification_title">Servizio di messaggistica attivo</string>
+  <string name="app_running_msg_notification_content">Ricezione dei messaggi in auto</string>
+  <string name="message_channel_name">Canale messaggi</string>
+  <string name="message_channel_description">Servizio ricezione messaggi telefonici</string>
+  <string name="new_message">Nuovo messaggio</string>
+  <string name="cd_unread">Da leggere</string>
+  <string name="cd_conversation_icon">Icona Conversazione</string>
+  <string name="cd_icon_indicating_the_last_action">Icona Testo sottotitoli</string>
+  <string name="cd_mute_button">Pulsante Disattiva audio</string>
+  <string name="cd_loading_info_icon">Icona Caricamento informazioni in corso…</string>
+  <string name="cd_reply_action_button">Pulsante di azione Rispondi</string>
+  <string name="cd_play_action_button">Pulsante di azione Riproduci</string>
+  <string name="now_string_shortest">ora</string>
+  <string name="participant_overflow_text">e altri %d</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d m</item>
+    <item quantity="other">%d m</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d h</item>
+    <item quantity="other">%d h</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d g</item>
+    <item quantity="other">%d g</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d a</item>
+    <item quantity="other">%d a</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">tra %d m</item>
+    <item quantity="other">tra %d m</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">tra %d h</item>
+    <item quantity="other">tra %d h</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">tra %d g</item>
+    <item quantity="other">tra %d g</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">tra %d a</item>
+    <item quantity="other">tra %d a</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d minuto fa</item>
+    <item quantity="other">%d minuti fa</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d ora fa</item>
+    <item quantity="other">%d ore fa</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d giorno fa</item>
+    <item quantity="other">%d giorni fa</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d anno fa</item>
+    <item quantity="other">%d anni fa</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">tra %d minuto</item>
+    <item quantity="other">tra %d minuti</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">tra %d ora</item>
+    <item quantity="other">tra %d ore</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">tra %d giorno</item>
+    <item quantity="other">tra %d giorni</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">tra %d anno</item>
+    <item quantity="other">tra %d anni</item>
+  </plurals>
+</resources>

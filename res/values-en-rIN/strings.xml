@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth disconnected</string>
+  <string name="no_messages">No messages</string>
+  <string name="connect_bluetooth_button_text">Connect to Bluetooth</string>
+  <string name="replied">Replied</string>
+  <string name="tap_to_read_aloud">Tap to read aloud</string>
+  <string name="action_reply">Reply</string>
+  <string name="action_mute">Mute</string>
+  <string name="action_mark_as_read">Mark as read</string>
+  <string name="app_running_msg_notification_title">Messaging service is active</string>
+  <string name="app_running_msg_notification_content">Receiving messages on car</string>
+  <string name="message_channel_name">Message channel</string>
+  <string name="message_channel_description">Phone message receiver service</string>
+  <string name="new_message">New message</string>
+  <string name="cd_unread">Unread</string>
+  <string name="cd_conversation_icon">Conversation icon</string>
+  <string name="cd_icon_indicating_the_last_action">Subtitle text icon</string>
+  <string name="cd_mute_button">Mute button</string>
+  <string name="cd_loading_info_icon">Loading info icon</string>
+  <string name="cd_reply_action_button">Reply action button</string>
+  <string name="cd_play_action_button">Play action button</string>
+  <string name="now_string_shortest">now</string>
+  <string name="participant_overflow_text">, and %d more</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%dm</item>
+    <item quantity="other">%dm</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%dh</item>
+    <item quantity="other">%dh</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%dd</item>
+    <item quantity="other">%dd</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%dy</item>
+    <item quantity="other">%dy</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">in %dm</item>
+    <item quantity="other">in %dm</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">in %dh</item>
+    <item quantity="other">in %dh</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">in %dd</item>
+    <item quantity="other">in %dd</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">in %dy</item>
+    <item quantity="other">in %dy</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d minute ago</item>
+    <item quantity="other">%d minutes ago</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d hour ago</item>
+    <item quantity="other">%d hours ago</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d day ago</item>
+    <item quantity="other">%d days ago</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d year ago</item>
+    <item quantity="other">%d years ago</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">in %d minute</item>
+    <item quantity="other">in %d minutes</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">in %d hour</item>
+    <item quantity="other">in %d hours</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">in %d day</item>
+    <item quantity="other">in %d days</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">in %d year</item>
+    <item quantity="other">in %d years</item>
+  </plurals>
+</resources>

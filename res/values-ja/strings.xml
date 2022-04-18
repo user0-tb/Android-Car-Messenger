@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth 未接続</string>
+  <string name="no_messages">メッセージなし</string>
+  <string name="connect_bluetooth_button_text">Bluetooth への接続</string>
+  <string name="replied">返信済み</string>
+  <string name="tap_to_read_aloud">タップで読み上げます</string>
+  <string name="action_reply">返信</string>
+  <string name="action_mute">ミュート</string>
+  <string name="action_mark_as_read">既読にする</string>
+  <string name="app_running_msg_notification_title">メッセージ サービスは有効です</string>
+  <string name="app_running_msg_notification_content">車でメッセージを受信しています</string>
+  <string name="message_channel_name">メッセージ チャンネル</string>
+  <string name="message_channel_description">スマートフォン メッセージ受信サービス</string>
+  <string name="new_message">新しいメッセージ</string>
+  <string name="cd_unread">未読</string>
+  <string name="cd_conversation_icon">会話アイコン</string>
+  <string name="cd_icon_indicating_the_last_action">字幕テキスト アイコン</string>
+  <string name="cd_mute_button">ミュートボタン</string>
+  <string name="cd_loading_info_icon">情報読み込み中のアイコン</string>
+  <string name="cd_reply_action_button">返信操作ボタン</string>
+  <string name="cd_play_action_button">再生操作ボタン</string>
+  <string name="now_string_shortest">現在</string>
+  <string name="participant_overflow_text">、他 %d 人</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d 分</item>
+    <item quantity="other">%d 分</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d 時間</item>
+    <item quantity="other">%d 時間</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d 日</item>
+    <item quantity="other">%d 日</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d 年</item>
+    <item quantity="other">%d 年</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%d 分後</item>
+    <item quantity="other">%d 分後</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%d 時間後</item>
+    <item quantity="other">%d 時間後</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%d 日後</item>
+    <item quantity="other">%d 日後</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%d 年後</item>
+    <item quantity="other">%d 年後</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d 分前</item>
+    <item quantity="other">%d 分前</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d 時間前</item>
+    <item quantity="other">%d 時間前</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d 日前</item>
+    <item quantity="other">%d 日前</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d 年前</item>
+    <item quantity="other">%d 年前</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d 分後</item>
+    <item quantity="other">%d 分後</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d 時間後</item>
+    <item quantity="other">%d 時間後</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d 日後</item>
+    <item quantity="other">%d 日後</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d 年後</item>
+    <item quantity="other">%d 年後</item>
+  </plurals>
+</resources>

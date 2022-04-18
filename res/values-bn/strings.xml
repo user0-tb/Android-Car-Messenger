@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">ব্লুটুথ ডিসকানেক্ট হয়ে গেছে</string>
+  <string name="no_messages">কোনও নতুন মেসেজ নেই</string>
+  <string name="connect_bluetooth_button_text">ব্লুটুথের সাথে কানেক্ট করুন</string>
+  <string name="replied">উত্তর দেওয়া হয়েছে</string>
+  <string name="tap_to_read_aloud">জোরে পড়তে ট্যাপ করুন</string>
+  <string name="action_reply">উত্তর দিন</string>
+  <string name="action_mute">মিউট করুন</string>
+  <string name="action_mark_as_read">\'পড়া হয়েছে\' হিসেবে চিহ্নিত করুন</string>
+  <string name="app_running_msg_notification_title">মেসেজিং পরিষেবা অ্যাক্টিভ আছে</string>
+  <string name="app_running_msg_notification_content">গাড়িতে মেসেজ রিসিভ করা হচ্ছে</string>
+  <string name="message_channel_name">ম্যাসেজ চ্যানেল</string>
+  <string name="message_channel_description">ফোন মেসেজ রিসিভার পরিষেবা</string>
+  <string name="new_message">নতুন মেসেজ</string>
+  <string name="cd_unread">পড়া হয়নি</string>
+  <string name="cd_conversation_icon">কথোপকথনের আইকন</string>
+  <string name="cd_icon_indicating_the_last_action">সাবটাইটেল টেক্সট আইকন</string>
+  <string name="cd_mute_button">\'মিউট\' বোতাম</string>
+  <string name="cd_loading_info_icon">তথ্য সংক্রান্ত আইকন লোড হচ্ছে</string>
+  <string name="cd_reply_action_button">\'উত্তর সংক্রান্ত অ্যাকশন\' বোতাম</string>
+  <string name="cd_play_action_button">\'প্লে অ্যাকশন\' বোতাম</string>
+  <string name="now_string_shortest">এখন</string>
+  <string name="participant_overflow_text">, এবং আরও %d জন</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">%d মিনিট</item>
+    <item quantity="other">%d মিনিট</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">%d ঘণ্টা</item>
+    <item quantity="other">%d ঘণ্টা</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">%d দিন</item>
+    <item quantity="other">%d দিন</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">%d বছর</item>
+    <item quantity="other">%d বছর</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">%d মিনিটের মধ্যে</item>
+    <item quantity="other">%d মিনিটের মধ্যে</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">%d ঘণ্টার মধ্যে</item>
+    <item quantity="other">%d ঘণ্টার মধ্যে</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">%d দিনের মধ্যে</item>
+    <item quantity="other">%d দিনের মধ্যে</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">%d বছরের মধ্যে</item>
+    <item quantity="other">%d বছরের মধ্যে</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">%d মিনিট আগে</item>
+    <item quantity="other">%d মিনিট আগে</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">%d ঘণ্টা আগে</item>
+    <item quantity="other">%d ঘণ্টা আগে</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">%d দিন আগে</item>
+    <item quantity="other">%d দিন আগে</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">%d বছর আগে</item>
+    <item quantity="other">%d বছর আগে</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">%d মিনিটের মধ্যে</item>
+    <item quantity="other">%d মিনিটের মধ্যে</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">%d ঘণ্টার মধ্যে</item>
+    <item quantity="other">%d ঘণ্টার মধ্যে</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">%d দিনের মধ্যে</item>
+    <item quantity="other">%d দিনের মধ্যে</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">%d বছরের মধ্যে</item>
+    <item quantity="other">%d বছরের মধ্যে</item>
+  </plurals>
+</resources>

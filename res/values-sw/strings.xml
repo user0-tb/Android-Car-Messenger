@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="bluetooth_disconnected">Bluetooth imetenganishwa</string>
+  <string name="no_messages">Hakuna ujumbe</string>
+  <string name="connect_bluetooth_button_text">Unganisha kwenye Bluetooth</string>
+  <string name="replied">Umejibiwa</string>
+  <string name="tap_to_read_aloud">Gusa ili usome kwa sauti</string>
+  <string name="action_reply">Jibu</string>
+  <string name="action_mute">Zima sauti</string>
+  <string name="action_mark_as_read">Weka alama kuwa umesoma</string>
+  <string name="app_running_msg_notification_title">Umewasha huduma ya kutumiana ujumbe</string>
+  <string name="app_running_msg_notification_content">Inapokea Ujumbe kwenye gari</string>
+  <string name="message_channel_name">Kituo cha Ujumbe</string>
+  <string name="message_channel_description">Huduma ya Kupokea Ujumbe wa simu</string>
+  <string name="new_message">Ujumbe Mpya</string>
+  <string name="cd_unread">Haijasomwa</string>
+  <string name="cd_conversation_icon">Aikoni ya Mazungumzo</string>
+  <string name="cd_icon_indicating_the_last_action">Aikoni ya Manukuu ya Maandishi</string>
+  <string name="cd_mute_button">Kitufe cha Kuzima Sauti</string>
+  <string name="cd_loading_info_icon">Aikoni ya Kupakia Maelezo</string>
+  <string name="cd_reply_action_button">Kitufe cha Kitendo cha Kujibu</string>
+  <string name="cd_play_action_button">Kitufe cha Kitendo cha Kucheza</string>
+  <string name="now_string_shortest">sasa</string>
+  <string name="participant_overflow_text">, na %d zaidi</string>
+  <plurals name="duration_minutes_shortest">
+    <item quantity="one">Dak %d</item>
+    <item quantity="other">Dak %d</item>
+  </plurals>
+  <plurals name="duration_hours_shortest">
+    <item quantity="one">Saa %d</item>
+    <item quantity="other">Saa %d</item>
+  </plurals>
+  <plurals name="duration_days_shortest">
+    <item quantity="one">Siku %d</item>
+    <item quantity="other">Siku %d</item>
+  </plurals>
+  <plurals name="duration_years_shortest">
+    <item quantity="one">Mwaka%d</item>
+    <item quantity="other">Miaka%d</item>
+  </plurals>
+  <plurals name="duration_minutes_shortest_future">
+    <item quantity="one">baada ya dak%d</item>
+    <item quantity="other">baada ya dak%d</item>
+  </plurals>
+  <plurals name="duration_hours_shortest_future">
+    <item quantity="one">baada ya saa%d</item>
+    <item quantity="other">baada ya saa%d</item>
+  </plurals>
+  <plurals name="duration_days_shortest_future">
+    <item quantity="one">baada ya siku%d</item>
+    <item quantity="other">baada ya siku%d</item>
+  </plurals>
+  <plurals name="duration_years_shortest_future">
+    <item quantity="one">baada ya mwaka%d</item>
+    <item quantity="other">baada ya miaka%d</item>
+  </plurals>
+  <plurals name="duration_minutes_relative">
+    <item quantity="one">Dakika %d iliyopita</item>
+    <item quantity="other">Dakika %d zilizopita</item>
+  </plurals>
+  <plurals name="duration_hours_relative">
+    <item quantity="one">Saa %d iliyopita</item>
+    <item quantity="other">Saa %d zilizopita</item>
+  </plurals>
+  <plurals name="duration_days_relative">
+    <item quantity="one">Siku %d iliyopita</item>
+    <item quantity="other">Siku %d zilizopita</item>
+  </plurals>
+  <plurals name="duration_years_relative">
+    <item quantity="one">Mwaka %d uliopita</item>
+    <item quantity="other">Miaka %d iliyopita</item>
+  </plurals>
+  <plurals name="duration_minutes_relative_future">
+    <item quantity="one">baada ya dakika %d</item>
+    <item quantity="other">baada ya dakika %d</item>
+  </plurals>
+  <plurals name="duration_hours_relative_future">
+    <item quantity="one">baada ya saa %d</item>
+    <item quantity="other">baada ya saa %d</item>
+  </plurals>
+  <plurals name="duration_days_relative_future">
+    <item quantity="one">baada ya siku %d</item>
+    <item quantity="other">baada ya siku %d</item>
+  </plurals>
+  <plurals name="duration_years_relative_future">
+    <item quantity="one">baada ya mwaka %d</item>
+    <item quantity="other">baada ya miaka %d</item>
+  </plurals>
+</resources>
