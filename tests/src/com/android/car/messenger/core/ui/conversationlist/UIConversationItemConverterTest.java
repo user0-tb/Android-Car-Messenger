@@ -32,8 +32,10 @@ import com.android.car.messenger.R;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.common.Conversation.Message.MessageStatus;
 import com.android.car.messenger.core.shared.MessageConstants;
+import com.android.car.messenger.impl.AppFactoryTestImpl;
 
 import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -52,6 +54,7 @@ public class UIConversationItemConverterTest {
     private static final String REPLY_STRING = "REPLY";
 
     private Context mContext;
+    private AppFactoryTestImpl mAppFactory;
     @Mock
     private CarUxRestrictions mMockCarUxRestrictions;
     private Person mPerson;
@@ -61,7 +64,14 @@ public class UIConversationItemConverterTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = ApplicationProvider.getApplicationContext();
+        mAppFactory = new AppFactoryTestImpl(mContext, /* dataModel= */ null,
+                /* sharedPreferences= */ null, /* listener= */ null);
         mPerson = new Person.Builder().build();
+    }
+
+    @After
+    public void teardown() {
+        mAppFactory.teardown();
     }
 
     @Test

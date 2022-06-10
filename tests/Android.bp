@@ -24,7 +24,7 @@ android_test {
     // CERTIFICATE is defined in Messenger app build file.
     certificate: CERTIFICATE,
 
-    min_sdk_version: "30",
+    min_sdk_version: "31",
 
     target_sdk_version: "31",
 

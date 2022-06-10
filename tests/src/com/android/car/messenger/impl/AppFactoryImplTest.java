@@ -50,8 +50,8 @@ public class AppFactoryImplTest {
                 /* dataModel= */ null, /* sharedPreferences= */ null, /* listener= */ null);
         assertThat(AppFactory.get()).isEqualTo(mAppFactory);
 
-        // Tests that existing instance cannot be overridden.
-        mAppFactory = new AppFactoryTestImpl(/* context= */ null,
+        // Tests that existing instance in AppFactory cannot be overridden.
+        new AppFactoryTestImpl(/* context= */ null,
                 /* dataModel= */ null, /* sharedPreferences= */ null, /* listener= */ null);
         assertThat(AppFactory.get()).isEqualTo(mAppFactory);
     }
@@ -82,7 +82,8 @@ public class AppFactoryImplTest {
 
     @Test
     public void testGetCarStateListener() {
-        mAppFactory = new AppFactoryTestImpl(/* context= */ null,
+        Context context = ApplicationProvider.getApplicationContext();
+        mAppFactory = new AppFactoryTestImpl(/* context= */ context,
                 /* dataModel= */ null, /* sharedPreferences= */ null, /* listener= */ null);
         assertThat(AppFactory.get().getCarStateListener()).isInstanceOf(CarStateListener.class);
     }

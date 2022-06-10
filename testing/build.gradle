@@ -20,7 +20,7 @@ android {
     compileSdkVersion gradle.ext.aaosLatestSDK
 
     defaultConfig {
-        minSdkVersion 30
+        minSdkVersion 31
         targetSdkVersion gradle.ext.aaosTargetSDK
         versionCode 1
         versionName '1.0'

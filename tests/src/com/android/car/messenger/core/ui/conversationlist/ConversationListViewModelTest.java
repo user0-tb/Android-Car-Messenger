@@ -21,13 +21,19 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.LiveData;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.car.apps.common.testutils.InstantTaskExecutorRule;
 import com.android.car.messenger.core.models.UserAccount;
+import com.android.car.messenger.core.util.CarStateListener;
+import com.android.car.messenger.impl.AppFactoryTestImpl;
+import com.android.car.messenger.impl.datamodels.TelephonyDataModel;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -43,6 +49,7 @@ public class ConversationListViewModelTest {
     private static final int ID_2 = 456;
 
     private ConversationListViewModel mConversationListViewModel;
+    private AppFactoryTestImpl mAppFactory;
 
     /** Used to execute livedata.postValue() synchronously */
     @Rule
@@ -59,10 +66,20 @@ public class ConversationListViewModelTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
+        Context context = ApplicationProvider.getApplicationContext();
+        CarStateListener carStateListener = new CarStateListener(context);
+        TelephonyDataModel telephonyDataModel = new TelephonyDataModel();
+        mAppFactory = new AppFactoryTestImpl(context, telephonyDataModel,
+                /* sharedPreferences= */ null, carStateListener);
         mConversationListViewModel = new ConversationListViewModel(mMockApplication);
 
         when(mMockUserAccount.getId()).thenReturn(ID_1);
         when(mMockUserAccount2.getId()).thenReturn(ID_2);
+    }
+
+    @After
+    public void teardown() {
+        mAppFactory.teardown();
     }
 
     @Test

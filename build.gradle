@@ -20,7 +20,7 @@ android {
     compileSdkVersion gradle.ext.aaosLatestSDK
     defaultConfig {
         applicationId "com.android.car.messenger"
-        minSdkVersion 30
+        minSdkVersion 31
         targetSdkVersion gradle.ext.aaosTargetSDK
     }
     compileOptions {
