@@ -21,7 +21,10 @@ package {
 android_test {
     name: "CarMessengerUnitTests",
 
-    min_sdk_version: "30",
+    // CERTIFICATE is defined in Messenger app build file.
+    certificate: CERTIFICATE,
+
+    min_sdk_version: "31",
 
     target_sdk_version: "31",
 
