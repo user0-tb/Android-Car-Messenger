@@ -45,8 +45,4 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
     implementation project(path: ':car-ui-lib')
-
-    implementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation 'androidx.test.espresso:espresso-contrib:3.4.0'
-    implementation 'com.linkedin.dexmaker:dexmaker-mockito-inline:2.28.1'
 }
