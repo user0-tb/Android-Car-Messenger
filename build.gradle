@@ -50,6 +50,10 @@ android {
 
     flavorDimensions 'devMode'
     productFlavors {
+        prod {
+            dimension 'devMode'
+        }
+
         fake {
             dimension 'devMode'
             versionNameSuffix '-fake'
@@ -64,12 +68,10 @@ android {
             res.srcDirs = ['res']
         }
 
-        fake {
-            java.srcDirs = ['src']
+        androidTestFake {
+            setRoot('tests')
+            java.srcDirs = ['tests/src']
         }
-
-        androidTestFake.setRoot('tests')
-        androidTestFake.java.srcDirs = ['tests/src']
     }
 
     testOptions {
