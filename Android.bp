@@ -50,16 +50,17 @@ android_app {
 
     // must be unbundled dependencies
     static_libs: [
+        "androidx.annotation_annotation",
         "androidx-constraintlayout_constraintlayout",
         "androidx.lifecycle_lifecycle-common-java8",
         "androidx.lifecycle_lifecycle-extensions",
         "androidx.legacy_legacy-support-v4",
         "androidx.preference_preference",
         "androidx.recyclerview_recyclerview",
+        "car-apps-common-prebuilt",
         "car-assist-lib-prebuilt",
         "car-messenger-common",
         "car-ui-lib-prebuilt",
-        "androidx.annotation_annotation",
     ],
 
     dex_preopt: {
@@ -102,6 +103,7 @@ android_test_helper_app {
 
     // must be unbundled dependencies
     static_libs: [
+        "androidx.annotation_annotation",
         "androidx-constraintlayout_constraintlayout",
         "androidx.lifecycle_lifecycle-common-java8",
         "androidx.lifecycle_lifecycle-extensions",
@@ -111,9 +113,8 @@ android_test_helper_app {
         "car-apps-common-prebuilt",
         "car-assist-lib-prebuilt",
         "car-messenger-common",
-        "car-ui-lib-prebuilt",
-        "androidx.annotation_annotation",
         "car-messenger-testing",
+        "car-ui-lib-prebuilt",
     ],
 
     dex_preopt: {

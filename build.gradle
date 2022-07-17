@@ -112,11 +112,11 @@ dependencies {
     implementation "androidx.preference:preference:1.1.1"
     implementation "androidx.annotation:annotation:1.0.1"
 
+    implementation project(':car-apps-common')
     implementation project(":car-assist-lib")
     implementation project(":car-messenger-common:model")
     implementation project(":car-ui-lib")
 
-    fakeImplementation project(':car-apps-common')
     fakeImplementation 'com.linkedin.dexmaker:dexmaker-mockito-inline-extended:2.28.1'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

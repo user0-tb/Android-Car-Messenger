@@ -28,11 +28,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.Transformations;
 
+import com.android.car.apps.common.log.L;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
 import com.android.car.messenger.core.models.UserAccount;
-import com.android.car.messenger.core.util.L;
 
 import java.util.Collection;
 import java.util.List;
@@ -40,6 +40,8 @@ import java.util.stream.Collectors;
 
 /** View model for ConversationLogFragment which provides message history live data. */
 public class ConversationListViewModel extends AndroidViewModel {
+    private static final String TAG = "CM.ConversationListViewModel";
+
     @SuppressLint("StaticFieldLeak")
     @NonNull
     private final DataModel mDataModel;
@@ -106,7 +108,7 @@ public class ConversationListViewModel extends AndroidViewModel {
         return Transformations.switchMap(
                 AppFactory.get().getCarStateListener().getUxrRestrictions(),
                 uxRestrictions -> {
-                    L.d("Got new ux restrictions: " + uxRestrictions);
+                    L.d(TAG, "Got new ux restrictions: " + uxRestrictions);
                     return Transformations.map(
                             liveData, conversations -> new Pair<>(uxRestrictions, conversations));
                 });

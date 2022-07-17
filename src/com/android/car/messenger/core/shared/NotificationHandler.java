@@ -28,17 +28,19 @@ import android.service.notification.StatusBarNotification;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.car.apps.common.log.L;
 import com.android.car.assist.payloadhandlers.ConversationPayloadHandler;
 import com.android.car.messenger.R;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.service.MessengerService;
 import com.android.car.messenger.core.ui.launcher.MessageLauncherActivity;
-import com.android.car.messenger.core.util.L;
 import com.android.car.messenger.core.util.VoiceUtil;
 
 /** Useful notification handler for posting messages */
 public class NotificationHandler {
+    private static final String TAG = "CM.NotificationHandler";
+
     @NonNull
     private static final String GROUP_TAP_TO_READ_NOTIFICATION =
             "com.android.car.messenger.TAP_TO_READ";
@@ -51,7 +53,7 @@ public class NotificationHandler {
     public static void postNotification(Conversation conversation) {
         int userAccountId = conversation.getExtras().getInt(EXTRA_ACCOUNT_ID, 0);
         if (userAccountId == 0) {
-            L.w(
+            L.w(TAG,
                     "posting Notification with null user account id. "
                             + "Note, reply would likely fail if user account id is not set.");
         }

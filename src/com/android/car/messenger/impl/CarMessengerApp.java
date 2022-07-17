@@ -22,12 +22,14 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.car.messenger.core.util.L;
+import com.android.car.apps.common.log.L;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 
 /** The application object */
 public class CarMessengerApp extends Application implements UncaughtExceptionHandler {
+    private static final String TAG = "CM.CarMessengerApp";
+
     @Nullable private static UncaughtExceptionHandler sSystemUncaughtExceptionHandler;
 
     @Override
@@ -41,14 +43,14 @@ public class CarMessengerApp extends Application implements UncaughtExceptionHan
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        L.d("onLowMemory");
+        L.d(TAG, "onLowMemory");
     }
 
     @Override
     public void uncaughtException(final Thread thread, final Throwable ex) {
         final boolean background = getMainLooper().getThread() != thread;
         if (background) {
-            L.e("Uncaught exception in background thread " + thread, ex);
+            L.e(TAG, "Uncaught exception in background thread " + thread, ex);
             final Handler handler = new Handler(getMainLooper());
             handler.post(() -> nullSafeUncaughtException(thread, ex));
         } else {

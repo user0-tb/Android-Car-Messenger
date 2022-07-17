@@ -29,13 +29,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
+import com.android.car.apps.common.log.L;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.models.UserAccount;
 import com.android.car.messenger.core.shared.MessageConstants;
 import com.android.car.messenger.core.util.CarStateListener;
 import com.android.car.messenger.core.util.ConversationUtil;
-import com.android.car.messenger.core.util.L;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -49,6 +49,8 @@ import java.util.Objects;
  * device after the car's connection to the{@link UserAccount}.
  */
 public class NewMessageLiveData extends ContentProviderLiveData<Conversation> {
+    private static final String TAG = "CM.NewMessageLiveData";
+
     @NonNull
     private final UserAccountLiveData mUserAccountLiveData = UserAccountLiveData.getInstance();
 
@@ -132,7 +134,7 @@ public class NewMessageLiveData extends ContentProviderLiveData<Conversation> {
         try {
             conversation = fetchConversation(conversationId);
         } catch (CursorIndexOutOfBoundsException e) {
-            L.w("Error occurred fetching conversation Id " + conversationId);
+            L.w(TAG, "Error occurred fetching conversation Id: %s", conversationId);
             return false;
         }
         conversation.getExtras().putInt(MessageConstants.EXTRA_ACCOUNT_ID, userAccount.getId());

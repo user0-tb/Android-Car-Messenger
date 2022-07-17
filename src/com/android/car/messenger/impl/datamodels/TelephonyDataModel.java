@@ -29,11 +29,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
+import com.android.car.apps.common.log.L;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
 import com.android.car.messenger.core.models.UserAccount;
-import com.android.car.messenger.core.util.L;
 import com.android.car.messenger.impl.datamodels.UserAccountLiveData.UserAccountChangeList;
 import com.android.car.messenger.impl.datamodels.util.CursorUtils;
 
@@ -43,6 +43,8 @@ import java.util.Set;
 
 /** Queries the telephony data model to retrieve the SMS/MMS messages */
 public class TelephonyDataModel implements DataModel {
+    private static final String TAG = "CM.TelephonyDataModel";
+
     @NonNull
     @Override
     public LiveData<Collection<UserAccount>> getAccounts() {
@@ -84,7 +86,7 @@ public class TelephonyDataModel implements DataModel {
 
     @Override
     public void markAsRead(@NonNull String conversationId) {
-        L.d("markAsRead for conversationId: " + conversationId);
+        L.d(TAG, "markAsRead for conversationId: %s", conversationId);
         Context context = AppFactory.get().getContext();
         ContentValues values = new ContentValues();
         values.put(Telephony.ThreadsColumns.READ, 1);
@@ -96,10 +98,10 @@ public class TelephonyDataModel implements DataModel {
     public void replyConversation(
             int accountId, @NonNull String conversationId, @NonNull String message) {
         if (accountId <= 0) {
-            L.e("Invalid user account id when replying conversation, dropping message");
+            L.e(TAG, "Invalid user account id when replying conversation, dropping message");
             return;
         }
-        L.d("Sending a message to a conversation");
+        L.d(TAG, "Sending a message to a conversation");
         String destination =
                 Uri.withAppendedPath(Telephony.Threads.CONTENT_URI, conversationId).toString();
         SmsManager.getSmsManagerForSubscriptionId(accountId)
@@ -113,7 +115,7 @@ public class TelephonyDataModel implements DataModel {
 
     @Override
     public void sendMessage(int accountId, @NonNull String phoneNumber, @NonNull String message) {
-        L.d("Sending a message to a phone number");
+        L.d(TAG, "Sending a message to a phone number");
         SmsManager.getSmsManagerForSubscriptionId(accountId)
                 .sendTextMessage(
                         phoneNumber,
@@ -128,7 +130,7 @@ public class TelephonyDataModel implements DataModel {
             @NonNull String iccId, @NonNull String phoneNumber, @NonNull String message) {
         UserAccount userAccount = UserAccountLiveData.getUserAccount(iccId);
         if (userAccount == null) {
-            L.d("Could not find User Account with specified iccId. Unable to send message");
+            L.d(TAG, "Could not find User Account with specified iccId. Unable to send message");
             return;
         }
         sendMessage(userAccount.getId(), phoneNumber, message);

@@ -34,8 +34,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.Person;
 
+import com.android.car.apps.common.log.L;
 import com.android.car.messenger.core.interfaces.AppFactory;
-import com.android.car.messenger.core.util.L;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +45,8 @@ import java.util.function.BiConsumer;
 
 /** Contact Utils for getting information on a contact */
 public class ContactUtils {
+    private static final String TAG = "CM.ContactUtils";
+
     @NonNull
     private static final Uri SINGLE_CANONICAL_ADDRESS_URI =
             MmsSms.CONTENT_URI.buildUpon().appendPath("canonical-address").build();
@@ -81,7 +83,7 @@ public class ContactUtils {
             long contactIdLong = Long.parseLong(contactId);
             String number = getCanonicalAddressesFromRecipientIds(context, contactIdLong);
             if (number == null) {
-                L.e("No phone number found for contactId: " + contactId);
+                L.e(TAG, "No phone number found for contactId: %s", contactId);
                 continue;
             }
             Person person = getPerson(context, number, processParticipant);
@@ -115,8 +117,8 @@ public class ContactUtils {
             Uri uri = CONTENT_FILTER_URI.buildUpon().appendEncodedPath(Uri.encode(phoneNo)).build();
             cursor = CursorUtils.simpleQueryWithProjection(context, uri, PROJECTION);
         } catch (IllegalArgumentException e) {
-            L.w("Unable to retrieve PhoneLookup cursor");
-            L.w(e.toString());
+            L.w(TAG, "Unable to retrieve PhoneLookup cursor");
+            L.w(TAG, e.toString());
         }
 
         if (cursor != null && cursor.moveToFirst()) {
@@ -137,7 +139,7 @@ public class ContactUtils {
                         fd.close();
                     }
                 } catch (IOException e) {
-                    L.e(e.toString());
+                    L.e(TAG, e.toString());
                 }
             }
         }
@@ -176,7 +178,7 @@ public class ContactUtils {
                 cursor.close();
             }
         }
-        L.w("No canonical address found for recipient id");
+        L.w(TAG, "No canonical address found for recipient id");
         return null;
     }
 }
