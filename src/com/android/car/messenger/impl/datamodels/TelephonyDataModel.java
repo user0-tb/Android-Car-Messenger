@@ -34,7 +34,8 @@ import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
 import com.android.car.messenger.core.models.UserAccount;
-import com.android.car.messenger.impl.datamodels.UserAccountLiveData.UserAccountChangeList;
+import com.android.car.messenger.core.ui.livedata.UserAccountLiveData;
+import com.android.car.messenger.core.ui.livedata.UserAccountLiveData.UserAccountChangeList;
 import com.android.car.messenger.impl.datamodels.util.CursorUtils;
 
 import java.util.Collection;

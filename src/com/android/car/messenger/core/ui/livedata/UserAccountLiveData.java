@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.car.messenger.impl.datamodels;
+package com.android.car.messenger.core.ui.livedata;
 
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
@@ -27,7 +27,7 @@ import androidx.lifecycle.LiveData;
 
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.models.UserAccount;
-import com.android.car.messenger.impl.datamodels.UserAccountLiveData.UserAccountChangeList;
+import com.android.car.messenger.core.ui.livedata.UserAccountLiveData.UserAccountChangeList;
 
 import java.time.Instant;
 import java.util.ArrayList;

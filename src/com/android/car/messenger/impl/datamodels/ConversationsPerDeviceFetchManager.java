@@ -34,6 +34,7 @@ import androidx.lifecycle.Observer;
 
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.models.UserAccount;
+import com.android.car.messenger.core.ui.livedata.UserAccountLiveData;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
 
 import com.android.car.apps.common.log.L;
@@ -33,6 +34,7 @@ import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
 import com.android.car.messenger.core.models.UserAccount;
+import com.android.car.messenger.core.ui.livedata.BluetoothStateLiveData;
 
 import java.util.Collection;
 import java.util.List;
@@ -47,28 +49,27 @@ public class ConversationListViewModel extends AndroidViewModel {
     private final DataModel mDataModel;
 
     @Nullable private UserAccount mUserAccount;
-    @Nullable private LiveData<UIConversationLog> mUIConversationLogLiveData;
+    @Nullable private LiveData<List<UIConversationItem>> mUIConversationLogLiveData;
+    private LiveData<Integer> mBluetoothStateLiveData;
+    private Observer mBluetoothStateObserver;
 
     public ConversationListViewModel(@NonNull Application application) {
         super(application);
         mDataModel = AppFactory.get().getDataModel();
+        mBluetoothStateLiveData = new BluetoothStateLiveData(application.getApplicationContext());
+        mBluetoothStateObserver = o -> L.i(TAG, "BluetoothState changed");
+        mBluetoothStateLiveData.observeForever(mBluetoothStateObserver);
+    }
+
+    public LiveData<Integer> getBluetoothStateLiveData() {
+        return mBluetoothStateLiveData;
     }
 
     /**
-     * Gets an observable {@link UIConversationLog} for the connected account
-     *
-     * <p>The observable emits the following: - {@link UIConversationLog#isLoading()} returns true
-     * when loading - {@link UIConversationLog#getConnectionStatus()} returns appropriate connection
-     * status, such as connected or disconnected - {@link UIConversationLog#getData()} returns a
-     * non-null list of {@link UIConversationItem}, or empty if no items found
+     * Gets an observable {@link UIConversationItem} list for the connected account
      */
     @NonNull
-    public LiveData<UIConversationLog> getConversations(@Nullable UserAccount userAccount) {
-        if (userAccount == null) {
-            MediatorLiveData<UIConversationLog> mutableLiveData = new MediatorLiveData<>();
-            mutableLiveData.postValue(UIConversationLog.getDisconnectedState());
-            return mutableLiveData;
-        }
+    public LiveData<List<UIConversationItem>> getConversations(@NonNull UserAccount userAccount) {
         if (mUserAccount != null
                 && mUserAccount.getId() == userAccount.getId()
                 && mUIConversationLogLiveData != null) {
@@ -79,9 +80,9 @@ public class ConversationListViewModel extends AndroidViewModel {
         return mUIConversationLogLiveData;
     }
 
-    private LiveData<UIConversationLog> createUIConversationLog(@NonNull UserAccount userAccount) {
-        MediatorLiveData<UIConversationLog> mutableLiveData = new MediatorLiveData<>();
-        mutableLiveData.postValue(UIConversationLog.getLoadingState());
+    private LiveData<List<UIConversationItem>> createUIConversationLog(
+            @NonNull UserAccount userAccount) {
+        MediatorLiveData<List<UIConversationItem>> mutableLiveData = new MediatorLiveData<>();
         mutableLiveData.addSource(
                 subscribeToConversations(userAccount),
                 pair -> {
@@ -95,8 +96,7 @@ public class ConversationListViewModel extends AndroidViewModel {
                                                             .convertToUIConversationItem(
                                                                     conversation, uxRestrictions))
                                     .collect(Collectors.toList());
-                    UIConversationLog log = UIConversationLog.getLoadedState(data);
-                    mutableLiveData.postValue(log);
+                    mutableLiveData.postValue(data);
                 });
         return mutableLiveData;
     }

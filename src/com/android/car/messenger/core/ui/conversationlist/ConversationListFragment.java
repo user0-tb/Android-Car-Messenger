@@ -22,12 +22,14 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.car.apps.common.log.L;
+import com.android.car.apps.common.util.LiveDataFunctions;
 import com.android.car.messenger.R;
 import com.android.car.messenger.common.Conversation;
-import com.android.car.messenger.core.models.ConnectionStatus;
+import com.android.car.messenger.core.interfaces.BluetoothState;
 import com.android.car.messenger.core.models.UserAccount;
 import com.android.car.messenger.core.shared.MessageConstants;
 import com.android.car.messenger.core.ui.base.MessageListBaseFragment;
@@ -35,6 +37,7 @@ import com.android.car.messenger.core.util.VoiceUtil;
 import com.android.car.ui.toolbar.MenuItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /** Fragment for Message History/Conversation Metadata List */
 public class ConversationListFragment extends MessageListBaseFragment
@@ -58,6 +61,11 @@ public class ConversationListFragment extends MessageListBaseFragment
             mUserAccount = getArguments().getParcelable(KEY_USER_ACCOUNT);
         }
 
+        if (mUserAccount == null) {
+            handleBluetoothDisconnected();
+            return;
+        }
+
         // Don't recreate the adapter if we already have one, so that the list items
         // will display immediately upon the view being recreated.
         L.d(TAG, "In View Created, about to load message data");
@@ -68,37 +76,29 @@ public class ConversationListFragment extends MessageListBaseFragment
         getRecyclerView().setAdapter(mConversationItemAdapter);
         ConversationListViewModel viewModel =
                 new ViewModelProvider(this).get(ConversationListViewModel.class);
+        LiveData<Integer> bluetoothStateLiveData = viewModel.getBluetoothStateLiveData();
+        LiveData<List<UIConversationItem>> conversationLiveData =
+                viewModel.getConversations(mUserAccount);
 
-        viewModel
-                .getConversations(mUserAccount)
-                .observe(
-                        this,
-                        conversationLog -> {
-                            if (conversationLog.getConnectionStatus()
-                                    != ConnectionStatus.CONNECTED) {
-                                ConnectionStatus connectionStatus =
-                                        conversationLog.getConnectionStatus();
-                                if (connectionStatus == ConnectionStatus.DISCONNECTED) {
-                                    // we currently only support bluetooth disconnect.
-                                    // Future work can add other types of disconnect such as login
-                                    handleBluetoothDisconnected();
-                                }
-                            } else if (conversationLog.isLoading()) {
-                                mLoadingFrameLayout.showLoading();
-                            } else if (conversationLog.getData() == null
-                                    || conversationLog.getData().isEmpty()) {
+        LiveDataFunctions.pair(bluetoothStateLiveData, conversationLiveData)
+                        .observe(this, pair -> {
+                            int bluetoothState = pair.first;
+                            List<UIConversationItem> conversationLog = pair.second;
+                            if (bluetoothState != BluetoothState.ENABLED) {
+                                handleBluetoothDisconnected();
+                            } else if (conversationLog == null || conversationLog.isEmpty()) {
                                 mLoadingFrameLayout.showEmpty(
                                         MessageConstants.INVALID_RES_ID,
                                         R.string.no_messages,
                                         MessageConstants.INVALID_RES_ID);
                                 setMenuItems();
                             } else {
-                                mConversationItemAdapter.setConversationLogItems(
-                                        conversationLog.getData());
+                                mConversationItemAdapter.setConversationLogItems(conversationLog);
                                 mLoadingFrameLayout.showContent();
                                 setMenuItems();
                             }
                         });
+
     }
 
     private void handleBluetoothDisconnected() {
