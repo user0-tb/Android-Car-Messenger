@@ -31,7 +31,6 @@ import com.android.car.messenger.R;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.BluetoothState;
 import com.android.car.messenger.core.models.UserAccount;
-import com.android.car.messenger.core.shared.MessageConstants;
 import com.android.car.messenger.core.ui.base.MessageListBaseFragment;
 import com.android.car.messenger.core.util.VoiceUtil;
 import com.android.car.ui.toolbar.MenuItem;
@@ -75,7 +74,7 @@ public class ConversationListFragment extends MessageListBaseFragment
         }
         getRecyclerView().setAdapter(mConversationItemAdapter);
         ConversationListViewModel viewModel =
-                new ViewModelProvider(this).get(ConversationListViewModel.class);
+                new ViewModelProvider(getActivity()).get(ConversationListViewModel.class);
         LiveData<Integer> bluetoothStateLiveData = viewModel.getBluetoothStateLiveData();
         LiveData<List<UIConversationItem>> conversationLiveData =
                 viewModel.getConversations(mUserAccount);
@@ -87,10 +86,7 @@ public class ConversationListFragment extends MessageListBaseFragment
                             if (bluetoothState != BluetoothState.ENABLED) {
                                 handleBluetoothDisconnected();
                             } else if (conversationLog == null || conversationLog.isEmpty()) {
-                                mLoadingFrameLayout.showEmpty(
-                                        MessageConstants.INVALID_RES_ID,
-                                        R.string.no_messages,
-                                        MessageConstants.INVALID_RES_ID);
+                                mLoadingFrameLayout.showEmpty(R.string.no_messages);
                                 setMenuItems();
                             } else {
                                 mConversationItemAdapter.setConversationLogItems(conversationLog);
@@ -106,9 +102,7 @@ public class ConversationListFragment extends MessageListBaseFragment
         launchIntent.setAction(BLUETOOTH_SETTING_ACTION);
         launchIntent.addCategory(BLUETOOTH_SETTING_CATEGORY);
         mLoadingFrameLayout.showError(
-                MessageConstants.INVALID_RES_ID,
                 R.string.bluetooth_disconnected,
-                MessageConstants.INVALID_RES_ID,
                 R.string.connect_bluetooth_button_text,
                 v -> startActivity(launchIntent),
                 true);
