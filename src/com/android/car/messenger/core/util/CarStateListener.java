@@ -28,6 +28,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -67,8 +68,12 @@ public class CarStateListener {
 
     @Nullable private Car mCar;
 
-    private int mProjectionState = ProjectionStatus.PROJECTION_STATE_INACTIVE;
-    @NonNull private List<ProjectionStatus> mProjectionDetails = new ArrayList<>();
+    @VisibleForTesting
+    int mProjectionState = ProjectionStatus.PROJECTION_STATE_INACTIVE;
+
+    @NonNull
+    @VisibleForTesting
+    List<ProjectionStatus> mProjectionDetails = new ArrayList<>();
 
     public CarStateListener(@NonNull Context context) {
         Car.createCar(
