@@ -48,16 +48,41 @@ android {
         }
     }
 
+    signingConfigs {
+        "default" {
+            storeFile file(gradle.ext.aaosCertPath)
+            storePassword 'carapps'
+            keyAlias 'carapps'
+            keyPassword 'carapps'
+        }
+
+        platform {
+            storeFile file(gradle.ext.platformCertPath)
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
     flavorDimensions 'devMode'
     productFlavors {
         prod {
             dimension 'devMode'
+            signingConfig signingConfigs.default
         }
 
         fake {
             dimension 'devMode'
             versionNameSuffix '-fake'
             testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+            signingConfig signingConfigs.default
+        }
+
+        platform {
+            dimension 'devMode'
+            if (file(gradle.ext.platformCertPath).exists()) {
+                signingConfig signingConfigs.platform
+            }
         }
     }
 
@@ -85,15 +110,6 @@ android {
             if (names.contains('fake')) {
                 setIgnore(true)
             }
-        }
-    }
-
-    signingConfigs {
-        debug {
-            storeFile file('../libs/certs/com_android_car_apps_test.jks')
-            storePassword 'carapps'
-            keyAlias 'carapps'
-            keyPassword 'carapps'
         }
     }
 }
