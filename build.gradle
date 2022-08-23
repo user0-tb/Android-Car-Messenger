@@ -25,6 +25,8 @@ android {
         minSdkVersion 31
         targetSdkVersion gradle.ext.aaosTargetSDK
         testInstrumentationRunnerArguments clearPackageData: 'true', coverage: 'true'
+        versionCode gradle.ext.getVersionCode()
+        versionName gradle.ext.getVersionName()
     }
 
     compileOptions {
