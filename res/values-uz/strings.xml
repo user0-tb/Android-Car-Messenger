@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,93 +13,94 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">Bluetooth aloqa uzildi</string>
-  <string name="no_messages">Hech qanday xabar yoʻq</string>
-  <string name="connect_bluetooth_button_text">Bluetoothga ulanish</string>
-  <string name="replied">Javob berildi</string>
-  <string name="tap_to_read_aloud">Tinglash uchun tegining</string>
-  <string name="action_reply">Javob berish</string>
-  <string name="action_mute">Ovozsiz</string>
-  <string name="action_mark_as_read">Ochilgan deb belgilash</string>
-  <string name="app_running_msg_notification_title">Xabarlashuv xizmati faol</string>
-  <string name="app_running_msg_notification_content">Xabarlarni avtomobilda qabul qilish</string>
-  <string name="message_channel_name">Xabarlar kanali</string>
-  <string name="message_channel_description">Telefon xabarini qabul qilish xizmati</string>
-  <string name="new_message">Yangi xabar</string>
-  <string name="cd_unread">Ochilmagan</string>
-  <string name="cd_conversation_icon">Suhbat belgisi</string>
-  <string name="cd_icon_indicating_the_last_action">Taglavha matni belgisi</string>
-  <string name="cd_mute_button">Ovozsiz qilish tugmasi</string>
-  <string name="cd_loading_info_icon">“Axborot yuklanmoqda” belgisi</string>
-  <string name="cd_reply_action_button">Javob berish amali tugmasi</string>
-  <string name="cd_play_action_button">Ijro amali tugmasi</string>
-  <string name="now_string_shortest">hozir</string>
-  <string name="participant_overflow_text">va yana %d kishi</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="one">%d d</item>
-    <item quantity="other">%d d</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="one">%d st</item>
-    <item quantity="other">%d st</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="one">%d k</item>
-    <item quantity="other">%d k</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="one">%d y</item>
-    <item quantity="other">%d y</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="one">%d daqiqadan keyin</item>
-    <item quantity="other">%d daqiqadan keyin</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="one">%d soatdan keyin</item>
-    <item quantity="other">%d soatdan keyin</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="one">%d kundan keyin</item>
-    <item quantity="other">%d kundan keyin</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="one">%d yildan keyin</item>
-    <item quantity="other">%d yildan keyin</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="one">%d daqiqa oldin</item>
-    <item quantity="other">%d daqiqa oldin</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="one">%d soat oldin</item>
-    <item quantity="other">%d soat oldin</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="one">%d kun oldin</item>
-    <item quantity="other">%d kun oldin</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="one">%d yil oldin</item>
-    <item quantity="other">%d yil oldin</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="one">%d daqiqadan keyin</item>
-    <item quantity="other">%d daqiqadan keyin</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="one">%d soatdan keyin</item>
-    <item quantity="other">%d soatdan keyin</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="one">%d kundan keyin</item>
-    <item quantity="other">%d kundan keyin</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="one">%d yildan keyin</item>
-    <item quantity="other">%d yildan keyin</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"Bluetooth aloqa uzildi."</string>
+    <string name="no_messages" msgid="1440256496615617958">"Hech qanday xabar yoʻq"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Bluetoothga ulanish"</string>
+    <string name="replied" msgid="4048102393748554631">"Javob berildi"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"Tinglash uchun tegining"</string>
+    <string name="action_reply" msgid="8404237041838225390">"Javob berish"</string>
+    <string name="action_mute" msgid="7982388368125401058">"Sukut"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"Ochilgan deb belgilash"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"Xabarlashuv xizmati faol"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"Xabarlarni avtomobilda qabul qilish"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"Xabarlar kanali"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"Telefon xabarini qabul qilish xizmati"</string>
+    <string name="new_message" msgid="8983092328255956122">"Yangi xabar"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"Ochilmagan"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"Suhbat belgisi"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"Taglavha matni belgisi"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"Ovozsiz qilish tugmasi"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"“Axborot yuklanmoqda” belgisi"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"Javob berish amali tugmasi"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"Ijro amali tugmasi"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"hozir"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">"va yana %d ta"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> d</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> d</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> st</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> st</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> k</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> k</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> y</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> y</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> daqiqadan keyin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> daqiqadan keyin</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> soatdan keyin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> soatdan keyin</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kundan keyin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kundan keyin</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> yildan keyin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> yildan keyin</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> daqiqa oldin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> daqiqa oldin</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> soat oldin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> soat oldin</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kun oldin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kun oldin</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> yil oldin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> yil oldin</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> daqiqadan keyin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> daqiqadan keyin</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> soatdan keyin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> soatdan keyin</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kundan keyin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kundan keyin</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> yildan keyin</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> yildan keyin</item>
+    </plurals>
 </resources>

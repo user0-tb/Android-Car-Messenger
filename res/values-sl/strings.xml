@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,125 +13,126 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">Povezava Bluetooth je prekinjena</string>
-  <string name="no_messages">Ni sporočil</string>
-  <string name="connect_bluetooth_button_text">Povezovanje z Bluetoothom</string>
-  <string name="replied">Odgovorjeno</string>
-  <string name="tap_to_read_aloud">Dotik za branje na glas</string>
-  <string name="action_reply">Odgovor</string>
-  <string name="action_mute">Izklopi zvok</string>
-  <string name="action_mark_as_read">Označi kot prebrano</string>
-  <string name="app_running_msg_notification_title">Storitev za sporočanje je aktivna.</string>
-  <string name="app_running_msg_notification_content">Prejemanje sporočil v avtomobilu</string>
-  <string name="message_channel_name">Kanal za sporočila</string>
-  <string name="message_channel_description">Storitev sprejem. sporočil prek telefona</string>
-  <string name="new_message">Novo sporočilo</string>
-  <string name="cd_unread">Neprebrano</string>
-  <string name="cd_conversation_icon">Ikona pogovora</string>
-  <string name="cd_icon_indicating_the_last_action">Ikona besedila podnaslova</string>
-  <string name="cd_mute_button">Gumb za izklop zvoka</string>
-  <string name="cd_loading_info_icon">Ikona za nalaganje informacij</string>
-  <string name="cd_reply_action_button">Gumb za dejanje odgovarjanja</string>
-  <string name="cd_play_action_button">Gumb za dejanje predvajanja</string>
-  <string name="now_string_shortest">zdaj</string>
-  <string name="participant_overflow_text">in še %d</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="one">%d min</item>
-    <item quantity="two">%d min</item>
-    <item quantity="few">%d min</item>
-    <item quantity="other">%d min</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="one">%d h</item>
-    <item quantity="two">%d h</item>
-    <item quantity="few">%d h</item>
-    <item quantity="other">%d h</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="one">%d d</item>
-    <item quantity="two">%d d</item>
-    <item quantity="few">%d d</item>
-    <item quantity="other">%d d</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="one">%d l</item>
-    <item quantity="two">%d l</item>
-    <item quantity="few">%d l</item>
-    <item quantity="other">%d l</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="one">čez %d min</item>
-    <item quantity="two">čez %d min</item>
-    <item quantity="few">čez %d min</item>
-    <item quantity="other">čez %d min</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="one">čez %d h</item>
-    <item quantity="two">čez %d h</item>
-    <item quantity="few">čez %d h</item>
-    <item quantity="other">čez %d h</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="one">čez %d d</item>
-    <item quantity="two">čez %d d</item>
-    <item quantity="few">čez %d d</item>
-    <item quantity="other">čez %d d</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="one">čez %d l</item>
-    <item quantity="two">čez %d l</item>
-    <item quantity="few">čez %d l</item>
-    <item quantity="other">čez %d l</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="one">pred %d minuto</item>
-    <item quantity="two">pred %d minutama</item>
-    <item quantity="few">pred %d minutami</item>
-    <item quantity="other">pred %d minutami</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="one">pred %d uro</item>
-    <item quantity="two">pred %d urama</item>
-    <item quantity="few">pred %d urami</item>
-    <item quantity="other">pred %d urami</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="one">pred %d dnevom</item>
-    <item quantity="two">pred %d dnevoma</item>
-    <item quantity="few">pred %d dnevi</item>
-    <item quantity="other">pred %d dnevi</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="one">pred %d letom</item>
-    <item quantity="two">pred %d letoma</item>
-    <item quantity="few">pred %d leti</item>
-    <item quantity="other">pred %d leti</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="one">čez %d minuto</item>
-    <item quantity="two">čez %d minuti</item>
-    <item quantity="few">čez %d minute</item>
-    <item quantity="other">čez %d minut</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="one">čez %d uro</item>
-    <item quantity="two">čez %d uri</item>
-    <item quantity="few">čez %d ure</item>
-    <item quantity="other">čez %d ur</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="one">čez %d dan</item>
-    <item quantity="two">čez %d dneva</item>
-    <item quantity="few">čez %d dni</item>
-    <item quantity="other">čez %d dni</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="one">čez %d leto</item>
-    <item quantity="two">čez %d leti</item>
-    <item quantity="few">čez %d leta</item>
-    <item quantity="other">čez %d let</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"Povezava Bluetooth je prekinjena"</string>
+    <string name="no_messages" msgid="1440256496615617958">"Ni sporočil"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Povezovanje z Bluetoothom"</string>
+    <string name="replied" msgid="4048102393748554631">"Odgovorjeno"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"Dotik za branje na glas"</string>
+    <string name="action_reply" msgid="8404237041838225390">"Odgovori"</string>
+    <string name="action_mute" msgid="7982388368125401058">"Izklopi zvok"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"Označi kot prebrano"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"Storitev za sporočanje je aktivna."</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"Prejemanje sporočil v avtomobilu"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"Kanal za sporočila"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"Storitev sprejem. sporočil prek telefona"</string>
+    <string name="new_message" msgid="8983092328255956122">"Novo sporočilo"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"Neprebrano"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"Ikona pogovora"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"Ikona besedila podnaslova"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"Gumb za izklop zvoka"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"Ikona za nalaganje informacij"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"Gumb za dejanje odgovarjanja"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"Gumb za dejanje predvajanja"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"zdaj"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">", in še %d"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> min</item>
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> min</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> min</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> min</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> h</item>
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> h</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> h</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> h</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> d</item>
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> d</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> d</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> d</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> l</item>
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> l</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> l</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> l</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="one">čez <xliff:g id="COUNT_1">%d</xliff:g> min</item>
+      <item quantity="two">čez <xliff:g id="COUNT_1">%d</xliff:g> min</item>
+      <item quantity="few">čez <xliff:g id="COUNT_1">%d</xliff:g> min</item>
+      <item quantity="other">čez <xliff:g id="COUNT_1">%d</xliff:g> min</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="one">čez <xliff:g id="COUNT_1">%d</xliff:g> h</item>
+      <item quantity="two">čez <xliff:g id="COUNT_1">%d</xliff:g> h</item>
+      <item quantity="few">čez <xliff:g id="COUNT_1">%d</xliff:g> h</item>
+      <item quantity="other">čez <xliff:g id="COUNT_1">%d</xliff:g> h</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="one">čez <xliff:g id="COUNT_1">%d</xliff:g> d</item>
+      <item quantity="two">čez <xliff:g id="COUNT_1">%d</xliff:g> d</item>
+      <item quantity="few">čez <xliff:g id="COUNT_1">%d</xliff:g> d</item>
+      <item quantity="other">čez <xliff:g id="COUNT_1">%d</xliff:g> d</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="one">čez <xliff:g id="COUNT_1">%d</xliff:g> l</item>
+      <item quantity="two">čez <xliff:g id="COUNT_1">%d</xliff:g> l</item>
+      <item quantity="few">čez <xliff:g id="COUNT_1">%d</xliff:g> l</item>
+      <item quantity="other">čez <xliff:g id="COUNT_1">%d</xliff:g> l</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="one">pred <xliff:g id="COUNT_1">%d</xliff:g> minuto</item>
+      <item quantity="two">pred <xliff:g id="COUNT_1">%d</xliff:g> minutama</item>
+      <item quantity="few">pred <xliff:g id="COUNT_1">%d</xliff:g> minutami</item>
+      <item quantity="other">pred <xliff:g id="COUNT_1">%d</xliff:g> minutami</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="one">pred <xliff:g id="COUNT_1">%d</xliff:g> uro</item>
+      <item quantity="two">pred <xliff:g id="COUNT_1">%d</xliff:g> urama</item>
+      <item quantity="few">pred <xliff:g id="COUNT_1">%d</xliff:g> urami</item>
+      <item quantity="other">pred <xliff:g id="COUNT_1">%d</xliff:g> urami</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="one">pred <xliff:g id="COUNT_1">%d</xliff:g> dnevom</item>
+      <item quantity="two">pred <xliff:g id="COUNT_1">%d</xliff:g> dnevoma</item>
+      <item quantity="few">pred <xliff:g id="COUNT_1">%d</xliff:g> dnevi</item>
+      <item quantity="other">pred <xliff:g id="COUNT_1">%d</xliff:g> dnevi</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="one">pred <xliff:g id="COUNT_1">%d</xliff:g> letom</item>
+      <item quantity="two">pred <xliff:g id="COUNT_1">%d</xliff:g> letoma</item>
+      <item quantity="few">pred <xliff:g id="COUNT_1">%d</xliff:g> leti</item>
+      <item quantity="other">pred <xliff:g id="COUNT_1">%d</xliff:g> leti</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="one">čez <xliff:g id="COUNT_1">%d</xliff:g> minuto</item>
+      <item quantity="two">čez <xliff:g id="COUNT_1">%d</xliff:g> minuti</item>
+      <item quantity="few">čez <xliff:g id="COUNT_1">%d</xliff:g> minute</item>
+      <item quantity="other">čez <xliff:g id="COUNT_1">%d</xliff:g> minut</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="one">čez <xliff:g id="COUNT_1">%d</xliff:g> uro</item>
+      <item quantity="two">čez <xliff:g id="COUNT_1">%d</xliff:g> uri</item>
+      <item quantity="few">čez <xliff:g id="COUNT_1">%d</xliff:g> ure</item>
+      <item quantity="other">čez <xliff:g id="COUNT_1">%d</xliff:g> ur</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="one">čez <xliff:g id="COUNT_1">%d</xliff:g> dan</item>
+      <item quantity="two">čez <xliff:g id="COUNT_1">%d</xliff:g> dneva</item>
+      <item quantity="few">čez <xliff:g id="COUNT_1">%d</xliff:g> dni</item>
+      <item quantity="other">čez <xliff:g id="COUNT_1">%d</xliff:g> dni</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="one">čez <xliff:g id="COUNT_1">%d</xliff:g> leto</item>
+      <item quantity="two">čez <xliff:g id="COUNT_1">%d</xliff:g> leti</item>
+      <item quantity="few">čez <xliff:g id="COUNT_1">%d</xliff:g> leta</item>
+      <item quantity="other">čez <xliff:g id="COUNT_1">%d</xliff:g> let</item>
+    </plurals>
 </resources>

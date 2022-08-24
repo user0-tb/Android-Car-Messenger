@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,93 +13,94 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">Bluetooth 未接続</string>
-  <string name="no_messages">メッセージなし</string>
-  <string name="connect_bluetooth_button_text">Bluetooth への接続</string>
-  <string name="replied">返信済み</string>
-  <string name="tap_to_read_aloud">タップで読み上げます</string>
-  <string name="action_reply">返信</string>
-  <string name="action_mute">ミュート</string>
-  <string name="action_mark_as_read">既読にする</string>
-  <string name="app_running_msg_notification_title">メッセージ サービスは有効です</string>
-  <string name="app_running_msg_notification_content">車でメッセージを受信しています</string>
-  <string name="message_channel_name">メッセージ チャンネル</string>
-  <string name="message_channel_description">スマートフォン メッセージ受信サービス</string>
-  <string name="new_message">新しいメッセージ</string>
-  <string name="cd_unread">未読</string>
-  <string name="cd_conversation_icon">会話アイコン</string>
-  <string name="cd_icon_indicating_the_last_action">字幕テキスト アイコン</string>
-  <string name="cd_mute_button">ミュートボタン</string>
-  <string name="cd_loading_info_icon">情報読み込み中のアイコン</string>
-  <string name="cd_reply_action_button">返信操作ボタン</string>
-  <string name="cd_play_action_button">再生操作ボタン</string>
-  <string name="now_string_shortest">現在</string>
-  <string name="participant_overflow_text">、他 %d 人</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="one">%d 分</item>
-    <item quantity="other">%d 分</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="one">%d 時間</item>
-    <item quantity="other">%d 時間</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="one">%d 日</item>
-    <item quantity="other">%d 日</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="one">%d 年</item>
-    <item quantity="other">%d 年</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="one">%d 分後</item>
-    <item quantity="other">%d 分後</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="one">%d 時間後</item>
-    <item quantity="other">%d 時間後</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="one">%d 日後</item>
-    <item quantity="other">%d 日後</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="one">%d 年後</item>
-    <item quantity="other">%d 年後</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="one">%d 分前</item>
-    <item quantity="other">%d 分前</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="one">%d 時間前</item>
-    <item quantity="other">%d 時間前</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="one">%d 日前</item>
-    <item quantity="other">%d 日前</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="one">%d 年前</item>
-    <item quantity="other">%d 年前</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="one">%d 分後</item>
-    <item quantity="other">%d 分後</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="one">%d 時間後</item>
-    <item quantity="other">%d 時間後</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="one">%d 日後</item>
-    <item quantity="other">%d 日後</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="one">%d 年後</item>
-    <item quantity="other">%d 年後</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"Bluetooth 未接続"</string>
+    <string name="no_messages" msgid="1440256496615617958">"メッセージなし"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Bluetooth に接続"</string>
+    <string name="replied" msgid="4048102393748554631">"返信済み"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"タップで読み上げ"</string>
+    <string name="action_reply" msgid="8404237041838225390">"返信"</string>
+    <string name="action_mute" msgid="7982388368125401058">"ミュート"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"既読にする"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"メッセージ サービスは有効です"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"車でメッセージを受信しています"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"メッセージ チャンネル"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"スマートフォン メッセージ受信サービス"</string>
+    <string name="new_message" msgid="8983092328255956122">"新しいメッセージ"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"未読"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"会話アイコン"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"字幕テキスト アイコン"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"ミュートボタン"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"情報読み込み中のアイコン"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"返信操作ボタン"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"再生操作ボタン"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"今"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">"、他 %d 人"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 分</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 分</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 時間</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 時間</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 日</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 日</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 年</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 年</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 分後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 分後</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 時間後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 時間後</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 日後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 日後</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 年後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 年後</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 分前</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 分前</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 時間前</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 時間前</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 日前</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 日前</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 年前</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 年前</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 分後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 分後</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 時間後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 時間後</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 日後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 日後</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 年後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 年後</item>
+    </plurals>
 </resources>
