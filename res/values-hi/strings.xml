@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,93 +13,94 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">ब्लूटूथ डिसकनेक्ट किया गया</string>
-  <string name="no_messages">कोई मैसेज नहीं है</string>
-  <string name="connect_bluetooth_button_text">ब्लूटूथ से कनेक्ट करें</string>
-  <string name="replied">जवाब दिया गया</string>
-  <string name="tap_to_read_aloud">पढ़कर सुनाने की सुविधा के लिए टैप करें</string>
-  <string name="action_reply">जवाब दें</string>
-  <string name="action_mute">म्यूट करें</string>
-  <string name="action_mark_as_read">\'पढ़ा गया\' के तौर पर मार्क करें</string>
-  <string name="app_running_msg_notification_title">मैसेज सेवा चालू है</string>
-  <string name="app_running_msg_notification_content">कार पर मैसेज मिल रहे हैं</string>
-  <string name="message_channel_name">मैसेज चैनल</string>
-  <string name="message_channel_description">फ़ोन पर मैसेज पाने की सेवा</string>
-  <string name="new_message">नया मैसेज</string>
-  <string name="cd_unread">नहीं पढ़ा गया</string>
-  <string name="cd_conversation_icon">बातचीत का आइकॉन</string>
-  <string name="cd_icon_indicating_the_last_action">सबटाइटल का आइकॉन</string>
-  <string name="cd_mute_button">\'म्यूट करें\' बटन</string>
-  <string name="cd_loading_info_icon">जानकारी लोड होने का आइकॉन</string>
-  <string name="cd_reply_action_button">जवाब देने के लिए ऐक्शन बटन</string>
-  <string name="cd_play_action_button">मीडिया चलाने के लिए ऐक्शन बटन</string>
-  <string name="now_string_shortest">अभी</string>
-  <string name="participant_overflow_text">,और %d अन्य</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="one">%d मिनट</item>
-    <item quantity="other">%d मिनट</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="one">%d घंटा</item>
-    <item quantity="other">%d घंटे</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="one">%d दिन</item>
-    <item quantity="other">%d दिन</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="one">%d साल</item>
-    <item quantity="other">%d साल</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="one">%d मिनट में</item>
-    <item quantity="other">%d मिनट में</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="one">%d घंटे में</item>
-    <item quantity="other">%d घंटे में</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="one">%d दिन में</item>
-    <item quantity="other">%d दिन में</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="one">%d साल में</item>
-    <item quantity="other">%d साल में</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="one">%d मिनट पहले</item>
-    <item quantity="other">%d मिनट पहले</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="one">%d घंटा पहले</item>
-    <item quantity="other">%d घंटे पहले</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="one">%d दिन पहले</item>
-    <item quantity="other">%d दिन पहले</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="one">%d साल पहले</item>
-    <item quantity="other">%d साल पहले</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="one">%d मिनट में</item>
-    <item quantity="other">%d मिनट में</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="one">%d घंटे में</item>
-    <item quantity="other">%d घंटे में</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="one">%d दिन में</item>
-    <item quantity="other">%d दिन में</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="one">%d साल में</item>
-    <item quantity="other">%d साल में</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"ब्लूटूथ डिसकनेक्ट किया गया"</string>
+    <string name="no_messages" msgid="1440256496615617958">"कोई नया मैसेज नहीं है"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"ब्लूटूथ से कनेक्ट करें"</string>
+    <string name="replied" msgid="4048102393748554631">"जवाब दिया गया"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"ज़ोर से पढ़वाकर सुनने के लिए टैप करें"</string>
+    <string name="action_reply" msgid="8404237041838225390">"जवाब दें"</string>
+    <string name="action_mute" msgid="7982388368125401058">"म्यूट करें"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"\'पढ़ा गया\' के तौर पर मार्क करें"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"मैसेज सेवा चालू है"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"कार पर मैसेज मिल रहे हैं"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"मैसेज चैनल"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"फ़ोन पर मैसेज पाने की सेवा"</string>
+    <string name="new_message" msgid="8983092328255956122">"नया मैसेज"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"नहीं पढ़ा गया"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"बातचीत का आइकॉन"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"सबटाइटल का आइकॉन"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"म्यूट करें बटन"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"जानकारी लोड होने का आइकॉन"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"जवाब देने के लिए बटन"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"मीडिया चलाने के लिए बटन"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"अभी"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">", और %d अन्य"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> मिनट</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> मिनट</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> घंटा</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> घंटे</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> दिन</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> दिन</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> साल</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> साल</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> मिनट में</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> मिनट में</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> घंटे में</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> घंटे में</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> दिन में</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> दिन में</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> साल में</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> साल में</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> मिनट पहले</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> मिनट पहले</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> घंटे पहले</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> घंटे पहले</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> दिन पहले</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> दिन पहले</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> साल पहले</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> साल पहले</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> मिनट में</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> मिनट में</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> घंटे में</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> घंटे में</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> दिन में</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> दिन में</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> साल में</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> साल में</item>
+    </plurals>
 </resources>

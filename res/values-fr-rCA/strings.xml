@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,93 +13,94 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">Bluetooth déconnecté</string>
-  <string name="no_messages">Aucun message</string>
-  <string name="connect_bluetooth_button_text">Se connecter au Bluetooth</string>
-  <string name="replied">Réponse envoyée</string>
-  <string name="tap_to_read_aloud">Touchez pour lire à haute voix</string>
-  <string name="action_reply">Répondre</string>
-  <string name="action_mute">Désactiver le son</string>
-  <string name="action_mark_as_read">Marquer comme lu</string>
-  <string name="app_running_msg_notification_title">Le service de messagerie est actif</string>
-  <string name="app_running_msg_notification_content">Réception des messages dans la voiture</string>
-  <string name="message_channel_name">Canal pour les messages</string>
-  <string name="message_channel_description">Serv. de réception des messages du tél.</string>
-  <string name="new_message">Nouveau message</string>
-  <string name="cd_unread">Non lus</string>
-  <string name="cd_conversation_icon">Icône de conversation</string>
-  <string name="cd_icon_indicating_the_last_action">Icône de texte de sous-titre</string>
-  <string name="cd_mute_button">Bouton de désactivation du son</string>
-  <string name="cd_loading_info_icon">Icône de chargement d\'informations</string>
-  <string name="cd_reply_action_button">Bouton d\'action Répondre</string>
-  <string name="cd_play_action_button">Bouton d\'action Jouer</string>
-  <string name="now_string_shortest">maint.</string>
-  <string name="participant_overflow_text">, et %d autres</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="one">%d m</item>
-    <item quantity="other">%d m</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="one">%d h</item>
-    <item quantity="other">%d h</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="one">%d j</item>
-    <item quantity="other">%d j</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="one">%d a</item>
-    <item quantity="other">%d a</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="one">dans %d m</item>
-    <item quantity="other">dans %d m</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="one">dans %d h</item>
-    <item quantity="other">dans %d h</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="one">dans %d j</item>
-    <item quantity="other">dans %d j</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="one">dans %d a</item>
-    <item quantity="other">dans %d a</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="one">Il y a %d minute</item>
-    <item quantity="other">Il y a %d minutes</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="one">Il y a %d heure</item>
-    <item quantity="other">Il y a %d heures</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="one">Il y a %d jour</item>
-    <item quantity="other">Il y a %d jours</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="one">il y a %d an</item>
-    <item quantity="other">il y a %d ans</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="one">dans %d minute</item>
-    <item quantity="other">dans %d minutes</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="one">dans %d heure</item>
-    <item quantity="other">dans %d heures</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="one">dans %d jour</item>
-    <item quantity="other">dans %d jours</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="one">dans %d an</item>
-    <item quantity="other">dans %d ans</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"Bluetooth déconnecté"</string>
+    <string name="no_messages" msgid="1440256496615617958">"Aucun message"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Connexion au Bluetooth"</string>
+    <string name="replied" msgid="4048102393748554631">"Réponse envoyée"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"Touchez pour lire à haute voix"</string>
+    <string name="action_reply" msgid="8404237041838225390">"Répondre"</string>
+    <string name="action_mute" msgid="7982388368125401058">"Désactiver le son"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"Marquer comme lu"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"Le service de messagerie est actif"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"Réception des messages dans la voiture"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"Canal pour les messages"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"Serv. de réception des messages du tél."</string>
+    <string name="new_message" msgid="8983092328255956122">"Nouveau message"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"Non lu"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"Icône de conversation"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"Icône de texte de sous-titre"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"Bouton de désactivation du son"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"Icône de chargement d\'informations"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"Bouton d\'action Répondre"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"Bouton d\'action Jouer"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"maintenant"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">", et %d autres"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> m</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> m</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> h</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> h</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> j</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> j</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> a</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> a</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="one">dans <xliff:g id="COUNT_1">%d</xliff:g> m</item>
+      <item quantity="other">dans <xliff:g id="COUNT_1">%d</xliff:g> m</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="one">dans <xliff:g id="COUNT_1">%d</xliff:g> h</item>
+      <item quantity="other">dans <xliff:g id="COUNT_1">%d</xliff:g> h</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="one">dans <xliff:g id="COUNT_1">%d</xliff:g> j</item>
+      <item quantity="other">dans <xliff:g id="COUNT_1">%d</xliff:g> j</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="one">dans <xliff:g id="COUNT_1">%d</xliff:g> a</item>
+      <item quantity="other">dans <xliff:g id="COUNT_1">%d</xliff:g> a</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="one">Il y a <xliff:g id="COUNT_1">%d</xliff:g> minute</item>
+      <item quantity="other">Il y a <xliff:g id="COUNT_1">%d</xliff:g> minutes</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="one">Il y a <xliff:g id="COUNT_1">%d</xliff:g> heure</item>
+      <item quantity="other">Il y a <xliff:g id="COUNT_1">%d</xliff:g> heures</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="one">Il y a <xliff:g id="COUNT_1">%d</xliff:g> jour</item>
+      <item quantity="other">Il y a <xliff:g id="COUNT_1">%d</xliff:g> jours</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="one">il y a <xliff:g id="COUNT_1">%d</xliff:g> an</item>
+      <item quantity="other">il y a <xliff:g id="COUNT_1">%d</xliff:g> ans</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="one">dans <xliff:g id="COUNT_1">%d</xliff:g> minute</item>
+      <item quantity="other">dans <xliff:g id="COUNT_1">%d</xliff:g> minutes</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="one">dans <xliff:g id="COUNT_1">%d</xliff:g> heure</item>
+      <item quantity="other">dans <xliff:g id="COUNT_1">%d</xliff:g> heures</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="one">dans <xliff:g id="COUNT_1">%d</xliff:g> jour</item>
+      <item quantity="other">dans <xliff:g id="COUNT_1">%d</xliff:g> jours</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="one">dans <xliff:g id="COUNT_1">%d</xliff:g> an</item>
+      <item quantity="other">dans <xliff:g id="COUNT_1">%d</xliff:g> ans</item>
+    </plurals>
 </resources>
