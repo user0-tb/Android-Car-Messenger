@@ -38,9 +38,21 @@ android {
         abortOnError false
     }
 
-    buildTypes {
-        debug {
-            testCoverageEnabled true
+    signingConfigs {
+        aaos {
+            storeFile file(gradle.ext.aaosCertPath)
+            storePassword 'carapps'
+            keyAlias 'carapps'
+            keyPassword 'carapps'
+        }
+
+        platform {
+            if (file(gradle.ext.platformCertPath).exists()) {
+                storeFile file(gradle.ext.platformCertPath)
+                storePassword 'android'
+                keyAlias 'androiddebugkey'
+                keyPassword 'android'
+            }
         }
     }
 
@@ -50,41 +62,30 @@ android {
         }
     }
 
-    signingConfigs {
-        "default" {
-            storeFile file(gradle.ext.aaosCertPath)
-            storePassword 'carapps'
-            keyAlias 'carapps'
-            keyPassword 'carapps'
-        }
-
-        platform {
-            storeFile file(gradle.ext.platformCertPath)
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
-    }
-
     flavorDimensions 'devMode'
     productFlavors {
         prod {
             dimension 'devMode'
-            signingConfig signingConfigs.default
+            signingConfig signingConfigs.aaos
         }
 
         fake {
             dimension 'devMode'
             versionNameSuffix '-fake'
             testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-            signingConfig signingConfigs.default
+            signingConfig signingConfigs.aaos
         }
 
         platform {
             dimension 'devMode'
-            if (file(gradle.ext.platformCertPath).exists()) {
-                signingConfig signingConfigs.platform
-            }
+            signingConfig signingConfigs.platform
+        }
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+            signingConfig android.buildTypes.release.signingConfig
         }
     }
 
