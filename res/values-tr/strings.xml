@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"Bluetooth bağlantısı kesildi"</string>
+    <string name="no_messages" msgid="1440256496615617958">"Mesaj yok"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Bluetooth\'a bağlan"</string>
+    <string name="replied" msgid="4048102393748554631">"Yanıtlandı"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"Yüksek sesle okunması için dokunun"</string>
+    <string name="action_reply" msgid="8404237041838225390">"Yanıtla"</string>
+    <string name="action_mute" msgid="7982388368125401058">"Yoksay"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"Okundu Olarak İşaretle"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"Mesaj hizmeti etkin"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"Mesajlar arabada alınıyor"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"Mesaj Kanalı"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"Telefon Mesaj Alıcı Hizmeti"</string>
+    <string name="new_message" msgid="8983092328255956122">"Yeni Mesaj"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"Okunmadı"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"Görüşme Simgesi"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"Altyazı Metin Simgesi"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"Mikrofonu Kapatma Düğmesi"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"Yükleniyor Bilgi Simgesi"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"Yanıtlama İşlem Düğmesi"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"Oynatma İşlem Düğmesi"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"şimdi"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">"ve %d tane daha"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> dk.</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> dk.</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> sa.</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> sa.</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> gün</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> gün</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> yıl</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> yıl</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> dk. içinde</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> dk. içinde</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> sa. içinde</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> sa. içinde</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> gün içinde</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> gün içinde</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> yıl içinde</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> yıl içinde</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> dakika önce</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> dakika önce</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> saat önce</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> saat önce</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> gün önce</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> gün önce</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> yıl önce</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> yıl önce</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> dakika içinde</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> dakika içinde</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> saat içinde</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> saat içinde</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> gün içinde</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> gün içinde</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> yıl içinde</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> yıl içinde</item>
+    </plurals>
+</resources>

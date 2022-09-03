@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"ব্লুটুথ সংযোগ বিচ্ছিন্ন হৈছে"</string>
+    <string name="no_messages" msgid="1440256496615617958">"কোনো বাৰ্তা নাই"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"ব্লুটুথৰ সৈতে সংযোগ কৰক"</string>
+    <string name="replied" msgid="4048102393748554631">"প্ৰত্যুত্তৰ দিয়া হৈছে"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"ডাঙৰকৈ পঢ়া শুনিবলৈ টিপক"</string>
+    <string name="action_reply" msgid="8404237041838225390">"প্ৰত্যুত্তৰ দিয়ক"</string>
+    <string name="action_mute" msgid="7982388368125401058">"মিউট কৰক"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"পঢ়া হৈছে বুলি চিহ্নিত কৰক"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"বাৰ্তা বিনিময় সেৱাটো সক্ৰিয় হৈ আছে"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"গাড়ীত বাৰ্তা লাভ কৰি আছে"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"বাৰ্তাৰ চেনেল"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"ফ’নৰ বাৰ্তাৰ প্ৰাপক সম্পৰ্কীয় সেৱা"</string>
+    <string name="new_message" msgid="8983092328255956122">"নতুন বাৰ্তা"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"নপঢ়া"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"বাৰ্তালাপৰ চিহ্ন"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"ছাবটাইটেল পাঠৰ চিহ্ন"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"মিউট কৰাৰ বুটাম"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"তথ্য ল’ড কৰাৰ চিহ্ন"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"প্ৰত্যুত্তৰ দিয়াৰ বুটাম"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"প্লে’ কৰাৰ বুটাম"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"এতিয়া"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">"আৰু অন্য %d গৰাকী"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> মি</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> মি</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ঘ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ঘ</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> দি</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> দি</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ব</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ব</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> মিনিটত</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> মিনিটত</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ঘণ্টাত</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ঘণ্টাত</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> দিনত</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> দিনত</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> বছৰত</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> বছৰত</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> মিনিট পূৰ্বে</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> মিনিট পূৰ্বে</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ঘণ্টা পূৰ্বে</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ঘণ্টা পূৰ্বে</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> দিন পূৰ্বে</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> দিন পূৰ্বে</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> বছৰ পূৰ্বে</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> বছৰ পূৰ্বে</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> মিনিটত</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> মিনিটত</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ঘণ্টাত</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ঘণ্টাত</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> দিনত</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> দিনত</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> বছৰত</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> বছৰত</item>
+    </plurals>
+</resources>

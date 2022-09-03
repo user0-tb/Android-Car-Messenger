@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"藍牙連線已中斷"</string>
+    <string name="no_messages" msgid="1440256496615617958">"沒有訊息"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"連接藍牙"</string>
+    <string name="replied" msgid="4048102393748554631">"已回覆"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"輕按即可朗讀"</string>
+    <string name="action_reply" msgid="8404237041838225390">"回覆"</string>
+    <string name="action_mute" msgid="7982388368125401058">"靜音"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"標示為已讀"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"訊息服務已啟用"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"汽車將可接收訊息"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"訊息渠道"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"手機訊息接收服務"</string>
+    <string name="new_message" msgid="8983092328255956122">"新短訊"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"未讀"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"對話圖示"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"字幕文字圖示"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"靜音按鈕"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"正在載入資料圖示"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"回覆動作按鈕"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"播放動作按鈕"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"現在"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">"、和另外 %d 個"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 分鐘</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 分鐘</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 小時</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 小時</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 天</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 天</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 年</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 年</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 分鐘後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 分鐘後</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 小時後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 小時後</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 天後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 天後</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 年後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 年後</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 分鐘前</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 分鐘前</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 個鐘前</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個鐘前</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 日前</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 日前</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 年前</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 年前</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 分鐘後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 分鐘後</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 個鐘後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個鐘後</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 日後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 日後</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 年後</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 年後</item>
+    </plurals>
+</resources>
