@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,157 +13,158 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">انقطع اتصال البلوتوث.</string>
-  <string name="no_messages">ما مِن رسائل.</string>
-  <string name="connect_bluetooth_button_text">الاتصال بالبلوتوث</string>
-  <string name="replied">تمّ الرد.</string>
-  <string name="tap_to_read_aloud">انقر للقراءة بصوت عالٍ.</string>
-  <string name="action_reply">الرد</string>
-  <string name="action_mute">كتم الصوت</string>
-  <string name="action_mark_as_read">وضع علامة \"مقروءة\"</string>
-  <string name="app_running_msg_notification_title">تم تفعيل خدمة المراسلة.</string>
-  <string name="app_running_msg_notification_content">تلقّي الرسائل على السيارة</string>
-  <string name="message_channel_name">قناة الرسائل</string>
-  <string name="message_channel_description">خدمة استلام الرسائل على الهاتف</string>
-  <string name="new_message">رسالة جديدة</string>
-  <string name="cd_unread">غير مقروءة</string>
-  <string name="cd_conversation_icon">رمز المحادثة</string>
-  <string name="cd_icon_indicating_the_last_action">رمز نص الترجمة</string>
-  <string name="cd_mute_button">زر كتم الصوت</string>
-  <string name="cd_loading_info_icon">رمز تحميل المعلومات</string>
-  <string name="cd_reply_action_button">زر الإجراء الخاص بالرد</string>
-  <string name="cd_play_action_button">زر الإجراء الخاص بالتشغيل</string>
-  <string name="now_string_shortest">الآن</string>
-  <string name="participant_overflow_text">و%d مشارِك آخر</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="zero">%d د</item>
-    <item quantity="one">%d د</item>
-    <item quantity="two">%d د</item>
-    <item quantity="few">%d د</item>
-    <item quantity="many">%d د</item>
-    <item quantity="other">%d د</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="zero">%d س</item>
-    <item quantity="one">%d س</item>
-    <item quantity="two">%d س</item>
-    <item quantity="few">%d س</item>
-    <item quantity="many">%d س</item>
-    <item quantity="other">%d س</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="zero">%d يوم</item>
-    <item quantity="one">%d يوم</item>
-    <item quantity="two">%d يوم</item>
-    <item quantity="few">%d أيام</item>
-    <item quantity="many">%d يومًا</item>
-    <item quantity="other">%d يوم</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="zero">%d سنة</item>
-    <item quantity="one">%d سنة</item>
-    <item quantity="two">%d سنة</item>
-    <item quantity="few">%d سنوات</item>
-    <item quantity="many">%d سنة</item>
-    <item quantity="other">%d سنة</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="zero">خلال %d د</item>
-    <item quantity="one">خلال %d د</item>
-    <item quantity="two">خلال %d د</item>
-    <item quantity="few">خلال %d د</item>
-    <item quantity="many">خلال %d د</item>
-    <item quantity="other">خلال %d د</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="zero">خلال %d س</item>
-    <item quantity="one">خلال %d س</item>
-    <item quantity="two">خلال %d س</item>
-    <item quantity="few">خلال %d س</item>
-    <item quantity="many">خلال %d س</item>
-    <item quantity="other">خلال %d س</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="zero">خلال %d يوم</item>
-    <item quantity="one">خلال %d يوم</item>
-    <item quantity="two">خلال يومين (%d)</item>
-    <item quantity="few">خلال %d أيام</item>
-    <item quantity="many">خلال %d يومًا</item>
-    <item quantity="other">خلال %d يوم</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="zero">خلال %d سنة</item>
-    <item quantity="one">خلال %d سنة</item>
-    <item quantity="two">خلال سنتَين (%d)</item>
-    <item quantity="few">خلال %d سنوات</item>
-    <item quantity="many">خلال %d سنة</item>
-    <item quantity="other">خلال %d سنة</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="zero">قبل %d دقيقة</item>
-    <item quantity="one">قبل دقيقة واحدة (%d)</item>
-    <item quantity="two">قبل دقيقتَين (%d)</item>
-    <item quantity="few">قبل %d دقائق</item>
-    <item quantity="many">قبل %d دقيقة</item>
-    <item quantity="other">قبل %d دقيقة</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="zero">قبل %d ساعة</item>
-    <item quantity="one">قبل ساعة واحدة (%d)</item>
-    <item quantity="two">قبل ساعتَين (%d)</item>
-    <item quantity="few">قبل %d ساعات</item>
-    <item quantity="many">قبل %d ساعة</item>
-    <item quantity="other">قبل %d ساعة</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="zero">قبل %d يوم</item>
-    <item quantity="one">قبل يوم واحد (%d)</item>
-    <item quantity="two">قبل يومَين (%d)</item>
-    <item quantity="few">قبل %d أيام</item>
-    <item quantity="many">قبل %d يومًا</item>
-    <item quantity="other">قبل %d يوم</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="zero">قبل %d سنة</item>
-    <item quantity="one">قبل سنة واحدة (%d)</item>
-    <item quantity="two">قبل سنتَين (%d)</item>
-    <item quantity="few">قبل %d سنوات</item>
-    <item quantity="many">قبل %d سنة</item>
-    <item quantity="other">قبل %d سنة</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="zero">خلال %d دقيقة</item>
-    <item quantity="one">خلال دقيقة واحدة (%d)</item>
-    <item quantity="two">خلال دقيقتَين (%d)</item>
-    <item quantity="few">خلال %d دقائق</item>
-    <item quantity="many">خلال %d دقيقة</item>
-    <item quantity="other">خلال %d دقيقة</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="zero">خلال %d ساعة</item>
-    <item quantity="one">خلال ساعة واحدة (%d)</item>
-    <item quantity="two">خلال ساعتَين (%d)</item>
-    <item quantity="few">خلال %d ساعات</item>
-    <item quantity="many">خلال %d ساعة</item>
-    <item quantity="other">خلال %d ساعة</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="zero">خلال %d يوم</item>
-    <item quantity="one">خلال يوم واحد (%d)</item>
-    <item quantity="two">خلال يومَين (%d)</item>
-    <item quantity="few">خلال %d أيام</item>
-    <item quantity="many">خلال %d يومًا</item>
-    <item quantity="other">خلال %d يوم</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="zero">خلال %d سنة</item>
-    <item quantity="one">خلال سنة واحدة (%d)</item>
-    <item quantity="two">خلال سنتَين (%d)</item>
-    <item quantity="few">خلال %d سنوات</item>
-    <item quantity="many">خلال %d سنة</item>
-    <item quantity="other">خلال %d سنة</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"البلوتوث غير متّصِل"</string>
+    <string name="no_messages" msgid="1440256496615617958">"ما مِن رسائل."</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"الاتصال بالبلوتوث"</string>
+    <string name="replied" msgid="4048102393748554631">"تم الرد."</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"انقر للقراءة بصوت عالٍ."</string>
+    <string name="action_reply" msgid="8404237041838225390">"رد"</string>
+    <string name="action_mute" msgid="7982388368125401058">"كتم الصوت"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"وضع علامة \"مقروءة\""</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"خدمة المراسلة مفعَّلة."</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"تلقّي الرسائل على السيارة"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"قناة الرسائل"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"خدمة استلام الرسائل على الهاتف"</string>
+    <string name="new_message" msgid="8983092328255956122">"رسالة جديدة"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"غير مقروءة"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"رمز المحادثة"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"رمز نص الترجمة"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"زر كتم الصوت"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"رمز تحميل المعلومات"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"زر الإجراء الخاص بالرد"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"زر الإجراء الخاص بالتشغيل"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"الآن"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">"و%d مشارك آخر"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> د</item>
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> د</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> د</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> د</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> د</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> د</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> س</item>
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> س</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> س</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> س</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> س</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> س</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> ي</item>
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> ي</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> ي</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> ي</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ي</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ي</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> سنوات</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> سنة</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="zero">خلال <xliff:g id="COUNT_1">%d</xliff:g> دقيقة</item>
+      <item quantity="two">خلال دقيقتين(<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">خلال <xliff:g id="COUNT_1">%d</xliff:g> دقائق</item>
+      <item quantity="many">خلال <xliff:g id="COUNT_1">%d</xliff:g> دقيقة</item>
+      <item quantity="other">خلال <xliff:g id="COUNT_1">%d</xliff:g> دقيقة</item>
+      <item quantity="one">خلال دقيقة (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="zero">خلال <xliff:g id="COUNT_1">%d</xliff:g> ساعة</item>
+      <item quantity="two">خلال ساعتين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">خلال <xliff:g id="COUNT_1">%d</xliff:g> ساعات</item>
+      <item quantity="many">خلال <xliff:g id="COUNT_1">%d</xliff:g> ساعة</item>
+      <item quantity="other">خلال <xliff:g id="COUNT_1">%d</xliff:g> ساعة</item>
+      <item quantity="one">خلال ساعة (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="zero">خلال <xliff:g id="COUNT_1">%d</xliff:g> يوم</item>
+      <item quantity="two">خلال يومين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">خلال <xliff:g id="COUNT_1">%d</xliff:g> أيام</item>
+      <item quantity="many">خلال <xliff:g id="COUNT_1">%d</xliff:g> يومًا</item>
+      <item quantity="other">خلال <xliff:g id="COUNT_1">%d</xliff:g> يوم</item>
+      <item quantity="one">خلال يوم (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="zero">خلال <xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="two">خلال سنتين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">خلال <xliff:g id="COUNT_1">%d</xliff:g> سنوات</item>
+      <item quantity="many">خلال <xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="other">خلال <xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="one">خلال سنة (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="zero">قبل <xliff:g id="COUNT_1">%d</xliff:g> دقيقة</item>
+      <item quantity="two">قبل دقيقتَين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">قبل <xliff:g id="COUNT_1">%d</xliff:g> دقائق</item>
+      <item quantity="many">قبل <xliff:g id="COUNT_1">%d</xliff:g> دقيقة</item>
+      <item quantity="other">قبل <xliff:g id="COUNT_1">%d</xliff:g> دقيقة</item>
+      <item quantity="one">قبل دقيقة واحدة (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="zero">قبل <xliff:g id="COUNT_1">%d</xliff:g> ساعة</item>
+      <item quantity="two">قبل ساعتَين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">قبل <xliff:g id="COUNT_1">%d</xliff:g> ساعات</item>
+      <item quantity="many">قبل <xliff:g id="COUNT_1">%d</xliff:g> ساعة</item>
+      <item quantity="other">قبل <xliff:g id="COUNT_1">%d</xliff:g> ساعة</item>
+      <item quantity="one">قبل ساعة واحدة (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="zero">قبل <xliff:g id="COUNT_1">%d</xliff:g> يوم</item>
+      <item quantity="two">قبل يومَين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">قبل <xliff:g id="COUNT_1">%d</xliff:g> أيام</item>
+      <item quantity="many">قبل <xliff:g id="COUNT_1">%d</xliff:g> يومًا</item>
+      <item quantity="other">قبل <xliff:g id="COUNT_1">%d</xliff:g> يوم</item>
+      <item quantity="one">قبل يوم واحد (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="zero">قبل <xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="two">قبل سنتَين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">قبل <xliff:g id="COUNT_1">%d</xliff:g> سنوات</item>
+      <item quantity="many">قبل <xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="other">قبل <xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="one">قبل سنة واحدة (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="zero">خلال <xliff:g id="COUNT_1">%d</xliff:g> دقيقة</item>
+      <item quantity="two">خلال دقيقتَين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">خلال <xliff:g id="COUNT_1">%d</xliff:g> دقائق</item>
+      <item quantity="many">خلال <xliff:g id="COUNT_1">%d</xliff:g> دقيقة</item>
+      <item quantity="other">خلال <xliff:g id="COUNT_1">%d</xliff:g> دقيقة</item>
+      <item quantity="one">خلال دقيقة واحدة (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="zero">خلال <xliff:g id="COUNT_1">%d</xliff:g> ساعة</item>
+      <item quantity="two">خلال ساعتَين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">خلال <xliff:g id="COUNT_1">%d</xliff:g> ساعات</item>
+      <item quantity="many">خلال <xliff:g id="COUNT_1">%d</xliff:g> ساعة</item>
+      <item quantity="other">خلال <xliff:g id="COUNT_1">%d</xliff:g> ساعة</item>
+      <item quantity="one">خلال ساعة واحدة (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="zero">خلال <xliff:g id="COUNT_1">%d</xliff:g> يوم</item>
+      <item quantity="two">خلال يومَين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">خلال <xliff:g id="COUNT_1">%d</xliff:g> أيام</item>
+      <item quantity="many">خلال <xliff:g id="COUNT_1">%d</xliff:g> يومًا</item>
+      <item quantity="other">خلال <xliff:g id="COUNT_1">%d</xliff:g> يوم</item>
+      <item quantity="one">خلال يوم واحد (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="zero">خلال <xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="two">خلال سنتَين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">خلال <xliff:g id="COUNT_1">%d</xliff:g> سنوات</item>
+      <item quantity="many">خلال <xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="other">خلال <xliff:g id="COUNT_1">%d</xliff:g> سنة</item>
+      <item quantity="one">خلال سنة واحدة (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
 </resources>

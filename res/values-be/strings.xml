@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,125 +13,126 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">Bluetooth выключаны</string>
-  <string name="no_messages">Няма паведамленняў</string>
-  <string name="connect_bluetooth_button_text">Падключыцца да Bluetooth</string>
-  <string name="replied">Адказ дадзены</string>
-  <string name="tap_to_read_aloud">Націсніце для агучвання</string>
-  <string name="action_reply">Адказаць</string>
-  <string name="action_mute">Адключыць апавяшчэнні</string>
-  <string name="action_mark_as_read">Пазначыць як прачытанае</string>
-  <string name="app_running_msg_notification_title">Сэрвіс абмену паведамленнямі актыўны</string>
-  <string name="app_running_msg_notification_content">Атрыманне паведамленняў у машыне</string>
-  <string name="message_channel_name">Канал для паведамленняў</string>
-  <string name="message_channel_description">Сэрвіс атрымання паведамленняў тэлефона</string>
-  <string name="new_message">Новае паведамленне</string>
-  <string name="cd_unread">Не прачытана</string>
-  <string name="cd_conversation_icon">Значок размовы</string>
-  <string name="cd_icon_indicating_the_last_action">Значок тэксту субцітраў</string>
-  <string name="cd_mute_button">Кнопка выключэння гуку</string>
-  <string name="cd_loading_info_icon">Значок загрузкі інфармацыі</string>
-  <string name="cd_reply_action_button">Значок дзеяння \"Адказаць\"</string>
-  <string name="cd_play_action_button">Значок дзеяння \"Прайграць\"</string>
-  <string name="now_string_shortest">цяпер</string>
-  <string name="participant_overflow_text">і яшчэ %d</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="one">%d хв</item>
-    <item quantity="few">%d хв</item>
-    <item quantity="many">%d хв</item>
-    <item quantity="other">%d хв</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="one">%d гадз</item>
-    <item quantity="few">%d гадз</item>
-    <item quantity="many">%d гадз</item>
-    <item quantity="other">%d гадз</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="one">%d сут</item>
-    <item quantity="few">%d сут</item>
-    <item quantity="many">%d сут</item>
-    <item quantity="other">%d сут</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="one">%d г.</item>
-    <item quantity="few">%d г.</item>
-    <item quantity="many">%d г.</item>
-    <item quantity="other">%d г.</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="one">праз %d хв</item>
-    <item quantity="few">праз %d хв</item>
-    <item quantity="many">праз %d хв</item>
-    <item quantity="other">праз %d хв</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="one">праз %d гадз</item>
-    <item quantity="few">праз %d гадз</item>
-    <item quantity="many">праз %d гадз</item>
-    <item quantity="other">праз %d гадз</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="one">праз %d сут</item>
-    <item quantity="few">праз %d сут</item>
-    <item quantity="many">праз %d сут</item>
-    <item quantity="other">праз %d сут</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="one">праз %d г.</item>
-    <item quantity="few">праз %d г.</item>
-    <item quantity="many">праз %d г.</item>
-    <item quantity="other">праз %d г.</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="one">%d хвіліну таму</item>
-    <item quantity="few">%d хвіліны таму</item>
-    <item quantity="many">%d хвілін таму</item>
-    <item quantity="other">%d хвіліны таму</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="one">%d гадзіну таму</item>
-    <item quantity="few">%d гадзіны таму</item>
-    <item quantity="many">%d гадзін таму</item>
-    <item quantity="other">%d гадзіны таму</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="one">%d дзень таму</item>
-    <item quantity="few">%d дні таму</item>
-    <item quantity="many">%d дзён таму</item>
-    <item quantity="other">%d дня таму</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="one">%d год таму</item>
-    <item quantity="few">%d гады таму</item>
-    <item quantity="many">%d гадоў таму</item>
-    <item quantity="other">%d года таму</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="one">праз %d хвіліну</item>
-    <item quantity="few">праз %d хвіліны</item>
-    <item quantity="many">праз %d хвілін</item>
-    <item quantity="other">праз %d хвіліны</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="one">праз %d гадзіну</item>
-    <item quantity="few">праз %d гадзіны</item>
-    <item quantity="many">праз %d гадзін</item>
-    <item quantity="other">праз %d гадзіны</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="one">праз %d дзень</item>
-    <item quantity="few">праз %d дні</item>
-    <item quantity="many">праз %d дзён</item>
-    <item quantity="other">праз %d дня</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="one">праз %d год</item>
-    <item quantity="few">праз %d гады</item>
-    <item quantity="many">праз %d гадоў</item>
-    <item quantity="other">праз %d года</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"Bluetooth адключаны"</string>
+    <string name="no_messages" msgid="1440256496615617958">"Няма паведамленняў"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Падключыцца да Bluetooth"</string>
+    <string name="replied" msgid="4048102393748554631">"Адказ дадзены"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"Націсніце для агучвання"</string>
+    <string name="action_reply" msgid="8404237041838225390">"Адказаць"</string>
+    <string name="action_mute" msgid="7982388368125401058">"Выключыць гук"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"Пазначыць як прачытанае"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"Сэрвіс абмену паведамленнямі актыўны"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"Атрыманне паведамленняў у машыне"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"Канал для паведамленняў"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"Сэрвіс атрымання паведамленняў тэлефона"</string>
+    <string name="new_message" msgid="8983092328255956122">"Новае паведамленне"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"Не прачытана"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"Значок размовы"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"Значок тэксту субцітраў"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"Кнопка выключэння гуку"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"Значок загрузкі інфармацыі"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"Кнопка дзеяння \"Адказаць\""</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"Кнопка дзеяння \"Прайграць\""</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"цяпер"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">"і яшчэ %d"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> хв</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> хв</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> хв</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> хв</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> гадз</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> гадз</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> гадз</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> гадз</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> сут</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> сут</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> сут</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> сут</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> г.</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> г.</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> г.</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> г.</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="one">праз <xliff:g id="COUNT_1">%d</xliff:g> хв</item>
+      <item quantity="few">праз <xliff:g id="COUNT_1">%d</xliff:g> хв</item>
+      <item quantity="many">праз <xliff:g id="COUNT_1">%d</xliff:g> хв</item>
+      <item quantity="other">праз <xliff:g id="COUNT_1">%d</xliff:g> хв</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="one">праз <xliff:g id="COUNT_1">%d</xliff:g> гадз</item>
+      <item quantity="few">праз <xliff:g id="COUNT_1">%d</xliff:g> гадз</item>
+      <item quantity="many">праз <xliff:g id="COUNT_1">%d</xliff:g> гадз</item>
+      <item quantity="other">праз <xliff:g id="COUNT_1">%d</xliff:g> гадз</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="one">праз <xliff:g id="COUNT_1">%d</xliff:g> сут</item>
+      <item quantity="few">праз <xliff:g id="COUNT_1">%d</xliff:g> сут</item>
+      <item quantity="many">праз <xliff:g id="COUNT_1">%d</xliff:g> сут</item>
+      <item quantity="other">праз <xliff:g id="COUNT_1">%d</xliff:g> сут</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="one">праз <xliff:g id="COUNT_1">%d</xliff:g> г.</item>
+      <item quantity="few">праз <xliff:g id="COUNT_1">%d</xliff:g> г.</item>
+      <item quantity="many">праз <xliff:g id="COUNT_1">%d</xliff:g> г.</item>
+      <item quantity="other">праз <xliff:g id="COUNT_1">%d</xliff:g> г.</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> хвіліну таму</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> хвіліны таму</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> хвілін таму</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> хвіліны таму</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> гадзіну таму</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> гадзіны таму</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> гадзін таму</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> гадзіны таму</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> дзень таму</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> дні таму</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> дзён таму</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> дня таму</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> год таму</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> гады таму</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> гадоў таму</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> года таму</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="one">праз <xliff:g id="COUNT_1">%d</xliff:g> хвіліну</item>
+      <item quantity="few">праз <xliff:g id="COUNT_1">%d</xliff:g> хвіліны</item>
+      <item quantity="many">праз <xliff:g id="COUNT_1">%d</xliff:g> хвілін</item>
+      <item quantity="other">праз <xliff:g id="COUNT_1">%d</xliff:g> хвіліны</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="one">праз <xliff:g id="COUNT_1">%d</xliff:g> гадзіну</item>
+      <item quantity="few">праз <xliff:g id="COUNT_1">%d</xliff:g> гадзіны</item>
+      <item quantity="many">праз <xliff:g id="COUNT_1">%d</xliff:g> гадзін</item>
+      <item quantity="other">праз <xliff:g id="COUNT_1">%d</xliff:g> гадзіны</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="one">праз <xliff:g id="COUNT_1">%d</xliff:g> дзень</item>
+      <item quantity="few">праз <xliff:g id="COUNT_1">%d</xliff:g> дні</item>
+      <item quantity="many">праз <xliff:g id="COUNT_1">%d</xliff:g> дзён</item>
+      <item quantity="other">праз <xliff:g id="COUNT_1">%d</xliff:g> дня</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="one">праз <xliff:g id="COUNT_1">%d</xliff:g> год</item>
+      <item quantity="few">праз <xliff:g id="COUNT_1">%d</xliff:g> гады</item>
+      <item quantity="many">праз <xliff:g id="COUNT_1">%d</xliff:g> гадоў</item>
+      <item quantity="other">праз <xliff:g id="COUNT_1">%d</xliff:g> года</item>
+    </plurals>
 </resources>

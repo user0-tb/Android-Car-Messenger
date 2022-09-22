@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,93 +13,94 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">Bluetooth ажыратылды</string>
-  <string name="no_messages">Билдирүүлөр жок</string>
-  <string name="connect_bluetooth_button_text">Bluetooth\'га туташуу</string>
-  <string name="replied">Жооп берилди</string>
-  <string name="tap_to_read_aloud">Үндү чыгарып окуу үчүн таптап коюңуз</string>
-  <string name="action_reply">Жооп берүү</string>
-  <string name="action_mute">Үнүн басуу</string>
-  <string name="action_mark_as_read">Окулду деп белгилөө</string>
-  <string name="app_running_msg_notification_title">Жазышуу кызматы жигердүү</string>
-  <string name="app_running_msg_notification_content">Билдирүүлөрдү унаага алуу</string>
-  <string name="message_channel_name">Жазышуу каналы</string>
-  <string name="message_channel_description">Телефондогу Жазышууну алуу кызматы</string>
-  <string name="new_message">Жаңы билдирүү</string>
-  <string name="cd_unread">Окулбагандар</string>
-  <string name="cd_conversation_icon">Жазышуунун сүрөтчөсү</string>
-  <string name="cd_icon_indicating_the_last_action">Коштомо жазуулардын сүрөтчөсү</string>
-  <string name="cd_mute_button">Үнүн басуу баскычы</string>
-  <string name="cd_loading_info_icon">Маалыматты жүктөө сүрөтчөсү</string>
-  <string name="cd_reply_action_button">Жооп берүү баскычы</string>
-  <string name="cd_play_action_button">Ойнотуу баскычы</string>
-  <string name="now_string_shortest">азыр</string>
-  <string name="participant_overflow_text">, жана дагы %d</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="one">%d мүн.</item>
-    <item quantity="other">%d мүн.</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="one">%d с.</item>
-    <item quantity="other">%d с.</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="one">%d к.</item>
-    <item quantity="other">%d к.</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="one">%d ж.</item>
-    <item quantity="other">%d ж.</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="one">%d мүн. кийин</item>
-    <item quantity="other">%d мүн. кийин</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="one">%d с. кийин</item>
-    <item quantity="other">%d с. кийин</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="one">%d к. кийин</item>
-    <item quantity="other">%d к. кийин</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="one">%d ж. кийин</item>
-    <item quantity="other">%d ж. кийин</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="one">%d мүнөт мурун</item>
-    <item quantity="other">%d мүнөт мурун</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="one">%d саат мурун</item>
-    <item quantity="other">%d саат мурун</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="one">%d күн мурун</item>
-    <item quantity="other">%d күн мурун</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="one">%d жыл мурун</item>
-    <item quantity="other">%d жыл мурун</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="one">%d мүнөттөн кийин</item>
-    <item quantity="other">%d мүнөттөн кийин</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="one">%d сааттан кийин</item>
-    <item quantity="other">%d сааттан кийин</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="one">%d күндөн кийин</item>
-    <item quantity="other">%d күндөн кийин</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="one">%d жылдан кийин</item>
-    <item quantity="other">%d жылдан кийин</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"Bluetooth ажыратылды"</string>
+    <string name="no_messages" msgid="1440256496615617958">"Билдирүүлөр жок"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Bluetooth\'га туташуу"</string>
+    <string name="replied" msgid="4048102393748554631">"Жооп берилди"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"Үндү чыгарып окуу үчүн таптап коюңуз"</string>
+    <string name="action_reply" msgid="8404237041838225390">"Жооп берүү"</string>
+    <string name="action_mute" msgid="7982388368125401058">"Үнүн басуу"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"Окулду деп белгилөө"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"Жазышуу кызматы жигердүү"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"Билдирүүлөрдү унаага алуу"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"Жазышуу каналы"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"Телефондогу Жазышууну алуу кызматы"</string>
+    <string name="new_message" msgid="8983092328255956122">"Жаңы билдирүү"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"Окула элек"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"Жазышуунун сүрөтчөсү"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"Коштомо жазуулардын сүрөтчөсү"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"Үнүн басуу баскычы"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"Маалыматты жүктөө сүрөтчөсү"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"Жооп берүү баскычы"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"Ойнотуу баскычы"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"азыр"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">", жана дагы %d"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> мүн.</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> мүн.</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> с.</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> с.</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> к.</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> к.</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ж.</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ж.</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> мүн. кийин</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> мүн. кийин</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> с. кийин</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> с. кийин</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> к. кийин</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> к. кийин</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ж. кийин</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ж. кийин</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> мүнөт мурун</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> мүнөт мурун</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> саат мурун</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> саат мурун</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> күн мурун</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> күн мурун</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> жыл мурун</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> жыл мурун</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> мүнөттөн кийин</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> мүнөттөн кийин</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> сааттан кийин</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> сааттан кийин</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> күндөн кийин</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> күндөн кийин</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> жылдан кийин</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> жылдан кийин</item>
+    </plurals>
 </resources>

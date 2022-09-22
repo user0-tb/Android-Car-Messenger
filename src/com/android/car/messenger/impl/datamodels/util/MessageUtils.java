@@ -32,12 +32,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.Person;
 
+import com.android.car.apps.common.log.L;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.common.Conversation.Message;
 import com.android.car.messenger.common.Conversation.Message.MessageStatus;
 import com.android.car.messenger.common.Conversation.Message.MessageType;
 import com.android.car.messenger.core.interfaces.AppFactory;
-import com.android.car.messenger.core.util.L;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +46,7 @@ import java.util.function.Function;
 
 /** Message Parser that provides useful static methods to parse 1-1 and Group MMS messages. */
 public final class MessageUtils {
+    private static final String TAG = "CM.MessageUtils";
 
     /**
      * Returns all messages in the given cursors in descending order.
@@ -147,7 +148,7 @@ public final class MessageUtils {
                 message = parseMessageAtPoint(context, messageCursor, hasBeenRepliedTo);
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
-                L.d("Message was not able to be parsed. Skipping.");
+                L.d(TAG, "Message was not able to be parsed. Skipping.");
                 continue;
             }
             if (message.getText().trim().isEmpty()) {
@@ -157,7 +158,7 @@ public final class MessageUtils {
                 // one with a text and one blank
                 // This leads to boomerang notifications, one with text and one that is empty.
                 // Validating or removing messages when blank is a mitigation on our end.
-                L.d("Message is blank. Skipped. ");
+                L.d(TAG, "Message is blank. Skipped. ");
                 continue;
             }
             if (message.getMessageType() == MessageType.MESSAGE_TYPE_SENT) {

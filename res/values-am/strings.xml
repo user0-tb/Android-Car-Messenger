@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,93 +13,94 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">ብሉቱዝ ተቋርጧል</string>
-  <string name="no_messages">ምንም መልዕክቶች የሉም</string>
-  <string name="connect_bluetooth_button_text">ከብሉቱዝ ጋር ተገናኝ</string>
-  <string name="replied">ምላሽ ሰጥተዋል</string>
-  <string name="tap_to_read_aloud">ጮኽ ብለው ለማንበብ መታ ያድርጉ</string>
-  <string name="action_reply">ምላሽ ስጥ</string>
-  <string name="action_mute">ድምጸ-ከል አድርግ</string>
-  <string name="action_mark_as_read">እንደተነበበ ምልክት አድርግ</string>
-  <string name="app_running_msg_notification_title">የመልዕክት መላላክ አገልግሎት ንቁ ነው</string>
-  <string name="app_running_msg_notification_content">በመኪና ላይ መልዕክቶችን መቀበል</string>
-  <string name="message_channel_name">የመልዕክት ሰርጥ</string>
-  <string name="message_channel_description">የስልክ መልዕክት መቀበያ አገልግሎት</string>
-  <string name="new_message">አዲስ መልዕክት</string>
-  <string name="cd_unread">ያልተነበበ</string>
-  <string name="cd_conversation_icon">የውይይት አዶ</string>
-  <string name="cd_icon_indicating_the_last_action">የግርጌ ጽሑፎች ጽሑፍ አዶ</string>
-  <string name="cd_mute_button">የድምፀ ከል አዝራር</string>
-  <string name="cd_loading_info_icon">የመጫን ላይ መረጃ አዶ</string>
-  <string name="cd_reply_action_button">የመልስ የድርጊት አዝራር</string>
-  <string name="cd_play_action_button">የአጫውት የድርጊት አዝራር</string>
-  <string name="now_string_shortest">አሁን</string>
-  <string name="participant_overflow_text">፣ እና %d ተጨማሪ</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="one">%d ደ</item>
-    <item quantity="other">%d ደ</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="one">%d ሰ</item>
-    <item quantity="other">%d ሰ</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="one">%d ቀ</item>
-    <item quantity="other">%d ቀ</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="one">%d ዓ</item>
-    <item quantity="other">%d ዓ</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="one">በ%d ደ ውስጥ</item>
-    <item quantity="other">በ%d ደ ውስጥ</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="one">በ%d ሰ ውስጥ</item>
-    <item quantity="other">በ%d ሰ ውስጥ</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="one">በ%d ቀ ውስጥ</item>
-    <item quantity="other">በ%d ቀ ውስጥ</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="one">በ%d ዓ ውስጥ</item>
-    <item quantity="other">በ%d ዓ ውስጥ</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="one">ከ%d ደቂቃዎች በፊት</item>
-    <item quantity="other">ከ%d ደቂቃዎች በፊት</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="one">ከ%d ሰዓቶች በፊት</item>
-    <item quantity="other">ከ%d ሰዓቶች በፊት</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="one">ከ%d ቀኖች በፊት</item>
-    <item quantity="other">ከ%d ቀኖች በፊት</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="one">ከ%d ዓመቶች በፊት</item>
-    <item quantity="other">ከ%d ዓመቶች በፊት</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="one">በ%d ደቂቃዎች ውስጥ</item>
-    <item quantity="other">በ%d ደቂቃዎች ውስጥ</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="one">በ%d ሰዓቶች ውስጥ</item>
-    <item quantity="other">በ%d ሰዓቶች ውስጥ</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="one">በ%d ቀኖች ውስጥ</item>
-    <item quantity="other">በ%d ቀኖች ውስጥ</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="one">በ%d ዓመታት ውስጥ</item>
-    <item quantity="other">በ%d ዓመታት ውስጥ</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"የብሉቱዝ ግንኙነት ተቋርጧል"</string>
+    <string name="no_messages" msgid="1440256496615617958">"ምንም መልዕክቶች የሉም"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"ከብሉቱዝ ጋር ተገናኝ"</string>
+    <string name="replied" msgid="4048102393748554631">"ምላሽ ሰጥተዋል"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"ጮኽ ብሎ እንዲያነብብ መታ ያድርጉ"</string>
+    <string name="action_reply" msgid="8404237041838225390">"መልስ"</string>
+    <string name="action_mute" msgid="7982388368125401058">"ድምጸ-ከል አድርግ"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"እንደተነበበ ምልክት አድርግ"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"የመልዕክት መላላክ አገልግሎት ንቁ ነው"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"በመኪና ላይ መልዕክቶችን መቀበል"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"የመልዕክት ሰርጥ"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"የስልክ መልዕክት መቀበያ አገልግሎት"</string>
+    <string name="new_message" msgid="8983092328255956122">"አዲስ መልዕክት"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"ያልተነበበ"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"የውይይት አዶ"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"የግርጌ ጽሑፍ አዶ"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"የድምፀ ከል አዝራር"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"የመረጃ በመጫን ላይ አዶ"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"የመልስ የእርምጃ አዝራር"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"የአጫውት የእርምጃ አዝራር"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"አሁን"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">"፣ እና %d ተጨማሪ"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ደ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ደ</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ሰ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ሰ</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ቀ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ቀ</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ዓ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ዓ</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="one">በ<xliff:g id="COUNT_1">%d</xliff:g> ደ ውስጥ</item>
+      <item quantity="other">በ<xliff:g id="COUNT_1">%d</xliff:g> ደ ውስጥ</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="one">በ<xliff:g id="COUNT_1">%d</xliff:g> ሰ ውስጥ</item>
+      <item quantity="other">በ<xliff:g id="COUNT_1">%d</xliff:g> ሰ ውስጥ</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="one">በ<xliff:g id="COUNT_1">%d</xliff:g> ቀ ውስጥ</item>
+      <item quantity="other">በ<xliff:g id="COUNT_1">%d</xliff:g> ቀ ውስጥ</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="one">በ<xliff:g id="COUNT_1">%d</xliff:g> ዓ ውስጥ</item>
+      <item quantity="other">በ<xliff:g id="COUNT_1">%d</xliff:g> ዓ ውስጥ</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="one">ከ<xliff:g id="COUNT_1">%d</xliff:g> ደቂቃ በፊት</item>
+      <item quantity="other">ከ<xliff:g id="COUNT_1">%d</xliff:g> ደቂቃዎች በፊት</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="one">ከ<xliff:g id="COUNT_1">%d</xliff:g> ሰዓት በፊት</item>
+      <item quantity="other">ከ<xliff:g id="COUNT_1">%d</xliff:g> ሰዓታት በፊት</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="one">ከ<xliff:g id="COUNT_1">%d</xliff:g> ቀን በፊት</item>
+      <item quantity="other">ከ<xliff:g id="COUNT_1">%d</xliff:g> ቀናት በፊት</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="one">ከ<xliff:g id="COUNT_1">%d</xliff:g> ዓመት በፊት</item>
+      <item quantity="other">ከ<xliff:g id="COUNT_1">%d</xliff:g> ዓመታት በፊት</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="one">በ<xliff:g id="COUNT_1">%d</xliff:g> ደቂቃ ውስጥ</item>
+      <item quantity="other">በ<xliff:g id="COUNT_1">%d</xliff:g> ደቂቃዎች ውስጥ</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="one">በ<xliff:g id="COUNT_1">%d</xliff:g> ሰዓት ውስጥ</item>
+      <item quantity="other">በ<xliff:g id="COUNT_1">%d</xliff:g> ሰዓታት ውስጥ</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="one">በ<xliff:g id="COUNT_1">%d</xliff:g> ቀን ውስጥ</item>
+      <item quantity="other">በ<xliff:g id="COUNT_1">%d</xliff:g> ቀናት ውስጥ</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="one">በ<xliff:g id="COUNT_1">%d</xliff:g> ዓመት ውስጥ</item>
+      <item quantity="other">በ<xliff:g id="COUNT_1">%d</xliff:g> ዓመታት ውስጥ</item>
+    </plurals>
 </resources>

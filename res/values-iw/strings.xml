@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,125 +13,126 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">Bluetooth מנותק</string>
-  <string name="no_messages">אין הודעות</string>
-  <string name="connect_bluetooth_button_text">התחברות אל Bluetooth</string>
-  <string name="replied">נשלחה תשובה</string>
-  <string name="tap_to_read_aloud">יש להקיש להקראה</string>
-  <string name="action_reply">שליחת תשובה</string>
-  <string name="action_mute">השתקה</string>
-  <string name="action_mark_as_read">סימון כפריט שנקרא</string>
-  <string name="app_running_msg_notification_title">שירות העברת ההודעות פעיל</string>
-  <string name="app_running_msg_notification_content">קבלת הודעות ברכב</string>
-  <string name="message_channel_name">ערוץ הודעות</string>
-  <string name="message_channel_description">שירות קבלת הודעות בטלפון</string>
-  <string name="new_message">הודעה חדשה</string>
-  <string name="cd_unread">לא נקראו</string>
-  <string name="cd_conversation_icon">סמל השיחה</string>
-  <string name="cd_icon_indicating_the_last_action">סמל של טקסט הכתוביות</string>
-  <string name="cd_mute_button">לחצן השתקה</string>
-  <string name="cd_loading_info_icon">סמל של טעינת המידע</string>
-  <string name="cd_reply_action_button">לחצן פעולה לתגובה</string>
-  <string name="cd_play_action_button">לחצן פעולה להפעלה</string>
-  <string name="now_string_shortest">עכשיו</string>
-  <string name="participant_overflow_text">ועוד %d</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="one">דקה (%d)</item>
-    <item quantity="two">%d דק‘</item>
-    <item quantity="many">%d דק‘</item>
-    <item quantity="other">%d דק‘</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="one">שעה (%d)</item>
-    <item quantity="two">שעתיים (%d)</item>
-    <item quantity="many">%d שע‘</item>
-    <item quantity="other">%d שע‘</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="one">יום (%d)</item>
-    <item quantity="two">יומיים (%d)</item>
-    <item quantity="many">%d י‘</item>
-    <item quantity="other">%d י‘</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="one">שנה (%d)</item>
-    <item quantity="two">שנתיים (%d)</item>
-    <item quantity="many">%d שנ‘</item>
-    <item quantity="other">%d שנ‘</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="one">בעוד דקה (%d)</item>
-    <item quantity="two">בעוד %d דק‘</item>
-    <item quantity="many">בעוד %d דק‘</item>
-    <item quantity="other">בעוד %d דק‘</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="one">בעוד שעה (%d)</item>
-    <item quantity="two">בעוד שעתיים (%d)</item>
-    <item quantity="many">בעוד %d שע‘</item>
-    <item quantity="other">בעוד %d שע‘</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="one">בעוד יום (%d)</item>
-    <item quantity="two">בעוד יומיים (%d)</item>
-    <item quantity="many">בעוד %d י‘</item>
-    <item quantity="other">בעוד %d י‘</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="one">בעוד שנה (%d)</item>
-    <item quantity="two">בעוד שנתיים (%d)</item>
-    <item quantity="many">בעוד %d שנ‘</item>
-    <item quantity="other">בעוד %d שנ‘</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="one">לפני דקה (%d)</item>
-    <item quantity="two">לפני %d דקות</item>
-    <item quantity="many">לפני %d דקות</item>
-    <item quantity="other">לפני %d דקות</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="one">לפני שעה (%d)</item>
-    <item quantity="two">לפני %d שעות</item>
-    <item quantity="many">לפני %d שעות</item>
-    <item quantity="other">לפני %d שעות</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="one">לפני יום (%d)</item>
-    <item quantity="two">לפני יומיים (%d)</item>
-    <item quantity="many">לפני %d ימים</item>
-    <item quantity="other">לפני %d ימים</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="one">לפני שנה (%d)</item>
-    <item quantity="two">לפני שנתיים (%d)</item>
-    <item quantity="many">לפני %d שנים</item>
-    <item quantity="other">לפני %d שנים</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="one">בעוד דקה (%d)</item>
-    <item quantity="two">בעוד %d דקות</item>
-    <item quantity="many">בעוד %d דקות</item>
-    <item quantity="other">בעוד %d דקות</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="one">בעוד שעה (%d)</item>
-    <item quantity="two">בעוד שעתיים (%d)</item>
-    <item quantity="many">בעוד %d שעות</item>
-    <item quantity="other">בעוד %d שעות</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="one">בעוד יום (%d)</item>
-    <item quantity="two">בעוד יומיים (%d)</item>
-    <item quantity="many">בעוד %d ימים</item>
-    <item quantity="other">בעוד %d ימים</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="one">בעוד שנה (%d)</item>
-    <item quantity="two">בעוד שנתיים (%d)</item>
-    <item quantity="many">בעוד %d שנים</item>
-    <item quantity="other">בעוד %d שנים</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"Bluetooth מנותק"</string>
+    <string name="no_messages" msgid="1440256496615617958">"אין הודעות"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"התחברות אל Bluetooth"</string>
+    <string name="replied" msgid="4048102393748554631">"נשלחה תשובה"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"יש להקיש להקראה"</string>
+    <string name="action_reply" msgid="8404237041838225390">"כתיבת תשובה"</string>
+    <string name="action_mute" msgid="7982388368125401058">"השתקה"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"סימון כפריט שנקרא"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"שירות העברת ההודעות פעיל"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"קבלת הודעות ברכב"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"ערוץ הודעות"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"שירות קבלת הודעות בטלפון"</string>
+    <string name="new_message" msgid="8983092328255956122">"הודעה חדשה"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"לא נקראו"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"סמל של שיחה"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"סמל של טקסט הכתוביות"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"לחצן השתקה"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"סמל של טעינת המידע"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"לחצן פעולה לתגובה"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"לחצן פעולה להפעלה"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"עכשיו"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">", ועוד ‎%d"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
+      <item quantity="one">דקה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
+      <item quantity="one">שעה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
+      <item quantity="one">יום (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
+      <item quantity="one">שנה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="two">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
+      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
+      <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
+      <item quantity="one">בעוד דקה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="two">בעוד שעתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
+      <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
+      <item quantity="one">בעוד שעה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="two">בעוד יומיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
+      <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
+      <item quantity="one">בעוד יום (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="two">בעוד שנתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
+      <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
+      <item quantity="one">בעוד שנה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="two">לפני <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
+      <item quantity="many">לפני <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
+      <item quantity="other">לפני <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
+      <item quantity="one">לפני דקה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="two">לפני שעתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="many">לפני <xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
+      <item quantity="other">לפני <xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
+      <item quantity="one">לפני שעה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="two">לפני יומיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="many">לפני <xliff:g id="COUNT_1">%d</xliff:g> ימים</item>
+      <item quantity="other">לפני <xliff:g id="COUNT_1">%d</xliff:g> ימים</item>
+      <item quantity="one">לפני יום (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="two">לפני שנתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="many">לפני <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
+      <item quantity="other">לפני <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
+      <item quantity="one">לפני שנה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="two">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
+      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
+      <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
+      <item quantity="one">בעוד דקה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="two">בעוד שעתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
+      <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
+      <item quantity="one">בעוד שעה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="two">בעוד יומיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> ימים</item>
+      <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> ימים</item>
+      <item quantity="one">בעוד יום (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="two">בעוד שנתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
+      <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
+      <item quantity="one">בעוד שנה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
 </resources>

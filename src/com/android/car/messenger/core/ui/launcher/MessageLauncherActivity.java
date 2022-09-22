@@ -17,16 +17,16 @@
 package com.android.car.messenger.core.ui.launcher;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.android.car.apps.common.log.L;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.models.UserAccount;
 import com.android.car.messenger.core.ui.conversationlist.ConversationListFragment;
-import com.android.car.messenger.core.util.L;
 import com.android.car.ui.baselayout.Insets;
 import com.android.car.ui.baselayout.InsetsChangedListener;
 
@@ -35,6 +35,7 @@ import com.android.car.ui.baselayout.InsetsChangedListener;
  * ConversationListFragment} or displays an error when no {@link UserAccount} are found.
  */
 public class MessageLauncherActivity extends FragmentActivity implements InsetsChangedListener {
+    private static final String TAG = "CM.MessageLauncherActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +43,13 @@ public class MessageLauncherActivity extends FragmentActivity implements InsetsC
         MessageLauncherViewModel viewModel =
                 new ViewModelProvider(this).get(MessageLauncherViewModel.class);
 
-        L.d("In onCreate: MessageLauncher");
+        L.d(TAG, "In onCreate: MessageLauncher");
         viewModel
                 .getAccounts()
                 .observe(
                         this,
                         accounts -> {
-                            L.d("Total number of accounts: " + accounts.size());
+                            L.d(TAG, "Total number of accounts: %d", accounts.size());
                             // First version only takes one device until multi-account support is
                             // added
                             UserAccount primaryAccount =
@@ -74,7 +75,7 @@ public class MessageLauncherActivity extends FragmentActivity implements InsetsC
 
     @Override
     protected void onResume() {
-        L.d("On Resume of Message Activity.");
+        L.d(TAG, "On Resume of Message Activity.");
         AppFactory.get().getDataModel().refresh();
         super.onResume();
     }

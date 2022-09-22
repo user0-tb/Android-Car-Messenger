@@ -30,12 +30,12 @@ import android.provider.Telephony;
 
 import androidx.annotation.NonNull;
 
+import com.android.car.apps.common.log.L;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.models.UserAccount;
 import com.android.car.messenger.core.shared.MessageConstants;
 import com.android.car.messenger.core.util.ConversationUtil;
-import com.android.car.messenger.core.util.L;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,6 +46,8 @@ import java.util.stream.Collectors;
 
 /** Publishes a list of {@link Conversation} for a {@link UserAccount} to subscribers */
 class ConversationListLiveData extends ContentProviderLiveData<Collection<Conversation>> {
+    private static final String TAG = "CM.ConversationListLiveData";
+
     @NonNull private final UserAccount mUserAccount;
 
     @NonNull
@@ -90,7 +92,7 @@ class ConversationListLiveData extends ContentProviderLiveData<Collection<Conver
             try {
                 conversation = fetchConversation(conversationId);
             } catch (CursorIndexOutOfBoundsException e) {
-                L.w("Error occurred fetching conversation Id " + conversationId);
+                L.w(TAG, "Error occurred fetching conversation Id: %s", conversationId);
             } finally {
                 if (conversation != null) {
                     conversations.add(conversation);

@@ -47,6 +47,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.car.apps.common.log.L;
 import com.android.car.messenger.R;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.common.Conversation.ConversationAction;
@@ -62,6 +63,7 @@ import java.util.List;
 
 /** Voice Util classes for requesting voice interactions and responding to voice actions */
 public class VoiceUtil {
+    private static final String TAG = "CM.VoiceUtil";
 
     /** Represents a null user account id */
     private static final int NULL_ACCOUNT_ID = 0;
@@ -74,7 +76,7 @@ public class VoiceUtil {
             @NonNull UserAccount userAccount,
             @NonNull Conversation conversation) {
         if (conversation.getMessages().isEmpty()) {
-            L.d("No messages to read from Conversation! Returning.");
+            L.d(TAG, "No messages to read from Conversation! Returning.");
             return;
         }
         voiceRequestHelper(
@@ -119,7 +121,7 @@ public class VoiceUtil {
             StatusBarNotification sbn =
                     NotificationHandler.postNotificationForLegacyTapToRead(tapToReadConversation);
             if (sbn == null) {
-                L.e("Failed to convert Conversation to SBN for Legacy Tap To Read.");
+                L.e(TAG, "Failed to convert Conversation to SBN for Legacy Tap To Read.");
                 return;
             }
             args.putString(KEY_ACTION, notificationAction);
@@ -222,10 +224,10 @@ public class VoiceUtil {
         final String iccId = intent.getStringExtra(KEY_DEVICE_ADDRESS);
         final CharSequence message = intent.getCharSequenceExtra(Intent.EXTRA_TEXT);
         if (iccId == null || phoneNumber == null || TextUtils.isEmpty(message)) {
-            L.e("Dropping voice reply. Received no icc id, phone Number and/or empty message!");
+            L.e(TAG, "Dropping voice reply. Received no icc id, phone number or empty message");
             return;
         }
-        L.d("Sending a message to specified phone number");
+        L.d(TAG, "Sending a message to specified phone number");
         AppFactory.get()
                 .getDataModel()
                 .sendMessage(iccId, phoneNumber.toString(), message.toString());
@@ -238,11 +240,11 @@ public class VoiceUtil {
                 intent.getIntExtra(MessageConstants.EXTRA_ACCOUNT_ID, NULL_ACCOUNT_ID);
         final Bundle bundle = RemoteInput.getResultsFromIntent(intent);
         if (bundle == null || accountId == NULL_ACCOUNT_ID) {
-            L.e("Dropping voice reply. Received null bundle or no user account id in bundle!");
+            L.e(TAG, "Dropping voice reply. Received null bundle or no user account id in bundle");
             return;
         }
         final CharSequence message = bundle.getCharSequence(Intent.EXTRA_TEXT);
-        L.d("voiceReply: " + message);
+        L.d(TAG, "voiceReply: " + message);
         if (!TextUtils.isEmpty(message)) {
             AppFactory.get()
                     .getDataModel()
@@ -255,7 +257,7 @@ public class VoiceUtil {
         Bundle extras = intent.getExtras();
         if (extras != null) {
             final String conversationKey = extras.getString(EXTRA_CONVERSATION_KEY);
-            L.d("mute");
+            L.d(TAG, "mute");
             AppFactory.get().getDataModel().muteConversation(conversationKey, true);
         }
     }
@@ -265,7 +267,7 @@ public class VoiceUtil {
         Bundle extras = intent.getExtras();
         if (extras != null) {
             final String conversationKey = extras.getString(EXTRA_CONVERSATION_KEY);
-            L.d("marking as read");
+            L.d(TAG, "marking as read");
             AppFactory.get().getDataModel().markAsRead(conversationKey);
         }
     }

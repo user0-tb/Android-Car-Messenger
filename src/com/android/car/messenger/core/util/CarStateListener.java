@@ -28,8 +28,11 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import com.android.car.apps.common.log.L;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,6 +43,8 @@ import java.util.List;
  * active.
  */
 public class CarStateListener {
+    private static final String TAG = "CM.CarStateListener";
+
     @NonNull
     static final String PROJECTION_STATUS_EXTRA_DEVICE_STATE =
             "android.car.projection.DEVICE_STATE";
@@ -63,8 +68,12 @@ public class CarStateListener {
 
     @Nullable private Car mCar;
 
-    private int mProjectionState = ProjectionStatus.PROJECTION_STATE_INACTIVE;
-    @NonNull private List<ProjectionStatus> mProjectionDetails = new ArrayList<>();
+    @VisibleForTesting
+    int mProjectionState = ProjectionStatus.PROJECTION_STATE_INACTIVE;
+
+    @NonNull
+    @VisibleForTesting
+    List<ProjectionStatus> mProjectionDetails = new ArrayList<>();
 
     public CarStateListener(@NonNull Context context) {
         Car.createCar(
@@ -123,7 +132,7 @@ public class CarStateListener {
      */
     public boolean isProjectionInActiveForeground(@Nullable String bluetoothAddress) {
         if (bluetoothAddress == null) {
-            L.i("returning non-device-specific projection status");
+            L.i(TAG, "returning non-device-specific projection status");
             return isProjectionInActiveForeground();
         }
 
@@ -134,14 +143,14 @@ public class CarStateListener {
         for (ProjectionStatus status : mProjectionDetails) {
             if (!status.isActive()) {
                 // Don't suppress UI for packages that aren't actively projecting.
-                L.d("skip non-projecting package " + status.getPackageName());
+                L.d(TAG, "skip non-projecting package %s", status.getPackageName());
                 continue;
             }
 
             for (ProjectionStatus.MobileDevice device : status.getConnectedMobileDevices()) {
                 if (!device.isProjecting()) {
                     // Don't suppress UI for devices that aren't foreground.
-                    L.d("skip non-projecting device " + device.getName());
+                    L.d(TAG, "skip non-projecting device %s", device.getName());
                     continue;
                 }
 
@@ -150,22 +159,23 @@ public class CarStateListener {
                                 PROJECTION_STATUS_EXTRA_DEVICE_STATE,
                                 ProjectionStatus.PROJECTION_STATE_ACTIVE_FOREGROUND)
                         != ProjectionStatus.PROJECTION_STATE_ACTIVE_FOREGROUND) {
-                    L.d("skip device " + device.getName() + " - not foreground");
+                    L.d(TAG, "skip device %s - not foreground", device.getName());
                     continue;
                 }
 
                 Parcelable projectingBluetoothDevice =
                         extras.getParcelable(BluetoothDevice.EXTRA_DEVICE);
-                L.d("Device " + device.getName() + " has BT device " + projectingBluetoothDevice);
+                L.d(TAG, "Device %s has BT device %s",
+                        device.getName(), projectingBluetoothDevice);
 
                 if (projectingBluetoothDevice == null) {
-                    L.i(
+                    L.i(TAG,
                             "Suppressing message notification - device "
                                     + device
                                     + " is projection, and does not specify a Bluetooth address");
                     return true;
                 } else if (!(projectingBluetoothDevice instanceof BluetoothDevice)) {
-                    L.e(
+                    L.e(TAG,
                             "Device "
                                     + device
                                     + " has bad EXTRA_DEVICE value "
@@ -174,7 +184,7 @@ public class CarStateListener {
                     return true;
                 } else if (bluetoothAddress.equals(
                         ((BluetoothDevice) projectingBluetoothDevice).getAddress())) {
-                    L.i(
+                    L.i(TAG,
                             "Suppressing message notification - device "
                                     + device
                                     + "is projecting, and message is coming from device's"

@@ -19,6 +19,7 @@ package com.android.car.messenger.impl.datamodels;
 import static com.android.dx.mockito.inline.extended.ExtendedMockito.doReturn;
 import static com.android.dx.mockito.inline.extended.ExtendedMockito.mockitoSession;
 import static com.android.dx.mockito.inline.extended.ExtendedMockito.when;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -50,9 +51,10 @@ import com.android.car.apps.common.testutils.InstantTaskExecutorRule;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.models.UserAccount;
 import com.android.car.messenger.core.shared.MessageConstants;
+import com.android.car.messenger.core.ui.livedata.UserAccountLiveData;
 import com.android.car.messenger.core.util.CarStateListener;
-import com.android.car.messenger.impl.datamodels.util.ConversationFetchUtil;
 import com.android.car.messenger.impl.AppFactoryTestImpl;
+import com.android.car.messenger.impl.datamodels.util.ConversationFetchUtil;
 
 import org.junit.After;
 import org.junit.Before;

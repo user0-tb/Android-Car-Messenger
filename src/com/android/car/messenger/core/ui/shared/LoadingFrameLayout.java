@@ -22,10 +22,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.MainThread;
@@ -50,9 +48,9 @@ public class LoadingFrameLayout extends FrameLayout {
     }
 
     @NonNull private final Context mContext;
-    @NonNull private ViewContainer mEmptyView;
-    @NonNull private ViewContainer mLoadingView;
-    @NonNull private ViewContainer mErrorView;
+    @NonNull private EmptyView mEmptyView;
+    @NonNull private LoadingView mLoadingView;
+    @NonNull private ErrorView mErrorView;
 
     @State private int mState = State.NEW;
 
@@ -83,15 +81,15 @@ public class LoadingFrameLayout extends FrameLayout {
     }
 
     private void setLoadingView(int loadingLayoutId) {
-        mLoadingView = new ViewContainer(State.LOADING, loadingLayoutId);
+        mLoadingView = new LoadingView(loadingLayoutId);
     }
 
     private void setEmptyView() {
-        mEmptyView = new ViewContainer(State.EMPTY);
+        mEmptyView = new EmptyView();
     }
 
     private void setErrorView() {
-        mErrorView = new ViewContainer(State.ERROR);
+        mErrorView = new ErrorView();
     }
 
     /** Shows the loading view, hides other views. */
@@ -103,92 +101,42 @@ public class LoadingFrameLayout extends FrameLayout {
     /**
      * Shows the error view where the action button is not available and hides other views.
      *
-     * @param iconResId drawable resource id used for the top icon. When it is invalid, hide the
-     *     icon view.
      * @param messageResId string resource id used for the error message. When it is invalid, hide
      *     the message view.
-     * @param secondaryMessageResId string resource id for the secondary error message. When it is
-     *     invalid, hide the secondary message view.
      */
-    public void showError(
-            @DrawableRes int iconResId,
-            @StringRes int messageResId,
-            @StringRes int secondaryMessageResId) {
-        showError(iconResId, messageResId, secondaryMessageResId, INVALID_RES_ID, null, false);
+    public void showError(@StringRes int messageResId) {
+        showError(messageResId, INVALID_RES_ID, null, false);
     }
 
     /**
      * Shows the error view, hides other views.
      *
-     * @param iconResId drawable resource id used for the top icon.When it is invalid, hide the icon
-     *     view.
      * @param messageResId string resource id used for the error message. When it is invalid, hide
      *     the message view.
-     * @param secondaryMessageResId string resource id for the secondary error message. When it is
-     *     invalid, hide the secondary message view.
      * @param actionButtonTextResId string resource id for the action button.
      * @param actionButtonOnClickListener click listener set on the action button.
      * @param showActionButton boolean flag if the action button will show.
      */
     public void showError(
-            @DrawableRes int iconResId,
             @StringRes int messageResId,
-            @StringRes int secondaryMessageResId,
             @StringRes int actionButtonTextResId,
             @Nullable OnClickListener actionButtonOnClickListener,
             boolean showActionButton) {
         switchTo(State.ERROR);
-        mErrorView.setIcon(iconResId);
         mErrorView.setMessage(messageResId);
-        mErrorView.setSecondaryMessage(secondaryMessageResId);
         mErrorView.setActionButtonText(actionButtonTextResId);
         mErrorView.setActionButtonClickListener(actionButtonOnClickListener);
         mErrorView.setActionButtonVisible(showActionButton);
     }
 
     /**
-     * Shows the empty view where the action button is not available and hides other views.
-     *
-     * @param iconResId drawable resource id used for the top icon. When it is invalid, hide the
-     *     icon view.
-     * @param messageResId string resource id used for the empty message. When it is invalid, hide
-     *     the message view.
-     * @param secondaryMessageResId string resource id for the secondary empty message. When it is
-     *     invalid, hide the secondary message view.
-     */
-    public void showEmpty(
-            @DrawableRes int iconResId,
-            @StringRes int messageResId,
-            @StringRes int secondaryMessageResId) {
-        showEmpty(iconResId, messageResId, secondaryMessageResId, INVALID_RES_ID, null, false);
-    }
-
-    /**
      * Shows the empty view and hides other views.
      *
-     * @param iconResId drawable resource id used for the top icon.When it is invalid, hide the icon
-     *     view.
      * @param messageResId string resource id used for the empty message. When it is invalid, hide
      *     the message view.
-     * @param secondaryMessageResId string resource id for the secondary empty message. When it is
-     *     invalid, hide the secondary message view.
-     * @param actionButtonTextResId string resource id for the action button.
-     * @param actionButtonOnClickListener click listener set on the action button.
-     * @param showActionButton boolean flag if the action button will show.
      */
-    public void showEmpty(
-            @DrawableRes int iconResId,
-            @StringRes int messageResId,
-            @StringRes int secondaryMessageResId,
-            @StringRes int actionButtonTextResId,
-            @Nullable OnClickListener actionButtonOnClickListener,
-            boolean showActionButton) {
-        mEmptyView.setIcon(iconResId);
+    public void showEmpty(@StringRes int messageResId) {
         mEmptyView.setMessage(messageResId);
-        mEmptyView.setSecondaryMessage(secondaryMessageResId);
-        mEmptyView.setActionButtonText(actionButtonTextResId);
-        mEmptyView.setActionButtonClickListener(actionButtonOnClickListener);
-        mEmptyView.setActionButtonVisible(showActionButton);
         switchTo(State.EMPTY);
     }
 
@@ -216,13 +164,9 @@ public class LoadingFrameLayout extends FrameLayout {
      * Container for views held by this LoadingFrameLayout. Used for deferring view inflation until
      * the view is about to be shown.
      */
-    private class ViewContainer {
+    private abstract class ViewContainer {
         @State private final int mViewState;
-        private View mView;
-        private ImageView mIconView;
-        private TextView mActionButton;
-        private TextView mMessageView;
-        private TextView mSecondaryMessageView;
+        protected View mView;
 
         private ViewContainer(@State int state) {
             mViewState = state;
@@ -236,16 +180,7 @@ public class LoadingFrameLayout extends FrameLayout {
             LoadingFrameLayout.this.addView(mView);
         }
 
-        private View inflateView() {
-            View view =
-                    LayoutInflater.from(mContext)
-                            .inflate(R.layout.loading_info_view, LoadingFrameLayout.this, false);
-            mMessageView = view.findViewById(R.id.loading_info_message);
-            mSecondaryMessageView = view.findViewById(R.id.loading_info_secondary_message);
-            mIconView = view.findViewById(R.id.loading_info_icon);
-            mActionButton = view.findViewById(R.id.loading_info_action_button);
-            return view;
-        }
+        protected abstract View inflateView();
 
         public void setVisibilityFromState(@State int newState) {
             if (mViewState == newState) {
@@ -265,6 +200,37 @@ public class LoadingFrameLayout extends FrameLayout {
                 mView.clearFocus();
             }
         }
+    }
+
+    private class LoadingView extends ViewContainer {
+        private View mProgressView;
+
+        private LoadingView(int layoutResId) {
+            super(State.LOADING, layoutResId);
+        }
+
+        @Override
+        protected View inflateView() {
+            mProgressView = mView.findViewById(R.id.progress_bar);
+            return mView;
+        }
+    }
+
+    private class EmptyView extends ViewContainer {
+        private TextView mMessageView;
+
+        private EmptyView() {
+            super(State.EMPTY);
+        }
+
+        @Override
+        protected View inflateView() {
+            View view =
+                    LayoutInflater.from(mContext)
+                            .inflate(R.layout.empty_view, LoadingFrameLayout.this, false);
+            mMessageView = view.findViewById(R.id.empty_message);
+            return view;
+        }
 
         private void setMessage(@StringRes int messageResId) {
             if (mMessageView == null) {
@@ -276,15 +242,34 @@ public class LoadingFrameLayout extends FrameLayout {
                 ViewUtils.setVisible(mMessageView, false);
             }
         }
+    }
 
-        private void setSecondaryMessage(@StringRes int secondaryMessageResId) {
-            if (mSecondaryMessageView == null) {
+    private class ErrorView extends ViewContainer {
+        private TextView mActionButton;
+        private TextView mMessageView;
+
+        private ErrorView() {
+            super(State.ERROR);
+        }
+
+        @Override
+        protected View inflateView() {
+            View view =
+                    LayoutInflater.from(mContext)
+                            .inflate(R.layout.error_view, LoadingFrameLayout.this, false);
+            mMessageView = view.findViewById(R.id.error_message);
+            mActionButton = view.findViewById(R.id.error_action_button);
+            return view;
+        }
+
+        private void setMessage(@StringRes int messageResId) {
+            if (mMessageView == null) {
                 return;
             }
-            if (secondaryMessageResId != INVALID_RES_ID) {
-                mSecondaryMessageView.setText(secondaryMessageResId);
+            if (messageResId != INVALID_RES_ID) {
+                mMessageView.setText(messageResId);
             } else {
-                ViewUtils.setVisible(mSecondaryMessageView, false);
+                ViewUtils.setVisible(mMessageView, false);
             }
         }
 
@@ -306,16 +291,6 @@ public class LoadingFrameLayout extends FrameLayout {
 
         private void setActionButtonVisible(boolean visible) {
             ViewUtils.setVisible(mActionButton, visible);
-        }
-
-        private void setIcon(@DrawableRes int iconResId) {
-            if (iconResId != INVALID_RES_ID) {
-                if (mIconView != null) {
-                    mIconView.setImageResource(iconResId);
-                }
-            } else {
-                ViewUtils.setVisible(mIconView, false);
-            }
         }
     }
 }

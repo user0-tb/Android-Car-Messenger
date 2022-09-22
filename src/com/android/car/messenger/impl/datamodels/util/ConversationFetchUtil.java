@@ -24,16 +24,19 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Pair;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
+
+import com.android.car.apps.common.log.L;
 import com.android.car.messenger.R;
 import com.android.car.messenger.common.Conversation;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.shared.MessageConstants;
 import com.android.car.messenger.core.ui.conversationlist.UIConversationItemConverter;
 import com.android.car.messenger.core.util.ConversationUtil;
-import com.android.car.messenger.core.util.L;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -42,6 +45,7 @@ import java.util.function.BiConsumer;
 
 /** Utility class for retrieving and setting conversation items. */
 public class ConversationFetchUtil {
+    private static final String TAG = "CM.ConversationFetchUtil";
 
     private static final int MESSAGE_LIMIT = UIConversationItemConverter.MAX_UNREAD_COUNT + 1;
     private static final String COMMA_DELIMITER = ", ";
@@ -51,7 +55,7 @@ public class ConversationFetchUtil {
 
     /** Fetches a conversation item based on a provided conversation id */
     public static Conversation fetchConversation(@NonNull String conversationId) {
-        L.d("Fetching latest data for Conversation " + conversationId);
+        L.d(TAG, "Fetching latest data for Conversation " + conversationId);
         Conversation.Builder conversationBuilder = initConversationBuilder(conversationId);
         Cursor mmsCursor = getMmsCursor(conversationId);
         Cursor smsCursor = getSmsCursor(conversationId);
