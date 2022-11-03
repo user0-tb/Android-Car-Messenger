@@ -19,9 +19,13 @@ package com.android.car.messenger.impl;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.preference.PreferenceManager;
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
 import com.android.car.messenger.core.util.CarStateListener;
+import com.android.car.messenger.impl.datamodels.TelephonyDataModel;
 
 /**
  * Test implementation of AppFactory to provide mocked Context, DataModel, SharedPreferences,
@@ -32,9 +36,9 @@ import com.android.car.messenger.core.util.CarStateListener;
  */
 public class AppFactoryTestImpl extends AppFactory {
 
-    private final Context mContext;
-    private final DataModel mDataModel;
-    private final SharedPreferences mSharedPreferences;
+    private Context mContext;
+    private DataModel mDataModel;
+    private SharedPreferences mSharedPreferences;
 
     public AppFactoryTestImpl(Context context,
             DataModel dataModel,
@@ -53,6 +57,9 @@ public class AppFactoryTestImpl extends AppFactory {
     public void teardown() {
         sRegistered = false;
         sInitialized = false;
+        mContext = ApplicationProvider.getApplicationContext();
+        mDataModel = new TelephonyDataModel();
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
     @Override

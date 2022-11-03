@@ -32,19 +32,24 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+
+import com.android.car.apps.common.log.L;
 import com.android.car.messenger.R;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
 import com.android.car.messenger.core.shared.NotificationHandler;
-import com.android.car.messenger.core.util.L;
 import com.android.car.messenger.core.util.VoiceUtil;
+
 import java.time.Duration;
 
 /** Service responsible for handling messaging events. */
 public class MessengerService extends Service {
+    private static final String TAG = "CM.MessengerService";
+
     /* ACTIONS */
     /** Used to start this service at boot-complete. Takes no arguments. */
     @NonNull public static final String ACTION_START = "com.android.car.messenger.ACTION_START";
@@ -80,7 +85,7 @@ public class MessengerService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        L.d("MessengerService - onCreate");
+        L.d(TAG, "MessengerService - onCreate");
         Handler handler = new Handler();
         handler.postDelayed(this::subscribeToNotificationUpdates, DELAY_FETCH_DURATION.toMillis());
 
@@ -97,7 +102,7 @@ public class MessengerService extends Service {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
 
         if (notificationManager == null) {
-            L.e("Failed to get NotificationManager instance");
+            L.e(TAG, "Failed to get NotificationManager instance");
             return;
         }
 
@@ -150,7 +155,7 @@ public class MessengerService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        L.d("onDestroy");
+        L.d(TAG, "onDestroy");
     }
 
     @Override
@@ -183,7 +188,7 @@ public class MessengerService extends Service {
                 // SMS app.
                 break;
             default:
-                L.w("Unsupported action: " + action);
+                L.w(TAG, "Unsupported action: " + action);
         }
         return result;
     }

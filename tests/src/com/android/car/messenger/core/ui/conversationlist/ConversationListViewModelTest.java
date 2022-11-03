@@ -22,8 +22,13 @@ import static org.mockito.Mockito.when;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleRegistry;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.preference.PreferenceManager;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -41,6 +46,8 @@ import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class ConversationListViewModelTest {
@@ -62,15 +69,27 @@ public class ConversationListViewModelTest {
     @Mock
     private UserAccount mMockUserAccount2;
 
+    private LifecycleRegistry mLifecycleRegistry;
+    @Mock
+    private LifecycleOwner mMockLifecycleOwner;
+    @Mock
+    private Observer<List<UIConversationItem>> mMockObserver;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
+        mLifecycleRegistry = new LifecycleRegistry(mMockLifecycleOwner);
+        when(mMockLifecycleOwner.getLifecycle()).thenReturn(mLifecycleRegistry);
+
         Context context = ApplicationProvider.getApplicationContext();
         CarStateListener carStateListener = new CarStateListener(context);
         TelephonyDataModel telephonyDataModel = new TelephonyDataModel();
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         mAppFactory = new AppFactoryTestImpl(context, telephonyDataModel,
-                /* sharedPreferences= */ null, carStateListener);
+                sharedPrefs, carStateListener);
+
+        when(mMockApplication.getApplicationContext()).thenReturn(context);
         mConversationListViewModel = new ConversationListViewModel(mMockApplication);
 
         when(mMockUserAccount.getId()).thenReturn(ID_1);
@@ -83,33 +102,28 @@ public class ConversationListViewModelTest {
     }
 
     @Test
-    public void testConversations_nullAccount() {
-        LiveData<UIConversationLog> liveData =
-                mConversationListViewModel.getConversations(null);
-
-        assertThat(liveData.getValue()).isNotNull();
-    }
-
-    @Test
     public void testConversations_existingAccount() {
         when(mMockUserAccount2.getId()).thenReturn(ID_1);
 
         // first call creates new conversation log
-        LiveData<UIConversationLog> liveData1 =
+        LiveData<List<UIConversationItem>> liveData1 =
                 mConversationListViewModel.getConversations(mMockUserAccount);
+        liveData1.observeForever(mMockObserver);
 
         // run this method again to return existing conversation log
-        LiveData<UIConversationLog> liveData2 =
+        LiveData<List<UIConversationItem>> liveData2 =
                 mConversationListViewModel.getConversations(mMockUserAccount2);
+        liveData2.observeForever(mMockObserver);
 
         assertThat(liveData1).isEqualTo(liveData2);
     }
 
     @Test
     public void testConversations_newAccount() {
-        LiveData<UIConversationLog> liveData =
+        LiveData<List<UIConversationItem>> liveData =
                 mConversationListViewModel.getConversations(mMockUserAccount);
 
+        liveData.observeForever(mMockObserver);
         assertThat(liveData.getValue()).isNotNull();
     }
 }

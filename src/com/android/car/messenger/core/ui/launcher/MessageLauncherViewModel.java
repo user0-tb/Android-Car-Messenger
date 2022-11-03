@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
 public class MessageLauncherViewModel extends AndroidViewModel {
     @NonNull private final DataModel mDataSource;
     @Nullable private LiveData<List<UserAccount>> mAccountsLiveData;
+
     // We currently only support the primary account until multi-account support is added
     private static final int DEVICE_LIMIT = 1;
 

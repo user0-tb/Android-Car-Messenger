@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,93 +13,94 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">ಬ್ಲೂಟೂತ್ ಡಿಸ್‌ಕನೆಕ್ಟ್ ಆಗಿದೆ</string>
-  <string name="no_messages">ಯಾವುದೇ ಸಂದೇಶಗಳಿಲ್ಲ</string>
-  <string name="connect_bluetooth_button_text">ಬ್ಲೂಟೂತ್‌ಗೆ ಕನೆಕ್ಟ್ ಮಾಡಿ</string>
-  <string name="replied">ಪ್ರತ್ಯುತ್ತರಿಸಿದ್ದಾರೆ</string>
-  <string name="tap_to_read_aloud">ಜೋರಾಗಿ ಓದಲು ಟ್ಯಾಪ್ ಮಾಡಿ</string>
-  <string name="action_reply">ಪ್ರತ್ಯುತ್ತರಿಸಿ</string>
-  <string name="action_mute">ಮ್ಯೂಟ್ ಮಾಡಿ</string>
-  <string name="action_mark_as_read">ಓದಲಾಗಿದೆ ಎಂದು ಗುರುತಿಸಿ</string>
-  <string name="app_running_msg_notification_title">ಸಂದೇಶ ಕಳುಹಿಸುವಿಕೆ ಸೇವೆಯು ಸಕ್ರಿಯವಾಗಿದೆ</string>
-  <string name="app_running_msg_notification_content">ಕಾರಿನಲ್ಲಿ ಸಂದೇಶಗಳನ್ನು ಸ್ವೀಕರಿಸಲಾಗುತ್ತಿದೆ</string>
-  <string name="message_channel_name">ಸಂದೇಶ ಚಾನಲ್</string>
-  <string name="message_channel_description">ಫೋನ್ ಸಂದೇಶ ಸ್ವೀಕರಿಸುವಿಕೆ ಸೇವೆ</string>
-  <string name="new_message">ಹೊಸ ಸಂದೇಶ</string>
-  <string name="cd_unread">ಓದದಿರುವುದು</string>
-  <string name="cd_conversation_icon">ಸಂವಾದ ಐಕಾನ್</string>
-  <string name="cd_icon_indicating_the_last_action">ಸಬ್‌ಟೈಟಲ್ ಪಠ್ಯ ಐಕಾನ್</string>
-  <string name="cd_mute_button">ಮ್ಯೂಟ್ ಬಟನ್</string>
-  <string name="cd_loading_info_icon">ಮಾಹಿತಿ ಐಕಾನ್ ಲೋಡ್ ಆಗುತ್ತಿದೆ</string>
-  <string name="cd_reply_action_button">ಪ್ರತ್ಯುತ್ತರಿಸುವ ಕ್ರಿಯಾ ಬಟನ್</string>
-  <string name="cd_play_action_button">ಪ್ಲೇ ಮಾಡುವ ಕ್ರಿಯಾ ಬಟನ್</string>
-  <string name="now_string_shortest">ಈಗ</string>
-  <string name="participant_overflow_text">, ಮತ್ತು ಇನ್ನೂ %d</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="one">%dನಿ</item>
-    <item quantity="other">%dನಿ</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="one">%dಗಂ</item>
-    <item quantity="other">%dಗಂ</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="one">%dದಿ</item>
-    <item quantity="other">%dದಿ</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="one">%dವ</item>
-    <item quantity="other">%dವ</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="one">%dನಿ ದಲ್ಲಿ</item>
-    <item quantity="other">%dನಿ ದಲ್ಲಿ</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="one">%dಗಂ ಯಲ್ಲಿ</item>
-    <item quantity="other">%dಗಂ ಯಲ್ಲಿ</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="one">%dದಿ ದಲ್ಲಿ</item>
-    <item quantity="other">%dದಿ ದಲ್ಲಿ</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="one">%dವ ದಲ್ಲಿ</item>
-    <item quantity="other">%dವ ದಲ್ಲಿ</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="one">%d ನಿಮಿಷಗಳ ಹಿಂದೆ</item>
-    <item quantity="other">%d ನಿಮಿಷಗಳ ಹಿಂದೆ</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="one">%d ಗಂಟೆಗಳ ಹಿಂದೆ</item>
-    <item quantity="other">%d ಗಂಟೆಗಳ ಹಿಂದೆ</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="one">%d ದಿನಗಳ ಹಿಂದೆ</item>
-    <item quantity="other">%d ದಿನಗಳ ಹಿಂದೆ</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="one">%d ವರ್ಷಗಳ ಹಿಂದೆ</item>
-    <item quantity="other">%d ವರ್ಷಗಳ ಹಿಂದೆ</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="one">%d ನಿಮಿಷಗಳಲ್ಲಿ</item>
-    <item quantity="other">%d ನಿಮಿಷಗಳಲ್ಲಿ</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="one">%d ಗಂಟೆಗಳಲ್ಲಿ</item>
-    <item quantity="other">%d ಗಂಟೆಗಳಲ್ಲಿ</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="one">%d ದಿನಗಳಲ್ಲಿ</item>
-    <item quantity="other">%d ದಿನಗಳಲ್ಲಿ</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="one">%d ವರ್ಷಗಳಲ್ಲಿ</item>
-    <item quantity="other">%d ವರ್ಷಗಳಲ್ಲಿ</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"ಬ್ಲೂಟೂತ್ ಡಿಸ್‌ಕನೆಕ್ಟ್ ಆಗಿದೆ"</string>
+    <string name="no_messages" msgid="1440256496615617958">"ಯಾವುದೇ ಸಂದೇಶಗಳಿಲ್ಲ"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"ಬ್ಲೂಟೂತ್‌ಗೆ ಕನೆಕ್ಟ್ ಮಾಡಿ"</string>
+    <string name="replied" msgid="4048102393748554631">"ಪ್ರತ್ಯುತ್ತರಿಸಿಲಾಗಿದೆ"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"ಜೋರಾಗಿ ಓದಲು ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
+    <string name="action_reply" msgid="8404237041838225390">"ಪ್ರತ್ಯುತ್ತರಿಸಿ"</string>
+    <string name="action_mute" msgid="7982388368125401058">"ಮ್ಯೂಟ್ ಮಾಡಿ"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"ಓದಲಾಗಿದೆ ಎಂದು ಗುರುತಿಸಿ"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"ಸಂದೇಶ ಕಳುಹಿಸುವಿಕೆ ಸೇವೆ ಸಕ್ರಿಯವಾಗಿದೆ"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"ಕಾರಿನಲ್ಲಿ ಸಂದೇಶಗಳನ್ನು ಸ್ವೀಕರಿಸಲಾಗುತ್ತಿದೆ"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"ಸಂದೇಶ ಚಾನಲ್"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"ಫೋನ್ ಸಂದೇಶ ಸ್ವೀಕರಿಸುವಿಕೆ ಸೇವೆ"</string>
+    <string name="new_message" msgid="8983092328255956122">"ಹೊಸ ಸಂದೇಶ"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"ಓದದಿರುವುದು"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"ಸಂಭಾಷಣೆ ಐಕಾನ್"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"ಸಬ್‌ಟೈಟಲ್ ಪಠ್ಯ ಐಕಾನ್"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"ಮ್ಯೂಟ್ ಬಟನ್"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"ಮಾಹಿತಿ ಐಕಾನ್ ಲೋಡ್ ಆಗುತ್ತಿದೆ"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"ಪ್ರತ್ಯುತ್ತರಿಸುವ ಕ್ರಿಯಾ ಬಟನ್"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"ಪ್ಲೇ ಮಾಡುವ ಕ್ರಿಯಾ ಬಟನ್"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"ಈಗ"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">"ಮತ್ತು ಇನ್ನೂ %d"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>ನಿಮಿಷಗಳು</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ನಿಮಿಷಗಳು</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>ಗಂಟೆಗಳು</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ಗಂಟೆಗಳು</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>ದಿನಗಳು</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ದಿನಗಳು</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>ವರ್ಷಗಳು</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ವರ್ಷಗಳು</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>ನಿಮಿಷಗಳಲ್ಲಿ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ನಿಮಿಷಗಳಲ್ಲಿ</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>ಗಂಟೆಗಳಲ್ಲಿ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ಗಂಟೆಗಳಲ್ಲಿ</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>ದಿನಗಳಲ್ಲಿ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ದಿನಗಳಲ್ಲಿ</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>ವರ್ಷಗಳಲ್ಲಿ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ವರ್ಷಗಳಲ್ಲಿ</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ನಿಮಿಷಗಳ ಹಿಂದೆ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ನಿಮಿಷಗಳ ಹಿಂದೆ</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ಗಂಟೆಗಳ ಹಿಂದೆ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ಗಂಟೆಗಳ ಹಿಂದೆ</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ದಿನಗಳ ಹಿಂದೆ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ದಿನಗಳ ಹಿಂದೆ</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ವರ್ಷಗಳ ಹಿಂದೆ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ವರ್ಷಗಳ ಹಿಂದೆ</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ನಿಮಿಷಗಳಲ್ಲಿ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ನಿಮಿಷಗಳಲ್ಲಿ</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ಗಂಟೆಗಳಲ್ಲಿ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ಗಂಟೆಗಳಲ್ಲಿ</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ದಿನಗಳಲ್ಲಿ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ದಿನಗಳಲ್ಲಿ</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ವರ್ಷಗಳಲ್ಲಿ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ವರ್ಷಗಳಲ್ಲಿ</item>
+    </plurals>
 </resources>

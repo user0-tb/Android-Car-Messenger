@@ -22,16 +22,17 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 
-import com.android.car.messenger.core.util.L;
+import com.android.car.apps.common.log.L;
 
 /**
  * Receiver that listens for on boot completed broadcast intent and starts {@link MessengerService}.
  */
 public class OnBootReceiver extends BroadcastReceiver {
+    private static final String TAG = "CM.OnBootReceiver";
 
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
-        L.d("BootReceiver received!");
+        L.d(TAG, "BootReceiver received!");
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             context.startService(new Intent(context, MessengerService.class));
         }

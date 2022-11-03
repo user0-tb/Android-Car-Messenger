@@ -16,17 +16,38 @@
 
 package com.android.car.messenger.testing;
 
-import android.app.Activity;
+import static org.mockito.Mockito.mock;
+
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 /**
  * Empty activity used for testing.
  */
-public class TestActivity extends Activity {
+public class TestActivity extends FragmentActivity {
+
+    private final ViewModelProvider.Factory mFactory = new ViewModelProvider.Factory() {
+        @NonNull
+        @Override
+        public <T extends ViewModel> T create(@NonNull Class<T> aClass) {
+            return mock(aClass);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_activity);
     }
+
+    @NonNull
+    @Override
+    public ViewModelProvider.Factory getDefaultViewModelProviderFactory() {
+        return mFactory;
+    }
+
 }

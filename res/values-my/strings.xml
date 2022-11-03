@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,93 +13,94 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+   -->
 
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="bluetooth_disconnected">ဘလူးတုသ် ချိတ်ဆက်မထားပါ</string>
-  <string name="no_messages">မက်ဆေ့ဂျ် မရှိပါ</string>
-  <string name="connect_bluetooth_button_text">ဘလူးတုသ်သို့ ချိတ်ဆက်ရန်</string>
-  <string name="replied">စာပြန်ပြီးပါပြီ</string>
-  <string name="tap_to_read_aloud">အသံထွက်ဖတ်ရန် တို့ပါ</string>
-  <string name="action_reply">စာပြန်ရန်</string>
-  <string name="action_mute">အသံပိတ်ရန်</string>
-  <string name="action_mark_as_read">ဖတ်ပြီးဟု မှတ်သားခြင်း</string>
-  <string name="app_running_msg_notification_title">မက်ဆေ့ဂျ်ပို့ ဝန်ဆောင်မှု ဖွင့်ထားသည်</string>
-  <string name="app_running_msg_notification_content">ကားပါ်၌ ‘မက်ဆေ့ဂျ်’ လက်ခံခြင်း</string>
-  <string name="message_channel_name">မက်ဆေ့ဂျ် ချန်နယ်</string>
-  <string name="message_channel_description">ဖုန်းမက်ဆေ့ဂျ် လက်ခံသည့် ဝန်ဆောင်မှု</string>
-  <string name="new_message">မက်ဆေ့ဂျ်အသစ်</string>
-  <string name="cd_unread">မဖတ်ရသေး</string>
-  <string name="cd_conversation_icon">စကားဝိုင်းသင်္ကေတ</string>
-  <string name="cd_icon_indicating_the_last_action">စာတန်းထိုး စာသားသင်္ကေတ</string>
-  <string name="cd_mute_button">အသံပိတ်ခလုတ်</string>
-  <string name="cd_loading_info_icon">အချက်အလက်သင်္ကေတ ဖွင့်နေသည်</string>
-  <string name="cd_reply_action_button">စာပြန်သည့် လုပ်ဆောင်ချက်ခလုတ်</string>
-  <string name="cd_play_action_button">ဖွင့်သည့် လုပ်ဆောင်ချက်ခလုတ်</string>
-  <string name="now_string_shortest">ယခု</string>
-  <string name="participant_overflow_text">နှင့် နောက်ထပ် %d ဦး</string>
-  <plurals name="duration_minutes_shortest">
-    <item quantity="one">%d မိနစ်</item>
-    <item quantity="other">%d မိနစ်</item>
-  </plurals>
-  <plurals name="duration_hours_shortest">
-    <item quantity="one">%d နာရီ</item>
-    <item quantity="other">%d နာရီ</item>
-  </plurals>
-  <plurals name="duration_days_shortest">
-    <item quantity="one">%d ရက်</item>
-    <item quantity="other">%d ရက်</item>
-  </plurals>
-  <plurals name="duration_years_shortest">
-    <item quantity="one">%d နှစ်</item>
-    <item quantity="other">%d နှစ်</item>
-  </plurals>
-  <plurals name="duration_minutes_shortest_future">
-    <item quantity="one">%d မိနစ်အတွင်း</item>
-    <item quantity="other">%d မိနစ်အတွင်း</item>
-  </plurals>
-  <plurals name="duration_hours_shortest_future">
-    <item quantity="one">%d နာရီအတွင်း</item>
-    <item quantity="other">%d နာရီအတွင်း</item>
-  </plurals>
-  <plurals name="duration_days_shortest_future">
-    <item quantity="one">%d ရက်အတွင်း</item>
-    <item quantity="other">%d ရက်အတွင်း</item>
-  </plurals>
-  <plurals name="duration_years_shortest_future">
-    <item quantity="one">%d နှစ်အတွင်း</item>
-    <item quantity="other">%d နှစ်အတွင်း</item>
-  </plurals>
-  <plurals name="duration_minutes_relative">
-    <item quantity="one">ပြီးခဲ့သော %d မိနစ်</item>
-    <item quantity="other">ပြီးခဲ့သော %d မိနစ်</item>
-  </plurals>
-  <plurals name="duration_hours_relative">
-    <item quantity="one">ပြီးခဲ့သော %d နာရီ</item>
-    <item quantity="other">ပြီးခဲ့သော %d နာရီ</item>
-  </plurals>
-  <plurals name="duration_days_relative">
-    <item quantity="one">ပြီးခဲ့သော %d ရက်</item>
-    <item quantity="other">ပြီးခဲ့သော %d ရက်</item>
-  </plurals>
-  <plurals name="duration_years_relative">
-    <item quantity="one">ပြီးခဲ့သော %d နှစ်</item>
-    <item quantity="other">ပြီးခဲ့သော %d နှစ်</item>
-  </plurals>
-  <plurals name="duration_minutes_relative_future">
-    <item quantity="one">%d မိနစ်အတွင်း</item>
-    <item quantity="other">%d မိနစ်အတွင်း</item>
-  </plurals>
-  <plurals name="duration_hours_relative_future">
-    <item quantity="one">%d နာရီအတွင်း</item>
-    <item quantity="other">%d နာရီအတွင်း</item>
-  </plurals>
-  <plurals name="duration_days_relative_future">
-    <item quantity="one">%d ရက်အတွင်း</item>
-    <item quantity="other">%d ရက်အတွင်း</item>
-  </plurals>
-  <plurals name="duration_years_relative_future">
-    <item quantity="one">%d နှစ်အတွင်း</item>
-    <item quantity="other">%d နှစ်အတွင်း</item>
-  </plurals>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"ဘလူးတုသ် ချိတ်ဆက်မထားပါ"</string>
+    <string name="no_messages" msgid="1440256496615617958">"မက်ဆေ့ဂျ် မရှိပါ"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"ဘလူးတုသ်သို့ ချိတ်ဆက်ခြင်း"</string>
+    <string name="replied" msgid="4048102393748554631">"စာပြန်ပြီးပါပြီ"</string>
+    <string name="tap_to_read_aloud" msgid="7309530473789467365">"အသံထွက်ဖတ်ရန် တို့ပါ"</string>
+    <string name="action_reply" msgid="8404237041838225390">"စာပြန်ရန်"</string>
+    <string name="action_mute" msgid="7982388368125401058">"အသံပိတ်ခြင်း"</string>
+    <string name="action_mark_as_read" msgid="2872221687403147551">"ဖတ်ပြီးဟု မှတ်သားခြင်း"</string>
+    <string name="app_running_msg_notification_title" msgid="3569467829547340722">"မက်ဆေ့ဂျ်ပို့ခြင်းဝန်ဆောင်မှုဖွင့်ထားသည်"</string>
+    <string name="app_running_msg_notification_content" msgid="7088111523632559583">"ကားပေါ်၌ ‘မက်ဆေ့ဂျ်’ လက်ခံခြင်း"</string>
+    <string name="message_channel_name" msgid="8568703344795660393">"မက်ဆေ့ဂျ် ချန်နယ်"</string>
+    <string name="message_channel_description" msgid="4316796171238519904">"ဖုန်းမက်ဆေ့ဂျ် လက်ခံသည့် ဝန်ဆောင်မှု"</string>
+    <string name="new_message" msgid="8983092328255956122">"မက်ဆေ့ဂျ်အသစ်"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"မဖတ်ရသေး"</string>
+    <string name="cd_conversation_icon" msgid="2600955838672124935">"စကားဝိုင်းသင်္ကေတ"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"စာတန်းထိုး စာသားသင်္ကေတ"</string>
+    <string name="cd_mute_button" msgid="76118116050731771">"အသံပိတ်ခလုတ်"</string>
+    <string name="cd_loading_info_icon" msgid="600252242790937732">"အချက်အလက်သင်္ကေတ ဖွင့်နေသည်"</string>
+    <string name="cd_reply_action_button" msgid="3349155913058787730">"စာပြန်သည့် လုပ်ဆောင်ချက် ခလုတ်"</string>
+    <string name="cd_play_action_button" msgid="2678681425367772215">"ဖွင့်သည့် လုပ်ဆောင်ချက် ခလုတ်"</string>
+    <string name="now_string_shortest" msgid="7873145874801426444">"ယခု"</string>
+    <string name="participant_overflow_text" msgid="6834410359562565577">"၊ နှင့် နောက်ထပ် %d ခု"</string>
+    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>m</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>m</item>
+    </plurals>
+    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>h</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>h</item>
+    </plurals>
+    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>d</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>d</item>
+    </plurals>
+    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>y</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>y</item>
+    </plurals>
+    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> မိနစ်အတွင်း</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> မိနစ်အတွင်း</item>
+    </plurals>
+    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> နာရီအတွင်း</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> နာရီအတွင်း</item>
+    </plurals>
+    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ရက်အတွင်း</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ရက်အတွင်း</item>
+    </plurals>
+    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> နှစ်အတွင်း</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> နှစ်အတွင်း</item>
+    </plurals>
+    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="other">ပြီးခဲ့သည့် <xliff:g id="COUNT_1">%d</xliff:g> မိနစ်</item>
+      <item quantity="one">ပြီးခဲ့သည့် <xliff:g id="COUNT_0">%d</xliff:g> မိနစ်</item>
+    </plurals>
+    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="other">ပြီးခဲ့သည့် <xliff:g id="COUNT_1">%d</xliff:g> နာရီ</item>
+      <item quantity="one">ပြီးခဲ့သည့် <xliff:g id="COUNT_0">%d</xliff:g> နာရီ</item>
+    </plurals>
+    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="other">ပြီးခဲ့သော <xliff:g id="COUNT_1">%d</xliff:g> ရက်</item>
+      <item quantity="one">ပြီးခဲ့သော <xliff:g id="COUNT_0">%d</xliff:g> ရက်</item>
+    </plurals>
+    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="other">ပြီးခဲ့သော <xliff:g id="COUNT_1">%d</xliff:g> နှစ်</item>
+      <item quantity="one">ပြီးခဲ့သော <xliff:g id="COUNT_0">%d</xliff:g> နှစ်</item>
+    </plurals>
+    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> မိနစ်အတွင်း</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> မိနစ်အတွင်း</item>
+    </plurals>
+    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> နာရီအတွင်း</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> နာရီအတွင်း</item>
+    </plurals>
+    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ရက်အတွင်း</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ရက်အတွင်း</item>
+    </plurals>
+    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> နှစ်အတွင်း</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> နှစ်အတွင်း</item>
+    </plurals>
 </resources>
