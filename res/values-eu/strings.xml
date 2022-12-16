@@ -17,9 +17,9 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="bluetooth_disconnected" msgid="337563193027514226">"Bluetooth-a deskonektatuta"</string>
+    <string name="bluetooth_disconnected" msgid="337563193027514226">"Bluetootha deskonektatuta"</string>
     <string name="no_messages" msgid="1440256496615617958">"Ez dago mezurik"</string>
-    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Konektatu Bluetooth-era"</string>
+    <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Konektatu Bluetoothera"</string>
     <string name="replied" msgid="4048102393748554631">"Erantzunda"</string>
     <string name="tap_to_read_aloud" msgid="7309530473789467365">"Ozen irakurtzeko, sakatu hau"</string>
     <string name="action_reply" msgid="8404237041838225390">"Erantzun"</string>

@@ -101,6 +101,10 @@ android_test_helper_app {
 
     libs: ["android.car-system-stubs"],
 
+    manifest: "AndroidManifest.xml",
+
+    additional_manifests: ["AndroidManifestForTesting.xml"],
+
     // must be unbundled dependencies
     static_libs: [
         "androidx.annotation_annotation",
