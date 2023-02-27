@@ -40,99 +40,83 @@
     <string name="now_string_shortest" msgid="7873145874801426444">"עכשיו"</string>
     <string name="participant_overflow_text" msgid="6834410359562565577">", ועוד ‎%d"</string>
     <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
       <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
-      <item quantity="one">דקה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
       <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
-      <item quantity="one">שעה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
       <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
-      <item quantity="one">יום (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
       <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
-      <item quantity="one">שנה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
+      <item quantity="one">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
       <item quantity="two">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
-      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
       <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דק‘</item>
-      <item quantity="one">בעוד דקה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
+      <item quantity="one">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
       <item quantity="two">בעוד שעתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
       <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שע‘</item>
-      <item quantity="one">בעוד שעה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
+      <item quantity="one">בעוד <xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
       <item quantity="two">בעוד יומיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
       <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> י‘</item>
-      <item quantity="one">בעוד יום (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
+      <item quantity="one">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
       <item quantity="two">בעוד שנתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
       <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
-      <item quantity="one">בעוד שנה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
+      <item quantity="one">לפני <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
       <item quantity="two">לפני <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
-      <item quantity="many">לפני <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
       <item quantity="other">לפני <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
-      <item quantity="one">לפני דקה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
+      <item quantity="one">לפני <xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
       <item quantity="two">לפני שעתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="many">לפני <xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
       <item quantity="other">לפני <xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
-      <item quantity="one">לפני שעה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
+      <item quantity="one">לפני <xliff:g id="COUNT_1">%d</xliff:g> ימים</item>
       <item quantity="two">לפני יומיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="many">לפני <xliff:g id="COUNT_1">%d</xliff:g> ימים</item>
       <item quantity="other">לפני <xliff:g id="COUNT_1">%d</xliff:g> ימים</item>
-      <item quantity="one">לפני יום (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
+      <item quantity="one">לפני <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
       <item quantity="two">לפני שנתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="many">לפני <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
       <item quantity="other">לפני <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
-      <item quantity="one">לפני שנה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
+      <item quantity="one">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
       <item quantity="two">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
-      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
       <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> דקות</item>
-      <item quantity="one">בעוד דקה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
+      <item quantity="one">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
       <item quantity="two">בעוד שעתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
       <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שעות</item>
-      <item quantity="one">בעוד שעה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
+      <item quantity="one">בעוד <xliff:g id="COUNT_1">%d</xliff:g> ימים</item>
       <item quantity="two">בעוד יומיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> ימים</item>
       <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> ימים</item>
-      <item quantity="one">בעוד יום (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
     <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
+      <item quantity="one">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
       <item quantity="two">בעוד שנתיים (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
-      <item quantity="many">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
       <item quantity="other">בעוד <xliff:g id="COUNT_1">%d</xliff:g> שנים</item>
-      <item quantity="one">בעוד שנה (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
 </resources>
