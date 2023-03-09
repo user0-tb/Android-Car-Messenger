@@ -39,36 +39,20 @@
     <string name="cd_play_action_button" msgid="2678681425367772215">"Paleidimo veiksmo mygtukas"</string>
     <string name="now_string_shortest" msgid="7873145874801426444">"dabar"</string>
     <string name="participant_overflow_text" msgid="6834410359562565577">"ir dar %d"</string>
-    <!-- no translation found for duration_minutes_shortest (3196334009463125092) -->
-    <skip />
-    <!-- no translation found for duration_hours_shortest (8095656486778505484) -->
-    <skip />
-    <!-- no translation found for duration_days_shortest (2567856512972859524) -->
-    <skip />
-    <!-- no translation found for duration_years_shortest (4541861612636279411) -->
-    <skip />
-    <!-- no translation found for duration_minutes_shortest_future (9057746041696643224) -->
-    <skip />
-    <!-- no translation found for duration_hours_shortest_future (2738010200085537168) -->
-    <skip />
-    <!-- no translation found for duration_days_shortest_future (6581670806566500466) -->
-    <skip />
-    <!-- no translation found for duration_years_shortest_future (3968534937321896952) -->
-    <skip />
-    <!-- no translation found for duration_minutes_relative (1479854166441683380) -->
-    <skip />
-    <!-- no translation found for duration_hours_relative (5279932468186494598) -->
-    <skip />
-    <!-- no translation found for duration_days_relative (5715578964136532587) -->
-    <skip />
-    <!-- no translation found for duration_years_relative (3688065932579415387) -->
-    <skip />
-    <!-- no translation found for duration_minutes_relative_future (7688847816715855347) -->
-    <skip />
-    <!-- no translation found for duration_hours_relative_future (8233520776576979970) -->
-    <skip />
-    <!-- no translation found for duration_days_relative_future (711437599453501312) -->
-    <skip />
-    <!-- no translation found for duration_years_relative_future (4324694717023686926) -->
-    <skip />
+    <string name="duration_minutes_shortest" msgid="3196334009463125092">"{count,plural, =1{# min.}one{# min.}few{# min.}many{# min.}other{# min.}}"</string>
+    <string name="duration_hours_shortest" msgid="8095656486778505484">"{count,plural, =1{# val.}one{# val.}few{# val.}many{# val.}other{# val.}}"</string>
+    <string name="duration_days_shortest" msgid="2567856512972859524">"{count,plural, =1{# d.}one{# d.}few{# d.}many{# d.}other{# d.}}"</string>
+    <string name="duration_years_shortest" msgid="4541861612636279411">"{count,plural, =1{# m.}one{# m.}few{# m.}many{# m.}other{# m.}}"</string>
+    <string name="duration_minutes_shortest_future" msgid="9057746041696643224">"{count,plural, =1{po # min.}one{po # min.}few{po # min.}many{po # min.}other{po # min.}}"</string>
+    <string name="duration_hours_shortest_future" msgid="2738010200085537168">"{count,plural, =1{po # val.}one{po # val.}few{po # val.}many{po # val.}other{po # val.}}"</string>
+    <string name="duration_days_shortest_future" msgid="6581670806566500466">"{count,plural, =1{po # d.}one{po # d.}few{po # d.}many{po # d.}other{po # d.}}"</string>
+    <string name="duration_years_shortest_future" msgid="3968534937321896952">"{count,plural, =1{po # m.}one{po # m.}few{po # m.}many{po # m.}other{po # m.}}"</string>
+    <string name="duration_minutes_relative" msgid="1479854166441683380">"{count,plural, =1{prieš # minutę}one{prieš # minutę}few{prieš # minutes}many{prieš # minutės}other{prieš # minučių}}"</string>
+    <string name="duration_hours_relative" msgid="5279932468186494598">"{count,plural, =1{prieš # valandą}one{prieš # valandą}few{prieš # valandas}many{prieš # valandos}other{prieš # valandų}}"</string>
+    <string name="duration_days_relative" msgid="5715578964136532587">"{count,plural, =1{prieš # dieną}one{prieš # dieną}few{prieš # dienas}many{prieš # dienos}other{prieš # dienų}}"</string>
+    <string name="duration_years_relative" msgid="3688065932579415387">"{count,plural, =1{prieš # metus}one{prieš # metus}few{prieš # metus}many{prieš # metų}other{prieš # metų}}"</string>
+    <string name="duration_minutes_relative_future" msgid="7688847816715855347">"{count,plural, =1{po # minutės}one{po # minutės}few{po # minučių}many{po # minutės}other{po # minučių}}"</string>
+    <string name="duration_hours_relative_future" msgid="8233520776576979970">"{count,plural, =1{po # valandos}one{po # valandos}few{po # valandų}many{po # valandos}other{po # valandų}}"</string>
+    <string name="duration_days_relative_future" msgid="711437599453501312">"{count,plural, =1{po # dienos}one{po # dienos}few{po # dienų}many{po # dienos}other{po # dienų}}"</string>
+    <string name="duration_years_relative_future" msgid="4324694717023686926">"{count,plural, =1{po # metų}one{po # metų}few{po # metų}many{po # metų}other{po # metų}}"</string>
 </resources>

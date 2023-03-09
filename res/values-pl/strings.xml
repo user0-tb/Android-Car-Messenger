@@ -39,36 +39,20 @@
     <string name="cd_play_action_button" msgid="2678681425367772215">"Przycisk odtwarzania"</string>
     <string name="now_string_shortest" msgid="7873145874801426444">"teraz"</string>
     <string name="participant_overflow_text" msgid="6834410359562565577">"i %d innych"</string>
-    <!-- no translation found for duration_minutes_shortest (3196334009463125092) -->
-    <skip />
-    <!-- no translation found for duration_hours_shortest (8095656486778505484) -->
-    <skip />
-    <!-- no translation found for duration_days_shortest (2567856512972859524) -->
-    <skip />
-    <!-- no translation found for duration_years_shortest (4541861612636279411) -->
-    <skip />
-    <!-- no translation found for duration_minutes_shortest_future (9057746041696643224) -->
-    <skip />
-    <!-- no translation found for duration_hours_shortest_future (2738010200085537168) -->
-    <skip />
-    <!-- no translation found for duration_days_shortest_future (6581670806566500466) -->
-    <skip />
-    <!-- no translation found for duration_years_shortest_future (3968534937321896952) -->
-    <skip />
-    <!-- no translation found for duration_minutes_relative (1479854166441683380) -->
-    <skip />
-    <!-- no translation found for duration_hours_relative (5279932468186494598) -->
-    <skip />
-    <!-- no translation found for duration_days_relative (5715578964136532587) -->
-    <skip />
-    <!-- no translation found for duration_years_relative (3688065932579415387) -->
-    <skip />
-    <!-- no translation found for duration_minutes_relative_future (7688847816715855347) -->
-    <skip />
-    <!-- no translation found for duration_hours_relative_future (8233520776576979970) -->
-    <skip />
-    <!-- no translation found for duration_days_relative_future (711437599453501312) -->
-    <skip />
-    <!-- no translation found for duration_years_relative_future (4324694717023686926) -->
-    <skip />
+    <string name="duration_minutes_shortest" msgid="3196334009463125092">"{count,plural, =1{# min}few{# min}many{# min}other{# min}}"</string>
+    <string name="duration_hours_shortest" msgid="8095656486778505484">"{count,plural, =1{# godz.}few{# godz.}many{# godz.}other{# godz.}}"</string>
+    <string name="duration_days_shortest" msgid="2567856512972859524">"{count,plural, =1{# dzień}few{# dni}many{# dni}other{# dnia}}"</string>
+    <string name="duration_years_shortest" msgid="4541861612636279411">"{count,plural, =1{# rok}few{# lata}many{# lat}other{# roku}}"</string>
+    <string name="duration_minutes_shortest_future" msgid="9057746041696643224">"{count,plural, =1{za # min}few{za # min}many{za # min}other{za # min}}"</string>
+    <string name="duration_hours_shortest_future" msgid="2738010200085537168">"{count,plural, =1{za # godz.}few{za # godz.}many{za # godz.}other{za # godz.}}"</string>
+    <string name="duration_days_shortest_future" msgid="6581670806566500466">"{count,plural, =1{za # dzień}few{za # dni}many{za # dni}other{za # dnia}}"</string>
+    <string name="duration_years_shortest_future" msgid="3968534937321896952">"{count,plural, =1{za # rok}few{za # lata}many{za # lat}other{za # roku}}"</string>
+    <string name="duration_minutes_relative" msgid="1479854166441683380">"{count,plural, =1{# minutę temu}few{# minuty temu}many{# minut temu}other{# minuty temu}}"</string>
+    <string name="duration_hours_relative" msgid="5279932468186494598">"{count,plural, =1{# godzinę temu}few{# godziny temu}many{# godzin temu}other{# godziny temu}}"</string>
+    <string name="duration_days_relative" msgid="5715578964136532587">"{count,plural, =1{# dzień temu}few{# dni temu}many{# dni temu}other{# dnia temu}}"</string>
+    <string name="duration_years_relative" msgid="3688065932579415387">"{count,plural, =1{# rok temu}few{# lata temu}many{# lat temu}other{# roku temu}}"</string>
+    <string name="duration_minutes_relative_future" msgid="7688847816715855347">"{count,plural, =1{za # minutę}few{za # minuty}many{za # minut}other{za # minuty}}"</string>
+    <string name="duration_hours_relative_future" msgid="8233520776576979970">"{count,plural, =1{za # godzinę}few{za # godziny}many{za # godzin}other{za # godziny}}"</string>
+    <string name="duration_days_relative_future" msgid="711437599453501312">"{count,plural, =1{za # dzień}few{za # dni}many{za # dni}other{za # dnia}}"</string>
+    <string name="duration_years_relative_future" msgid="4324694717023686926">"{count,plural, =1{za # rok}few{za # lata}many{za # lat}other{za # roku}}"</string>
 </resources>

@@ -39,36 +39,20 @@
     <string name="cd_play_action_button" msgid="2678681425367772215">"زر الإجراء الخاص بالتشغيل"</string>
     <string name="now_string_shortest" msgid="7873145874801426444">"الآن"</string>
     <string name="participant_overflow_text" msgid="6834410359562565577">"و%d مشارك آخر"</string>
-    <!-- no translation found for duration_minutes_shortest (3196334009463125092) -->
-    <skip />
-    <!-- no translation found for duration_hours_shortest (8095656486778505484) -->
-    <skip />
-    <!-- no translation found for duration_days_shortest (2567856512972859524) -->
-    <skip />
-    <!-- no translation found for duration_years_shortest (4541861612636279411) -->
-    <skip />
-    <!-- no translation found for duration_minutes_shortest_future (9057746041696643224) -->
-    <skip />
-    <!-- no translation found for duration_hours_shortest_future (2738010200085537168) -->
-    <skip />
-    <!-- no translation found for duration_days_shortest_future (6581670806566500466) -->
-    <skip />
-    <!-- no translation found for duration_years_shortest_future (3968534937321896952) -->
-    <skip />
-    <!-- no translation found for duration_minutes_relative (1479854166441683380) -->
-    <skip />
-    <!-- no translation found for duration_hours_relative (5279932468186494598) -->
-    <skip />
-    <!-- no translation found for duration_days_relative (5715578964136532587) -->
-    <skip />
-    <!-- no translation found for duration_years_relative (3688065932579415387) -->
-    <skip />
-    <!-- no translation found for duration_minutes_relative_future (7688847816715855347) -->
-    <skip />
-    <!-- no translation found for duration_hours_relative_future (8233520776576979970) -->
-    <skip />
-    <!-- no translation found for duration_days_relative_future (711437599453501312) -->
-    <skip />
-    <!-- no translation found for duration_years_relative_future (4324694717023686926) -->
-    <skip />
+    <string name="duration_minutes_shortest" msgid="3196334009463125092">"{count,plural, =1{# د}zero{# د}two{# د}few{# د}many{# د}other{# د}}"</string>
+    <string name="duration_hours_shortest" msgid="8095656486778505484">"{count,plural, =1{# ساعة}zero{# ساعة}two{# ساعة}few{# ساعة}many{# ساعة}other{# ساعة}}"</string>
+    <string name="duration_days_shortest" msgid="2567856512972859524">"{count,plural, =1{# يوم}zero{# يوم}two{# يوم}few{# يوم}many{# يوم}other{# يوم}}"</string>
+    <string name="duration_years_shortest" msgid="4541861612636279411">"{count,plural, =1{# عام}zero{# عام}two{# عام}few{# عام}many{# عام}other{# عام}}"</string>
+    <string name="duration_minutes_shortest_future" msgid="9057746041696643224">"{count,plural, =1{خلال دقيقة}zero{خلال # دقيقة}two{خلال دقيقتَين}few{خلال # دقائق}many{خلال # دقيقة}other{خلال # دقيقة}}"</string>
+    <string name="duration_hours_shortest_future" msgid="2738010200085537168">"{count,plural, =1{خلال ساعة}zero{خلال # ساعة}two{خلال ساعتَين}few{خلال # ساعات}many{خلال # ساعة}other{خلال # ساعة}}"</string>
+    <string name="duration_days_shortest_future" msgid="6581670806566500466">"{count,plural, =1{خلال يوم واحد}zero{خلال # يوم}two{خلال يومَين}few{خلال # أيام}many{خلال # يومًا}other{خلال # يوم}}"</string>
+    <string name="duration_years_shortest_future" msgid="3968534937321896952">"{count,plural, =1{خلال عام واحد}zero{خلال # عام}two{خلال عامَين}few{خلال # أعوام}many{خلال # عامًا}other{خلال # عام}}"</string>
+    <string name="duration_minutes_relative" msgid="1479854166441683380">"{count,plural, =1{قبل دقيقة واحدة}zero{قبل # دقيقة}two{قبل دقيقتَين}few{قبل # دقائق}many{قبل # دقيقة}other{قبل # دقيقة}}"</string>
+    <string name="duration_hours_relative" msgid="5279932468186494598">"{count,plural, =1{قبل ساعة واحدة}zero{قبل # ساعة}two{قبل ساعتَين}few{قبل # ساعات}many{قبل # ساعة}other{قبل # ساعة}}"</string>
+    <string name="duration_days_relative" msgid="5715578964136532587">"{count,plural, =1{قبل يوم واحد}zero{قبل # يوم}two{قبل يومَين}few{قبل # أيام}many{قبل # يومًا}other{قبل # يوم}}"</string>
+    <string name="duration_years_relative" msgid="3688065932579415387">"{count,plural, =1{قبل عام واحد}zero{قبل # عام}two{قبل عامَين}few{قبل # أعوام}many{قبل # عامًا}other{قبل # عام}}"</string>
+    <string name="duration_minutes_relative_future" msgid="7688847816715855347">"{count,plural, =1{خلال دقيقة واحدة}zero{خلال # دقيقة}two{خلال دقيقتَين}few{خلال # دقائق}many{خلال # دقيقة}other{خلال # دقيقة}}"</string>
+    <string name="duration_hours_relative_future" msgid="8233520776576979970">"{count,plural, =1{خلال ساعة واحدة}zero{خلال # ساعة}two{خلال ساعتَين}few{خلال # ساعات}many{خلال # ساعة}other{خلال # ساعة}}"</string>
+    <string name="duration_days_relative_future" msgid="711437599453501312">"{count,plural, =1{خلال يوم واحد}zero{خلال # يوم}two{خلال يومَين}few{خلال # أيام}many{خلال # يومًا}other{خلال # يوم}}"</string>
+    <string name="duration_years_relative_future" msgid="4324694717023686926">"{count,plural, =1{خلال عام واحد}zero{خلال # عام}two{خلال عامَين}few{خلال # أعوام}many{خلال # عامًا}other{خلال # عام}}"</string>
 </resources>

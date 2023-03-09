@@ -39,36 +39,20 @@
     <string name="cd_play_action_button" msgid="2678681425367772215">"「播放」動作按鈕"</string>
     <string name="now_string_shortest" msgid="7873145874801426444">"現在"</string>
     <string name="participant_overflow_text" msgid="6834410359562565577">"還有 %d 位"</string>
-    <!-- no translation found for duration_minutes_shortest (3196334009463125092) -->
-    <skip />
-    <!-- no translation found for duration_hours_shortest (8095656486778505484) -->
-    <skip />
-    <!-- no translation found for duration_days_shortest (2567856512972859524) -->
-    <skip />
-    <!-- no translation found for duration_years_shortest (4541861612636279411) -->
-    <skip />
-    <!-- no translation found for duration_minutes_shortest_future (9057746041696643224) -->
-    <skip />
-    <!-- no translation found for duration_hours_shortest_future (2738010200085537168) -->
-    <skip />
-    <!-- no translation found for duration_days_shortest_future (6581670806566500466) -->
-    <skip />
-    <!-- no translation found for duration_years_shortest_future (3968534937321896952) -->
-    <skip />
-    <!-- no translation found for duration_minutes_relative (1479854166441683380) -->
-    <skip />
-    <!-- no translation found for duration_hours_relative (5279932468186494598) -->
-    <skip />
-    <!-- no translation found for duration_days_relative (5715578964136532587) -->
-    <skip />
-    <!-- no translation found for duration_years_relative (3688065932579415387) -->
-    <skip />
-    <!-- no translation found for duration_minutes_relative_future (7688847816715855347) -->
-    <skip />
-    <!-- no translation found for duration_hours_relative_future (8233520776576979970) -->
-    <skip />
-    <!-- no translation found for duration_days_relative_future (711437599453501312) -->
-    <skip />
-    <!-- no translation found for duration_years_relative_future (4324694717023686926) -->
-    <skip />
+    <string name="duration_minutes_shortest" msgid="3196334009463125092">"{count,plural, =1{# 分鐘}other{# 分鐘}}"</string>
+    <string name="duration_hours_shortest" msgid="8095656486778505484">"{count,plural, =1{# 小時}other{# 小時}}"</string>
+    <string name="duration_days_shortest" msgid="2567856512972859524">"{count,plural, =1{# 天}other{# 天}}"</string>
+    <string name="duration_years_shortest" msgid="4541861612636279411">"{count,plural, =1{# 年}other{# 年}}"</string>
+    <string name="duration_minutes_shortest_future" msgid="9057746041696643224">"{count,plural, =1{# 分鐘後}other{# 分鐘後}}"</string>
+    <string name="duration_hours_shortest_future" msgid="2738010200085537168">"{count,plural, =1{# 小時後}other{# 小時後}}"</string>
+    <string name="duration_days_shortest_future" msgid="6581670806566500466">"{count,plural, =1{# 天後}other{# 天後}}"</string>
+    <string name="duration_years_shortest_future" msgid="3968534937321896952">"{count,plural, =1{# 年後}other{# 年後}}"</string>
+    <string name="duration_minutes_relative" msgid="1479854166441683380">"{count,plural, =1{# 分鐘前}other{# 分鐘前}}"</string>
+    <string name="duration_hours_relative" msgid="5279932468186494598">"{count,plural, =1{# 小時前}other{# 小時前}}"</string>
+    <string name="duration_days_relative" msgid="5715578964136532587">"{count,plural, =1{# 天前}other{# 天前}}"</string>
+    <string name="duration_years_relative" msgid="3688065932579415387">"{count,plural, =1{# 年前}other{# 年前}}"</string>
+    <string name="duration_minutes_relative_future" msgid="7688847816715855347">"{count,plural, =1{# 分鐘後}other{# 分鐘後}}"</string>
+    <string name="duration_hours_relative_future" msgid="8233520776576979970">"{count,plural, =1{# 小時後}other{# 小時後}}"</string>
+    <string name="duration_days_relative_future" msgid="711437599453501312">"{count,plural, =1{# 天後}other{# 天後}}"</string>
+    <string name="duration_years_relative_future" msgid="4324694717023686926">"{count,plural, =1{# 年後}other{# 年後}}"</string>
 </resources>

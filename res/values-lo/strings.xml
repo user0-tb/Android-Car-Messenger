@@ -39,36 +39,20 @@
     <string name="cd_play_action_button" msgid="2678681425367772215">"ປຸ່ມຄຳສັ່ງຫຼິ້ນ"</string>
     <string name="now_string_shortest" msgid="7873145874801426444">"ຕອນນີ້"</string>
     <string name="participant_overflow_text" msgid="6834410359562565577">", ແລະ ອີກ %d"</string>
-    <!-- no translation found for duration_minutes_shortest (3196334009463125092) -->
-    <skip />
-    <!-- no translation found for duration_hours_shortest (8095656486778505484) -->
-    <skip />
-    <!-- no translation found for duration_days_shortest (2567856512972859524) -->
-    <skip />
-    <!-- no translation found for duration_years_shortest (4541861612636279411) -->
-    <skip />
-    <!-- no translation found for duration_minutes_shortest_future (9057746041696643224) -->
-    <skip />
-    <!-- no translation found for duration_hours_shortest_future (2738010200085537168) -->
-    <skip />
-    <!-- no translation found for duration_days_shortest_future (6581670806566500466) -->
-    <skip />
-    <!-- no translation found for duration_years_shortest_future (3968534937321896952) -->
-    <skip />
-    <!-- no translation found for duration_minutes_relative (1479854166441683380) -->
-    <skip />
-    <!-- no translation found for duration_hours_relative (5279932468186494598) -->
-    <skip />
-    <!-- no translation found for duration_days_relative (5715578964136532587) -->
-    <skip />
-    <!-- no translation found for duration_years_relative (3688065932579415387) -->
-    <skip />
-    <!-- no translation found for duration_minutes_relative_future (7688847816715855347) -->
-    <skip />
-    <!-- no translation found for duration_hours_relative_future (8233520776576979970) -->
-    <skip />
-    <!-- no translation found for duration_days_relative_future (711437599453501312) -->
-    <skip />
-    <!-- no translation found for duration_years_relative_future (4324694717023686926) -->
-    <skip />
+    <string name="duration_minutes_shortest" msgid="3196334009463125092">"{count,plural, =1{# ນທ}other{# ນທ}}"</string>
+    <string name="duration_hours_shortest" msgid="8095656486778505484">"{count,plural, =1{# ຊມ}other{# ຊມ}}"</string>
+    <string name="duration_days_shortest" msgid="2567856512972859524">"{count,plural, =1{# ມ}other{# ມ}}"</string>
+    <string name="duration_years_shortest" msgid="4541861612636279411">"{count,plural, =1{# ປ}other{# ປ}}"</string>
+    <string name="duration_minutes_shortest_future" msgid="9057746041696643224">"{count,plural, =1{ໃນ # ນທ}other{ໃນ # ນທ}}"</string>
+    <string name="duration_hours_shortest_future" msgid="2738010200085537168">"{count,plural, =1{ໃນ # ຊມ}other{ໃນ # ຊມ}}"</string>
+    <string name="duration_days_shortest_future" msgid="6581670806566500466">"{count,plural, =1{ໃນ #ມ}other{ໃນ #ມ}}"</string>
+    <string name="duration_years_shortest_future" msgid="3968534937321896952">"{count,plural, =1{ໃນ # ປ}other{ໃນ # ປ}}"</string>
+    <string name="duration_minutes_relative" msgid="1479854166441683380">"{count,plural, =1{# ນາທີກ່ອນ}other{# ນາທີກ່ອນ}}"</string>
+    <string name="duration_hours_relative" msgid="5279932468186494598">"{count,plural, =1{# ຊົ່ວໂມງກ່ອນ}other{# ຊົ່ວໂມງກ່ອນ}}"</string>
+    <string name="duration_days_relative" msgid="5715578964136532587">"{count,plural, =1{# ມື້ກ່ອນ}other{# ມື້ກ່ອນ}}"</string>
+    <string name="duration_years_relative" msgid="3688065932579415387">"{count,plural, =1{# ປີກ່ອນ}other{# ປີກ່ອນ}}"</string>
+    <string name="duration_minutes_relative_future" msgid="7688847816715855347">"{count,plural, =1{ໃນ # ນາທີ}other{ໃນ # ນາທີ}}"</string>
+    <string name="duration_hours_relative_future" msgid="8233520776576979970">"{count,plural, =1{ໃນ # ຊົ່ວໂມງ}other{ໃນ # ຊົ່ວໂມງ}}"</string>
+    <string name="duration_days_relative_future" msgid="711437599453501312">"{count,plural, =1{ໃນ # ມື້}other{ໃນ # ມື້}}"</string>
+    <string name="duration_years_relative_future" msgid="4324694717023686926">"{count,plural, =1{ໃນ # ປີ}other{ໃນ # ປີ}}"</string>
 </resources>
