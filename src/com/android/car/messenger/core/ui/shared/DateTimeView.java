@@ -30,6 +30,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.icu.text.MessageFormat;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityNodeInfo;
@@ -46,6 +47,9 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.temporal.JulianFields;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Class to provide an updatable custom view with the relative time, based on the time set and the
@@ -228,35 +232,27 @@ public class DateTimeView extends TextView {
         long millisIncrease;
         boolean past = (now >= mTimeMillis);
         String result;
+        Map<String, Object> strArgs = new HashMap<>();
+
         if (duration < MINUTE_IN_MILLIS) {
             setText(mNowText);
             mUpdateTimeMillis = mTimeMillis + MINUTE_IN_MILLIS + 1;
             return;
         } else if (duration < HOUR_IN_MILLIS) {
             count = (int) (duration / MINUTE_IN_MILLIS);
-            result =
-                    String.format(
-                            getContext()
-                                    .getResources()
-                                    .getQuantityString(
-                                            past
-                                                    ? R.plurals.duration_minutes_shortest
-                                                    : R.plurals.duration_minutes_shortest_future,
-                                            count),
-                            count);
+            MessageFormat msgFmt = new MessageFormat(getContext().getResources().getString(
+                    past ? R.string.duration_minutes_shortest
+                            : R.string.duration_minutes_shortest_future), Locale.getDefault());
+            strArgs.put("count", count);
+            result = msgFmt.format(strArgs);
             millisIncrease = MINUTE_IN_MILLIS;
         } else if (duration < DAY_IN_MILLIS) {
             count = (int) (duration / HOUR_IN_MILLIS);
-            result =
-                    String.format(
-                            getContext()
-                                    .getResources()
-                                    .getQuantityString(
-                                            past
-                                                    ? R.plurals.duration_hours_shortest
-                                                    : R.plurals.duration_hours_shortest_future,
-                                            count),
-                            count);
+            MessageFormat msgFmt = new MessageFormat(getContext().getResources().getString(
+                    past ? R.string.duration_hours_shortest
+                            : R.string.duration_hours_shortest_future), Locale.getDefault());
+            strArgs.put("count", count);
+            result = msgFmt.format(strArgs);
             millisIncrease = HOUR_IN_MILLIS;
         } else if (duration < YEAR_IN_MILLIS) {
             // In weird cases it can become 0 because of daylight savings
@@ -265,16 +261,11 @@ public class DateTimeView extends TextView {
             LocalDateTime localNow = toLocalDateTime(now, zoneId);
 
             count = max(Math.abs(dayDistance(localDateTime, localNow)), 1);
-            result =
-                    String.format(
-                            getContext()
-                                    .getResources()
-                                    .getQuantityString(
-                                            past
-                                                    ? R.plurals.duration_days_shortest
-                                                    : R.plurals.duration_days_shortest_future,
-                                            count),
-                            count);
+            MessageFormat msgFmt = new MessageFormat(getContext().getResources().getString(
+                    past ? R.string.duration_days_shortest
+                            : R.string.duration_days_shortest_future), Locale.getDefault());
+            strArgs.put("count", count);
+            result = msgFmt.format(strArgs);
             if (past || count != 1) {
                 mUpdateTimeMillis = computeNextMidnight(localNow, zoneId);
                 millisIncrease = -1;
@@ -284,16 +275,11 @@ public class DateTimeView extends TextView {
 
         } else {
             count = (int) (duration / YEAR_IN_MILLIS);
-            result =
-                    String.format(
-                            getContext()
-                                    .getResources()
-                                    .getQuantityString(
-                                            past
-                                                    ? R.plurals.duration_years_shortest
-                                                    : R.plurals.duration_years_shortest_future,
-                                            count),
-                            count);
+            MessageFormat msgFmt = new MessageFormat(getContext().getResources().getString(
+                    past ? R.string.duration_years_shortest
+                            : R.string.duration_years_shortest_future), Locale.getDefault());
+            strArgs.put("count", count);
+            result = msgFmt.format(strArgs);
             millisIncrease = YEAR_IN_MILLIS;
         }
         if (millisIncrease != -1) {
@@ -354,33 +340,25 @@ public class DateTimeView extends TextView {
             int count;
             boolean past = (now >= mTimeMillis);
             String result;
+            Map<String, Object> strArgs = new HashMap<>();
+
             if (duration < MINUTE_IN_MILLIS) {
                 result = mNowText;
             } else if (duration < HOUR_IN_MILLIS) {
                 count = (int) (duration / MINUTE_IN_MILLIS);
-                result =
-                        String.format(
-                                getContext()
-                                        .getResources()
-                                        .getQuantityString(
-                                                past
-                                                        ? R.plurals.duration_minutes_relative
-                                                        : R.plurals
-                                                                .duration_minutes_relative_future,
-                                                count),
-                                count);
+                MessageFormat msgFmt = new MessageFormat(getContext().getResources().getString(
+                        past ? R.string.duration_minutes_relative
+                                : R.string.duration_minutes_relative_future), Locale.getDefault());
+                strArgs.put("count", count);
+                result = msgFmt.format(strArgs);
+
             } else if (duration < DAY_IN_MILLIS) {
                 count = (int) (duration / HOUR_IN_MILLIS);
-                result =
-                        String.format(
-                                getContext()
-                                        .getResources()
-                                        .getQuantityString(
-                                                past
-                                                        ? R.plurals.duration_hours_relative
-                                                        : R.plurals.duration_hours_relative_future,
-                                                count),
-                                count);
+                MessageFormat msgFmt = new MessageFormat(getContext().getResources().getString(
+                        past ? R.string.duration_hours_relative
+                                : R.string.duration_hours_relative_future), Locale.getDefault());
+                strArgs.put("count", count);
+                result = msgFmt.format(strArgs);
             } else if (duration < YEAR_IN_MILLIS) {
                 // In weird cases it can become 0 because of daylight savings
                 LocalDateTime localDateTime = mLocalTime;
@@ -388,29 +366,18 @@ public class DateTimeView extends TextView {
                 LocalDateTime localNow = toLocalDateTime(now, zoneId);
 
                 count = max(Math.abs(dayDistance(localDateTime, localNow)), 1);
-                result =
-                        String.format(
-                                getContext()
-                                        .getResources()
-                                        .getQuantityString(
-                                                past
-                                                        ? R.plurals.duration_days_relative
-                                                        : R.plurals.duration_days_relative_future,
-                                                count),
-                                count);
-
+                MessageFormat msgFmt = new MessageFormat(getContext().getResources().getString(
+                        past ? R.string.duration_days_relative
+                                : R.string.duration_days_relative_future), Locale.getDefault());
+                strArgs.put("count", count);
+                result = msgFmt.format(strArgs);
             } else {
                 count = (int) (duration / YEAR_IN_MILLIS);
-                result =
-                        String.format(
-                                getContext()
-                                        .getResources()
-                                        .getQuantityString(
-                                                past
-                                                        ? R.plurals.duration_years_relative
-                                                        : R.plurals.duration_years_relative_future,
-                                                count),
-                                count);
+                MessageFormat msgFmt = new MessageFormat(getContext().getResources().getString(
+                        past ? R.string.duration_years_relative
+                                : R.string.duration_years_relative_future), Locale.getDefault());
+                strArgs.put("count", count);
+                result = msgFmt.format(strArgs);
             }
             info.setText(result);
         }

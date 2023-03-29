@@ -39,68 +39,20 @@
     <string name="cd_play_action_button" msgid="2678681425367772215">"Бутон за действието „пускане“"</string>
     <string name="now_string_shortest" msgid="7873145874801426444">"сега"</string>
     <string name="participant_overflow_text" msgid="6834410359562565577">"и още %d"</string>
-    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> мин</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> мин</item>
-    </plurals>
-    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ч</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ч</item>
-    </plurals>
-    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> д</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> д</item>
-    </plurals>
-    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> г.</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> г.</item>
-    </plurals>
-    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
-      <item quantity="other">след <xliff:g id="COUNT_1">%d</xliff:g> мин</item>
-      <item quantity="one">след <xliff:g id="COUNT_0">%d</xliff:g> мин</item>
-    </plurals>
-    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
-      <item quantity="other">след <xliff:g id="COUNT_1">%d</xliff:g> ч</item>
-      <item quantity="one">след <xliff:g id="COUNT_0">%d</xliff:g> ч</item>
-    </plurals>
-    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
-      <item quantity="other">след <xliff:g id="COUNT_1">%d</xliff:g> д</item>
-      <item quantity="one">след <xliff:g id="COUNT_0">%d</xliff:g> д</item>
-    </plurals>
-    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
-      <item quantity="other">след <xliff:g id="COUNT_1">%d</xliff:g> г.</item>
-      <item quantity="one">след <xliff:g id="COUNT_0">%d</xliff:g> г.</item>
-    </plurals>
-    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
-      <item quantity="other">преди <xliff:g id="COUNT_1">%d</xliff:g> минути</item>
-      <item quantity="one">преди <xliff:g id="COUNT_0">%d</xliff:g> минута</item>
-    </plurals>
-    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
-      <item quantity="other">преди <xliff:g id="COUNT_1">%d</xliff:g> часа</item>
-      <item quantity="one">преди <xliff:g id="COUNT_0">%d</xliff:g> час</item>
-    </plurals>
-    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
-      <item quantity="other">преди <xliff:g id="COUNT_1">%d</xliff:g> дни</item>
-      <item quantity="one">преди <xliff:g id="COUNT_0">%d</xliff:g> ден</item>
-    </plurals>
-    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
-      <item quantity="other">преди <xliff:g id="COUNT_1">%d</xliff:g> години</item>
-      <item quantity="one">преди <xliff:g id="COUNT_0">%d</xliff:g> година</item>
-    </plurals>
-    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
-      <item quantity="other">след <xliff:g id="COUNT_1">%d</xliff:g> минути</item>
-      <item quantity="one">след <xliff:g id="COUNT_0">%d</xliff:g> минута</item>
-    </plurals>
-    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
-      <item quantity="other">след <xliff:g id="COUNT_1">%d</xliff:g> часа</item>
-      <item quantity="one">след <xliff:g id="COUNT_0">%d</xliff:g> час</item>
-    </plurals>
-    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
-      <item quantity="other">след <xliff:g id="COUNT_1">%d</xliff:g> дни</item>
-      <item quantity="one">след <xliff:g id="COUNT_0">%d</xliff:g> ден</item>
-    </plurals>
-    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
-      <item quantity="other">след <xliff:g id="COUNT_1">%d</xliff:g> години</item>
-      <item quantity="one">след <xliff:g id="COUNT_0">%d</xliff:g> година</item>
-    </plurals>
+    <string name="duration_minutes_shortest" msgid="3196334009463125092">"{count,plural, =1{# м}other{# м}}"</string>
+    <string name="duration_hours_shortest" msgid="8095656486778505484">"{count,plural, =1{# ч}other{# ч}}"</string>
+    <string name="duration_days_shortest" msgid="2567856512972859524">"{count,plural, =1{# д}other{# д}}"</string>
+    <string name="duration_years_shortest" msgid="4541861612636279411">"{count,plural, =1{# г.}other{# г.}}"</string>
+    <string name="duration_minutes_shortest_future" msgid="9057746041696643224">"{count,plural, =1{след # мин}other{след # мин}}"</string>
+    <string name="duration_hours_shortest_future" msgid="2738010200085537168">"{count,plural, =1{след # ч}other{след # ч}}"</string>
+    <string name="duration_days_shortest_future" msgid="6581670806566500466">"{count,plural, =1{след # д}other{след # д}}"</string>
+    <string name="duration_years_shortest_future" msgid="3968534937321896952">"{count,plural, =1{след # г.}other{след # г.}}"</string>
+    <string name="duration_minutes_relative" msgid="1479854166441683380">"{count,plural, =1{преди # минута}other{преди # минути}}"</string>
+    <string name="duration_hours_relative" msgid="5279932468186494598">"{count,plural, =1{преди # час}other{преди # часа}}"</string>
+    <string name="duration_days_relative" msgid="5715578964136532587">"{count,plural, =1{преди # ден}other{преди # дни}}"</string>
+    <string name="duration_years_relative" msgid="3688065932579415387">"{count,plural, =1{преди # година}other{преди # години}}"</string>
+    <string name="duration_minutes_relative_future" msgid="7688847816715855347">"{count,plural, =1{след # минута}other{след # минути}}"</string>
+    <string name="duration_hours_relative_future" msgid="8233520776576979970">"{count,plural, =1{след # час}other{след # часа}}"</string>
+    <string name="duration_days_relative_future" msgid="711437599453501312">"{count,plural, =1{след # ден}other{след # дни}}"</string>
+    <string name="duration_years_relative_future" msgid="4324694717023686926">"{count,plural, =1{след # година}other{след # години}}"</string>
 </resources>

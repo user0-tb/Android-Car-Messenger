@@ -39,68 +39,20 @@
     <string name="cd_play_action_button" msgid="2678681425367772215">"Botão de ação para reproduzir"</string>
     <string name="now_string_shortest" msgid="7873145874801426444">"agora"</string>
     <string name="participant_overflow_text" msgid="6834410359562565577">"e mais %d"</string>
-    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> min</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> min</item>
-    </plurals>
-    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> h</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> h</item>
-    </plurals>
-    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> d</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> d</item>
-    </plurals>
-    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> a</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> a</item>
-    </plurals>
-    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
-      <item quantity="other">dentro de <xliff:g id="COUNT_1">%d</xliff:g> min</item>
-      <item quantity="one">dentro de <xliff:g id="COUNT_0">%d</xliff:g> min</item>
-    </plurals>
-    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
-      <item quantity="other">dentro de <xliff:g id="COUNT_1">%d</xliff:g> h</item>
-      <item quantity="one">dentro de <xliff:g id="COUNT_0">%d</xliff:g> h</item>
-    </plurals>
-    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
-      <item quantity="other">dentro de <xliff:g id="COUNT_1">%d</xliff:g> d</item>
-      <item quantity="one">dentro de <xliff:g id="COUNT_0">%d</xliff:g> d</item>
-    </plurals>
-    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
-      <item quantity="other">dentro de <xliff:g id="COUNT_1">%d</xliff:g> a</item>
-      <item quantity="one">dentro de <xliff:g id="COUNT_0">%d</xliff:g> a</item>
-    </plurals>
-    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
-      <item quantity="other">há <xliff:g id="COUNT_1">%d</xliff:g> minutos</item>
-      <item quantity="one">há <xliff:g id="COUNT_0">%d</xliff:g> minuto</item>
-    </plurals>
-    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
-      <item quantity="other">há <xliff:g id="COUNT_1">%d</xliff:g> horas</item>
-      <item quantity="one">há <xliff:g id="COUNT_0">%d</xliff:g> hora</item>
-    </plurals>
-    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
-      <item quantity="other">há <xliff:g id="COUNT_1">%d</xliff:g> dias</item>
-      <item quantity="one">há <xliff:g id="COUNT_0">%d</xliff:g> dia</item>
-    </plurals>
-    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
-      <item quantity="other">há <xliff:g id="COUNT_1">%d</xliff:g> anos</item>
-      <item quantity="one">há <xliff:g id="COUNT_0">%d</xliff:g> ano</item>
-    </plurals>
-    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
-      <item quantity="other">dentro de <xliff:g id="COUNT_1">%d</xliff:g> minutos</item>
-      <item quantity="one">dentro de <xliff:g id="COUNT_0">%d</xliff:g> minuto</item>
-    </plurals>
-    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
-      <item quantity="other">dentro de <xliff:g id="COUNT_1">%d</xliff:g> horas</item>
-      <item quantity="one">dentro de <xliff:g id="COUNT_0">%d</xliff:g> hora</item>
-    </plurals>
-    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
-      <item quantity="other">dentro de <xliff:g id="COUNT_1">%d</xliff:g> dias</item>
-      <item quantity="one">dentro de <xliff:g id="COUNT_0">%d</xliff:g> dia</item>
-    </plurals>
-    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
-      <item quantity="other">dentro de <xliff:g id="COUNT_1">%d</xliff:g> anos</item>
-      <item quantity="one">dentro de <xliff:g id="COUNT_0">%d</xliff:g> ano</item>
-    </plurals>
+    <string name="duration_minutes_shortest" msgid="3196334009463125092">"{count,plural, =1{# min}other{# min}}"</string>
+    <string name="duration_hours_shortest" msgid="8095656486778505484">"{count,plural, =1{# h}other{# h}}"</string>
+    <string name="duration_days_shortest" msgid="2567856512972859524">"{count,plural, =1{# d}other{# d}}"</string>
+    <string name="duration_years_shortest" msgid="4541861612636279411">"{count,plural, =1{# a}other{# a}}"</string>
+    <string name="duration_minutes_shortest_future" msgid="9057746041696643224">"{count,plural, =1{em # min}other{em # min}}"</string>
+    <string name="duration_hours_shortest_future" msgid="2738010200085537168">"{count,plural, =1{dentro de # h}other{dentro de # h}}"</string>
+    <string name="duration_days_shortest_future" msgid="6581670806566500466">"{count,plural, =1{dentro de # d}other{dentro de # d}}"</string>
+    <string name="duration_years_shortest_future" msgid="3968534937321896952">"{count,plural, =1{dentro de # a}other{dentro de # a}}"</string>
+    <string name="duration_minutes_relative" msgid="1479854166441683380">"{count,plural, =1{há # minuto}other{há # minutos}}"</string>
+    <string name="duration_hours_relative" msgid="5279932468186494598">"{count,plural, =1{há # hora}other{há # horas}}"</string>
+    <string name="duration_days_relative" msgid="5715578964136532587">"{count,plural, =1{há # dia}other{há # dias}}"</string>
+    <string name="duration_years_relative" msgid="3688065932579415387">"{count,plural, =1{há # ano}other{há # anos}}"</string>
+    <string name="duration_minutes_relative_future" msgid="7688847816715855347">"{count,plural, =1{dentro de # minuto}other{dentro de # minutos}}"</string>
+    <string name="duration_hours_relative_future" msgid="8233520776576979970">"{count,plural, =1{dentro de # hora}other{dentro de # horas}}"</string>
+    <string name="duration_days_relative_future" msgid="711437599453501312">"{count,plural, =1{dentro de # dia}other{dentro de # dias}}"</string>
+    <string name="duration_years_relative_future" msgid="4324694717023686926">"{count,plural, =1{dentro de # ano}other{dentro de # anos}}"</string>
 </resources>

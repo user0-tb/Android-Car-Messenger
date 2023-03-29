@@ -39,68 +39,20 @@
     <string name="cd_play_action_button" msgid="2678681425367772215">"ପ୍ଲେ କରିବା କାର୍ଯ୍ୟ ବଟନ"</string>
     <string name="now_string_shortest" msgid="7873145874801426444">"ଏବେ"</string>
     <string name="participant_overflow_text" msgid="6834410359562565577">", ଏବଂ ଅଧିକ %d"</string>
-    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ମି</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>ମି</item>
-    </plurals>
-    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ଘ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>ଘ</item>
-    </plurals>
-    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ଦି</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>ଦି</item>
-    </plurals>
-    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ବ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>ବ</item>
-    </plurals>
-    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ମିନିଟରେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ମିନିଟରେ</item>
-    </plurals>
-    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ଘଣ୍ଟାରେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ଘଣ୍ଟାରେ</item>
-    </plurals>
-    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ଦିନରେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ଦିନରେ</item>
-    </plurals>
-    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ବର୍ଷରେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ବର୍ଷରେ</item>
-    </plurals>
-    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ମିନିଟ ପୂର୍ବେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ମିନିଟ ପୂର୍ବେ</item>
-    </plurals>
-    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ଘଣ୍ଟା ପୂର୍ବେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ଘଣ୍ଟା ପୂର୍ବେ</item>
-    </plurals>
-    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ଦିନ ପୂର୍ବେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ଦିନ ପୂର୍ବେ</item>
-    </plurals>
-    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ବର୍ଷ ପୂର୍ବେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ବର୍ଷ ପୂର୍ବେ</item>
-    </plurals>
-    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ମିନିଟରେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ମିନିଟରେ</item>
-    </plurals>
-    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ଘଣ୍ଟାରେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ଘଣ୍ଟାରେ</item>
-    </plurals>
-    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ଦିନରେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ଦିନରେ</item>
-    </plurals>
-    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ବର୍ଷରେ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ବର୍ଷରେ</item>
-    </plurals>
+    <string name="duration_minutes_shortest" msgid="3196334009463125092">"{count,plural, =1{#ମିନିଟ}other{#ମିନିଟ}}"</string>
+    <string name="duration_hours_shortest" msgid="8095656486778505484">"{count,plural, =1{#ଘଣ୍ଟା}other{#ଘଣ୍ଟା}}"</string>
+    <string name="duration_days_shortest" msgid="2567856512972859524">"{count,plural, =1{# ଦିନ}other{# ଦିନ}}"</string>
+    <string name="duration_years_shortest" msgid="4541861612636279411">"{count,plural, =1{# ବର୍ଷ}other{# ବର୍ଷ}}"</string>
+    <string name="duration_minutes_shortest_future" msgid="9057746041696643224">"{count,plural, =1{# ମିନିଟରେ}other{# ମିନିଟରେ}}"</string>
+    <string name="duration_hours_shortest_future" msgid="2738010200085537168">"{count,plural, =1{# ଘଣ୍ଟାରେ}other{# ଘଣ୍ଟାରେ}}"</string>
+    <string name="duration_days_shortest_future" msgid="6581670806566500466">"{count,plural, =1{# ଦିନରେ}other{# ଦିନରେ}}"</string>
+    <string name="duration_years_shortest_future" msgid="3968534937321896952">"{count,plural, =1{# ବର୍ଷରେ}other{# ବର୍ଷରେ}}"</string>
+    <string name="duration_minutes_relative" msgid="1479854166441683380">"{count,plural, =1{# ମିନିଟ ପୂର୍ବେ}other{# ମିନିଟ ପୂର୍ବେ}}"</string>
+    <string name="duration_hours_relative" msgid="5279932468186494598">"{count,plural, =1{# ଘଣ୍ଟା ପୂର୍ବେ}other{# ଘଣ୍ଟା ପୂର୍ବେ}}"</string>
+    <string name="duration_days_relative" msgid="5715578964136532587">"{count,plural, =1{# ଦିନ ପୂର୍ବେ}other{# ଦିନ ପୂର୍ବେ}}"</string>
+    <string name="duration_years_relative" msgid="3688065932579415387">"{count,plural, =1{# ବର୍ଷ ପୂର୍ବେ}other{# ବର୍ଷ ପୂର୍ବେ}}"</string>
+    <string name="duration_minutes_relative_future" msgid="7688847816715855347">"{count,plural, =1{# ମିନିଟରେ}other{# ମିନିଟରେ}}"</string>
+    <string name="duration_hours_relative_future" msgid="8233520776576979970">"{count,plural, =1{# ଘଣ୍ଟାରେ}other{# ଘଣ୍ଟାରେ}}"</string>
+    <string name="duration_days_relative_future" msgid="711437599453501312">"{count,plural, =1{# ଦିନରେ}other{# ଦିନରେ}}"</string>
+    <string name="duration_years_relative_future" msgid="4324694717023686926">"{count,plural, =1{# ବର୍ଷରେ}other{# ବର୍ଷରେ}}"</string>
 </resources>
