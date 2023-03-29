@@ -30,7 +30,7 @@
     <string name="message_channel_name" msgid="8568703344795660393">"چینل کا پیغام"</string>
     <string name="message_channel_description" msgid="4316796171238519904">"فون پیغام کے موصول کنندہ کی سروس"</string>
     <string name="new_message" msgid="8983092328255956122">"نیا پیغام"</string>
-    <string name="cd_unread" msgid="8970475932047388299">"بغیر پڑھا ہوا"</string>
+    <string name="cd_unread" msgid="8970475932047388299">"نہ پڑھا ہوا"</string>
     <string name="cd_conversation_icon" msgid="2600955838672124935">"گفتگو کا آئیکن"</string>
     <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"سب ٹائٹل کا ٹیکسٹ آئیکن"</string>
     <string name="cd_mute_button" msgid="76118116050731771">"خاموش کرنے کا بٹن"</string>
