@@ -39,68 +39,20 @@
     <string name="cd_play_action_button" msgid="2678681425367772215">"Actieknop voor afspelen"</string>
     <string name="now_string_shortest" msgid="7873145874801426444">"nu"</string>
     <string name="participant_overflow_text" msgid="6834410359562565577">"en nog %d"</string>
-    <plurals name="duration_minutes_shortest" formatted="false" msgid="2032564710937299020">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> m</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> m</item>
-    </plurals>
-    <plurals name="duration_hours_shortest" formatted="false" msgid="2397711120966219380">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> u</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> u</item>
-    </plurals>
-    <plurals name="duration_days_shortest" formatted="false" msgid="4821932189741294398">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> d</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> d</item>
-    </plurals>
-    <plurals name="duration_years_shortest" formatted="false" msgid="7691808083731802291">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> j</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> j</item>
-    </plurals>
-    <plurals name="duration_minutes_shortest_future" formatted="false" msgid="970404855523073058">
-      <item quantity="other">over <xliff:g id="COUNT_1">%d</xliff:g> m</item>
-      <item quantity="one">over <xliff:g id="COUNT_0">%d</xliff:g> m</item>
-    </plurals>
-    <plurals name="duration_hours_shortest_future" formatted="false" msgid="7576669586217994277">
-      <item quantity="other">over <xliff:g id="COUNT_1">%d</xliff:g> u</item>
-      <item quantity="one">over <xliff:g id="COUNT_0">%d</xliff:g> u</item>
-    </plurals>
-    <plurals name="duration_days_shortest_future" formatted="false" msgid="4181726681322114142">
-      <item quantity="other">over <xliff:g id="COUNT_1">%d</xliff:g> d</item>
-      <item quantity="one">over <xliff:g id="COUNT_0">%d</xliff:g> d</item>
-    </plurals>
-    <plurals name="duration_years_shortest_future" formatted="false" msgid="1914139956285007640">
-      <item quantity="other">over <xliff:g id="COUNT_1">%d</xliff:g> j</item>
-      <item quantity="one">over <xliff:g id="COUNT_0">%d</xliff:g> j</item>
-    </plurals>
-    <plurals name="duration_minutes_relative" formatted="false" msgid="8320950654420403156">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> minuten geleden</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> minuut geleden</item>
-    </plurals>
-    <plurals name="duration_hours_relative" formatted="false" msgid="7620985305988832154">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> uur geleden</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> uur geleden</item>
-    </plurals>
-    <plurals name="duration_days_relative" formatted="false" msgid="3112990273438998896">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> dagen geleden</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> dag geleden</item>
-    </plurals>
-    <plurals name="duration_years_relative" formatted="false" msgid="1430710802825188536">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> jaar geleden</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> jaar geleden</item>
-    </plurals>
-    <plurals name="duration_minutes_relative_future" formatted="false" msgid="7739520423472129340">
-      <item quantity="other">over <xliff:g id="COUNT_1">%d</xliff:g> minuten</item>
-      <item quantity="one">over <xliff:g id="COUNT_0">%d</xliff:g> minuut</item>
-    </plurals>
-    <plurals name="duration_hours_relative_future" formatted="false" msgid="7073660035612223835">
-      <item quantity="other">over <xliff:g id="COUNT_1">%d</xliff:g> uur</item>
-      <item quantity="one">over <xliff:g id="COUNT_0">%d</xliff:g> uur</item>
-    </plurals>
-    <plurals name="duration_days_relative_future" formatted="false" msgid="4695393291542301533">
-      <item quantity="other">over <xliff:g id="COUNT_1">%d</xliff:g> dagen</item>
-      <item quantity="one">over <xliff:g id="COUNT_0">%d</xliff:g> dag</item>
-    </plurals>
-    <plurals name="duration_years_relative_future" formatted="false" msgid="4435371633130093708">
-      <item quantity="other">over <xliff:g id="COUNT_1">%d</xliff:g> jaar</item>
-      <item quantity="one">over <xliff:g id="COUNT_0">%d</xliff:g> jaar</item>
-    </plurals>
+    <string name="duration_minutes_shortest" msgid="3196334009463125092">"{count,plural, =1{#m}other{#m}}"</string>
+    <string name="duration_hours_shortest" msgid="8095656486778505484">"{count,plural, =1{#u}other{#u}}"</string>
+    <string name="duration_days_shortest" msgid="2567856512972859524">"{count,plural, =1{#d}other{#d}}"</string>
+    <string name="duration_years_shortest" msgid="4541861612636279411">"{count,plural, =1{#j}other{#j}}"</string>
+    <string name="duration_minutes_shortest_future" msgid="9057746041696643224">"{count,plural, =1{over #m}other{over #m}}"</string>
+    <string name="duration_hours_shortest_future" msgid="2738010200085537168">"{count,plural, =1{over #u}other{over #u}}"</string>
+    <string name="duration_days_shortest_future" msgid="6581670806566500466">"{count,plural, =1{over #d}other{over #d}}"</string>
+    <string name="duration_years_shortest_future" msgid="3968534937321896952">"{count,plural, =1{over #j}other{over #j}}"</string>
+    <string name="duration_minutes_relative" msgid="1479854166441683380">"{count,plural, =1{# minuut geleden}other{# minuten geleden}}"</string>
+    <string name="duration_hours_relative" msgid="5279932468186494598">"{count,plural, =1{# uur geleden}other{# uur geleden}}"</string>
+    <string name="duration_days_relative" msgid="5715578964136532587">"{count,plural, =1{# dag geleden}other{# dagen geleden}}"</string>
+    <string name="duration_years_relative" msgid="3688065932579415387">"{count,plural, =1{# jaar geleden}other{# jaar geleden}}"</string>
+    <string name="duration_minutes_relative_future" msgid="7688847816715855347">"{count,plural, =1{over # minuut}other{over # minuten}}"</string>
+    <string name="duration_hours_relative_future" msgid="8233520776576979970">"{count,plural, =1{over # uur}other{over # uur}}"</string>
+    <string name="duration_days_relative_future" msgid="711437599453501312">"{count,plural, =1{over # dag}other{over # dagen}}"</string>
+    <string name="duration_years_relative_future" msgid="4324694717023686926">"{count,plural, =1{over # jaar}other{over # jaar}}"</string>
 </resources>

@@ -80,98 +80,114 @@
     <string name="participant_overflow_text">, and %d more</string>
 
     <!-- Phrase describing a time duration using minutes that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->
-    <plurals name="duration_minutes_shortest">
-        <item quantity="one"><xliff:g example="1" id="count">%d</xliff:g>m</item>
-        <item quantity="other"><xliff:g example="2" id="count">%d</xliff:g>m</item>
-    </plurals>
+    <string name="duration_minutes_shortest"> {count, plural,
+        =1 {#m}
+        other {#m}
+    }
+    </string>
 
     <!-- Phrase describing a time duration using hours that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->
-    <plurals name="duration_hours_shortest">
-        <item quantity="one"><xliff:g example="1" id="count">%d</xliff:g>h</item>
-        <item quantity="other"><xliff:g example="2" id="count">%d</xliff:g>h</item>
-    </plurals>
+    <string name="duration_hours_shortest"> {count, plural,
+        =1 {#h}
+        other {#h}
+    }
+    </string>
 
     <!-- Phrase describing a time duration using days that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->
-    <plurals name="duration_days_shortest">
-        <item quantity="one"><xliff:g example="1" id="count">%d</xliff:g>d</item>
-        <item quantity="other"><xliff:g example="2" id="count">%d</xliff:g>d</item>
-    </plurals>
+    <string name="duration_days_shortest"> {count, plural,
+        =1 {#d}
+        other {#d}
+    }
+    </string>
 
     <!-- Phrase describing a time duration using years that is as short as possible, preferrably one character. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=6] -->
-    <plurals name="duration_years_shortest">
-        <item quantity="one"><xliff:g example="1" id="count">%d</xliff:g>y</item>
-        <item quantity="other"><xliff:g example="2" id="count">%d</xliff:g>y</item>
-    </plurals>
+    <string name="duration_years_shortest"> {count, plural,
+        =1 {#y}
+        other {#y}
+    }
+    </string>
 
     <!-- Phrase describing a time duration using minutes that is as short as possible, preferrably one character. This version should be a future point in time. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=14] -->
-    <plurals name="duration_minutes_shortest_future">
-        <item quantity="one">in <xliff:g example="1" id="count">%d</xliff:g>m</item>
-        <item quantity="other">in <xliff:g example="2" id="count">%d</xliff:g>m</item>
-    </plurals>
+    <string name="duration_minutes_shortest_future"> {count, plural,
+        =1 {in #m}
+        other {in #m}
+    }
+    </string>
 
     <!-- Phrase describing a time duration using hours that is as short as possible, preferrably one character. This version should be a future point in time. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=14] -->
-    <plurals name="duration_hours_shortest_future">
-        <item quantity="one">in <xliff:g example="1" id="count">%d</xliff:g>h</item>
-        <item quantity="other">in <xliff:g example="2" id="count">%d</xliff:g>h</item>
-    </plurals>
+    <string name="duration_hours_shortest_future"> {count, plural,
+        =1 {in #h}
+        other {in #h}
+    }
+    </string>
 
     <!-- Phrase describing a time duration using days that is as short as possible, preferrably one character. This version should be a future point in time. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=14] -->
-    <plurals name="duration_days_shortest_future">
-        <item quantity="one">in <xliff:g example="1" id="count">%d</xliff:g>d</item>
-        <item quantity="other">in <xliff:g example="2" id="count">%d</xliff:g>d</item>
-    </plurals>
+    <string name="duration_days_shortest_future"> {count, plural,
+        =1 {in #d}
+        other {in #d}
+    }
+    </string>
 
     <!-- Phrase describing a time duration using years that is as short as possible, preferrably one character. This version should be a future point in time. If the language needs a space in between the integer and the unit, please also integrate it in the string, but preferably it should not have a space in between.[CHAR LIMIT=14] -->
-    <plurals name="duration_years_shortest_future">
-        <item quantity="one">in <xliff:g example="1" id="count">%d</xliff:g>y</item>
-        <item quantity="other">in <xliff:g example="2" id="count">%d</xliff:g>y</item>
-    </plurals>
+    <string name="duration_years_shortest_future"> {count, plural,
+        =1 {in #y}
+        other {in #y}
+    }
+    </string>
 
     <!-- Phrase describing a relative time using minutes in the past that is not shown on the screen but used for accessibility. [CHAR LIMIT=40] -->
-    <plurals name="duration_minutes_relative">
-        <item quantity="one"><xliff:g example="1" id="count">%d</xliff:g> minute ago</item>
-        <item quantity="other"><xliff:g example="2" id="count">%d</xliff:g> minutes ago</item>
-    </plurals>
+    <string name="duration_minutes_relative"> {count, plural,
+        =1 {# minute ago}
+        other {# minutes ago}
+    }
+    </string>
 
     <!-- Phrase describing a relative time using hours in the past that is not shown on the screen but used for accessibility. [CHAR LIMIT=40] -->
-    <plurals name="duration_hours_relative">
-        <item quantity="one"><xliff:g example="1" id="count">%d</xliff:g> hour ago</item>
-        <item quantity="other"><xliff:g example="2" id="count">%d</xliff:g> hours ago</item>
-    </plurals>
+    <string name="duration_hours_relative"> {count, plural,
+        =1 {# hour ago}
+        other {# hours ago}
+    }
+    </string>
 
     <!-- Phrase describing a relative time using days in the past that is not shown on the screen but used for accessibility. [CHAR LIMIT=40] -->
-    <plurals name="duration_days_relative">
-        <item quantity="one"><xliff:g example="1" id="count">%d</xliff:g> day ago</item>
-        <item quantity="other"><xliff:g example="2" id="count">%d</xliff:g> days ago</item>
-    </plurals>
+    <string name="duration_days_relative"> {count, plural,
+        =1 {# day ago}
+        other {# days ago}
+    }
+    </string>
 
     <!-- Phrase describing a relative time using years in the past that is not shown on the screen but used for accessibility. [CHAR LIMIT=40] -->
-    <plurals name="duration_years_relative">
-        <item quantity="one"><xliff:g example="1" id="count">%d</xliff:g> year ago</item>
-        <item quantity="other"><xliff:g example="2" id="count">%d</xliff:g> years ago</item>
-    </plurals>
+    <string name="duration_years_relative"> {count, plural,
+        =1 {# year ago}
+        other {# years ago}
+    }
+    </string>
 
     <!-- Phrase describing a relative time using minutes that is not shown on the screen but used for accessibility. This version should be a future point in time. [CHAR LIMIT=NONE] -->
-    <plurals name="duration_minutes_relative_future">
-        <item quantity="one">in <xliff:g example="1" id="count">%d</xliff:g> minute</item>
-        <item quantity="other">in <xliff:g example="2" id="count">%d</xliff:g> minutes</item>
-    </plurals>
+    <string name="duration_minutes_relative_future"> {count, plural,
+        =1 {in # minute}
+        other {in # minutes}
+    }
+    </string>
 
     <!-- Phrase describing a relative time using hours that is not shown on the screen but used for accessibility. This version should be a future point in time. [CHAR LIMIT=NONE] -->
-    <plurals name="duration_hours_relative_future">
-        <item quantity="one">in <xliff:g example="1" id="count">%d</xliff:g> hour</item>
-        <item quantity="other">in <xliff:g example="2" id="count">%d</xliff:g> hours</item>
-    </plurals>
+    <string name="duration_hours_relative_future"> {count, plural,
+        =1 {in # hour}
+        other {in # hours}
+    }
+    </string>
 
     <!-- Phrase describing a relative time using days that is not shown on the screen but used for accessibility. This version should be a future point in time. [CHAR LIMIT=NONE] -->
-    <plurals name="duration_days_relative_future">
-        <item quantity="one">in <xliff:g example="1" id="count">%d</xliff:g> day</item>
-        <item quantity="other">in <xliff:g example="2" id="count">%d</xliff:g> days</item>
-    </plurals>
+    <string name="duration_days_relative_future"> {count, plural,
+        =1 {in # day}
+        other {in # days}
+    }
+    </string>
 
     <!-- Phrase describing a relative time using years that is not shown on the screen but used for accessibility. This version should be a future point in time. [CHAR LIMIT=NONE] -->
-    <plurals name="duration_years_relative_future">
-        <item quantity="one">in <xliff:g example="1" id="count">%d</xliff:g> year</item>
-        <item quantity="other">in <xliff:g example="2" id="count">%d</xliff:g> years</item>
-    </plurals>
+    <string name="duration_years_relative_future"> {count, plural,
+        =1 {in # year}
+        other {in # years}
+    }
+    </string>
 </resources>
