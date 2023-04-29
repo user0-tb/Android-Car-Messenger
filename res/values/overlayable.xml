@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Copyright (C) 2023 The Android Open Source Project
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.-->
+<!--
+THIS FILE WAS AUTO GENERATED, DO NOT EDIT MANUALLY.
+REGENERATE USING packages/apps/Car/tests/tools/rro/generate-overlayable.py
+-->
+<resources>
+  <overlayable name="CarMessengerApp">
+    <policy type="system|product|signature">
+      <item type="array" name="letter_tile_colors"/>
+      <item type="attr" name="emptyViewLayout"/>
+      <item type="attr" name="errorViewLayout"/>
+      <item type="attr" name="progressViewLayout"/>
+      <item type="bool" name="direct_reply_supported"/>
+      <item type="bool" name="direct_send_supported"/>
+      <item type="bool" name="group_avatar_fill_background"/>
+      <item type="bool" name="ttr_conversation_supported"/>
+      <item type="color" name="background_image_30p_black"/>
+      <item type="color" name="car_card_ripple_background"/>
+      <item type="color" name="car_grey_50"/>
+      <item type="color" name="car_grey_868"/>
+      <item type="color" name="car_red_500a"/>
+      <item type="color" name="divider_color"/>
+      <item type="color" name="divider_color_light"/>
+      <item type="color" name="group_avatar_background_color"/>
+      <item type="color" name="group_avatar_stroke_color"/>
+      <item type="color" name="hero_button_background_color"/>
+      <item type="color" name="hero_button_text_color"/>
+      <item type="color" name="icon_tint"/>
+      <item type="color" name="letter_tile_default_color"/>
+      <item type="color" name="letter_tile_font_color"/>
+      <item type="color" name="primary_icon_color"/>
+      <item type="color" name="primary_text_color"/>
+      <item type="color" name="secondary_text_color"/>
+      <item type="color" name="unread_color"/>
+      <item type="color" name="unread_text_color"/>
+      <item type="color" name="uxr_button_text_color"/>
+      <item type="color" name="uxr_button_text_color_selector"/>
+      <item type="color" name="uxr_button_text_disabled_color"/>
+      <item type="dimen" name="avatar_icon_size"/>
+      <item type="dimen" name="car_keyline_1"/>
+      <item type="dimen" name="car_keyline_2"/>
+      <item type="dimen" name="contact_avatar_corner_radius_percent"/>
+      <item type="dimen" name="conversation_avatar_width"/>
+      <item type="dimen" name="dialog_max_width"/>
+      <item type="dimen" name="dot_size"/>
+      <item type="dimen" name="hero_button_corner_radius"/>
+      <item type="dimen" name="hero_button_height"/>
+      <item type="dimen" name="hero_button_max_width"/>
+      <item type="dimen" name="hero_button_min_width"/>
+      <item type="dimen" name="letter_spacing_body1"/>
+      <item type="dimen" name="letter_spacing_body2"/>
+      <item type="dimen" name="letter_spacing_body3"/>
+      <item type="dimen" name="letter_spacing_display3"/>
+      <item type="dimen" name="list_divider_height"/>
+      <item type="dimen" name="list_divider_inset"/>
+      <item type="dimen" name="list_item_guideline_begin"/>
+      <item type="dimen" name="list_item_height"/>
+      <item type="dimen" name="list_item_padding"/>
+      <item type="dimen" name="list_item_text_margin_end"/>
+      <item type="dimen" name="list_top_padding"/>
+      <item type="dimen" name="loading_info_button_margin_top"/>
+      <item type="dimen" name="loading_info_icon_margin_bottom"/>
+      <item type="dimen" name="loading_info_icon_size"/>
+      <item type="dimen" name="message_history_guideline_begin"/>
+      <item type="dimen" name="message_history_icons_margin"/>
+      <item type="dimen" name="message_history_item_height"/>
+      <item type="dimen" name="message_history_item_padding"/>
+      <item type="dimen" name="message_history_text_margin_end"/>
+      <item type="dimen" name="subtitle_icon_width"/>
+      <item type="dimen" name="unread_text_size"/>
+      <item type="dimen" name="vertical_divider_inset"/>
+      <item type="dimen" name="vertical_divider_width"/>
+      <item type="drawable" name="car_ui_icon_reply"/>
+      <item type="drawable" name="car_ui_icon_toggle_mute"/>
+      <item type="drawable" name="hero_button_background"/>
+      <item type="drawable" name="ic_launcher_icon"/>
+      <item type="drawable" name="ic_message"/>
+      <item type="drawable" name="ic_mute"/>
+      <item type="drawable" name="ic_person"/>
+      <item type="drawable" name="ic_play"/>
+      <item type="drawable" name="ic_reply"/>
+      <item type="drawable" name="ic_subtitle_play"/>
+      <item type="drawable" name="ic_unmute"/>
+      <item type="drawable" name="list_divider"/>
+      <item type="drawable" name="ui_icon_edit"/>
+      <item type="drawable" name="unread_badge_background"/>
+      <item type="fraction" name="letter_to_tile_ratio"/>
+      <item type="id" name="date_time_view"/>
+      <item type="id" name="empty_message"/>
+      <item type="id" name="error_action_button"/>
+      <item type="id" name="error_message"/>
+      <item type="id" name="guideline_begin"/>
+      <item type="id" name="guideline_end"/>
+      <item type="id" name="icon"/>
+      <item type="id" name="last_action_icon_view"/>
+      <item type="id" name="list_view"/>
+      <item type="id" name="loading_frame_layout"/>
+      <item type="id" name="mute_action_button"/>
+      <item type="id" name="play_action_button"/>
+      <item type="id" name="play_action_touch_view"/>
+      <item type="id" name="preview"/>
+      <item type="id" name="preview_dot"/>
+      <item type="id" name="preview_section"/>
+      <item type="id" name="progress_bar"/>
+      <item type="id" name="reply_action_button"/>
+      <item type="id" name="title"/>
+      <item type="id" name="unread_badge"/>
+      <item type="integer" name="config_letter_tile_text_style"/>
+      <item type="integer" name="group_avatar_max_group_size"/>
+      <item type="layout" name="conversation_list_item"/>
+      <item type="layout" name="empty_view"/>
+      <item type="layout" name="error_view"/>
+      <item type="layout" name="list_fragment"/>
+      <item type="layout" name="loading_list_fragment"/>
+      <item type="layout" name="loading_progress_view"/>
+      <item type="string" name="action_mark_as_read"/>
+      <item type="string" name="action_mute"/>
+      <item type="string" name="action_reply"/>
+      <item type="string" name="app_name"/>
+      <item type="string" name="app_running_msg_notification_content"/>
+      <item type="string" name="app_running_msg_notification_title"/>
+      <item type="string" name="bluetooth_disconnected"/>
+      <item type="string" name="cd_conversation_icon"/>
+      <item type="string" name="cd_icon_indicating_the_last_action"/>
+      <item type="string" name="cd_loading_info_icon"/>
+      <item type="string" name="cd_mute_button"/>
+      <item type="string" name="cd_play_action_button"/>
+      <item type="string" name="cd_reply_action_button"/>
+      <item type="string" name="cd_unread"/>
+      <item type="string" name="config_letter_tile_font_family"/>
+      <item type="string" name="connect_bluetooth_button_text"/>
+      <item type="string" name="dot"/>
+      <item type="string" name="duration_days_relative"/>
+      <item type="string" name="duration_days_relative_future"/>
+      <item type="string" name="duration_days_shortest"/>
+      <item type="string" name="duration_days_shortest_future"/>
+      <item type="string" name="duration_hours_relative"/>
+      <item type="string" name="duration_hours_relative_future"/>
+      <item type="string" name="duration_hours_shortest"/>
+      <item type="string" name="duration_hours_shortest_future"/>
+      <item type="string" name="duration_minutes_relative"/>
+      <item type="string" name="duration_minutes_relative_future"/>
+      <item type="string" name="duration_minutes_shortest"/>
+      <item type="string" name="duration_minutes_shortest_future"/>
+      <item type="string" name="duration_years_relative"/>
+      <item type="string" name="duration_years_relative_future"/>
+      <item type="string" name="duration_years_shortest"/>
+      <item type="string" name="duration_years_shortest_future"/>
+      <item type="string" name="message_channel_description"/>
+      <item type="string" name="message_channel_name"/>
+      <item type="string" name="message_overflow"/>
+      <item type="string" name="new_message"/>
+      <item type="string" name="no_messages"/>
+      <item type="string" name="now_string_shortest"/>
+      <item type="string" name="participant_overflow_text"/>
+      <item type="string" name="replied"/>
+      <item type="string" name="tap_to_read_aloud"/>
+      <item type="style" name="FullScreenErrorButtonStyle"/>
+      <item type="style" name="FullScreenErrorMessageStyle"/>
+      <item type="style" name="LoadingInfoActionButtonStyle"/>
+      <item type="style" name="LoadingInfoMessageStyle"/>
+      <item type="style" name="LoadingInfoSecondaryMessageStyle"/>
+      <item type="style" name="TextAppearance"/>
+      <item type="style" name="TextAppearance.Body1"/>
+      <item type="style" name="TextAppearance.Body2"/>
+      <item type="style" name="TextAppearance.Body3"/>
+      <item type="style" name="TextAppearance.Display3"/>
+      <item type="style" name="TextAppearance.MessageHistoryTextPreview"/>
+      <item type="style" name="TextAppearance.MessageHistoryTextPreviewUnread"/>
+      <item type="style" name="TextAppearance.MessageHistoryTitle"/>
+      <item type="style" name="TextAppearance.MessageHistoryUnreadMetadata"/>
+      <item type="style" name="TextAppearance.MessageHistoryUnreadTitle"/>
+      <item type="style" name="Theme.Messaging"/>
+      <item type="style" name="Theme.Messaging.BidiText"/>
+      <item type="style" name="Widget.Button"/>
+    </policy>
+  </overlayable>
+</resources>

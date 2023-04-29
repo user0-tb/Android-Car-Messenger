@@ -26,14 +26,12 @@
         android:name="com.android.car.messenger.impl.CarMessengerApp"
         android:icon="@drawable/ic_launcher_icon"
         android:label="@string/app_name"
-        android:screenOrientation="landscape"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CarUi.WithToolbar">
+        android:theme="@style/Theme.Messaging">
 
         <activity
             android:name=".core.ui.launcher.MessageLauncherActivity"
             android:exported="true"
-            android:screenOrientation="landscape"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
