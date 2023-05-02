@@ -20,13 +20,13 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.car.messenger.R;
 import com.android.car.messenger.core.interfaces.AppFactory;
@@ -59,7 +59,6 @@ public class ConversationItemViewHolder extends RecyclerView.ViewHolder {
     @NonNull private final View mPlayActionButton;
     @NonNull private final TextView mUnreadBadge;
     @NonNull private final DateTimeView mDateTimeView;
-    @NonNull private final View mDivider;
 
     /** Conversation Item View Holder constructor */
     public ConversationItemViewHolder(
@@ -79,7 +78,6 @@ public class ConversationItemViewHolder extends RecyclerView.ViewHolder {
         mMuteActionButton = itemView.findViewById(R.id.mute_action_button);
         mReplyActionButton = itemView.findViewById(R.id.reply_action_button);
         mPlayActionButton = itemView.findViewById(R.id.play_action_button);
-        mDivider = itemView.findViewById(R.id.divider);
         mAvatarView.setOutlineProvider(CircularOutputlineProvider.get());
         mDataModel = AppFactory.get().getDataModel();
     }
@@ -141,11 +139,6 @@ public class ConversationItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setUpActionButton(@NonNull UIConversationItem uiData) {
-        ViewUtils.setVisible(
-                mDivider,
-                uiData.shouldShowReplyIcon()
-                        || uiData.shouldShowMuteIcon()
-                        || uiData.shouldShowPlayIcon());
         ViewUtils.setVisible(mMuteActionButton, uiData.shouldShowMuteIcon());
         ViewUtils.setVisible(mReplyActionButton, uiData.shouldShowReplyIcon());
         ViewUtils.setVisible(mPlayActionButton, uiData.shouldShowPlayIcon());
