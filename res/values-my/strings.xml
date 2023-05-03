@@ -17,7 +17,8 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="bluetooth_disconnected" msgid="337563193027514226">"ဘလူးတုသ် ချိတ်ဆက်မထားပါ"</string>
+    <!-- no translation found for bluetooth_disconnected (4625342093561456799) -->
+    <skip />
     <string name="no_messages" msgid="1440256496615617958">"မက်ဆေ့ဂျ် မရှိပါ"</string>
     <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"ဘလူးတုသ်သို့ ချိတ်ဆက်ခြင်း"</string>
     <string name="replied" msgid="4048102393748554631">"စာပြန်ပြီးပါပြီ"</string>
