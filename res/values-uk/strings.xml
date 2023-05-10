@@ -17,8 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for bluetooth_disconnected (4625342093561456799) -->
-    <skip />
+    <string name="bluetooth_disconnected" msgid="4625342093561456799">"Bluetooth відключено.\nПеревірте дозволи на доступ до повідомлень."</string>
     <string name="no_messages" msgid="1440256496615617958">"Немає повідомлень"</string>
     <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Підключитися до Bluetooth"</string>
     <string name="replied" msgid="4048102393748554631">"Відповідь надіслано"</string>

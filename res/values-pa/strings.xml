@@ -17,8 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- no translation found for bluetooth_disconnected (4625342093561456799) -->
-    <skip />
+    <string name="bluetooth_disconnected" msgid="4625342093561456799">"ਬਲੂਟੁੱਥ ਡਿਸਕਨੈਕਟ ਹੈ।\nਕਿਰਪਾ ਕਰਕੇ ਸੁਨੇਹਾ ਪਹੁੰਚ ਸੰਬੰਧੀ ਇਜਾਜ਼ਤਾਂ ਦੇਖੋ।"</string>
     <string name="no_messages" msgid="1440256496615617958">"ਕੋਈ ਸੁਨੇਹਾ ਨਹੀਂ"</string>
     <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"ਬਲੂਟੁੱਥ ਨਾਲ ਕਨੈਕਟ ਕਰੋ"</string>
     <string name="replied" msgid="4048102393748554631">"ਜਵਾਬ ਦਿੱਤਾ ਗਿਆ"</string>
