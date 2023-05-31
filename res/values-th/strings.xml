@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="bluetooth_disconnected" msgid="337563193027514226">"ตัดการเชื่อมต่อบลูทูธแล้ว"</string>
+    <string name="bluetooth_disconnected" msgid="4625342093561456799">"บลูทูธไม่ได้เชื่อมต่อ\nโปรดตรวจสอบสิทธิ์การเข้าถึงข้อความ"</string>
     <string name="no_messages" msgid="1440256496615617958">"ไม่มีข้อความ"</string>
     <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"เชื่อมต่อบลูทูธ"</string>
     <string name="replied" msgid="4048102393748554631">"ตอบแล้ว"</string>

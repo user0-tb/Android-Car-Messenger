@@ -24,7 +24,7 @@
     </style>
 
     <style name="TextAppearance.MessageHistoryTextPreview" parent="TextAppearance.Body3">
-        <item name="android:textColor">@color/secondary_text_color</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
         <item name="android:alpha">0.72</item>
     </style>
 
@@ -64,7 +64,7 @@
     <!-- Styles for text. Sub1-3 are not included here as their use should be exceptional -->
     <style name="TextAppearance">
         <item name="android:fontFamily">roboto-regular</item>
-        <item name="android:textColor">@color/primary_text_color</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textFontWeight">400</item>
     </style>

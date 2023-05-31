@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="bluetooth_disconnected" msgid="337563193027514226">"Bluetooth-ühendus on katkestatud"</string>
+    <string name="bluetooth_disconnected" msgid="4625342093561456799">"Bluetooth on katkestatud.\nKontrollige sõnumitele juurdepääsu lubasid."</string>
     <string name="no_messages" msgid="1440256496615617958">"Sõnumeid pole"</string>
     <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Ühenda Bluetoothiga"</string>
     <string name="replied" msgid="4048102393748554631">"Vastatud"</string>

@@ -21,8 +21,8 @@
     <!-- Button text for when disconnected from Bluetooth [CHAR LIMIT=40] -->
     <string name="app_name" translatable="false">SMS</string>
 
-    <!-- Button text for connecting to Bluetooth [CHAR LIMIT=40] -->
-    <string name="bluetooth_disconnected">Bluetooth disconnected</string>
+    <!-- Button text for connecting to Bluetooth [CHAR LIMIT=90] -->
+    <string name="bluetooth_disconnected">Bluetooth disconnected.\nPlease check message access permissions.</string>
 
     <!-- Status when no new messages[CHAR LIMIT=40] -->
     <string name="no_messages">No messages</string>
