@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="bluetooth_disconnected" msgid="337563193027514226">"Bluetooth വിച്ഛേദിച്ചു"</string>
+    <string name="bluetooth_disconnected" msgid="4625342093561456799">"Bluetooth വിച്ഛേദിച്ചു.\nസന്ദേശ ആക്സസ് അനുമതികൾ പരിശോധിക്കൂ."</string>
     <string name="no_messages" msgid="1440256496615617958">"സന്ദേശങ്ങളൊന്നുമില്ല"</string>
     <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Bluetooth-ലേക്ക് കണക്‌റ്റ് ചെയ്യുക"</string>
     <string name="replied" msgid="4048102393748554631">"മറുപടി നൽകി"</string>

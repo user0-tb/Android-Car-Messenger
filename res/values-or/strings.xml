@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="bluetooth_disconnected" msgid="337563193027514226">"ବ୍ଲୁଟୁଥ ବିଚ୍ଛିନ୍ନ ହୋଇଯାଇଛି"</string>
+    <string name="bluetooth_disconnected" msgid="4625342093561456799">"ବ୍ଲୁଟୁଥ ଡିସକନେକ୍ଟ ହୋଇଛି।\nମେସେଜ ଆକ୍ସେସ ଅନୁମତି ଯାଞ୍ଚ କର।"</string>
     <string name="no_messages" msgid="1440256496615617958">"କୌଣସି ମେସେଜ ନାହିଁ"</string>
     <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"ବ୍ଲୁଟୁଥ ସହ କନେକ୍ଟ କରନ୍ତୁ"</string>
     <string name="replied" msgid="4048102393748554631">"ପ୍ରତ୍ୟୁତ୍ତର ଦେଇଛନ୍ତି"</string>

@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="bluetooth_disconnected" msgid="337563193027514226">"蓝牙已断开连接"</string>
+    <string name="bluetooth_disconnected" msgid="4625342093561456799">"蓝牙已断开。\n请检查消息访问权限。"</string>
     <string name="no_messages" msgid="1440256496615617958">"没有任何消息"</string>
     <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"连接到蓝牙"</string>
     <string name="replied" msgid="4048102393748554631">"已回复"</string>

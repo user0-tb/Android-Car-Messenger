@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="bluetooth_disconnected" msgid="337563193027514226">"Връзката през Bluetooth е прекратена"</string>
+    <string name="bluetooth_disconnected" msgid="4625342093561456799">"Връзката с Bluetooth прекъсна.\nПроверете разрешенията за достъп до съобщ."</string>
     <string name="no_messages" msgid="1440256496615617958">"Няма съобщения"</string>
     <string name="connect_bluetooth_button_text" msgid="1879858507749591260">"Свързване с Bluetooth"</string>
     <string name="replied" msgid="4048102393748554631">"С отговор"</string>
