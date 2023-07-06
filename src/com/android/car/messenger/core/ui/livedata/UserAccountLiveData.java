@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
+import com.android.car.apps.common.log.L;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.models.UserAccount;
 import com.android.car.messenger.core.ui.livedata.UserAccountLiveData.UserAccountChangeList;
@@ -59,6 +60,8 @@ import java.util.stream.Stream;
  * </ul>
  */
 public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
+    private static final String TAG = "CM.UserAccountLiveData";
+
     @NonNull private final SubscriptionManager mSubscriptionManager;
 
     @NonNull
@@ -66,6 +69,7 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
             new OnSubscriptionsChangedListener() {
                 @Override
                 public void onSubscriptionsChanged() {
+                    L.i(TAG, "Subscriptions changed");
                     loadValue();
                 }
             };
@@ -128,6 +132,9 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
             }
             return;
         }
+
+        L.d(TAG, "accounts: %d, added: %d, removed: %d",
+                accounts.size(), addedAccounts.size(), removedAccounts.size());
 
         UserAccountChangeList newAccountChangeList = new UserAccountChangeList();
         newAccountChangeList.mAccounts = accounts;

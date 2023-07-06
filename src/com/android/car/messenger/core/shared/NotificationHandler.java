@@ -57,6 +57,7 @@ public class NotificationHandler {
                     "posting Notification with null user account id. "
                             + "Note, reply would likely fail if user account id is not set.");
         }
+        L.d(TAG, "posting notification with id: " + conversation.getId());
         Conversation tapToReadConversation =
                 VoiceUtil.createTapToReadConversation(conversation, userAccountId);
         Context context = AppFactory.get().getContext();
@@ -101,6 +102,7 @@ public class NotificationHandler {
     @Nullable
     public static StatusBarNotification postNotificationForLegacyTapToRead(
             @NonNull Conversation tapToReadConversation) {
+        L.d(TAG, "Posting legacy notification: " + tapToReadConversation.getId());
         Context context = AppFactory.get().getContext();
         // cancel any other notifications within group.
         // There should be only notification in group at a time.
@@ -133,6 +135,7 @@ public class NotificationHandler {
 
     /** Cancels all Tap To Read Notifications */
     public static void cancelAllTapToReadNotifications(@NonNull Context context) {
+        L.d(TAG, "Cancelling all TTR notifications");
         NotificationManager notificationManager =
                 context.getSystemService(NotificationManager.class);
         for (StatusBarNotification sbn : notificationManager.getActiveNotifications()) {

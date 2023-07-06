@@ -75,6 +75,7 @@ public class VoiceUtil {
             @NonNull Activity activity,
             @NonNull UserAccount userAccount,
             @NonNull Conversation conversation) {
+        L.i(TAG, "read conversation: " + conversation.getId());
         if (conversation.getMessages().isEmpty()) {
             L.d(TAG, "No messages to read from Conversation! Returning.");
             return;
@@ -92,6 +93,7 @@ public class VoiceUtil {
             @NonNull Activity activity,
             @NonNull UserAccount userAccount,
             @NonNull Conversation conversation) {
+        L.i(TAG, "reply conversation: " + conversation.getId());
         voiceRequestHelper(
                 activity,
                 conversation,
@@ -133,6 +135,7 @@ public class VoiceUtil {
 
     /** Requests Voice request to start a generic compose voice interaction */
     public static void voiceRequestGenericCompose(Activity activity, UserAccount userAccount) {
+        L.i(TAG, "compose sms from user: " + userAccount.getIccId());
         Bundle bundle = new Bundle();
         bundle.putString(KEY_ACTION, VOICE_ACTION_SEND_SMS);
         bundle.putString(KEY_DEVICE_ADDRESS, userAccount.getIccId());
