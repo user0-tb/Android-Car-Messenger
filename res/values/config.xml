@@ -19,6 +19,7 @@
     <bool name="direct_send_supported">true</bool>
     <bool name="direct_reply_supported">true</bool>
     <bool name="ttr_conversation_supported">false</bool>
+    <bool name="filter_local_sim">true</bool>
 
     <!--
     A number between 1 and 4 is required.
