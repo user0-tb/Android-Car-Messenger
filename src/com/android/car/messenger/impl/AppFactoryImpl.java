@@ -16,20 +16,14 @@
 
 package com.android.car.messenger.impl;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.os.IBinder;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.interfaces.DataModel;
-import com.android.car.messenger.core.service.MessengerService;
 import com.android.car.messenger.impl.datamodels.TelephonyDataModel;
 
 /* App Factory Implementation */
@@ -37,23 +31,6 @@ class AppFactoryImpl extends AppFactory {
     @NonNull private Context mApplicationContext;
     @NonNull private DataModel mDataModel;
     @NonNull private SharedPreferences mSharedPreferences;
-    @Nullable private MessengerService mMessengerService;
-
-    @NonNull
-    private final ServiceConnection mServiceConnection =
-            new ServiceConnection() {
-                @Override
-                public void onServiceConnected(
-                        @NonNull ComponentName className, @NonNull IBinder service) {
-                    MessengerService.LocalBinder binder = (MessengerService.LocalBinder) service;
-                    mMessengerService = binder.getService();
-                }
-
-                @Override
-                public void onServiceDisconnected(@NonNull ComponentName arg0) {
-                    mMessengerService = null;
-                }
-            };
 
     private AppFactoryImpl() {}
 
@@ -72,23 +49,12 @@ class AppFactoryImpl extends AppFactory {
         factory.mDataModel = new TelephonyDataModel();
         factory.mSharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(factory.mApplicationContext);
-
-        // Create Messenger Service
-        Intent intent = new Intent(factory.mApplicationContext, MessengerService.class);
-        factory.mApplicationContext.bindService(
-                intent, factory.mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     @NonNull
     public Context getContext() {
-        // prefer the messenger service context
-        // to avoid warnings on using app context for UI constants
-        if (mMessengerService != null) {
-            return mMessengerService;
-        } else {
-            return mApplicationContext;
-        }
+        return mApplicationContext;
     }
 
     @Override

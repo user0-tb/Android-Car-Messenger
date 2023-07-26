@@ -23,7 +23,7 @@
     <string name="replied" msgid="4048102393748554631">"Con risposta"</string>
     <string name="tap_to_read_aloud" msgid="7309530473789467365">"Tocca per la lettura ad alta voce"</string>
     <string name="action_reply" msgid="8404237041838225390">"Rispondi"</string>
-    <string name="action_mute" msgid="7982388368125401058">"Disattiva audio"</string>
+    <string name="action_mute" msgid="7982388368125401058">"Silenzia"</string>
     <string name="action_mark_as_read" msgid="2872221687403147551">"Segna come letto"</string>
     <string name="app_running_msg_notification_title" msgid="3569467829547340722">"Servizio di messaggistica attivo"</string>
     <string name="app_running_msg_notification_content" msgid="7088111523632559583">"Ricezione dei messaggi in auto"</string>

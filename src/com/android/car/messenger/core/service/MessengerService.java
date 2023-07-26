@@ -149,6 +149,8 @@ public class MessengerService extends Service {
                         .setContentText(getString(R.string.app_running_msg_notification_content))
                         .build();
 
+
+        L.d(TAG, "startForeground");
         startForeground(SERVICE_STARTED_NOTIFICATION_ID, notification);
     }
 
@@ -167,6 +169,7 @@ public class MessengerService extends Service {
         }
 
         final String action = intent.getAction();
+        L.i(TAG, "action: " + action);
         switch (action) {
             case ACTION_START:
                 // NO-OP
