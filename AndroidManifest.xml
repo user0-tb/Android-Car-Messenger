@@ -132,5 +132,6 @@
          checking the projection state and more etc.
     -->
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
 </manifest>

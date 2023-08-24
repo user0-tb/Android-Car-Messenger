@@ -102,6 +102,7 @@ public class NewMessageLiveData extends ContentProviderLiveData<Conversation> {
 
     @Override
     public void onDataChange() {
+        L.d(TAG, "telephony database changed");
         for (UserAccount userAccount : mUserAccounts) {
             if (hasProjectionInForeground(userAccount)) {
                 continue;
@@ -117,6 +118,7 @@ public class NewMessageLiveData extends ContentProviderLiveData<Conversation> {
             if (foundNewMms || foundNewSms) {
                 // onDataChange is called per one message insert,
                 // so once a new message is found we can exit early
+                L.d(TAG, foundNewMms ? "found new MMS" : "found new SMS");
                 break;
             }
         }
