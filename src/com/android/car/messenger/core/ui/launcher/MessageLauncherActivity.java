@@ -43,7 +43,7 @@ public class MessageLauncherActivity extends FragmentActivity implements InsetsC
         MessageLauncherViewModel viewModel =
                 new ViewModelProvider(this).get(MessageLauncherViewModel.class);
 
-        L.d(TAG, "In onCreate: MessageLauncher");
+        L.d(TAG, "onCreate: MessageLauncher");
         viewModel
                 .getAccounts()
                 .observe(
@@ -75,7 +75,7 @@ public class MessageLauncherActivity extends FragmentActivity implements InsetsC
 
     @Override
     protected void onResume() {
-        L.d(TAG, "On Resume of Message Activity.");
+        L.d(TAG, "onResumeL: Message Activity");
         AppFactory.get().getDataModel().refresh();
         super.onResume();
     }

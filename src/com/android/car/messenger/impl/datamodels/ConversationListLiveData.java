@@ -84,6 +84,7 @@ class ConversationListLiveData extends ContentProviderLiveData<Collection<Conver
 
     @Override
     public void onDataChange() {
+        L.d(TAG, "telephony database changed");
         Cursor cursor = ConversationsPerDeviceFetchManager.getCursor(mUserAccount.getId());
         ArrayList<Conversation> conversations = new ArrayList<>();
         while (cursor != null && cursor.moveToNext()) {

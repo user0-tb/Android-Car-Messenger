@@ -15,6 +15,8 @@
  */
 package com.android.car.messenger.core.ui.livedata;
 
+import static android.telephony.SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM;
+
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -25,6 +27,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
+import com.android.car.apps.common.log.L;
+import com.android.car.messenger.R;
 import com.android.car.messenger.core.interfaces.AppFactory;
 import com.android.car.messenger.core.models.UserAccount;
 import com.android.car.messenger.core.ui.livedata.UserAccountLiveData.UserAccountChangeList;
@@ -59,13 +63,17 @@ import java.util.stream.Stream;
  * </ul>
  */
 public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
+    private static final String TAG = "CM.UserAccountLiveData";
+
     @NonNull private final SubscriptionManager mSubscriptionManager;
+    private boolean mFilterLocalSim;
 
     @NonNull
     private final OnSubscriptionsChangedListener mOnChangeListener =
             new OnSubscriptionsChangedListener() {
                 @Override
                 public void onSubscriptionsChanged() {
+                    L.i(TAG, "Subscriptions changed");
                     loadValue();
                 }
             };
@@ -74,6 +82,7 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
 
     private UserAccountLiveData() {
         Context context = AppFactory.get().getContext();
+        mFilterLocalSim = context.getResources().getBoolean(R.bool.filter_local_sim);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mSubscriptionManager.addOnSubscriptionsChangedListener(mOnChangeListener);
         loadValue();
@@ -128,6 +137,9 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
             }
             return;
         }
+
+        L.d(TAG, "accounts: %d, added: %d, removed: %d",
+                accounts.size(), addedAccounts.size(), removedAccounts.size());
 
         UserAccountChangeList newAccountChangeList = new UserAccountChangeList();
         newAccountChangeList.mAccounts = accounts;
@@ -200,14 +212,22 @@ public class UserAccountLiveData extends LiveData<UserAccountChangeList> {
         return value;
     }
 
-    /** Returns null safe subscription info list */
+    /** Returns null safe subscription info list. The subscriptions will only be type REMOTE_SIM */
     @NonNull
     private List<SubscriptionInfo> getNullSafeSubscriptionInfoList() {
         List<SubscriptionInfo> subscriptionInfos =
                 mSubscriptionManager.getActiveSubscriptionInfoList();
+
         if (subscriptionInfos == null) {
             return new ArrayList<>();
         }
+
+        // Filter the list to return only remote sim connections
+        if (mFilterLocalSim) {
+            subscriptionInfos.removeIf(
+                    info -> info.getSubscriptionType() == SUBSCRIPTION_TYPE_LOCAL_SIM);
+        }
+
         // The last added subscription is more likely the last device connection made
         // and more likely relevant to the user.
         // Reverse the subscription list to prioritize the last connected device.

@@ -32,7 +32,7 @@
     <string name="new_message" msgid="8983092328255956122">"አዲስ መልዕክት"</string>
     <string name="cd_unread" msgid="8970475932047388299">"ያልተነበበ"</string>
     <string name="cd_conversation_icon" msgid="2600955838672124935">"የውይይት አዶ"</string>
-    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"የግርጌ ጽሑፍ አዶ"</string>
+    <string name="cd_icon_indicating_the_last_action" msgid="1823559093876712683">"የግርጌ ጽሁፍ አዶ"</string>
     <string name="cd_mute_button" msgid="76118116050731771">"የድምፀ ከል አዝራር"</string>
     <string name="cd_loading_info_icon" msgid="600252242790937732">"የመረጃ በመጫን ላይ አዶ"</string>
     <string name="cd_reply_action_button" msgid="3349155913058787730">"የመልስ የእርምጃ አዝራር"</string>

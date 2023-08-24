@@ -73,6 +73,7 @@ public class TelephonyDataModel implements DataModel {
 
     @Override
     public void muteConversation(@NonNull String conversationId, boolean mute) {
+        L.d(TAG, "Muting conversation: " + conversationId);
         SharedPreferences sharedPreferences = AppFactory.get().getSharedPreferences();
         Set<String> mutedConversations =
                 sharedPreferences.getStringSet(KEY_MUTED_CONVERSATIONS, new HashSet<>());
