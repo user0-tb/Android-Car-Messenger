@@ -18,4 +18,8 @@ jobs:
         cache: gradle
 
     - name: Build with Gradle
-      run: gradle tasks
+      run: gradle wrapper
+    - name: chmod
+      run: chmod -x gradlew
+    - name: gradlew
+      run: ./gradlew
