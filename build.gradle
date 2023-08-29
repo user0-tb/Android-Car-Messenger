@@ -36,7 +36,7 @@ allprojects {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion gradle.ext.aaosLatestSDK
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.android.car.messenger"
         minSdkVersion 30
