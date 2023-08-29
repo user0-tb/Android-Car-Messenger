@@ -22,4 +22,4 @@ jobs:
     - name: chmod
       run: chmod +x gradlew
     - name: gradlew
-      run: ./gradlew
+      run: ./gradlew tasks
