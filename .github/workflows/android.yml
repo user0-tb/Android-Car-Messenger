@@ -20,6 +20,6 @@ jobs:
     - name: Build with Gradle
       run: gradle wrapper
     - name: chmod
-      run: chmod -x gradlew
+      run: chmod +x gradlew
     - name: gradlew
       run: ./gradlew
