@@ -90,8 +90,6 @@ android {
 }
 
 dependencies {
-    implementation files(gradle.ext.lib_car_system_stubs)
-
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta8"
 
     def lifecycle_version = "2.2.0"
